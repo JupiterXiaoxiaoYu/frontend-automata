@@ -30,14 +30,13 @@ const MainMenuProgressBar = ({
         <img
           src={iconPath}
           className={
-            isCreating
+            showAnimation
+              ? "main-progress-bot-creating-animation-image"
+              : isCreating
               ? "main-progress-bot-creating-image"
               : "main-progress-bot-image"
           }
         />
-      )}
-      {showAnimation && (
-        <div className="main-progress-bot-creating-animation" />
       )}
       <p className="main-progress-bar-program-name-text">{programName}</p>
       <p className="main-progress-bar-program-processing-time-text">

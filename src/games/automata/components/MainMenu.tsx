@@ -156,6 +156,9 @@ const MainMenu = ({ localTimer }: Props) => {
               isCurrentProgram={!isSelectingUIState}
               isStop={selectedCreature.isProgramStop}
             />
+            {showUnlockAnimation && (
+              <div className="main-bot-creating-animation" />
+            )}
             {selectedCreaturePrograms.map((program, index) => (
               <MainMenuProgram
                 key={index}
