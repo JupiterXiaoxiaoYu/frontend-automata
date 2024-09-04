@@ -17,9 +17,16 @@ interface Props {
   isStop: boolean;
   order: number;
   program: ProgramModel | null;
+  showingAnimation: boolean;
 }
 
-const MainMenuProgram = ({ isCurrent, isStop, order, program }: Props) => {
+const MainMenuProgram = ({
+  isCurrent,
+  isStop,
+  order,
+  program,
+  showingAnimation,
+}: Props) => {
   const dispatch = useAppDispatch();
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isLoading = useAppSelector(selectIsLoading);
@@ -45,7 +52,16 @@ const MainMenuProgram = ({ isCurrent, isStop, order, program }: Props) => {
         left: `${xPosition}%`,
       }}
     >
-      {getProgramComponent(program, isCurrent && !isStop)}
+      <div
+        key={program?.index}
+        className={
+          showingAnimation
+            ? "main-bot-program-animation-container"
+            : "main-bot-program-normal-container"
+        }
+      >
+        {getProgramComponent(program, isCurrent && !isStop)}
+      </div>
     </div>
   );
 };

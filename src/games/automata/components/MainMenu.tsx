@@ -168,6 +168,7 @@ const MainMenu = ({ localTimer }: Props) => {
                 isStop={selectedCreature.isProgramStop}
                 order={index}
                 program={program}
+                showingAnimation={isSelectingUIState}
               />
             ))}
             <MainMenuWarning />
