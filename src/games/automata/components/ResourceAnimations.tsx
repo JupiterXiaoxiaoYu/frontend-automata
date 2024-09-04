@@ -16,6 +16,7 @@ import {
 } from "../../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./ResourceAnimations.css";
+import GainTitaniumResource from "./GainTitaniumResource";
 
 interface Props {
   localTimer: number;
@@ -34,6 +35,8 @@ const ResourceAnimations = ({ localTimer }: Props) => {
   const [spendAnimations, setSpendAnimations] = useState<SpendAnimationProps[]>(
     []
   );
+  const [gainTitaniumAnimationDelayTime, setGainTitaniumAnimationDelayTime] =
+    useState<number>(0);
 
   interface GainAnimationProps {
     entity: ResourceAmountPair;
@@ -94,19 +97,17 @@ const ResourceAnimations = ({ localTimer }: Props) => {
       setPlayingAnimation(true);
 
       const delayTimePerItem = 250;
-      const gainResources = diffResources.filter(
-        (pair) =>
-          // commonResourceTypes.find((type) => type == pair.type) != null &&
-          pair.amount > 0
+      const gainResources = diffResources.filter((pair) => pair.amount > 0);
+      const gainResourcesWithoutTitanium = diffResources.filter(
+        (pair) => pair.amount > 0 && pair.type != ResourceType.Titanium
       );
-      const spendResources = diffResources.filter(
-        (pair) =>
-          // commonResourceTypes.find((type) => type == pair.type) != null &&
-          pair.amount < 0
-      );
+      const spendResources = diffResources.filter((pair) => pair.amount < 0);
+      const isGainingTitanium =
+        gainResources.filter((pair) => pair.type == ResourceType.Titanium)
+          .length > 0;
 
-      setGainAnimations(
-        gainResources.map((pair, index) => ({
+      const gainAnimationsValue = gainResourcesWithoutTitanium.map(
+        (pair, index) => ({
           entity: pair,
           delayTime: index * delayTimePerItem,
           centerPosition: getCenterPosition(parentRef.current!),
@@ -114,21 +115,44 @@ const ResourceAnimations = ({ localTimer }: Props) => {
             pair.type
           ),
           resourceDisplayerPosition: getResourceDisplayerPosition(pair.type),
-        }))
+        })
       );
+      const spendAnimationsValue = spendResources.map((pair, index) => ({
+        entity: pair,
+        delayTime:
+          (index + gainResources.length + (isGainingTitanium ? 3 : 0) + 1) *
+          delayTimePerItem,
+        startPosition: getResourceDisplayerPosition(pair.type),
+        endPosition: getCenterPosition(parentRef.current!),
+      }));
 
-      setSpendAnimations(
-        spendResources.map((pair, index) => ({
-          entity: pair,
-          delayTime: (index + gainResources.length + 1) * delayTimePerItem,
-          startPosition: getResourceDisplayerPosition(pair.type),
-          endPosition: getCenterPosition(parentRef.current!),
-        }))
+      if (isGainingTitanium) {
+        gainAnimationsValue.push({
+          entity: gainResources.filter(
+            (pair) => pair.type == ResourceType.Titanium
+          )[0],
+          delayTime: (gainResources.length + 2) * delayTimePerItem,
+          centerPosition: getCenterPosition(parentRef.current!),
+          splashEndPosition: getSplashEndPosition(parentRef.current!)(
+            ResourceType.Titanium
+          ),
+          resourceDisplayerPosition: getResourceDisplayerPosition(
+            ResourceType.Titanium
+          ),
+        });
+      }
+
+      setGainAnimations(gainAnimationsValue);
+      setSpendAnimations(spendAnimationsValue);
+      setGainTitaniumAnimationDelayTime(
+        isGainingTitanium
+          ? gainResourcesWithoutTitanium.length * delayTimePerItem
+          : 0
       );
 
       setTimeout(() => {
         setPlayingAnimation(false);
-      }, (gainResources.length + spendResources.length + 2) * delayTimePerItem + 1000);
+      }, (gainResourcesWithoutTitanium.length + (isGainingTitanium ? 3 : 0) + spendResources.length + 2) * delayTimePerItem + 1000);
     }
   };
 
@@ -182,6 +206,12 @@ const ResourceAnimations = ({ localTimer }: Props) => {
             changeAmount={prop.entity.amount}
           />
         ))}
+      {gainTitaniumAnimationDelayTime && (
+        <GainTitaniumResource
+          animationIndex={animationIndex}
+          delayTime={gainTitaniumAnimationDelayTime}
+        />
+      )}
     </div>
   );
 };
