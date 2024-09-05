@@ -40,6 +40,30 @@ import EnerGate from "../../games/automata/components/Programs/EnerGate";
 import EnerFusion from "../../games/automata/components/Programs/EnerFusion";
 import QuantumCore from "../../games/automata/components/Programs/QuantumCore";
 import XenoBloom from "../../games/automata/components/Programs/XenoBloom";
+import QuantumScribeImage from "../../games/automata/images/Animations/Programs/QuantumScribe/QuantumScribe_00.png";
+import QuantumFrostImage from "../../games/automata/images/Animations/Programs/QuantumFrost/QuantumFrost_00.png";
+import QuantumSurgeImage from "../../games/automata/images/Animations/Programs/QuantumSurge/QuantumSurge_00.png";
+import QuantaForgeImage from "../../games/automata/images/Animations/Programs/QuantaForge/QuantaForge_00.png";
+import AespaImage from "../../games/automata/images/Animations/Programs/Aespa/Aespa_00.png";
+import BioGenImage from "../../games/automata/images/Animations/Programs/BioGen/BioGen_00.png";
+import BioFusionImage from "../../games/automata/images/Animations/Programs/BioFusion/BioFusion_00.png";
+import AstroMineImage from "../../games/automata/images/Animations/Programs/AstroMine/AstroMine_00.png";
+import TitaniumBoostImage from "../../games/automata/images/Animations/Programs/TitaniumBoost/TitaniumBoost_00.png";
+import QuantumLeapImage from "../../games/automata/images/Animations/Programs/QuantumLeap/QuantumLeap_00.png";
+import BioSurgeImage from "../../games/automata/images/Animations/Programs/BioSurge/BioSurge_00.png";
+import BioHarvestImage from "../../games/automata/images/Animations/Programs/BioHarvest/BioHarvest_00.png";
+import EnerGexImage from "../../games/automata/images/Animations/Programs/EnerGex/EnerGex_00.png";
+import EtherWeaveImage from "../../games/automata/images/Animations/Programs/EtherWeave/EtherWeave_00.png";
+import BioCastImage from "../../games/automata/images/Animations/Programs/BioCast/BioCast_00.png";
+import AstroChargeImage from "../../games/automata/images/Animations/Programs/AstroCharge/AstroCharge_00.png";
+import BioSynthesisImage from "../../games/automata/images/Animations/Programs/BioSynthesis/BioSynthesis_00.png";
+import XenoFloralImage from "../../games/automata/images/Animations/Programs/XenoFloral/XenoFloral_00.png";
+import FoamTapImage from "../../games/automata/images/Animations/Programs/FoamTap/FoamTap_00.png";
+import CrystaBloomImage from "../../games/automata/images/Animations/Programs/CrystaBloom/CrystaBloom_00.png";
+import EnerGateImage from "../../games/automata/images/Animations/Programs/EnerGate/EnerGate_00.png";
+import EnerFusionImage from "../../games/automata/images/Animations/Programs/EnerFusion/EnerFusion_00.png";
+import QuantumCoreImage from "../../games/automata/images/Animations/Programs/QuantumCore/QuantumCore_00.png";
+import XenoBloomImage from "../../games/automata/images/Animations/Programs/XenoBloom/XenoBloom_00.png";
 
 export interface CreatureModel {
   rareResources: ResourceAmountPair[];
@@ -403,4 +427,58 @@ export function getProgramComponent(
   }
 
   return <BioGen showAnimation={showAnimation} />;
+}
+
+export function getProgramIconPath(type: ProgramType): string {
+  switch (type) {
+    case ProgramType.QuantumScribe:
+      return QuantumScribeImage;
+    case ProgramType.QuantumFrost:
+      return QuantumFrostImage;
+    case ProgramType.QuantumSurge:
+      return QuantumSurgeImage;
+    case ProgramType.QuantaForge:
+      return QuantaForgeImage;
+    case ProgramType.Aespa:
+      return AespaImage;
+    case ProgramType.BioGen:
+      return BioGenImage;
+    case ProgramType.BioFusion:
+      return BioFusionImage;
+    case ProgramType.AstroMine:
+      return AstroMineImage;
+    case ProgramType.TitaniumBoost:
+      return TitaniumBoostImage;
+    case ProgramType.QuantumLeap:
+      return QuantumLeapImage;
+    case ProgramType.BioSurge:
+      return BioSurgeImage;
+    case ProgramType.BioHarvest:
+      return BioHarvestImage;
+    case ProgramType.EnerGex:
+      return EnerGexImage;
+    case ProgramType.EtherWeave:
+      return EtherWeaveImage;
+    case ProgramType.BioCast:
+      return BioCastImage;
+    case ProgramType.AstroCharge:
+      return AstroChargeImage;
+    case ProgramType.BioSynthesis:
+      return BioSynthesisImage;
+    case ProgramType.XenoFloral:
+      return XenoFloralImage;
+    case ProgramType.FoamTap:
+      return FoamTapImage;
+    case ProgramType.CrystaBloom:
+      return CrystaBloomImage;
+    case ProgramType.EnerGate:
+      return EnerGateImage;
+    case ProgramType.EnerFusion:
+      return EnerFusionImage;
+    case ProgramType.QuantumCore:
+      return QuantumCoreImage;
+    case ProgramType.XenoBloom:
+      return XenoBloomImage;
+  }
+  return BioGenImage;
 }

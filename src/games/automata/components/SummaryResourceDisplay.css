@@ -41,10 +41,14 @@
     color: #5CFFFF;
     word-wrap: break-word;
     text-shadow: 
-        -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+        -1px -1px 0px #000,
+         0px -1px 0px #000,
+         1px -1px 0px #000,
+        -1px  0px 0px #000,
+         1px  0px 0px #000,
+        -1px  1px 0px #000,
+         0px  1px 0px #000,
+         1px  1px 0px #000;
 }
 
 .summary-resource-display-positive-text, .summary-resource-display-zero-text, .summary-resource-display-negative-text {

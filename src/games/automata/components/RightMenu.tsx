@@ -28,9 +28,9 @@ const RightMenu = () => {
       setProgramGridHeight(programGridRef.current.offsetHeight);
     }
   };
-  const programGridElementWidth = 85;
-  const programGridElementHeight = 92;
-  const programGridColumnCount = 2;
+  const programGridElementWidth = 170;
+  const programGridElementHeight = 95;
+  const programGridColumnCount = 1;
   const programGridRowCount = Math.floor(
     programGridHeight / programGridElementHeight
   );
@@ -84,7 +84,7 @@ const RightMenu = () => {
           elements={programs.map((program, index) => (
             <Program
               key={index}
-              data={program}
+              program={program}
               onSelect={() => onSelectProgram(program.index)}
             />
           ))}

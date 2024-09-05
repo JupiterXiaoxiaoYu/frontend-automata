@@ -5,29 +5,34 @@ import ProgramResourceDisplay from "./ProgramResourceDisplay";
 import {
   ProgramModel,
   getResourceIconPath,
+  getProgramIconPath,
 } from "../../../data/automata/models";
 import ProgramButton from "./Buttons/ProgramButton";
 
 import { formatTime } from "../../../data/automata/creatures";
 
 interface Props {
-  data: ProgramModel;
+  program: ProgramModel;
   onSelect: () => void;
 }
 
-const Program = ({ data, onSelect }: Props) => {
+const Program = ({ program, onSelect }: Props) => {
   return (
     <div className="program-container">
       <ProgramButton isDisabled={false} onClick={onSelect} />
-      <p className="program-name-text">{data.name}</p>
-      <p className="program-time-text">{formatTime(data.processingTime)}</p>
+      <p className="program-name-text">{program.name}</p>
+      <p className="program-time-text">{formatTime(program.processingTime)}</p>
+      <img
+        src={getProgramIconPath(program.type)}
+        className="program-icon-image"
+      />
       <div className="program-resource-grid">
         <Grid
-          elementWidth={35}
-          elementHeight={14}
+          elementWidth={44}
+          elementHeight={16}
           columnCount={2}
           rowCount={4}
-          elements={data.resources.map((resource, index) => (
+          elements={program.resources.map((resource, index) => (
             <ProgramResourceDisplay
               key={index}
               iconImagePath={getResourceIconPath(resource.type)}

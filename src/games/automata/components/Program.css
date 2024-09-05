@@ -1,7 +1,7 @@
 .program-container {
     position: relative;
-    width: 85px;
-    height: 92px;
+    width: 168px;
+    height: 89px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -9,15 +9,15 @@
 
 .program-name-text {
     position: absolute;
-    top: 12%;
-    left: 50%;
+    top: 9%;
+    left: 35%;
     transform: translate(-50%, -50%);
-    font-size: 8px;
-    text-align: center;
+    font-size: 10px;
+    text-align: left;
     line-height: 100%;
     margin: 0px;
-    width: 90%;
-    height: 8px;
+    width: 60%;
+    height: 10px;
     font-family: "mishmash";
     color: white;
     pointer-events: none;
@@ -25,26 +25,35 @@
 
 .program-time-text {
     position: absolute;
-    top: 22%;
-    left: 50%;
+    top: 9%;
+    left: 80%;
     transform: translate(-50%, -50%);
     font-size: 8px;
-    text-align: center;
+    text-align: right;
     line-height: 100%;
     margin: 0px;
-    width: 90%;
+    width: 25%;
     height: 8px;
     font-family: "mishmash";
     color: white;
     pointer-events: none;
 }
 
+.program-icon-image{
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 50%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+}
+
 .program-resource-grid{
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 70px;
-    height: 56px;
-    top: 59%;
-    left: 50%;
+    width: 88px;
+    height: 64px;
+    top: 55%;
+    left: 67%;
     pointer-events: none;
 }

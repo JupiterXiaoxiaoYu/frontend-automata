@@ -88,5 +88,12 @@ for program in programs:
 
     # print(f'import {program} from "../../games/automata/components/Programs/{program}";')
     
+    # print(f"""case ProgramType.{program}:
+    #   return <{program} showAnimation={{showAnimation}} />;""")
+    
+    
+    # print(f'import {program}Icon from "../../games/automata/images/Animations/Programs/{program}/{program}_00.png";')
+    
+    
     print(f"""case ProgramType.{program}:
-      return <{program} showAnimation={{showAnimation}} />;""")
+      return {program}Icon;""")

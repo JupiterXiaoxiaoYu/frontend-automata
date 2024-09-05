@@ -2,7 +2,7 @@ import React from "react";
 import ImageButton from "./ImageButton";
 import programButtonImage from "../../images/Buttons/Program/program_button.png";
 import programButtonHoverImage from "../../images/Buttons/Program/program_hover.png";
-import programButtonDisableImage from "../../images/Buttons/Program/program_button_idle.png";
+import programButtonClickImage from "../../images/Buttons/Program/program_click.png";
 import "./ProgramButton.css";
 
 interface Props {
@@ -17,8 +17,8 @@ const ProgramButton = ({ isDisabled, onClick }: Props) => {
         isDisabled={isDisabled}
         defaultImagePath={programButtonImage}
         hoverImagePath={programButtonHoverImage}
-        clickedImagePath={programButtonImage}
-        disabledImagePath={programButtonDisableImage}
+        clickedImagePath={programButtonClickImage}
+        disabledImagePath={programButtonImage}
         onClick={onClick}
       />
     </div>
