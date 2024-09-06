@@ -1,20 +1,16 @@
 import { GameController as AutomataController } from "./games/automata/controller";
-import { MainNavBar } from "./components/Nav";
+import { loginL1AccountAsync } from "./data/accountSlice";
+import { useAppDispatch } from "./app/hooks";
+import { useEffect } from "react";
 import "./App.css";
 
 function App() {
-  return (
-    <>
-      <MainNavBar
-        currency={0}
-        handleRestart={() => {
-          /* */
-        }}
-        showNavBar={false}
-      />
-      <AutomataController />
-    </>
-  );
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(loginL1AccountAsync());
+  }, []);
+
+  return <AutomataController />;
 }
 
 export default App;

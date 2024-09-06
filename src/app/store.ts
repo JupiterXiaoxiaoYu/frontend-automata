@@ -3,7 +3,6 @@ import statusReducer from '../data/statusSlice';
 import accountReducer from '../data/accountSlice';
 import endpointReducer from "../data/endpoint";
 import gameReducer from "../data/game";
-import clientReducer from "../games/miniserverfe/thunk";
 import automataReducer from "../data/automata/automata";
 
 export const store = configureStore({
@@ -34,7 +33,6 @@ export const store = configureStore({
     account: accountReducer,
     endpoint: endpointReducer,
     game: gameReducer,
-    client: clientReducer,
     automata: automataReducer,
   },
   devTools: {
