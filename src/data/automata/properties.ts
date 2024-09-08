@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
-import { getConfig, sendTransaction, queryState } from "../../games/automata/request"
+import { getConfig, sendTransaction, queryState } from "../../games/request"
 import { ResourceAmountPair, emptyCommonResources } from "./models"
 
 export enum UIState{

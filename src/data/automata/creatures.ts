@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
-import { queryState, SERVER_TICK_TO_SECOND } from "../../games/automata/request";
+import { queryState, SERVER_TICK_TO_SECOND } from "../../games/request";
 import { CreatureModel, getRareResources, emptyRareResources, emptyCreature, getCreatingCreature, ResourceType, allResourceTypes, ProgramModel, ProgramInfo } from './models';
 import { selectProgramByIndex, selectProgramsByIndexes } from "./programs"
 

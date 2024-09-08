@@ -1,4 +1,4 @@
-import { GameController as AutomataController } from "./games/automata/controller";
+import { GameController as AutomataController } from "./games/controller";
 import { loginL1AccountAsync } from "./data/accountSlice";
 import { useAppDispatch } from "./app/hooks";
 import { useEffect } from "react";

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
-import { getConfig, SERVER_TICK_TO_SECOND } from "../../games/automata/request";
+import { getConfig, SERVER_TICK_TO_SECOND } from "../../games/request";
 import { ProgramModel, FilterModel, allResourcesToggleFilter, getCommonResources, getRareResources, ResourceType, allResourceTypes
  } from "./models";
 

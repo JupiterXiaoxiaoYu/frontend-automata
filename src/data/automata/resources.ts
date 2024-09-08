@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
-import { queryState } from "../../games/automata/request";
+import { queryState } from "../../games/request";
 import { ResourceAmountPair, ResourceType, emptyCommonResources, getCommonResources } from './models';
 
 interface ResourcesState {
