@@ -1,8 +1,7 @@
 import os
 
-programs = [
-    'QuantumScribe', 'QuantumFrost', 'QuantumSurge', 'QuantaForge', 'Aespa', 'BioGen', 'BioFusion', 'AstroMine', 'TitaniumBoost', 'QuantumLeap', 'BioSurge', 'BioHarvest', 'EnerGex', 'EtherWeave', 'BioCast', 'AstroCharge', 'BioSynthesis', 'XenoFloral', 'FoamTap', 'CrystaBloom', 'EnerGate', 'EnerFusion', 'QuantumCore', 'XenoBloom'
-]
+base_path = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/automata/images/Animations/Programs/"
+programs = [dir_name for dir_name in os.listdir(base_path)]
 
 template = """import React, {{ useEffect }} from "react";
 import "../MainMenuProgram.css";
@@ -65,7 +64,7 @@ const {component_name} = ({{ showAnimation }}: Props) => {{
 export default {component_name};
 """
 
-output_dir = "/Users/charlie/Documents/GitHub/trustless-browser-sandbox/src/games/automata/components/Programs/"  # Update this with your output directory
+output_dir = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/automata/components/Programs/"  # Update this with your output directory
 
 for program in programs:
     # imports = "\n".join(
@@ -83,8 +82,6 @@ for program in programs:
     # file_name = os.path.join(output_dir, f"{program}.tsx")
     # with open(file_name, "w") as file:
     #     file.write(content)
-    # print(f"Generated {file_name}")
-    
 
     # print(f'import {program} from "../../games/automata/components/Programs/{program}";')
     
