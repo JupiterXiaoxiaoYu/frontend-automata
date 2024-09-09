@@ -59,7 +59,7 @@ export const programsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(getConfig.fulfilled, (state, action) => {
-          state.programs = decodePrograms(action.payload.modifiers);
+        //   state.programs = decodePrograms(action.payload.modifiers);
         });
     }
 });

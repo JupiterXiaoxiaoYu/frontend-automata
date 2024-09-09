@@ -14,6 +14,7 @@ interface SendTransactionParams {
 }
 
 interface QueryStateRes {
+    nonce: string;
     player: any;
     creatures: any;
     globalTimer: any;
@@ -61,11 +62,14 @@ export const queryState = createAsyncThunk<
                 const { cmd, prikey } = params;
                 const res = await query_state(cmd, prikey);
                 const datas = JSON.parse(res.data);
-                const [player, creatures, serverTick] = datas;
-                console.log("query state data", datas.data);
+                const nonce = datas[0].nonce.toString();
+                const serverTick = datas[1];
+                console.log("query state data", datas[0].data);
+                const { energy, cost_info, current_cost, objects, local, cards } = datas[0].data;
                 return {
-                    player,
-                    creatures,
+                    nonce,
+                    player: local,
+                    creatures: objects,
                     globalTimer: serverTick * SERVER_TICK_TO_SECOND,
                 };
 

@@ -20,7 +20,7 @@ export const resourcesSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(queryState.fulfilled, (state, action) => {
-            state.commonResources = getCommonResources(action.payload.player.data.local);
+            state.commonResources = getCommonResources(action.payload.player);
         });
     }
   },

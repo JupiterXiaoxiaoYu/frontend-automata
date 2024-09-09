@@ -66,7 +66,7 @@ export const propertiesSlice = createSlice({
           state.uIState = UIState.Idle;
         }
         state.globalTimer = action.payload.globalTimer;
-        state.nonce = action.payload.player.nonce.toString();
+        state.nonce = action.payload.nonce;
         console.log("send transaction fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
