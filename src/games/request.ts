@@ -3,6 +3,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const SERVER_TICK_TO_SECOND = 5;
 
+interface GetConfigRes {
+    objectCostExp: number;
+    upgradeCostExp: number;
+}
+
 interface SendTransactionRes {
     success: boolean;
     jobid: string | undefined;
@@ -25,13 +30,21 @@ interface QueryStateParams {
     prikey: string;
 }
 
-export const getConfig = createAsyncThunk(
-    'client/getConfig',
-    async () => {
-        const res = await query_config();
-        const data = JSON.parse(res.data);
-        return data;
-    }
+export const getConfig = createAsyncThunk<
+    GetConfigRes,
+    Record<string, never>,
+    { rejectValue: string }
+    >(
+        'client/getConfig',
+        async () => {
+            const res = await query_config();
+            const data = JSON.parse(res.data);
+            const { object_cost_exp: objectCostExp, upgrade_cost_exp: upgradeCostExp} = data;
+            return {
+                objectCostExp,
+                upgradeCostExp,
+            };
+        }
 )
 
 export const sendTransaction = createAsyncThunk<

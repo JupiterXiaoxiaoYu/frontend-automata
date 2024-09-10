@@ -44,7 +44,7 @@ export function GameController() {
 
   function loginProcess() {
     if (uIState == UIState.QueryConfig) {
-      dispatch(getConfig());
+      dispatch(getConfig({}));
     } else if (uIState == UIState.QueryState) {
       dispatch(queryState({ cmd: [], prikey: l2account!.address }));
     } else if (uIState == UIState.CreatePlayer) {
