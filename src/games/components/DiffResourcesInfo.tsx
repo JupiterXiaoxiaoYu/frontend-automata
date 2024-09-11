@@ -22,16 +22,6 @@ const DiffResourcesInfo = ({ diffResources }: Props) => {
     ResourceType.AlienFloral,
     ResourceType.SpiceMelange,
     ResourceType.Titanium,
-    ResourceType.Enercore,
-    ResourceType.Nexium,
-    null,
-    null,
-    ResourceType.Swiftex,
-    ResourceType.Cognisurge,
-    null,
-    null,
-    ResourceType.Vitalshield,
-    ResourceType.Flexonix,
   ];
   return (
     <>

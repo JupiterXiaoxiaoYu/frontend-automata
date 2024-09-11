@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { ResourceType, getResourceIconPath } from "../../data/automata/models";
-import "./SpendCommonResource.css";
+import "./SpendResource.css";
 import ResourceChangeAmountAnimation from "./ResourceChangeAmountAnimation";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   changeAmount: number;
 }
 
-const SpendCommonResource = ({
+const SpendResource = ({
   type,
   animationIndex,
   delayTime,
@@ -118,19 +118,16 @@ const SpendCommonResource = ({
   }, [animationIndex]);
   return (
     <>
-      <div className="spend-common-resource-container">
-        <div
-          ref={parabolaXRef}
-          className="spend-common-resource-animation-container"
-        >
+      <div className="spend-resource-container">
+        <div ref={parabolaXRef} className="spend-resource-animation-container">
           <div
             ref={parabolaYRef}
-            className="spend-common-resource-animation-container"
+            className="spend-resource-animation-container"
           >
             {playingIconAnimation && (
               <img
                 src={getResourceIconPath(type)}
-                className="spend-common-resource-image"
+                className="spend-resource-image"
               />
             )}
           </div>
@@ -138,7 +135,7 @@ const SpendCommonResource = ({
       </div>
       {playingResourceChangeAmountAnimation && (
         <div
-          className="spend-common-resource-amount-animation-container"
+          className="spend-resource-amount-animation-container"
           style={{
             left: `${startPosition.x + 30}px`,
             top: `${startPosition.y + 20}px`,
@@ -151,4 +148,4 @@ const SpendCommonResource = ({
   );
 };
 
-export default SpendCommonResource;
+export default SpendResource;

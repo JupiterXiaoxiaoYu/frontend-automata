@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import GainCommonResource from "./GainCommonResource";
-import SpendCommonResource from "./SpendCommonResource";
+import GainResource from "./GainResource";
+import SpendResource from "./SpendResource";
 import {
-  commonResourceTypes,
-  rareResourceTypes,
+  resourceTypes,
   ResourceAmountPair,
-  emptyCommonResources,
+  emptyResources,
   ProgramInfo,
   ResourceType,
 } from "../../data/automata/models";
@@ -76,18 +75,12 @@ const ResourceAnimations = ({ localTimer }: Props) => {
     };
 
   const getResourceDisplayerPosition = (type: ResourceType) => {
-    const commonResourceIndex = commonResourceTypes.findIndex((t) => t == type);
-    const rareResourceIndex = rareResourceTypes.findIndex((t) => t == type);
+    const resourceIndex = resourceTypes.findIndex((t) => t == type);
 
-    return commonResourceIndex != -1
-      ? {
-          x: 90 * commonResourceIndex + 30,
-          y: 25,
-        }
-      : {
-          x: 80 * rareResourceIndex + 272,
-          y: 70,
-        };
+    return {
+      x: 90 * resourceIndex + 30,
+      y: 25,
+    };
   };
 
   const triggerAnimation = (diffResources: ResourceAmountPair[]) => {
@@ -183,7 +176,7 @@ const ResourceAnimations = ({ localTimer }: Props) => {
     <div ref={parentRef} className="resource-animations-container">
       {playingAnimation &&
         gainAnimations.map((prop, index) => (
-          <GainCommonResource
+          <GainResource
             key={index}
             type={prop.entity.type}
             animationIndex={animationIndex}
@@ -196,7 +189,7 @@ const ResourceAnimations = ({ localTimer }: Props) => {
         ))}
       {playingAnimation &&
         spendAnimations.map((prop, index) => (
-          <SpendCommonResource
+          <SpendResource
             key={index}
             type={prop.entity.type}
             animationIndex={animationIndex}

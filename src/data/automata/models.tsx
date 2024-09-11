@@ -144,7 +144,7 @@ import XenoBloomIcon from "../../games/images/Animations/Programs/XenoBloom/Xeno
 import StarLightIcon from "../../games/images/Animations/Programs/StarLight/StarLight_00.png";
 
 export interface CreatureModel {
-  rareResources: ResourceAmountPair[];
+  attributes: AttributeAmountPair[];
   name: string;
   isLocked: boolean;
   creatureType: number;
@@ -245,16 +245,22 @@ export enum ResourceType {
   AlienFloral,
   SpiceMelange,
   Titanium,
-  Enercore,
-  Nexium,
-  Swiftex,
-  Cognisurge,
-  Vitalshield,
-  Flexonix,
 }
 
 export interface ResourceAmountPair {
   type: ResourceType;
+  amount: number;
+}
+
+export enum AttributeType {
+  Level,
+  Speed,
+  Efficiency,
+  Productivity,
+}
+
+export interface AttributeAmountPair {
+  type: AttributeType;
   amount: number;
 }
 
@@ -267,7 +273,7 @@ export enum GuideType {
   First,
 }
 
-export const commonResourceTypes = [
+export const resourceTypes = [
   ResourceType.Crystal,
   ResourceType.InterstellarMineral,
   ResourceType.Biomass,
@@ -278,29 +284,25 @@ export const commonResourceTypes = [
   ResourceType.Titanium,
 ];
 
-export const rareResourceTypes = [
-  ResourceType.Enercore,
-  ResourceType.Nexium,
-  ResourceType.Swiftex,
-  ResourceType.Cognisurge,
-  ResourceType.Vitalshield,
-  ResourceType.Flexonix,
+export const attributeTypes = [
+  AttributeType.Level,
+  AttributeType.Speed,
+  AttributeType.Efficiency,
+  AttributeType.Efficiency,
 ];
 
-export const allResourceTypes = [...commonResourceTypes, ...rareResourceTypes];
-
-export const emptyCommonResources = commonResourceTypes.map((type) => ({
+export const emptyResources = resourceTypes.map((type) => ({
   type,
   amount: 0,
 }));
 
-export const emptyRareResources = rareResourceTypes.map((type) => ({
+export const emptyAttributes = attributeTypes.map((type) => ({
   type,
   amount: 0,
 }));
 
 export const emptyCreature: CreatureModel = {
-  rareResources: emptyRareResources,
+  attributes: emptyAttributes,
   name: "",
   isLocked: false,
   creatureType: -1,
@@ -312,7 +314,7 @@ export const emptyCreature: CreatureModel = {
 
 export function getCreatingCreature(creatureType: number): CreatureModel {
   return {
-    rareResources: emptyRareResources,
+    attributes: emptyAttributes,
     name: "Creating",
     isLocked: false,
     creatureType: creatureType,
@@ -324,21 +326,21 @@ export function getCreatingCreature(creatureType: number): CreatureModel {
 }
 
 export const allResourcesToggleFilter: FilterModel = {
-  dict: allResourceTypes.reduce((acc, type) => {
+  dict: resourceTypes.reduce((acc, type) => {
     acc[type] = false;
     return acc;
   }, {} as { [key in ResourceType]?: boolean }),
 };
 
-export function getCommonResources(array: Array<number>) {
-  return commonResourceTypes.map((type, index) => ({
+export function getResources(array: Array<number>) {
+  return resourceTypes.map((type, index) => ({
     type,
     amount: array[index],
   }));
 }
 
-export function getRareResources(array: Array<number>) {
-  return rareResourceTypes.map((type, index) => ({
+export function getAttributes(array: Array<number>) {
+  return attributeTypes.map((type, index) => ({
     type,
     amount: array[index],
   }));
@@ -362,20 +364,23 @@ export function getResourceIconPath(type: ResourceType): string {
       return SpiceMelangeIcon;
     case ResourceType.Titanium:
       return TitaniumIcon;
-    case ResourceType.Enercore:
-      return EnercoreIcon;
-    case ResourceType.Nexium:
-      return NexiumIcon;
-    case ResourceType.Swiftex:
-      return SwiftexIcon;
-    case ResourceType.Cognisurge:
-      return CognisurgeIcon;
-    case ResourceType.Vitalshield:
-      return VitalshieldIcon;
-    case ResourceType.Flexonix:
-      return FlexonixIcon;
     default:
       throw new Error("Unknown ResourceType");
+  }
+}
+
+export function getAttributeIconPath(type: AttributeType): string {
+  switch (type) {
+    case AttributeType.Level:
+      return EnercoreIcon;
+    case AttributeType.Speed:
+      return NexiumIcon;
+    case AttributeType.Efficiency:
+      return SwiftexIcon;
+    case AttributeType.Productivity:
+      return CognisurgeIcon;
+    default:
+      throw new Error("Unknown AttributeType");
   }
 }
 
@@ -397,18 +402,6 @@ export function getResourceNameText(type: ResourceType): string {
       return "Spice Melange";
     case ResourceType.Titanium:
       return "Titanium";
-    case ResourceType.Enercore:
-      return "Enercore";
-    case ResourceType.Nexium:
-      return "Nexium";
-    case ResourceType.Swiftex:
-      return "Swiftex";
-    case ResourceType.Cognisurge:
-      return "Cognisurge";
-    case ResourceType.Vitalshield:
-      return "Vitalshield";
-    case ResourceType.Flexonix:
-      return "Flexonix";
     default:
       throw new Error("Unknown ResourceType");
   }
@@ -443,6 +436,10 @@ export function getCreatureIconPath(creatureType: number): string {
   return creatureType == -1
     ? ""
     : botIconPaths[creatureType % botIconPaths.length];
+}
+
+export function getProgramName(type: ProgramType): string {
+  return ProgramType[type];
 }
 
 export function getProgramComponent(

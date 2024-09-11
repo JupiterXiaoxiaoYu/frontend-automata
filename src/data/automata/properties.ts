@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
 import { getConfig, sendTransaction, queryState } from "../../games/request"
-import { ResourceAmountPair, emptyCommonResources } from "./models"
+import { ResourceAmountPair, emptyResources } from "./models"
 
 export enum UIState{
   Init,

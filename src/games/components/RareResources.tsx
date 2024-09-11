@@ -3,20 +3,20 @@ import RareResourceDisplay from "./RareResourceDisplay";
 import { useAppSelector } from "../../app/hooks";
 
 import {
-  getResourceIconPath,
-  rareResourceTypes,
+  getAttributeIconPath,
+  attributeTypes,
 } from "../../data/automata/models";
-import { selectSelectedRareResources } from "../../data/automata/creatures";
+import { selectSelectedAttributes } from "../../data/automata/creatures";
 import "./RareResources.css";
 
 const RareResources = () => {
   return (
     <div className="top-rare-resources-container">
-      {rareResourceTypes.map((type, index) => (
+      {attributeTypes.map((type, index) => (
         <RareResourceDisplay
           key={index}
-          iconImagePath={getResourceIconPath(type)}
-          amount={useAppSelector(selectSelectedRareResources(type))}
+          iconImagePath={getAttributeIconPath(type)}
+          amount={useAppSelector(selectSelectedAttributes(type))}
         />
       ))}
     </div>

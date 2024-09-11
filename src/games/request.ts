@@ -22,6 +22,7 @@ interface QueryStateRes {
     nonce: string;
     player: any;
     creatures: any;
+    cards: any;
     globalTimer: any;
 }
 
@@ -40,6 +41,7 @@ export const getConfig = createAsyncThunk<
             const res = await query_config();
             const data = JSON.parse(res.data);
             const { object_cost_exp: objectCostExp, upgrade_cost_exp: upgradeCostExp} = data;
+                console.log("(T):", data);
             return {
                 objectCostExp,
                 upgradeCostExp,
@@ -83,6 +85,7 @@ export const queryState = createAsyncThunk<
                     nonce,
                     player: local,
                     creatures: objects,
+                    cards,
                     globalTimer: serverTick * SERVER_TICK_TO_SECOND,
                 };
 

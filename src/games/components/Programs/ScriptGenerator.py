@@ -92,5 +92,9 @@ for program in programs:
     # print(f'import {program}Icon from "../../games/images/Animations/Programs/{program}/{program}_00.png";')
     
     
+    # print(f"""case ProgramType.{program}:
+    #   return {program}Icon;""")
+    
+    
     print(f"""case ProgramType.{program}:
-      return {program}Icon;""")
+      return "{program}";""")

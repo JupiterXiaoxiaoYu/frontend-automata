@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
 import { queryState, SERVER_TICK_TO_SECOND } from "../../games/request";
-import { CreatureModel, getRareResources, emptyRareResources, emptyCreature, getCreatingCreature, ResourceType, allResourceTypes, ProgramModel, ProgramInfo } from './models';
+import { CreatureModel, getAttributes, emptyAttributes, emptyCreature, getCreatingCreature, ProgramInfo, AttributeType, resourceTypes } from './models';
 import { selectProgramByIndex, selectProgramsByIndexes } from "./programs"
 
 interface CreatureRaw {
-    entity: Array<number>;
-    object_id: Array<string>;
-    modifiers: Array<number>;
+    attributes: Array<number>;
+    cards: Array<number>;
     modifier_info: string;
 }
 
@@ -30,11 +29,11 @@ function rawToModel(raw: CreatureRaw, index: number): CreatureModel {
     const isProgramStop = parseInt(binary.slice(0, 8), 2) == 1;
     const startTick = parseInt(binary.slice(16), 2);
     return {
-        rareResources: getRareResources(raw.entity),
+        attributes: getAttributes(raw.attributes),
         name: `Bot ${index + 1}`,
         creatureType: index,
         isLocked: false,
-        programIndexes: raw.modifiers,
+        programIndexes: [0, 0, 0, 0, 0, 0, 0, 0],
         currentProgramIndex: currentProgramIndex,
         isProgramStop: isProgramStop,
         startTime: startTick * SERVER_TICK_TO_SECOND,
@@ -43,7 +42,7 @@ function rawToModel(raw: CreatureRaw, index: number): CreatureModel {
 
 function createLockedCreature(creatureType: number): CreatureModel {
     return {
-        rareResources: emptyRareResources,
+        attributes: emptyAttributes,
         name: "Lock",
         isLocked: true,
         creatureType: creatureType,
@@ -128,6 +127,7 @@ export const creaturesSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(queryState.fulfilled, (state, action) => {
+            console.log("(T):", action.payload.creatures);
             const creatures = action.payload.creatures as CreatureRaw[];
             state.creatures =creatures.map((creature, index) => rawToModel(creature, index));
         });
@@ -161,15 +161,15 @@ export const selectSelectedCreature = (state: RootState) =>
         ? state.automata.creatures.rebootCreature 
         : state.automata.creatures.creatures[state.automata.creatures.selectedCreatureIndex]
 
-export const selectSelectedRareResources = (type: ResourceType) => (state: RootState) => 
-    selectSelectedCreature(state).rareResources.find(resource => resource.type == type)?.amount ?? 0;
+export const selectSelectedAttributes = (type: AttributeType) => (state: RootState) => 
+    selectSelectedCreature(state).attributes.find(attribute => attribute.type == type)?.amount ?? 0;
 
 export const selectSelectedCreaturePrograms = (state: RootState) => 
     selectProgramsByIndexes(selectSelectedCreature(state).programIndexes)(state)
 
 export const selectSelectedCreatureDiffResources = (state: RootState) => {
     const programs = selectProgramsByIndexes(selectSelectedCreature(state).programIndexes)(state).filter(program => program != null);
-    const diffResources = Object.fromEntries(allResourceTypes.map(type => [type, 0]));
+    const diffResources = Object.fromEntries(resourceTypes.map(type => [type, 0]));
     programs.forEach(program => program?.resources?.forEach(resource => diffResources[resource.type] += resource.amount));
     return diffResources;
 }

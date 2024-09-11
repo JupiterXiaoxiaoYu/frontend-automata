@@ -11,7 +11,7 @@ import {
 } from "../../data/automata/programs";
 
 import {
-  allResourceTypes,
+  resourceTypes,
   getResourceIconPath,
   ResourceType,
 } from "../../data/automata/models";
@@ -31,7 +31,7 @@ const ProgramFilterBar = () => {
           onClick={onClickAllResourcesToggle}
         />
 
-        {allResourceTypes.map((type, index) => (
+        {resourceTypes.map((type, index) => (
           <ProgramFilterButton
             key={index}
             isSelected={useAppSelector(selectIsResourceTypeToggled(type))}

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { ResourceType, getResourceIconPath } from "../../data/automata/models";
-import "./GainCommonResource.css";
+import "./GainResource.css";
 import ResourceChangeAmountAnimation from "./ResourceChangeAmountAnimation";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
   changeAmount: number;
 }
 
-const GainCommonResource = ({
+const GainResource = ({
   type,
   animationIndex,
   delayTime,
@@ -151,23 +151,14 @@ const GainCommonResource = ({
 
   return (
     <>
-      <div className="gain-common-resource-container">
-        <div
-          ref={parabolaXRef}
-          className="gain-common-resource-animation-container"
-        >
-          <div
-            ref={parabolaYRef}
-            className="gain-common-resource-animation-container"
-          >
-            <div
-              ref={splashRef}
-              className="gain-common-resource-animation-container"
-            >
+      <div className="gain-resource-container">
+        <div ref={parabolaXRef} className="gain-resource-animation-container">
+          <div ref={parabolaYRef} className="gain-resource-animation-container">
+            <div ref={splashRef} className="gain-resource-animation-container">
               {playingIconAnimation && (
                 <img
                   src={getResourceIconPath(type)}
-                  className="gain-common-resource-image"
+                  className="gain-resource-image"
                 />
               )}
             </div>
@@ -176,7 +167,7 @@ const GainCommonResource = ({
       </div>
       {playingResourceChangeAmountAnimation && (
         <div
-          className="gain-common-resource-amount-animation-container"
+          className="gain-resource-amount-animation-container"
           style={{
             left: `${resourceDisplayerPosition.x + 30}px`,
             top: `${resourceDisplayerPosition.y + 20}px`,
@@ -189,4 +180,4 @@ const GainCommonResource = ({
   );
 };
 
-export default GainCommonResource;
+export default GainResource;

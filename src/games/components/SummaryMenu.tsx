@@ -22,13 +22,6 @@ const SummaryMenu = () => {
     ResourceType.AlienFloral,
     ResourceType.SpiceMelange,
     ResourceType.Titanium,
-    ResourceType.Enercore,
-    ResourceType.Nexium,
-    ResourceType.Swiftex,
-    null,
-    ResourceType.Cognisurge,
-    ResourceType.Vitalshield,
-    ResourceType.Flexonix,
   ];
 
   const dispatch = useAppDispatch();

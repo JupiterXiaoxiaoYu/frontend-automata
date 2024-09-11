@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
 import { queryState } from "../../games/request";
-import { ResourceAmountPair, ResourceType, emptyCommonResources, getCommonResources } from './models';
+import { ResourceAmountPair, ResourceType, emptyResources, getResources } from './models';
 
 interface ResourcesState {
-    commonResources: ResourceAmountPair[];
+    resources: ResourceAmountPair[];
 }
 
 const initialState: ResourcesState = {
-    commonResources: emptyCommonResources,
+    resources: emptyResources,
 };
 
 export const resourcesSlice = createSlice({
@@ -20,13 +20,13 @@ export const resourcesSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(queryState.fulfilled, (state, action) => {
-            state.commonResources = getCommonResources(action.payload.player);
+            state.resources = getResources(action.payload.player);
         });
     }
   },
 );
 
-export const selectCommonResource = (type: ResourceType) => (state: RootState) => state.automata.resources.commonResources.find(resource => resource.type == type)?.amount ?? 0;
+export const selectResources = (type: ResourceType) => (state: RootState) => state.automata.resources.resources.find(resource => resource.type == type)?.amount ?? 0;
     
 // export const { } = resourcesSlice.actions;
 export default resourcesSlice.reducer;
