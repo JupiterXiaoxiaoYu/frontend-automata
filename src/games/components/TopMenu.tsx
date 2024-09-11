@@ -2,7 +2,7 @@ import React from "react";
 import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
-import RareResources from "./RareResources";
+import Attributes from "./Attributes";
 
 const TopMenu = () => {
   return (
@@ -12,7 +12,7 @@ const TopMenu = () => {
       <div className="top-right"></div>
       <AccountInfo />
       <Resources />
-      <RareResources />
+      <Attributes />
     </div>
   );
 };

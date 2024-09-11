@@ -127,7 +127,6 @@ export const creaturesSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(queryState.fulfilled, (state, action) => {
-            console.log("(T):", action.payload.creatures);
             const creatures = action.payload.creatures as CreatureRaw[];
             state.creatures =creatures.map((creature, index) => rawToModel(creature, index));
         });

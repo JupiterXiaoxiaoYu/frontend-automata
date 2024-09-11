@@ -1,10 +1,10 @@
-.rare-resource-display-container {
+.attribute-display-container {
     position: relative;
     width: 80px;
     height: 40px;
 }
 
-.rare-resource-display-background {
+.attribute-display-background {
     position: absolute;
     width: 45px;
     height: 16px;
@@ -13,7 +13,7 @@
     transform: translate(-50%, -50%);
 }
 
-.rare-resource-display-image {
+.attribute-display-image {
     position: absolute;
     top: 50%;
     left: 15%;
@@ -22,7 +22,7 @@
     height: 32px;
 }
 
-.rare-resource-display-text {
+.attribute-display-text {
     position: absolute;
     top: 50%;
     left: 55%;

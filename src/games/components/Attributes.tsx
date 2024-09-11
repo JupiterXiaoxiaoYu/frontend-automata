@@ -1,5 +1,5 @@
 import React from "react";
-import RareResourceDisplay from "./RareResourceDisplay";
+import AttributeDisplay from "./AttributeDisplay";
 import { useAppSelector } from "../../app/hooks";
 
 import {
@@ -7,13 +7,13 @@ import {
   attributeTypes,
 } from "../../data/automata/models";
 import { selectSelectedAttributes } from "../../data/automata/creatures";
-import "./RareResources.css";
+import "./Attributes.css";
 
-const RareResources = () => {
+const Attributes = () => {
   return (
-    <div className="top-rare-resources-container">
+    <div className="top-attributes-container">
       {attributeTypes.map((type, index) => (
-        <RareResourceDisplay
+        <AttributeDisplay
           key={index}
           iconImagePath={getAttributeIconPath(type)}
           amount={useAppSelector(selectSelectedAttributes(type))}
@@ -23,4 +23,4 @@ const RareResources = () => {
   );
 };
 
-export default RareResources;
+export default Attributes;

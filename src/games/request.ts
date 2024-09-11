@@ -41,7 +41,6 @@ export const getConfig = createAsyncThunk<
             const res = await query_config();
             const data = JSON.parse(res.data);
             const { object_cost_exp: objectCostExp, upgrade_cost_exp: upgradeCostExp} = data;
-                console.log("(T):", data);
             return {
                 objectCostExp,
                 upgradeCostExp,
