@@ -125,7 +125,7 @@ const MainMenu = ({ localTimer }: Props) => {
   }
 
   const currentProgramInfo = useAppSelector(
-    isSelectingUIState
+    isSelectingUIState || isLoading
       ? selectSelectedCreatureSelectingProgram
       : selectSelectedCreatureCurrentProgram(localTimer)
   );
@@ -144,12 +144,14 @@ const MainMenu = ({ localTimer }: Props) => {
               remainTime={currentProgramInfo.remainTime}
               progress={currentProgramInfo.progress}
               iconPath={getCreatureIconPath(selectedCreature.creatureType)}
+              isStarting={selectedCreature.isStarting}
               isCreating={isCreatingUIState}
               showAnimation={showUnlockAnimation}
             />
             <img src={circleBackground} className="main-circle-background" />
             <MainMenuSelectingFrame
               order={currentProgramInfo.index}
+              isReady={!isLoading && !selectedCreature.isStarting}
               isCurrentProgram={!isSelectingUIState}
               isStop={selectedCreature.isProgramStop}
             />
@@ -159,13 +161,15 @@ const MainMenu = ({ localTimer }: Props) => {
             {selectedCreaturePrograms.map((program, index) => (
               <MainMenuProgram
                 key={index}
-                isCurrent={
-                  !isSelectingUIState && currentProgramInfo.index == index
-                }
-                isStop={selectedCreature.isProgramStop}
                 order={index}
                 program={program}
-                showingAnimation={isSelectingUIState}
+                showContainerAnimation={isSelectingUIState}
+                showProgramAnimation={
+                  !selectedCreature.isStarting &&
+                  !isSelectingUIState &&
+                  currentProgramInfo.index == index &&
+                  !selectedCreature.isProgramStop
+                }
               />
             ))}
             <MainMenuWarning />

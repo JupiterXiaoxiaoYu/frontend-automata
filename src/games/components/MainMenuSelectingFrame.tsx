@@ -14,6 +14,7 @@ import "./MainMenuSelectingFrame.css";
 
 interface Props {
   order: number | null;
+  isReady: boolean;
   isCurrentProgram: boolean;
   isStop: boolean;
 }
@@ -34,7 +35,12 @@ function getSelectingFrameDiv(order: number) {
   );
 }
 
-const MainMenuSelectingFrame = ({ order, isCurrentProgram, isStop }: Props) => {
+const MainMenuSelectingFrame = ({
+  order,
+  isReady,
+  isCurrentProgram,
+  isStop,
+}: Props) => {
   if (order == null) {
     return <></>;
   }
@@ -77,8 +83,14 @@ const MainMenuSelectingFrame = ({ order, isCurrentProgram, isStop }: Props) => {
   };
 
   return (
-    <React.Fragment key={isCurrentProgram ? "current" : "selecting"}>
-      {isCurrentProgram ? currentFrameDiv() : selectingFrameDiv()}
+    <React.Fragment
+      key={!isReady ? "loading" : isCurrentProgram ? "current" : "selecting"}
+    >
+      {!isReady
+        ? null
+        : isCurrentProgram
+        ? currentFrameDiv()
+        : selectingFrameDiv()}
     </React.Fragment>
   );
 };

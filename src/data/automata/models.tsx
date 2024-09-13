@@ -152,6 +152,7 @@ export interface CreatureModel {
   currentProgramIndex: number;
   isProgramStop: boolean;
   startTime: number;
+  isStarting: boolean;
 }
 
 export enum ProgramType {
@@ -310,6 +311,7 @@ export const emptyCreature: CreatureModel = {
   currentProgramIndex: 0,
   isProgramStop: false,
   startTime: 0,
+  isStarting: true,
 };
 
 export function getCreatingCreature(creatureType: number): CreatureModel {
@@ -322,6 +324,7 @@ export function getCreatingCreature(creatureType: number): CreatureModel {
     currentProgramIndex: 0,
     isProgramStop: false,
     startTime: 0,
+    isStarting: true,
   };
 }
 

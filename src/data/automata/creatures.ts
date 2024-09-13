@@ -23,11 +23,12 @@ export function formatTime(seconds: number) {
     return `${pad(hours)}:${pad(minutes)}:${pad(secs)}`;
 }
 
-function rawToModel(raw: CreatureRaw, index: number): CreatureModel {
+function rawToModel(raw: CreatureRaw, index: number, globalTimer: number): CreatureModel {
     const binary = BigInt(raw.modifier_info).toString(2).padStart(64, "0");
     const currentProgramIndex = parseInt(binary.slice(8, 16), 2);
     const isProgramStop = parseInt(binary.slice(0, 8), 2) == 1;
     const startTick = parseInt(binary.slice(16), 2);
+    const startTime = startTick * SERVER_TICK_TO_SECOND;
     return {
         attributes: getAttributes(raw.attributes),
         name: `Bot ${index + 1}`,
@@ -36,7 +37,8 @@ function rawToModel(raw: CreatureRaw, index: number): CreatureModel {
         programIndexes: [0, 0, 0, 0, 0, 0, 0, 0],
         currentProgramIndex: currentProgramIndex,
         isProgramStop: isProgramStop,
-        startTime: startTick * SERVER_TICK_TO_SECOND,
+        startTime: startTime,
+        isStarting: globalTimer == startTime,
     };
 }
 
@@ -50,6 +52,7 @@ function createLockedCreature(creatureType: number): CreatureModel {
         currentProgramIndex: 0,
         isProgramStop: false,
         startTime: 0,
+        isStarting: true,
     }
 }
 
@@ -128,7 +131,8 @@ export const creaturesSlice = createSlice({
       builder
         .addCase(queryState.fulfilled, (state, action) => {
             const creatures = action.payload.creatures as CreatureRaw[];
-            state.creatures =creatures.map((creature, index) => rawToModel(creature, index));
+            const globalTimer = action.payload.globalTimer;
+            state.creatures =creatures.map((creature, index) => rawToModel(creature, index, globalTimer));
         });
     }
   },
@@ -174,7 +178,7 @@ export const selectSelectedCreatureDiffResources = (state: RootState) => {
 }
 
 function getProgressBarValue(progress: number, process: number){
-    return Math.min((progress / process) * 100, 100);
+    return Math.max(0, Math.min((progress / process) * 100, 100));
 }
 
 export const selectSelectedCreatureCurrentProgramIndex = (state: RootState) => selectSelectedCreature(state).currentProgramIndex;
@@ -186,7 +190,7 @@ export const selectSelectedCreatureCurrentProgram = (localTimer: number) => (sta
 const getCurrentProgram = (selectedCreature: CreatureModel) => (localTimer: number) => (state: RootState): ProgramInfo => {
     const currentProgramIndex = selectedCreature.currentProgramIndex
     const programIndex = selectedCreature.programIndexes[currentProgramIndex]!;
-    let program = selectProgramByIndex(programIndex)(state);
+    const program = selectProgramByIndex(programIndex)(state);
 
     if (program == null){
         return {
@@ -206,28 +210,11 @@ const getCurrentProgram = (selectedCreature: CreatureModel) => (localTimer: numb
         };
     }
 
-    let time = localTimer - selectedCreature.startTime;
-    let diffIndex = 0;
-    let index = currentProgramIndex + diffIndex;
-    while (diffIndex < 8 && time >= program.processingTime) {
-        time -= program.processingTime;
-        diffIndex += 1;
-        index = (currentProgramIndex + diffIndex) % 8;
-        program = selectProgramByIndex(selectedCreature.programIndexes[index]!)(state)!;
-        if (program == null){
-            return {
-                program: null,
-                index: null,
-                remainTime: 0,
-                progress: 0,
-            }
-        }
-    }
-
+    const time = localTimer - selectedCreature.startTime;
     return {
         program, 
-        index,
-        remainTime: Math.ceil(program.processingTime - time),
+        index: currentProgramIndex,
+        remainTime: Math.min(Math.ceil(program.processingTime - time), program.processingTime),
         progress: getProgressBarValue(time, program.processingTime),
     };
 }
