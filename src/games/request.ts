@@ -40,6 +40,7 @@ export const getConfig = createAsyncThunk<
         async () => {
             const res = await query_config();
             const data = JSON.parse(res.data);
+            console.log("(Data-Config)", data);
             const { object_cost_exp: objectCostExp, upgrade_cost_exp: upgradeCostExp} = data;
             return {
                 objectCostExp,
@@ -76,9 +77,9 @@ export const queryState = createAsyncThunk<
                 const { cmd, prikey } = params;
                 const res = await query_state(cmd, prikey);
                 const datas = JSON.parse(res.data);
+                console.log("(Data-QueryState)", datas);
                 const nonce = datas[0].nonce.toString();
                 const serverTick = datas[1];
-                console.log("query state data", datas[0].data);
                 const { energy, cost_info, current_cost, objects, local, cards } = datas[0].data;
                 return {
                     nonce,

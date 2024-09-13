@@ -34,7 +34,7 @@ function rawToModel(raw: CreatureRaw, index: number, globalTimer: number): Creat
         name: `Bot ${index + 1}`,
         creatureType: index,
         isLocked: false,
-        programIndexes: [0, 0, 0, 0, 0, 0, 0, 0],
+        programIndexes: raw.cards,
         currentProgramIndex: currentProgramIndex,
         isProgramStop: isProgramStop,
         startTime: startTime,
