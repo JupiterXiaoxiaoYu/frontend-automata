@@ -28,8 +28,9 @@ const Gameplay = () => {
   const resetStartTimeRef = () => {
     startTimeRef.current = 0;
     lastLocalTimerRef.current =
-      Math.abs(globalTimerCache - localTimer) > SERVER_TICK_TO_SECOND
-        ? globalTimerCache
+      Math.abs(globalTimerCache - SERVER_TICK_TO_SECOND - localTimer) >
+      SERVER_TICK_TO_SECOND
+        ? globalTimerCache - SERVER_TICK_TO_SECOND
         : localTimer;
   };
 
@@ -56,8 +57,7 @@ const Gameplay = () => {
     resetStartTimeRef();
     elapsedTimeMultiplierRef.current = Math.max(
       Math.min(
-        (globalTimerCache - lastLocalTimerRef.current + SERVER_TICK_TO_SECOND) /
-          SERVER_TICK_TO_SECOND,
+        (globalTimerCache - lastLocalTimerRef.current) / SERVER_TICK_TO_SECOND,
         1.2
       ),
       0.8

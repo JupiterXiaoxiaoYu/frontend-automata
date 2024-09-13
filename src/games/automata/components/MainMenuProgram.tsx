@@ -13,19 +13,17 @@ import { setSelectingProgramIndex } from "../../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 interface Props {
-  isCurrent: boolean;
-  isStop: boolean;
   order: number;
   program: ProgramModel | null;
-  showingAnimation: boolean;
+  showContainerAnimation: boolean;
+  showProgramAnimation: boolean;
 }
 
 const MainMenuProgram = ({
-  isCurrent,
-  isStop,
   order,
   program,
-  showingAnimation,
+  showContainerAnimation,
+  showProgramAnimation,
 }: Props) => {
   const dispatch = useAppDispatch();
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
@@ -55,12 +53,12 @@ const MainMenuProgram = ({
       <div
         key={program?.index}
         className={
-          showingAnimation
+          showContainerAnimation
             ? "main-bot-program-animation-container"
             : "main-bot-program-normal-container"
         }
       >
-        {getProgramComponent(program, isCurrent && !isStop)}
+        {getProgramComponent(program, showProgramAnimation)}
       </div>
     </div>
   );
