@@ -73,7 +73,11 @@ const Creature = ({ index, creature, progress }: Props) => {
           />
         </>
       )}
-      <p className="creature-text">{creature.name}</p>
+      {creature.name === "Creating" ? (
+        <p className="creature-creating-text">Creating</p>
+      ) : (
+        <p className="creature-text">{creature.name}</p>
+      )}
       {isLocked && <img src={creatureLock} className="creature-lock-image" />}
     </div>
   );
