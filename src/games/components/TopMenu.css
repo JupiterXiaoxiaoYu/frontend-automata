@@ -2,6 +2,7 @@
     height: 110px;
     min-height: 110px;
     width: 100%;
+    min-width: 960px;
     display: flex;
     font-size: 24px;
     z-index: 10;
@@ -31,4 +32,20 @@
     height: 110px;
     background-image: url('../images/backgrounds/top_mid.png');
     background-repeat: repeat-x;
+}
+
+.top-withdraw{
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    left: calc(max(100%, 960px) - 280px);
+    top: 5px;
+}
+
+.top-deposit{
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    left: calc(max(100%, 960px) - 350px);
+    top: 5px;
 }

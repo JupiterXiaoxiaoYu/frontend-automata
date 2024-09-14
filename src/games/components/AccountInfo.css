@@ -2,9 +2,8 @@
     position: absolute;
     width: 202px;
     height: 58px;
-    right: 10px;
+    left: calc(max(100%, 960px) - 210px);
     top: 0px;
-    /* transform: translate(-50%, -50%); */
 }
 
 .account-info-background {
