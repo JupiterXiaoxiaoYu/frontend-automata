@@ -59,7 +59,9 @@ const Creature = ({ index, creature, progress }: Props) => {
           <img src={creatureIconPath} className="creature-image-background" />
           <img
             src={creatureIconPath}
-            className="creature-image"
+            className={
+              creature.isProgramStop ? "creature-stop-image" : "creature-image"
+            }
             style={{
               clipPath: isLocked
                 ? ""

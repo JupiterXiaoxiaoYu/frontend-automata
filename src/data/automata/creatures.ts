@@ -11,7 +11,7 @@ interface CreatureRaw {
 }
 
 export function formatTime(seconds: number) {
-    if (seconds == 0){
+    if (seconds <= 0){
         return "";
     }
 
