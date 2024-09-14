@@ -45,6 +45,8 @@ const Creature = ({ index, creature, progress }: Props) => {
     }
   };
 
+  const filterPercentage = creature.isProgramStop ? 100 : 100 - progress;
+
   return (
     <div className="creature-container" onClick={() => onSelect()}>
       <img src={creatureBackground} className="creature-background" />
@@ -65,9 +67,7 @@ const Creature = ({ index, creature, progress }: Props) => {
             style={{
               clipPath: isLocked
                 ? ""
-                : `polygon(0 ${100 - progress}%, 100% ${
-                    100 - progress
-                  }%, 100% 0, 0 0)`,
+                : `polygon(0 ${filterPercentage}%, 100% ${filterPercentage}%, 100% 0, 0 0)`,
             }}
           />
         </>
