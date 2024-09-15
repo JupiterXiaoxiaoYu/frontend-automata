@@ -1,17 +1,17 @@
 import React from "react";
-import background from "../images/backgrounds/guide_frame.png";
-import EndGuideButton from "./Buttons/EndGuideButton";
-import HorizontalPrevPageButton from "./Buttons/HorizontalPrevPageButton";
-import HorizontalNextPageButton from "./Buttons/HorizontalNextPageButton";
-import { UIState, setUIState } from "../../data/automata/properties";
+import background from "../../images/backgrounds/guide_frame.png";
+import EndGuideButton from "../Buttons/EndGuideButton";
+import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
+import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";
+import { UIState, setUIState } from "../../../data/automata/properties";
 import {
   nextPage,
   prevPage,
   selectCurrentPage,
   selectTotalPage,
   selectGuideOnCurrentPage,
-} from "../../data/automata/guides";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+} from "../../../data/automata/guides";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./GuidePopup.css";
 
 const GuidePopup = () => {

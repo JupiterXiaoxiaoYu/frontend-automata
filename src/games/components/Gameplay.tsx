@@ -8,7 +8,7 @@ import MainMenu from "./MainMenu";
 import { UIState, selectUIState } from "../../data/automata/properties";
 import { selectGlobalTimer } from "../../data/automata/properties";
 import { useAppSelector } from "../../app/hooks";
-import GuidePopup from "./GuidePopup";
+import GuidePopup from "./Popups/GuidePopup";
 import ResourceAnimations from "./ResourceAnimations";
 
 const Gameplay = () => {
