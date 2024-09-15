@@ -1,18 +1,30 @@
-import React from "react";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import Attributes from "./Attributes";
 import WithDrawButton from "./Buttons/WithdrawButton";
 import DepositButton from "./Buttons/DepositButton";
+import {
+  selectIsLoading,
+  setUIState,
+  UIState,
+} from "../../data/automata/properties";
 
 const TopMenu = () => {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsLoading);
+
   const onClickWithdraw = () => {
-    /* */
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: UIState.Withdraw }));
+    }
   };
 
   const onClickDeposit = () => {
-    /* */
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: UIState.Deposit }));
+    }
   };
 
   return (

@@ -13,6 +13,8 @@ export enum UIState{
   Guide,
   Creating,
   Reboot,
+  Withdraw,
+  Deposit,
 }
 
 interface PropertiesState {

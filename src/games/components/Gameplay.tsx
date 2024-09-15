@@ -10,10 +10,13 @@ import { selectGlobalTimer } from "../../data/automata/properties";
 import { useAppSelector } from "../../app/hooks";
 import GuidePopup from "./Popups/GuidePopup";
 import ResourceAnimations from "./ResourceAnimations";
+import WithdrawPopup from "./Popups/WithdrawPopup";
 
 const Gameplay = () => {
   const uIState = useAppSelector(selectUIState);
   const showGuidePopup = uIState == UIState.Guide;
+  const showWithdrawPopup =
+    uIState == UIState.Withdraw || uIState == UIState.Deposit;
 
   //#region LocalTime
   const globalTimer = useAppSelector(selectGlobalTimer);
@@ -95,6 +98,9 @@ const Gameplay = () => {
         <RightMenu />
       </div>
       {showGuidePopup && <GuidePopup />}
+      {showWithdrawPopup && (
+        <WithdrawPopup isWithdraw={uIState == UIState.Withdraw} />
+      )}
     </>
   );
 };
