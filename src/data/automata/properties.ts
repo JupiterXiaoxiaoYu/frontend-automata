@@ -15,6 +15,7 @@ export enum UIState{
   Reboot,
   Withdraw,
   Deposit,
+  Upgrade,
 }
 
 interface PropertiesState {

@@ -1,0 +1,73 @@
+.upgrade-popup-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+}
+
+.upgrade-popup-mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.upgrade-popup-main-container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 371px;
+    height: 282px;
+}
+
+.upgrade-popup-main-background {
+    width: 100%;
+    height: 100%;
+}
+
+.upgrade-popup-confirm-button {
+    position: absolute;
+    top: 85%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.upgrade-popup-cancel-button {
+    position: absolute;
+    top: 85%;
+    left: 78%;
+    transform: translate(-50%, -50%);
+}
+
+.upgrade-popup-title-text{
+    position: absolute;
+    top: 16%;
+    left: 63%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    text-align: left;
+    line-height: 15px;
+    margin: 0px;
+    width: 40%;
+    height: 15px;
+    font-family: "mishmash";
+    color: white;
+}
+
+.upgrade-popup-bot-name-text{
+    position: absolute;
+    top: 21.5%;
+    left: 63%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    text-align: left;
+    line-height: 10px;
+    margin: 0px;
+    width: 40%;
+    height: 10px;
+    font-family: "mishmash";
+    color: white;
+}
