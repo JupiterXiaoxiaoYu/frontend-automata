@@ -7,12 +7,27 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UpgradePopup.css";
 import UpgradeConfirmButton from "../Buttons/UpgradeConfirmButton";
 import UpgradeCancelButton from "../Buttons/UpgradeCancelButton";
+import UpgradSpeedButton from "../Buttons/UpgradeSpeedButton";
+import UpgradEfficiencyButton from "../Buttons/UpgradeEfficiencyButton";
+import UpgradProductivityButton from "../Buttons/UpgradeProductivityButton";
 
 // interface Props {}
 
 const UpgradePopup = () => {
   const dispatch = useAppDispatch();
   // const [amount, setAmount] = useState("");
+
+  const onClickSpeed = () => {
+    /* */
+  };
+
+  const onClickProductivity = () => {
+    /* */
+  };
+
+  const onClickEfficiency = () => {
+    /* */
+  };
 
   const onClickConfirm = () => {
     /* */
@@ -30,11 +45,18 @@ const UpgradePopup = () => {
         <p className="upgrade-popup-title-text">{`Level ${1}`}</p>
         <p className="upgrade-popup-bot-name-text">{"COC-3721"}</p>
 
-        <div className="upgrade-popup-amount-contianer">
-          {/* <img
+        {/* <img
             src={amountBackground}
             className="upgrade-popup-amount-background"
           /> */}
+        <div className="upgrade-popup-speed-button">
+          <UpgradSpeedButton onClick={onClickSpeed} />
+        </div>
+        <div className="upgrade-popup-efficiency-button">
+          <UpgradEfficiencyButton onClick={onClickEfficiency} />
+        </div>
+        <div className="upgrade-popup-productivity-button">
+          <UpgradProductivityButton onClick={onClickProductivity} />
         </div>
         <div className="upgrade-popup-confirm-button">
           <UpgradeConfirmButton onClick={onClickConfirm} />

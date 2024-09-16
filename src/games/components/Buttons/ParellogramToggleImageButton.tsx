@@ -10,6 +10,8 @@ interface Props {
   disabledImagePath: string;
   selectedImagePath: string;
   onClick: () => void;
+  imageWidth: number;
+  imageHeight: number;
 }
 
 const ParellogramToggleImageButton = ({
@@ -21,6 +23,8 @@ const ParellogramToggleImageButton = ({
   disabledImagePath,
   selectedImagePath,
   onClick,
+  imageWidth,
+  imageHeight,
 }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -52,18 +56,7 @@ const ParellogramToggleImageButton = ({
   };
 
   return (
-    <button
-      className={
-        isDisabled
-          ? "parellogram-toggle-image-button-disabled"
-          : "parellogram-toggle-image-button"
-      }
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-      disabled={isDisabled}
-    >
+    <div className="parellogram-toggle-image-button-container">
       <img
         src={
           isDisabled
@@ -76,8 +69,25 @@ const ParellogramToggleImageButton = ({
             ? hoverImagePath
             : defaultImagePath
         }
+        className="parellogram-toggle-image"
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+        }}
       />
-    </button>
+      <button
+        className={
+          isDisabled
+            ? "parellogram-toggle-image-button-disabled"
+            : "parellogram-toggle-image-button"
+        }
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleMouseEnter}
+        disabled={isDisabled}
+      />
+    </div>
   );
 };
 

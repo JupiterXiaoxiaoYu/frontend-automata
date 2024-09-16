@@ -28,6 +28,27 @@
     height: 100%;
 }
 
+.upgrade-popup-speed-button {
+    position: absolute;
+    top: 65%;
+    left: 23%;
+    transform: translate(-50%, -50%)  skew(-20deg);
+}
+
+.upgrade-popup-efficiency-button {
+    position: absolute;
+    top: 65%;
+    left: 49%;
+    transform: translate(-50%, -50%)  skew(-20deg);
+}
+
+.upgrade-popup-productivity-button {
+    position: absolute;
+    top: 65%;
+    left: 75%;
+    transform: translate(-50%, -50%)  skew(-20deg);
+}
+
 .upgrade-popup-confirm-button {
     position: absolute;
     top: 85%;
