@@ -7,23 +7,12 @@ import SummaryResourceDisplay from "./SummaryResourceDisplay";
 import { setUIState, UIState } from "../../data/automata/properties";
 import "./SummaryMenu.css";
 import {
-  ResourceType,
   getResourceIconPath,
   getResourceNameText,
+  resourceTypes,
 } from "../../data/automata/models";
 
 const SummaryMenu = () => {
-  const allResourceTypesWithBlanks = [
-    ResourceType.Crystal,
-    ResourceType.InterstellarMineral,
-    ResourceType.Biomass,
-    ResourceType.QuantumFoam,
-    ResourceType.Necrodermis,
-    ResourceType.AlienFloral,
-    ResourceType.SpiceMelange,
-    ResourceType.Titanium,
-  ];
-
   const dispatch = useAppDispatch();
   const onClickGuide = () => {
     dispatch(setUIState({ uIState: UIState.Guide }));
@@ -36,18 +25,14 @@ const SummaryMenu = () => {
         <Grid
           columnCount={4}
           rowCount={5}
-          elements={allResourceTypesWithBlanks.map((type, index) =>
-            type != null ? (
-              <SummaryResourceDisplay
-                key={index}
-                type={getResourceNameText(type)}
-                iconImagePath={getResourceIconPath(type)}
-                amount={500000}
-              />
-            ) : (
-              <SummaryResourceDisplay key={index} />
-            )
-          )}
+          elements={resourceTypes.map((type, index) => (
+            <SummaryResourceDisplay
+              key={index}
+              type={getResourceNameText(type)}
+              iconImagePath={getResourceIconPath(type)}
+              amount={500000}
+            />
+          ))}
         />
       </div>
       <div className="summary-menu-guide-button">

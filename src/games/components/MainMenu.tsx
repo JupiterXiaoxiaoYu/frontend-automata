@@ -125,7 +125,7 @@ const MainMenu = ({ localTimer }: Props) => {
   }
 
   function onClickUpgrade() {
-    if (!isLoading) {
+    if (!isLoading && !isSelectingUIState) {
       dispatch(setUIState({ uIState: UIState.Upgrade }));
     }
   }

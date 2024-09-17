@@ -12,7 +12,6 @@ import GuidePopup from "./Popups/GuidePopup";
 import ResourceAnimations from "./ResourceAnimations";
 import WithdrawPopup from "./Popups/WithdrawPopup";
 import UpgradePopup from "./Popups/UpgradePopup";
-import { selectSelectedCreature } from "../../data/automata/creatures";
 
 const Gameplay = () => {
   const uIState = useAppSelector(selectUIState);
@@ -20,7 +19,6 @@ const Gameplay = () => {
   const showWithdrawPopup =
     uIState == UIState.Withdraw || uIState == UIState.Deposit;
   const showUpgradePopup = uIState == UIState.Upgrade;
-  const selectedCreature = useAppSelector(selectSelectedCreature);
 
   //#region LocalTime
   const globalTimer = useAppSelector(selectGlobalTimer);
@@ -105,7 +103,7 @@ const Gameplay = () => {
       {showWithdrawPopup && (
         <WithdrawPopup isWithdraw={uIState == UIState.Withdraw} />
       )}
-      {showUpgradePopup && <UpgradePopup creature={selectedCreature} />}
+      {showUpgradePopup && <UpgradePopup />}
     </>
   );
 };

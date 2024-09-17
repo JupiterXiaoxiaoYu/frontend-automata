@@ -1,0 +1,40 @@
+.upgrade-popup-resource-display-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.upgrade-popup-resource-display-image {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    transform: translate(-50%, -50%);
+}
+
+.upgrade-popup-resource-display-positive-text, .upgrade-popup-resource-display-zero-text, .upgrade-popup-resource-display-negative-text {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    font-size: 8px;
+    text-align: right;
+    line-height: 8px;
+    margin: 0px;
+    width: 60%;
+    height: 8px;
+    font-family: "mishmash";
+}
+
+.upgrade-popup-resource-display-positive-text {
+    color: rgb(85, 221, 85);
+}
+
+.upgrade-popup-resource-display-zero-text{
+    color: white;
+}
+
+.upgrade-popup-resource-display-negative-text {
+    color: rgb(220, 36, 36);
+}

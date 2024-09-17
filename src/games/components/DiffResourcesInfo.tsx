@@ -4,7 +4,7 @@ import infoBackground from "../images/backgrounds/info_frame.png";
 import Grid from "./Grid";
 import DiffResourceDisplay from "./DiffResourceDisplay";
 
-import { ResourceType, getResourceIconPath } from "../../data/automata/models";
+import { getResourceIconPath, resourceTypes } from "../../data/automata/models";
 
 interface Props {
   diffResources: {
@@ -13,16 +13,6 @@ interface Props {
 }
 
 const DiffResourcesInfo = ({ diffResources }: Props) => {
-  const allResourceTypesWithBlanks = [
-    ResourceType.Crystal,
-    ResourceType.InterstellarMineral,
-    ResourceType.Biomass,
-    ResourceType.QuantumFoam,
-    ResourceType.Necrodermis,
-    ResourceType.AlienFloral,
-    ResourceType.SpiceMelange,
-    ResourceType.Titanium,
-  ];
   return (
     <>
       <img src={infoBackground} className="main-info-background" />
@@ -30,17 +20,13 @@ const DiffResourcesInfo = ({ diffResources }: Props) => {
         <Grid
           columnCount={4}
           rowCount={5}
-          elements={allResourceTypesWithBlanks.map((type, index) =>
-            type != null ? (
-              <DiffResourceDisplay
-                key={index}
-                iconImagePath={getResourceIconPath(type)}
-                amount={diffResources[type]}
-              />
-            ) : (
-              <DiffResourceDisplay key={index} />
-            )
-          )}
+          elements={resourceTypes.map((type, index) => (
+            <DiffResourceDisplay
+              key={index}
+              iconImagePath={getResourceIconPath(type)}
+              amount={diffResources[type]}
+            />
+          ))}
         />
       </div>
     </>

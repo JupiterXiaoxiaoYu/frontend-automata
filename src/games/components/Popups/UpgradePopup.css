@@ -23,6 +23,11 @@
     height: 282px;
 }
 
+.upgrade-popup-main-background {
+    width: 100%;
+    height: 100%;
+}
+
 .upgrade-popup-creature-image {
     position: absolute;
     top: 29.9%;
@@ -32,9 +37,13 @@
     height: 85px;
 }
 
-.upgrade-popup-main-background {
-    width: 100%;
-    height: 100%;
+.upgrade-popup-resources-info-grid{
+    width: 156px;
+    height: 57px;
+    top: 35%;
+    left: 62.5%;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
 
 .upgrade-popup-speed-button {

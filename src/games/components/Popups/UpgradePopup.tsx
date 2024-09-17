@@ -13,11 +13,16 @@ import UpgradProductivityButton from "../Buttons/UpgradeProductivityButton";
 import {
   CreatureModel,
   getCreatureIconPath,
+  getResourceIconPath,
+  resourceTypes,
 } from "../../../data/automata/models";
+import UpgradePopupResourceDisplay from "./UpgradePopupResourceDisplay";
+import Grid from "../Grid";
+import {
+  selectSelectedCreature,
+  selectSelectedCreatureDiffResources,
+} from "../../../data/automata/creatures";
 
-interface Props {
-  creature: CreatureModel;
-}
 enum UpgradeState {
   None,
   Speed,
@@ -25,9 +30,14 @@ enum UpgradeState {
   Productivity,
 }
 
-const UpgradePopup = ({ creature }: Props) => {
+const UpgradePopup = () => {
   const dispatch = useAppDispatch();
   const [upgradeState, setUpgradeState] = useState(UpgradeState.None);
+
+  const selectedCreature = useAppSelector(selectSelectedCreature);
+  const selectedCreatureDiffResources = useAppSelector(
+    selectSelectedCreatureDiffResources
+  );
 
   const onClickSpeed = () => {
     setUpgradeState(UpgradeState.Speed);
@@ -58,14 +68,24 @@ const UpgradePopup = ({ creature }: Props) => {
         <p className="upgrade-popup-bot-name-text">{"COC-3721"}</p>
 
         <img
-          src={getCreatureIconPath(creature.creatureType)}
+          src={getCreatureIconPath(selectedCreature.creatureType)}
           className="upgrade-popup-creature-image"
         />
-
-        {/* <img
-            src={amountBackground}
-            className="upgrade-popup-amount-background"
-          /> */}
+        <div className="upgrade-popup-resources-info-grid">
+          <Grid
+            elementWidth={52}
+            elementHeight={19}
+            columnCount={3}
+            rowCount={3}
+            elements={resourceTypes.map((type, index) => (
+              <UpgradePopupResourceDisplay
+                key={index}
+                iconImagePath={getResourceIconPath(type)}
+                amount={selectedCreatureDiffResources[type]}
+              />
+            ))}
+          />
+        </div>
         <div className="upgrade-popup-speed-button">
           <UpgradSpeedButton
             isSelected={upgradeState == UpgradeState.Speed}
