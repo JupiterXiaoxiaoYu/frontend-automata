@@ -6,15 +6,16 @@ import "./UpgradeEfficiencyButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 
 interface Props {
+  isSelected: boolean;
   onClick: () => void;
 }
 
-const UpgradeEfficiencyButton = ({ onClick }: Props) => {
+const UpgradeEfficiencyButton = ({ isSelected, onClick }: Props) => {
   return (
     <div className="upgrade-efficiency-button-scale">
       <ParellogramToggleImageButton
         isDisabled={false}
-        isSelected={false}
+        isSelected={isSelected}
         defaultImagePath={upgradEfficiencyButtonImage}
         hoverImagePath={upgradEfficiencyButtonHoverImage}
         clickedImagePath={upgradEfficiencyButtonClickImage}

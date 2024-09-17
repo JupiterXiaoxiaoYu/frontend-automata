@@ -23,6 +23,15 @@
     height: 282px;
 }
 
+.upgrade-popup-creature-image {
+    position: absolute;
+    top: 29.9%;
+    left: 26.8%;
+    transform: translate(-50%, -50%);
+    width: 85px;
+    height: 85px;
+}
+
 .upgrade-popup-main-background {
     width: 100%;
     height: 100%;
@@ -39,14 +48,14 @@
     position: absolute;
     top: 65%;
     left: 49%;
-    transform: translate(-50%, -50%)  skew(-20deg);
+    transform: translate(-50%, -50%) skew(-20deg);
 }
 
 .upgrade-popup-productivity-button {
     position: absolute;
     top: 65%;
     left: 75%;
-    transform: translate(-50%, -50%)  skew(-20deg);
+    transform: translate(-50%, -50%) skew(-20deg);
 }
 
 .upgrade-popup-confirm-button {
@@ -89,6 +98,38 @@
     margin: 0px;
     width: 40%;
     height: 10px;
+    font-family: "mishmash";
+    color: white;
+}
+
+.upgrade-popup-upgrade-title-text{
+    pointer-events: none;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%) skew(20deg);
+    font-size: 8px;
+    text-align: center;
+    line-height: 8px;
+    margin: 0px;
+    width: 80%;
+    height: 8px;
+    font-family: "mishmash";
+    color: white;
+}
+
+.upgrade-popup-upgrade-value-text{
+    pointer-events: none;
+    position: absolute;
+    top: 81%;
+    left: 53%;
+    transform: translate(-50%, -50%) skew(20deg);
+    font-size: 12px;
+    text-align: center;
+    line-height: 12px;
+    margin: 0px;
+    width: 80%;
+    height: 12px;
     font-family: "mishmash";
     color: white;
 }

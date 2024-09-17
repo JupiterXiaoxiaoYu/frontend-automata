@@ -6,15 +6,16 @@ import "./UpgradeProductivityButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 
 interface Props {
+  isSelected: boolean;
   onClick: () => void;
 }
 
-const UpgradeProductivityButton = ({ onClick }: Props) => {
+const UpgradeProductivityButton = ({ isSelected, onClick }: Props) => {
   return (
     <div className="upgrade-productivity-button-scale">
       <ParellogramToggleImageButton
         isDisabled={false}
-        isSelected={false}
+        isSelected={isSelected}
         defaultImagePath={upgradProductivityButtonImage}
         hoverImagePath={upgradProductivityButtonHoverImage}
         clickedImagePath={upgradProductivityButtonClickImage}

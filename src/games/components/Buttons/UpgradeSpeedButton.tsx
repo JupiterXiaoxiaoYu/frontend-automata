@@ -6,15 +6,16 @@ import "./UpgradeSpeedButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 
 interface Props {
+  isSelected: boolean;
   onClick: () => void;
 }
 
-const UpgradeSpeedButton = ({ onClick }: Props) => {
+const UpgradeSpeedButton = ({ isSelected, onClick }: Props) => {
   return (
     <div className="upgrade-speed-button-scale">
       <ParellogramToggleImageButton
         isDisabled={false}
-        isSelected={false}
+        isSelected={isSelected}
         defaultImagePath={upgradSpeedButtonImage}
         hoverImagePath={upgradSpeedButtonHoverImage}
         clickedImagePath={upgradSpeedButtonClickImage}
