@@ -52,7 +52,7 @@ function createLockedCreature(creatureType: number): CreatureModel {
         currentProgramIndex: 0,
         isProgramStop: false,
         startTime: 0,
-        isStarting: true,
+        isStarting: false,
     }
 }
 
