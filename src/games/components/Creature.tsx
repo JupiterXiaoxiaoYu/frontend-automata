@@ -1,6 +1,7 @@
 import React from "react";
 import "./Creature.css";
 import creatureBackground from "../images/backgrounds/creature_frame.png";
+import creatureStopMask from "../images/backgrounds/creature_frame_mask.png";
 import creatureSelectingFrame from "../images/backgrounds/robot_select.png";
 import creatureLock from "../images/backgrounds/robot_lock.png";
 import { UIState, setUIState } from "../../data/automata/properties";
@@ -45,7 +46,7 @@ const Creature = ({ index, creature, progress }: Props) => {
     }
   };
 
-  const filterPercentage = creature.isProgramStop ? 100 : 100 - progress;
+  const filterPercentage = 100 - progress;
 
   return (
     <div className="creature-container" onClick={() => onSelect()}>
@@ -61,15 +62,16 @@ const Creature = ({ index, creature, progress }: Props) => {
           <img src={creatureIconPath} className="creature-image-background" />
           <img
             src={creatureIconPath}
-            className={
-              creature.isProgramStop ? "creature-stop-image" : "creature-image"
-            }
+            className="creature-image"
             style={{
               clipPath: isLocked
                 ? ""
                 : `polygon(0 ${filterPercentage}%, 100% ${filterPercentage}%, 100% 0, 0 0)`,
             }}
           />
+          {creature.isProgramStop && (
+            <img src={creatureStopMask} className="creature-image-mask" />
+          )}
         </>
       )}
       {creature.name === "Creating" ? (
