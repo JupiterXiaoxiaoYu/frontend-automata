@@ -1,13 +1,13 @@
 .program-filter-bar-container{
     width: 55px;
-    height: 430px;
+    height: 258px;
 }
 
 .program-filter-bar-background{
     position: absolute;
     right: 0px;
     width: 22px;
-    height: 430px;
+    height: 258px;
 }
 
 .program-filter-bar-filters-container{
@@ -18,5 +18,5 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 55px;
-    height: 390px;
+    height: 234px;
 }
