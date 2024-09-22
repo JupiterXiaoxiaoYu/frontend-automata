@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import circleBackground from "../images/backgrounds/circle.png";
 import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
-import ConfirmButton from "./Buttons/CreatureConfirmButton";
-import UnlockButton from "./Buttons/CreatureUnlockButton";
+import CreatureConfirmButton from "./Buttons/CreatureConfirmButton";
+import CreatureUnlockButton from "./Buttons/CreatureUnlockButton";
 import "./MainMenu.css";
-import RebootButton from "./Buttons/CreatureRebootButton";
+import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import DiffResourcesInfo from "./DiffResourcesInfo";
 import Rocket from "./Rocket";
 import { getTransactionCommandArray } from "../rpc";
@@ -85,11 +85,10 @@ const MainMenu = ({ localTimer }: Props) => {
     }, 1000);
   }
 
-  function sendUpdateProgram() {
+  function sendUpdateProgram(isCreating: boolean) {
     if (!isLoading) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
-      const isCreating = uIState == UIState.Creating;
       dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
@@ -142,7 +141,7 @@ const MainMenu = ({ localTimer }: Props) => {
 
   useEffect(() => {
     if (uIState == UIState.PlayUnlockAnimation) {
-      playUnlockAnimation(sendUpdateProgram);
+      playUnlockAnimation(() => sendUpdateProgram(true));
     }
   }, [uIState]);
 
@@ -196,19 +195,19 @@ const MainMenu = ({ localTimer }: Props) => {
             ))}
             <MainMenuWarning />
             {showConfirmButton && (
-              <ConfirmButton
+              <CreatureConfirmButton
                 isDisabled={!enableConfirmButton}
-                onClick={() => sendUpdateProgram()}
+                onClick={() => sendUpdateProgram(false)}
               />
             )}
             {showUnlockButton && (
-              <UnlockButton
+              <CreatureUnlockButton
                 isDisabled={!enableUnlockButton}
                 onClick={() => onClickUnlock()}
               />
             )}
             {showRebootButton && (
-              <RebootButton onClick={() => onClickReboot()} />
+              <CreatureRebootButton onClick={() => onClickReboot()} />
             )}
           </div>
         </div>
