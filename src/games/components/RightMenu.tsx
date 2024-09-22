@@ -9,6 +9,8 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   selectIsSelectingUIState,
   selectIsLoading,
+  setUIState,
+  UIState,
 } from "../../data/automata/properties";
 import {
   selectFilteredPrograms,
@@ -18,6 +20,7 @@ import {
   nextPage,
 } from "../../data/automata/programs";
 import { setProgramIndex } from "../../data/automata/creatures";
+import NewProgram from "./NewProgram";
 
 const RightMenu = () => {
   const dispatch = useAppDispatch();
@@ -61,6 +64,12 @@ const RightMenu = () => {
     }
   };
 
+  const onClickNewProgram = () => {
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: UIState.NewProgramPopup }));
+    }
+  };
+
   const onClickPrevPageButton = () => {
     dispatch(prevPage({}));
   };
@@ -81,13 +90,16 @@ const RightMenu = () => {
           elementHeight={programGridElementHeight}
           columnCount={programGridColumnCount}
           rowCount={programGridRowCount}
-          elements={programs.map((program, index) => (
-            <Program
-              key={index}
-              program={program}
-              onSelect={() => onSelectProgram(program.index)}
-            />
-          ))}
+          elements={[
+            ...programs.map((program, index) => (
+              <Program
+                key={index}
+                program={program}
+                onSelect={() => onSelectProgram(program.index)}
+              />
+            )),
+            <NewProgram onSelect={onClickNewProgram} />,
+          ]}
         />
       </div>
       <div className="right-program-filter-bar-position">

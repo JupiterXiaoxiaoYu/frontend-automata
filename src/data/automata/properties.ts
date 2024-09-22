@@ -19,6 +19,7 @@ export enum UIState{
   UnlockPopup,
   PlayUnlockAnimation,
   NewProgramPopup,
+  PlayNewProgramAnimation,
 }
 
 interface PropertiesState {

@@ -46,6 +46,7 @@
     top: 50%;
     left: 21%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .program-resource-grid{

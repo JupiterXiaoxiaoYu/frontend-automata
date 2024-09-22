@@ -6,6 +6,7 @@ import UpgradePopup from "./Popups/UpgradePopup";
 import { UIState, selectUIState } from "../../data/automata/properties";
 import "./Popups.css";
 import UnlockPopup from "./Popups/UnlockPopup";
+import NewProgramPopup from "./Popups/NewProgramPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
@@ -14,6 +15,7 @@ const Popups = () => {
     uIState == UIState.WithdrawPopup || uIState == UIState.DepositPopup;
   const showUpgradePopup = uIState == UIState.UpgradePopup;
   const showUnlockPopup = uIState == UIState.UnlockPopup;
+  const showNewProgramPopup = uIState == UIState.NewProgramPopup;
 
   return (
     <>
@@ -23,6 +25,7 @@ const Popups = () => {
       )}
       {showUpgradePopup && <UpgradePopup />}
       {showUnlockPopup && <UnlockPopup />}
+      {showNewProgramPopup && <NewProgramPopup />}
     </>
   );
 };
