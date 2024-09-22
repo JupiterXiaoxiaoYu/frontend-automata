@@ -73,15 +73,19 @@ const MainMenu = ({ localTimer }: Props) => {
 
   function onClickUnlock() {
     if (uIState == UIState.Creating) {
-      setShowUnlockAnimation(true);
-      setTimeout(() => {
-        setShowUnlockAnimation(false);
-        onClickConfirm();
-      }, 1000);
+      playUnlockAnimation(sendUpdateProgram);
     }
   }
 
-  function onClickConfirm() {
+  function playUnlockAnimation(onAnimationEnd: () => void) {
+    setShowUnlockAnimation(true);
+    setTimeout(() => {
+      setShowUnlockAnimation(false);
+      onAnimationEnd();
+    }, 1000);
+  }
+
+  function sendUpdateProgram() {
     if (!isLoading) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
@@ -186,7 +190,7 @@ const MainMenu = ({ localTimer }: Props) => {
             {showConfirmButton && (
               <ConfirmButton
                 isDisabled={!enableConfirmButton}
-                onClick={() => onClickConfirm()}
+                onClick={() => sendUpdateProgram()}
               />
             )}
             {showUnlockButton && (
