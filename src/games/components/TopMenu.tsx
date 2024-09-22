@@ -17,13 +17,13 @@ const TopMenu = () => {
 
   const onClickWithdraw = () => {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.Withdraw }));
+      dispatch(setUIState({ uIState: UIState.WithdrawPopup }));
     }
   };
 
   const onClickDeposit = () => {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.Deposit }));
+      dispatch(setUIState({ uIState: UIState.DepositPopup }));
     }
   };
 

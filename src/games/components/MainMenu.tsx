@@ -73,7 +73,7 @@ const MainMenu = ({ localTimer }: Props) => {
 
   function onClickUnlock() {
     if (uIState == UIState.Creating) {
-      playUnlockAnimation(sendUpdateProgram);
+      dispatch(setUIState({ uIState: UIState.UnlockPopup }));
     }
   }
 
@@ -130,7 +130,7 @@ const MainMenu = ({ localTimer }: Props) => {
 
   function onClickUpgrade() {
     if (!isLoading && !isSelectingUIState) {
-      dispatch(setUIState({ uIState: UIState.Upgrade }));
+      dispatch(setUIState({ uIState: UIState.UpgradePopup }));
     }
   }
 
@@ -139,6 +139,12 @@ const MainMenu = ({ localTimer }: Props) => {
       ? selectSelectedCreatureSelectingProgram
       : selectSelectedCreatureCurrentProgram(localTimer)
   );
+
+  useEffect(() => {
+    if (uIState == UIState.PlayUnlockAnimation) {
+      playUnlockAnimation(sendUpdateProgram);
+    }
+  }, [uIState]);
 
   return (
     <div className="main">
@@ -181,6 +187,8 @@ const MainMenu = ({ localTimer }: Props) => {
                 showProgramAnimation={
                   !selectedCreature.isStarting &&
                   !isSelectingUIState &&
+                  uIState != UIState.UnlockPopup &&
+                  uIState != UIState.PlayUnlockAnimation &&
                   currentProgramInfo.index == index &&
                   !selectedCreature.isProgramStop
                 }

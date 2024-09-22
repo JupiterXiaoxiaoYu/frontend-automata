@@ -13,9 +13,12 @@ export enum UIState{
   Guide,
   Creating,
   Reboot,
-  Withdraw,
-  Deposit,
-  Upgrade,
+  WithdrawPopup,
+  DepositPopup,
+  UpgradePopup,
+  UnlockPopup,
+  PlayUnlockAnimation,
+  NewProgramPopup,
 }
 
 interface PropertiesState {

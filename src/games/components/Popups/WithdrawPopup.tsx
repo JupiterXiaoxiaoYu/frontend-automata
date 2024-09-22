@@ -28,7 +28,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           {isWithdraw ? "Withdraw" : "Deposit"}
         </p>
         <p className="withdraw-popup-amount-text">amount</p>
-        <div className="withdraw-popup-amount-contianer">
+        <div className="withdraw-popup-amount-container">
           <img
             src={amountBackground}
             className="withdraw-popup-amount-background"

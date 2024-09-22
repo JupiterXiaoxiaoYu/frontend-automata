@@ -8,17 +8,11 @@ import MainMenu from "./MainMenu";
 import { UIState, selectUIState } from "../../data/automata/properties";
 import { selectGlobalTimer } from "../../data/automata/properties";
 import { useAppSelector } from "../../app/hooks";
-import GuidePopup from "./Popups/GuidePopup";
 import ResourceAnimations from "./ResourceAnimations";
-import WithdrawPopup from "./Popups/WithdrawPopup";
-import UpgradePopup from "./Popups/UpgradePopup";
+import Popups from "./Popups";
 
 const Gameplay = () => {
   const uIState = useAppSelector(selectUIState);
-  const showGuidePopup = uIState == UIState.Guide;
-  const showWithdrawPopup =
-    uIState == UIState.Withdraw || uIState == UIState.Deposit;
-  const showUpgradePopup = uIState == UIState.Upgrade;
 
   //#region LocalTime
   const globalTimer = useAppSelector(selectGlobalTimer);
@@ -99,11 +93,7 @@ const Gameplay = () => {
         <MainMenu localTimer={localTimer} />
         <RightMenu />
       </div>
-      {showGuidePopup && <GuidePopup />}
-      {showWithdrawPopup && (
-        <WithdrawPopup isWithdraw={uIState == UIState.Withdraw} />
-      )}
-      {showUpgradePopup && <UpgradePopup />}
+      <Popups />
     </>
   );
 };
