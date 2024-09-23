@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
-import { UIState, setUIState } from "../../../data/automata/properties";
+import {
+  UIState,
+  selectCurrentCost,
+  setUIState,
+} from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./NewProgramPopup.css";
 import {
   getResourceIconPath,
   ResourceType,
 } from "../../../data/automata/models";
+import { selectResources } from "../../../data/automata/resources";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
+  const currentCost = useAppSelector(selectCurrentCost);
+  const titaniumCount = useAppSelector(selectResources(ResourceType.Titanium));
 
   const onClickConfirm = () => {
     dispatch(setUIState({ uIState: UIState.PlayNewProgramAnimation }));
@@ -33,14 +40,17 @@ const NewProgramPopup = () => {
             src={getResourceIconPath(ResourceType.Titanium)}
             className="new-program-popup-cost-icon"
           />
-          <p className="new-program-popup-cost-text">{100}</p>
+          <p className="new-program-popup-cost-text">{currentCost}</p>
           <img
             src={amountBackground}
             className="new-program-popup-cost-background"
           />
         </div>
         <div className="new-program-popup-confirm-button">
-          <ConfirmButton onClick={onClickConfirm} />
+          <ConfirmButton
+            isDisabled={titaniumCount < currentCost}
+            onClick={onClickConfirm}
+          />
         </div>
       </div>
     </div>

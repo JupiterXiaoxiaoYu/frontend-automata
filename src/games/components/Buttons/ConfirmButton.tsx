@@ -6,18 +6,19 @@ import confirmButtonClickImage from "../../images/Buttons/Confirm/confirm_click.
 import "./ConfirmButton.css";
 
 interface Props {
+  isDisabled: boolean;
   onClick: () => void;
 }
 
-const ConfirmButton = ({ onClick }: Props) => {
+const ConfirmButton = ({ isDisabled, onClick }: Props) => {
   return (
     <div className="confirm-button-scale">
       <ImageButton
-        isDisabled={false}
+        isDisabled={isDisabled}
         defaultImagePath={confirmButtonImage}
         hoverImagePath={confirmButtonHoverImage}
         clickedImagePath={confirmButtonClickImage}
-        disabledImagePath={confirmButtonImage}
+        disabledImagePath={confirmButtonClickImage}
         onClick={onClick}
       />
     </div>

@@ -28,6 +28,7 @@ interface PropertiesState {
     nonce: string;
     hasRocket: boolean;
     selectedCreatureDiffResources: ResourceAmountPair[];
+    currentCost: number;
 }
 
 const initialState: PropertiesState = {
@@ -36,6 +37,7 @@ const initialState: PropertiesState = {
     nonce: "0",
     hasRocket: false,
     selectedCreatureDiffResources: [],
+    currentCost: 0,
 };
 
 export const propertiesSlice = createSlice({
@@ -74,6 +76,7 @@ export const propertiesSlice = createSlice({
         }
         state.globalTimer = action.payload.globalTimer;
         state.nonce = action.payload.nonce;
+        state.currentCost = action.payload.currentCost;
         console.log("send transaction fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -91,6 +94,8 @@ export const selectUIState = (state: RootState) => state.automata.properties.uIS
 export const selectGlobalTimer = (state: RootState) => state.automata.properties.globalTimer;
 export const selectNonce = (state: RootState) => BigInt(state.automata.properties.nonce);
 export const selectHasRocket = (state: RootState) => state.automata.properties.hasRocket;
+export const selectCreatureUnlockCost = (state: RootState) => BigInt(state.automata.properties.nonce);
+export const selectCurrentCost = (state: RootState) => state.automata.properties.currentCost;
     
 export const { setUIState, setHasRocket } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

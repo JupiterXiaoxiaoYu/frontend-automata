@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import background from "../../images/backgrounds/upgrade_frame.png";
 // import amountBackground from "../../images/backgrounds/upgrade_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
 import { UIState, setUIState } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UpgradePopup.css";

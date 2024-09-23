@@ -46,7 +46,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           />
         </div>
         <div className="withdraw-popup-confirm-button">
-          <ConfirmButton onClick={onClickConfirm} />
+          <ConfirmButton isDisabled={true} onClick={onClickConfirm} />
         </div>
       </div>
     </div>
