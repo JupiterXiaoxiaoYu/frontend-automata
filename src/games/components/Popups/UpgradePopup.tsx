@@ -6,7 +6,6 @@ import { UIState, setUIState } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UpgradePopup.css";
 import UpgradeConfirmButton from "../Buttons/UpgradeConfirmButton";
-import UpgradeCancelButton from "../Buttons/UpgradeCancelButton";
 import UpgradSpeedButton from "../Buttons/UpgradeSpeedButton";
 import UpgradEfficiencyButton from "../Buttons/UpgradeEfficiencyButton";
 import UpgradProductivityButton from "../Buttons/UpgradeProductivityButton";
@@ -61,7 +60,7 @@ const UpgradePopup = () => {
 
   return (
     <div className="upgrade-popup-container">
-      <div className="upgrade-popup-mask"></div>
+      <div onClick={onClickCancel} className="upgrade-popup-mask" />
       <div className="upgrade-popup-main-container">
         <img src={background} className="upgrade-popup-main-background" />
         <p className="upgrade-popup-title-text">{`Level ${1}`}</p>
@@ -118,9 +117,6 @@ const UpgradePopup = () => {
         </div>
         <div className="upgrade-popup-confirm-button">
           <UpgradeConfirmButton onClick={onClickConfirm} />
-        </div>
-        <div className="upgrade-popup-cancel-button">
-          <UpgradeCancelButton onClick={onClickCancel} />
         </div>
       </div>
     </div>

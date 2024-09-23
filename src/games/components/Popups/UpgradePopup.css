@@ -70,14 +70,7 @@
 .upgrade-popup-confirm-button {
     position: absolute;
     top: 85%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-}
-
-.upgrade-popup-cancel-button {
-    position: absolute;
-    top: 85%;
-    left: 78%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 

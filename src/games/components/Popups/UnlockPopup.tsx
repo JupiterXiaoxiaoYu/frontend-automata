@@ -17,9 +17,13 @@ const UnlockPopup = () => {
     dispatch(setUIState({ uIState: UIState.PlayUnlockAnimation }));
   };
 
+  const onClickCancel = () => {
+    dispatch(setUIState({ uIState: UIState.Creating }));
+  };
+
   return (
     <div className="unlock-popup-container">
-      <div className="unlock-popup-mask"></div>
+      <div onClick={onClickCancel} className="unlock-popup-mask" />
       <div className="unlock-popup-main-container">
         <img src={background} className="unlock-popup-main-background" />
         <p className="unlock-popup-title-text">Unlock</p>

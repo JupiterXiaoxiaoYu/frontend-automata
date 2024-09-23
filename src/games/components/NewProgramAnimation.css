@@ -35,13 +35,6 @@
     background-size: cover;
 }
 
-.new-program-animation-claim-button {
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, -50%);
-}
-
 @keyframes SpinAnimation {
     0% {
       transform: translate(-50%, -50%) rotate(0deg);

@@ -17,9 +17,13 @@ const NewProgramPopup = () => {
     dispatch(setUIState({ uIState: UIState.PlayNewProgramAnimation }));
   };
 
+  const onClickCancel = () => {
+    dispatch(setUIState({ uIState: UIState.Idle }));
+  };
+
   return (
     <div className="new-program-popup-container">
-      <div className="new-program-popup-mask"></div>
+      <div onClick={onClickCancel} className="new-program-popup-mask" />
       <div className="new-program-popup-main-container">
         <img src={background} className="new-program-popup-main-background" />
         <p className="new-program-popup-title-text">New Program</p>

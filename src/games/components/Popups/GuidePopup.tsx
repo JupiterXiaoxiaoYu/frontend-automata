@@ -40,7 +40,7 @@ const GuidePopup = () => {
 
   return (
     <div className="guide-popup-container">
-      <div className="guide-popup-mask"></div>
+      <div onClick={onClickEndGuide} className="guide-popup-mask" />
       <div className="guide-popup-main-container">
         <img src={background} className="guide-popup-main-background" />
         {currentGuide}

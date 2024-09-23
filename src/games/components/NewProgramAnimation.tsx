@@ -39,10 +39,6 @@ import image_29 from "../images/Animations/NewPrograms/card_29.png";
 import image_30 from "../images/Animations/NewPrograms/card_30.png";
 import bg_spin from "../images/backgrounds/bg_spin.png";
 import "./NewProgramAnimation.css";
-import ClaimButton from "./Buttons/ClaimButton";
-import Grid from "./Grid";
-import ProgramResourceDisplay from "./ProgramResourceDisplay";
-import { getResourceIconPath } from "../../data/automata/models";
 import { selectAllPrograms } from "../../data/automata/programs";
 
 import Program from "./Program";
@@ -124,10 +120,12 @@ const NewProgramAnimation = () => {
     }
   }, [uIState]);
 
-  const onClickClaim = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
-    setShowAnimation(false);
-    setAnimationEnd(false);
+  const onClickCancel = () => {
+    if (animationEnd) {
+      dispatch(setUIState({ uIState: UIState.Idle }));
+      setShowAnimation(false);
+      setAnimationEnd(false);
+    }
   };
 
   return (
@@ -139,7 +137,7 @@ const NewProgramAnimation = () => {
       </div>
       {showAnimation && (
         <div className="new-program-animation-container">
-          <div className="new-program-animation-mask" />
+          <div onClick={onClickCancel} className="new-program-animation-mask" />
           <div className="new-program-animation-program-container">
             <div className="new-program-animation-main-animation" />
             {animationEnd && (
@@ -148,9 +146,6 @@ const NewProgramAnimation = () => {
                   src={bg_spin}
                   className="new-program-animation-spin-image"
                 />
-                <div className="new-program-animation-claim-button">
-                  <ClaimButton onClick={onClickClaim} />
-                </div>
                 <Program
                   program={program}
                   isDisabled={true}

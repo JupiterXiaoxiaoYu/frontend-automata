@@ -19,9 +19,13 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
     dispatch(setUIState({ uIState: UIState.Idle }));
   };
 
+  const onClickCancel = () => {
+    dispatch(setUIState({ uIState: UIState.Idle }));
+  };
+
   return (
     <div className="withdraw-popup-container">
-      <div className="withdraw-popup-mask"></div>
+      <div onClick={onClickCancel} className="withdraw-popup-mask" />
       <div className="withdraw-popup-main-container">
         <img src={background} className="withdraw-popup-main-background" />
         <p className="withdraw-popup-title-text">
