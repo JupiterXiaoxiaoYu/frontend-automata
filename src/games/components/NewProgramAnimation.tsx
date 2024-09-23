@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   selectIsSelectingUIState,
   selectUIState,
+  setUIState,
   UIState,
 } from "../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -78,6 +79,7 @@ import image_69 from "../images/Animations/NewPrograms/card_69.png";
 import image_70 from "../images/Animations/NewPrograms/card_70.png";
 import image_71 from "../images/Animations/NewPrograms/card_71.png";
 import "./NewProgramAnimation.css";
+import ClaimButton from "./Buttons/ClaimButton";
 
 const NewProgramAnimation = () => {
   const images = [
@@ -158,6 +160,7 @@ const NewProgramAnimation = () => {
   const dispatch = useAppDispatch();
   const uIState = useAppSelector(selectUIState);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [animationEnd, setAnimationEnd] = useState(false);
 
   const animationName = "NewProgramAnimation";
   const generateAnimation = () => {
@@ -165,7 +168,7 @@ const NewProgramAnimation = () => {
       return;
     }
 
-    const keyframes = [...images, images[0]]
+    const keyframes = images
       .map((img, index) => {
         const percentage = (index / images.length) * 100;
         return `${percentage}% { background-image: url(${img}); }`;
@@ -188,21 +191,39 @@ const NewProgramAnimation = () => {
   useEffect(() => {
     if (uIState == UIState.PlayNewProgramAnimation) {
       setShowAnimation(true);
+      setTimeout(() => {
+        setAnimationEnd(true);
+      }, 4000);
     }
   }, [uIState]);
 
+  const onClickClaim = () => {
+    dispatch(setUIState({ uIState: UIState.Idle }));
+    setShowAnimation(false);
+    setAnimationEnd(false);
+  };
+
   return (
-    <div>
-      {images.map((image, index) => (
-        <link key={index} rel="preload" href={image} as="image" />
-      ))}
+    <>
+      <div>
+        {images.map((image, index) => (
+          <link key={index} rel="preload" href={image} as="image" />
+        ))}
+      </div>
       {showAnimation && (
         <div className="new-program-animation-container">
-          <div className="new-program-animation-mask"></div>
-          <div className="new-program-animation-main-animation"></div>
+          <div className="new-program-animation-mask" />
+          <div className="new-program-animation-main-animation" />
+          {animationEnd && (
+            <>
+              <div className="new-program-animation-claim-button">
+                <ClaimButton onClick={onClickClaim} />
+              </div>
+            </>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

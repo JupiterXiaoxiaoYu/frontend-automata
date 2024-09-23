@@ -22,5 +22,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
     animation: NewProgramAnimation 4s linear forwards;
+    background-image: url("../images/Animations/NewPrograms/card_71.png");
     background-size: cover;
+}
+
+.new-program-animation-claim-button {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
 }
