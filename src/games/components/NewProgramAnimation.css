@@ -30,8 +30,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    animation: NewProgramAnimation 4s linear forwards;
-    background-image: url("../images/Animations/NewPrograms/card_71.png");
+    animation: NewProgramAnimation 2s linear forwards;
+    background-image: url("../images/Animations/NewPrograms/card_30.png");
     background-size: cover;
 }
 
@@ -40,4 +40,23 @@
     left: 50%;
     top: 100%;
     transform: translate(-50%, -50%);
+}
+
+@keyframes SpinAnimation {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.new-program-animation-spin-image {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: SpinAnimation 5s linear infinite;
 }
