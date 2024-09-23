@@ -66,7 +66,7 @@ export default {component_name};
 
 output_dir = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/components/Programs/"  # Update this with your output directory
 
-for program in programs:
+# for program in programs:
     # imports = "\n".join(
     #     [f'import image_{i:02} from "../../images/Animations/Programs/{program}/{program}_{i:02}.png";' for i in range(24)]
     # )
@@ -96,5 +96,9 @@ for program in programs:
     #   return {program}Icon;""")
     
     
-    print(f"""case ProgramType.{program}:
-      return "{program}";""")
+    # print(f"""case ProgramType.{program}:
+    #   return "{program}";""")
+    
+for i in range(0, 72) :
+    print(f"""image_{"{:02d}".format(i)},""")
+

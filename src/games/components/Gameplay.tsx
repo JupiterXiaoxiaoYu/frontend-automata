@@ -10,6 +10,7 @@ import { selectGlobalTimer } from "../../data/automata/properties";
 import { useAppSelector } from "../../app/hooks";
 import ResourceAnimations from "./ResourceAnimations";
 import Popups from "./Popups";
+import NewProgramAnimation from "./NewProgramAnimation";
 
 const Gameplay = () => {
   const uIState = useAppSelector(selectUIState);
@@ -87,6 +88,7 @@ const Gameplay = () => {
   return (
     <>
       <ResourceAnimations localTimer={localTimer} />
+      <NewProgramAnimation />
       <TopMenu />
       <div className="middle-container">
         <LeftMenu localTimer={localTimer} />
