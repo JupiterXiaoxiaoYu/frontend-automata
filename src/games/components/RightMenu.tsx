@@ -95,6 +95,7 @@ const RightMenu = () => {
               <Program
                 key={index}
                 program={program}
+                isDisabled={false}
                 onSelect={() => onSelectProgram(program.index)}
               />
             )),

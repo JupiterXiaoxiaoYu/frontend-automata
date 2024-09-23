@@ -80,6 +80,11 @@ import image_70 from "../images/Animations/NewPrograms/card_70.png";
 import image_71 from "../images/Animations/NewPrograms/card_71.png";
 import "./NewProgramAnimation.css";
 import ClaimButton from "./Buttons/ClaimButton";
+import Grid from "./Grid";
+import ProgramResourceDisplay from "./ProgramResourceDisplay";
+import { getResourceIconPath } from "../../data/automata/models";
+import { selectAllPrograms } from "../../data/automata/programs";
+import Program from "./Program";
 
 const NewProgramAnimation = () => {
   const images = [
@@ -161,6 +166,8 @@ const NewProgramAnimation = () => {
   const uIState = useAppSelector(selectUIState);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationEnd, setAnimationEnd] = useState(false);
+  const programs = useAppSelector(selectAllPrograms);
+  const program = programs[programs.length - 1];
 
   const animationName = "NewProgramAnimation";
   const generateAnimation = () => {
@@ -213,14 +220,23 @@ const NewProgramAnimation = () => {
       {showAnimation && (
         <div className="new-program-animation-container">
           <div className="new-program-animation-mask" />
-          <div className="new-program-animation-main-animation" />
-          {animationEnd && (
-            <>
-              <div className="new-program-animation-claim-button">
-                <ClaimButton onClick={onClickClaim} />
-              </div>
-            </>
-          )}
+          <div className="new-program-animation-program-container">
+            <div className="new-program-animation-main-animation" />
+            {animationEnd && (
+              <>
+                <div className="new-program-animation-claim-button">
+                  <ClaimButton onClick={onClickClaim} />
+                </div>
+                <Program
+                  program={program}
+                  isDisabled={true}
+                  onSelect={() => {
+                    /* */
+                  }}
+                />
+              </>
+            )}
+          </div>
         </div>
       )}
     </>

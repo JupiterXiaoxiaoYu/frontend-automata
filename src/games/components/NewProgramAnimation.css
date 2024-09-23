@@ -14,10 +14,19 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.new-program-animation-main-animation {
+.new-program-animation-program-container {
     position: absolute;
     width: 165px;
     height: 125px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.new-program-animation-main-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -29,6 +38,6 @@
 .new-program-animation-claim-button {
     position: absolute;
     left: 50%;
-    top: 60%;
+    top: 100%;
     transform: translate(-50%, -50%);
 }

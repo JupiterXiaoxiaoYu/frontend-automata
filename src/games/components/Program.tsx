@@ -13,13 +13,14 @@ import { formatTime } from "../../data/automata/creatures";
 
 interface Props {
   program: ProgramModel;
+  isDisabled: boolean;
   onSelect: () => void;
 }
 
-const Program = ({ program, onSelect }: Props) => {
+const Program = ({ program, isDisabled, onSelect }: Props) => {
   return (
     <div className="program-container">
-      <ProgramButton isDisabled={false} onClick={onSelect} />
+      <ProgramButton isDisabled={isDisabled} onClick={onSelect} />
       <p className="program-name-text">{program.name}</p>
       <p className="program-time-text">{formatTime(program.processingTime)}</p>
       <img
