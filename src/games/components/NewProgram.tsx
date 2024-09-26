@@ -1,24 +1,31 @@
 import React from "react";
 import "./NewProgram.css";
-import Grid from "./Grid";
-import {
-  ProgramModel,
-  getResourceIconPath,
-  getProgramIconPath,
-} from "../../data/automata/models";
-import ProgramButton from "./Buttons/ProgramButton";
-
-import { formatTime } from "../../data/automata/creatures";
+import background from "../images/backgrounds/new_program_normal.png";
+import EmptyButton from "./Buttons/EmptyButton";
+import { getResourceIconPath, ResourceType } from "../../data/automata/models";
+import { useAppSelector } from "../../app/hooks";
+import { selectCurrentCost } from "../../data/automata/properties";
 
 interface Props {
   onSelect: () => void;
 }
 
 const NewProgram = ({ onSelect }: Props) => {
+  const currentCost = useAppSelector(selectCurrentCost);
+
   return (
     <div className="new-program-container">
-      <ProgramButton isDisabled={false} onClick={onSelect} />
-      <p className="new-program-name-text">New Program</p>
+      <img src={background} className="new-program-background" />
+      <p className="new-program-title-text">Buy New</p>
+      <p className="new-program-title-2-text">Program</p>
+      <p className="new-program-button">
+        <EmptyButton isDisabled={false} onClick={onSelect} />
+      </p>
+      <img
+        src={getResourceIconPath(ResourceType.Titanium)}
+        className="new-program-icon-image"
+      />
+      <p className="new-program-button-text">{currentCost}</p>
     </div>
   );
 };

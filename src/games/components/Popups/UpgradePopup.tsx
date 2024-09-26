@@ -9,6 +9,7 @@ import UpgradSpeedButton from "../Buttons/UpgradeSpeedButton";
 import UpgradEfficiencyButton from "../Buttons/UpgradeEfficiencyButton";
 import UpgradProductivityButton from "../Buttons/UpgradeProductivityButton";
 import {
+  AttributeType,
   CreatureModel,
   getCreatureIconPath,
   getResourceIconPath,
@@ -17,6 +18,7 @@ import {
 import UpgradePopupResourceDisplay from "./UpgradePopupResourceDisplay";
 import Grid from "../Grid";
 import {
+  selectSelectedAttributes,
   selectSelectedCreature,
   selectSelectedCreatureDiffResources,
 } from "../../../data/automata/creatures";
@@ -35,6 +37,14 @@ const UpgradePopup = () => {
   const selectedCreature = useAppSelector(selectSelectedCreature);
   const selectedCreatureDiffResources = useAppSelector(
     selectSelectedCreatureDiffResources
+  );
+  const level = useAppSelector(selectSelectedAttributes(AttributeType.Level));
+  const speed = useAppSelector(selectSelectedAttributes(AttributeType.Speed));
+  const efficiency = useAppSelector(
+    selectSelectedAttributes(AttributeType.Efficiency)
+  );
+  const productivity = useAppSelector(
+    selectSelectedAttributes(AttributeType.Productivity)
   );
 
   const onClickSpeed = () => {
@@ -62,7 +72,7 @@ const UpgradePopup = () => {
       <div onClick={onClickCancel} className="upgrade-popup-mask" />
       <div className="upgrade-popup-main-container">
         <img src={background} className="upgrade-popup-main-background" />
-        <p className="upgrade-popup-title-text">{`Level ${1}`}</p>
+        <p className="upgrade-popup-title-text">{`Level ${level}`}</p>
         <p className="upgrade-popup-bot-name-text">{"COC-3721"}</p>
 
         <img
@@ -91,7 +101,8 @@ const UpgradePopup = () => {
           />
           <p className="upgrade-popup-upgrade-title-text">speed</p>
           <p className="upgrade-popup-upgrade-value-text">
-            5<span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            {speed}
+            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
           </p>
         </div>
         <div className="upgrade-popup-efficiency-button">
@@ -101,7 +112,8 @@ const UpgradePopup = () => {
           />
           <p className="upgrade-popup-upgrade-title-text">efficiency</p>
           <p className="upgrade-popup-upgrade-value-text">
-            5<span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            {efficiency}
+            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
           </p>
         </div>
         <div className="upgrade-popup-productivity-button">
@@ -111,7 +123,8 @@ const UpgradePopup = () => {
           />
           <p className="upgrade-popup-upgrade-title-text">productivity</p>
           <p className="upgrade-popup-upgrade-value-text">
-            5<span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            {productivity}
+            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
           </p>
         </div>
         <div className="upgrade-popup-confirm-button">
