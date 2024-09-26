@@ -115,7 +115,10 @@ const UpgradePopup = () => {
           </p>
         </div>
         <div className="upgrade-popup-confirm-button">
-          <UpgradeConfirmButton onClick={onClickConfirm} />
+          <UpgradeConfirmButton
+            isDisable={upgradeState == UpgradeState.None}
+            onClick={onClickConfirm}
+          />
         </div>
       </div>
     </div>
