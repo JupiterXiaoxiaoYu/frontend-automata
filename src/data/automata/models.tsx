@@ -6,12 +6,10 @@ import NecrodermisIcon from "../../games/images/Icons/Necrodermis.png";
 import AlienFloralIcon from "../../games/images/Icons/AlienFloral.png";
 import SpiceMelangeIcon from "../../games/images/Icons/SpiceMelange.png";
 import TitaniumIcon from "../../games/images/Icons/Titanium.png";
-import EnercoreIcon from "../../games/images/Icons/Enercore.png";
-import NexiumIcon from "../../games/images/Icons/Nexium.png";
-import SwiftexIcon from "../../games/images/Icons/Swiftex.png";
-import CognisurgeIcon from "../../games/images/Icons/Cognisurge.png";
-import VitalshieldIcon from "../../games/images/Icons/Vitalshield.png";
-import FlexonixIcon from "../../games/images/Icons/Flexonix.png";
+import LevelIcon from "../../games/images/Icons/level.png";
+import SpeedIcon from "../../games/images/Icons/speed.png";
+import EfficiencyIcon from "../../games/images/Icons/efficiency.png";
+import ProductivityIcon from "../../games/images/Icons/productivity.png";
 import Bot1 from "../../games/images/CreatureBots/robot1.png";
 import Bot2 from "../../games/images/CreatureBots/robot2.png";
 import Bot3 from "../../games/images/CreatureBots/robot3.png";
@@ -289,7 +287,7 @@ export const attributeTypes = [
   AttributeType.Level,
   AttributeType.Speed,
   AttributeType.Efficiency,
-  AttributeType.Efficiency,
+  AttributeType.Productivity,
 ];
 
 export const emptyResources = resourceTypes.map((type) => ({
@@ -375,13 +373,13 @@ export function getResourceIconPath(type: ResourceType): string {
 export function getAttributeIconPath(type: AttributeType): string {
   switch (type) {
     case AttributeType.Level:
-      return EnercoreIcon;
+      return LevelIcon;
     case AttributeType.Speed:
-      return NexiumIcon;
+      return SpeedIcon;
     case AttributeType.Efficiency:
-      return SwiftexIcon;
+      return EfficiencyIcon;
     case AttributeType.Productivity:
-      return CognisurgeIcon;
+      return ProductivityIcon;
     default:
       throw new Error("Unknown AttributeType");
   }
