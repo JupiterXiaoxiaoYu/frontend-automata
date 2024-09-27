@@ -79,9 +79,9 @@ export const queryState = createAsyncThunk<
                 const res = await query_state(cmd, prikey);
                 const datas = JSON.parse(res.data);
                 console.log("(Data-QueryState)", datas);
-                const nonce = datas[0].nonce.toString();
-                const serverTick = datas[1];
-                const { energy, cost_info, current_cost: currentCost, objects, local, cards } = datas[0].data;
+                const nonce = datas.player.nonce.toString();
+                const serverTick = datas.state;
+                const { energy, cost_info, current_cost: currentCost, objects, local, cards } = datas.player.data;
                 return {
                     nonce,
                     player: local,
