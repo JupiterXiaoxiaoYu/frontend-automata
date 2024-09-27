@@ -37,6 +37,7 @@
     height: 12px;
     font-family: "mishmash";
     pointer-events: none;
+    user-select: none;
 }
 
 .resource-change-amount-animation-positive-text {

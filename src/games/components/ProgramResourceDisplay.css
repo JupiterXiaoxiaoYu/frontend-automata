@@ -14,6 +14,7 @@
     transform: translate(-50%, -50%);
     width: 12px;
     height: 12px;
+    user-select: none;
 }
 
 .program-resource-display-positive-text, 
@@ -30,6 +31,7 @@
     width: 28px;
     height: 10px;
     font-family: "mishmash";
+    user-select: none;
 }
 
 .program-resource-display-positive-text {

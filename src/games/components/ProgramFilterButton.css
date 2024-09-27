@@ -8,12 +8,14 @@
     position: absolute;
     width: 54px;
     height: 26px;
+    user-select: none;
 }
 
 .program-filter-bar-filter-background{
     position: absolute;
     width: 54px;
     height: 26px;
+    user-select: none;
 }
 
 .program-filter-bar-filter-icon{
@@ -23,6 +25,7 @@
     transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
+    user-select: none;
 }
 
 .program-filter-bar-filter-text {
@@ -40,4 +43,5 @@
     font-family: "mishmash";
     color: black;
     pointer-events: none;
+    user-select: none;
 }

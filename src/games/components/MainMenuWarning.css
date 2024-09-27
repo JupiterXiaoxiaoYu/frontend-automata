@@ -23,6 +23,7 @@
     font-family: "mishmash";
     pointer-events: none;
     animation: shine 2s infinite alternate linear;
+    user-select: none;
 }
 
 @keyframes shine {

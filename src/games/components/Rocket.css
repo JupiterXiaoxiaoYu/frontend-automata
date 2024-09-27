@@ -26,4 +26,5 @@
     height: 134px;
     background-size: cover;
     animation: rocketFrames 0.5s steps(5) infinite;
+    user-select: none;
 }

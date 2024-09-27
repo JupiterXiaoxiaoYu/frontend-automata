@@ -21,6 +21,7 @@ body, html, #root {
     width: 100%;
     background-image: url('../images/backgrounds/welcome.png');
     background-size: contain;
+    user-select: none;
 }
 
 .welcome-page-background-filter{

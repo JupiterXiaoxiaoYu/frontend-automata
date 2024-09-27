@@ -10,6 +10,7 @@
     left: 10%;
     width: 28%;
     height: 60%;
+    user-select: none;
 }
 
 .diff-resource-display-positive-text, .diff-resource-display-zero-text, .diff-resource-display-negative-text {
@@ -24,6 +25,7 @@
     width: 60%;
     height: 8px;
     font-family: "mishmash";
+    user-select: none;
 }
 
 .diff-resource-display-positive-text {

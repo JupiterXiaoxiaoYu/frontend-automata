@@ -12,6 +12,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    user-select: none;
 }
 
 .withdraw-popup-main-container {
@@ -26,6 +27,7 @@
 .withdraw-popup-main-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .withdraw-popup-confirm-button {
@@ -47,6 +49,7 @@
 .withdraw-popup-amount-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .withdraw-popup-title-text{
@@ -62,6 +65,7 @@
     height: 20px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .withdraw-popup-amount-text {
@@ -77,6 +81,7 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .withdraw-popup-amount-input {
@@ -92,6 +97,7 @@
     transform: translate(-50%, -50%);
     width: 80%;
     height: 10px;
+    user-select: none;
 }
 
 

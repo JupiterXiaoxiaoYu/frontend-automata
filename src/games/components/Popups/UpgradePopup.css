@@ -12,6 +12,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    user-select: none;
 }
 
 .upgrade-popup-main-container {
@@ -26,6 +27,7 @@
 .upgrade-popup-main-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .upgrade-popup-creature-image {
@@ -35,6 +37,7 @@
     transform: translate(-50%, -50%);
     width: 85px;
     height: 85px;
+    user-select: none;
 }
 
 .upgrade-popup-resources-info-grid{
@@ -87,6 +90,7 @@
     height: 15px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .upgrade-popup-bot-name-text{
@@ -102,6 +106,7 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .upgrade-popup-upgrade-title-text{
@@ -118,6 +123,7 @@
     height: 8px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .upgrade-popup-upgrade-value-text{
@@ -134,4 +140,5 @@
     height: 12px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }

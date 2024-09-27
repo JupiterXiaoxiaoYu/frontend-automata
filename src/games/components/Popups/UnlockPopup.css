@@ -12,6 +12,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    user-select: none;
 }
 
 .unlock-popup-main-container {
@@ -26,6 +27,7 @@
 .unlock-popup-main-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .unlock-popup-confirm-button {
@@ -47,6 +49,7 @@
 .unlock-popup-cost-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .unlock-popup-cost-icon {
@@ -56,6 +59,7 @@
     top: 50%;
     left: 35%;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .unlock-popup-title-text{
@@ -71,6 +75,7 @@
     height: 20px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .unlock-popup-subtitle-text {
@@ -86,6 +91,7 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .unlock-popup-cost-text {
@@ -101,4 +107,5 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }

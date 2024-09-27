@@ -21,6 +21,7 @@
     font-family: "mishmash";
     color: white;
     pointer-events: none;
+    user-select: none;
 }
 
 .program-time-text {
@@ -37,6 +38,7 @@
     font-family: "mishmash";
     color: white;
     pointer-events: none;
+    user-select: none;
 }
 
 .program-icon-image{
@@ -47,6 +49,7 @@
     left: 21%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    user-select: none;
 }
 
 .program-resource-grid{

@@ -13,6 +13,7 @@
     font-family: "mishmash";
     color: #5CFFFF;
     pointer-events: none;
+    user-select: none;
 }
 
 .guide-popup-1-content-text {
@@ -30,6 +31,7 @@
     font-family: "mishmash";
     color: white;
     pointer-events: none;
+    user-select: none;
 }
 
 .guide-popup-1-image {
@@ -39,4 +41,5 @@
     left: 25%;
     top: 41%;
     transform: translate(-50%, -50%);
+    user-select: none;
 }

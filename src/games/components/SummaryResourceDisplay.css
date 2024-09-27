@@ -14,6 +14,7 @@
     width: 82px;
     height: 20px;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .summary-resource-display-image {
@@ -23,6 +24,7 @@
     width: 30px;
     height: 30px;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .summary-resource-display-title-text {
@@ -49,6 +51,7 @@
         -1px  1px 0px #000,
          0px  1px 0px #000,
          1px  1px 0px #000;
+    user-select: none;
 }
 
 .summary-resource-display-positive-text, .summary-resource-display-zero-text, .summary-resource-display-negative-text {
@@ -63,6 +66,7 @@
     width: 50%;
     height: 10px;
     font-family: "mishmash";
+    user-select: none;
 }
 
 .summary-resource-display-positive-text {

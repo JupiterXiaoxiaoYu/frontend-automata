@@ -12,6 +12,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    user-select: none;
 }
 
 .new-program-popup-main-container {
@@ -26,6 +27,7 @@
 .new-program-popup-main-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .new-program-popup-confirm-button {
@@ -47,6 +49,7 @@
 .new-program-popup-cost-background {
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .new-program-popup-cost-icon {
@@ -56,6 +59,7 @@
     top: 50%;
     left: 35%;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .new-program-popup-title-text{
@@ -71,6 +75,7 @@
     height: 20px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .new-program-popup-subtitle-text {
@@ -86,6 +91,7 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }
 
 .new-program-popup-cost-text {
@@ -101,4 +107,5 @@
     height: 10px;
     font-family: "mishmash";
     color: white;
+    user-select: none;
 }

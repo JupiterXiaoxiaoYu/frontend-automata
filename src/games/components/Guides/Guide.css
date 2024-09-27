@@ -13,4 +13,5 @@
     font-family: "mishmash";
     color: #5CFFFF;
     pointer-events: none;
+    user-select: none;
 }

@@ -52,4 +52,5 @@
     top: 50%;
     transform: translate(-50%, -50%);
     animation: SpinAnimation 5s linear infinite;
+    user-select: none;
 }

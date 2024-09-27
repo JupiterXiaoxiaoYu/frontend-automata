@@ -54,6 +54,7 @@
     height: 60px;
     bottom: 0px;
     right: -2px;
+    user-select: none;
 }
 
 .left-middle-bar {
@@ -63,4 +64,5 @@
     top: 50%;
     right: -20px;
     transform: translate(-50%, -50%);
+    user-select: none;
 }

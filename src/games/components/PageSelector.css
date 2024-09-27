@@ -11,6 +11,7 @@
     transform: translate(-50%, -50%);
     width: 56px;
     height: 25px;
+    user-select: none;
 }
 
 .page-selector-page-number-text {
@@ -27,6 +28,7 @@
     font-family: "mishmash";
     color: #5CFFFF;
     pointer-events: none;
+    user-select: none;
 }
 
 .page-selector-prev-button{

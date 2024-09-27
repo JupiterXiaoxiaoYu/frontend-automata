@@ -13,6 +13,7 @@
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
+    user-select: none;
 }
 
 .account-info-account-text, .account-info-key-text, .account-info-player-id-text{
@@ -27,6 +28,7 @@
     color: #5CFFFF;
     white-space: break-spaces;
     pointer-events: none;
+    user-select: none;
 }
 
 .account-info-account-text{

@@ -8,6 +8,7 @@
     right: 0px;
     width: 22px;
     height: 258px;
+    user-select: none;
 }
 
 .program-filter-bar-filters-container{

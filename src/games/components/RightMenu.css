@@ -61,4 +61,5 @@
     height: 60px;
     bottom: 0px;
     left: -2px;
+    user-select: none;
 }

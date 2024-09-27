@@ -14,6 +14,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .welcome-page-progress-bar-background {
@@ -23,6 +24,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    user-select: none;
 }
 
 .welcome-page-progress-container {
@@ -56,6 +58,7 @@
     width: 100%;
     height: 15px;
     font-family: "mishmash";
+    user-select: none;
 }
 
 .welcome-page-progress-bar-progress-text{
