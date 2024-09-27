@@ -92,7 +92,7 @@ const UpgradePopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(setUIState({ uIState: UIState.Idle }));
+          dispatch(setUIState({ uIState: UIState.PlayUpgradeAnimation }));
         }
       });
     } catch (e) {

@@ -74,7 +74,7 @@ export function GameController() {
   useEffect(() => {
     setTimeout(() => {
       updateState();
-    }, 1000);
+    }, 3000);
   }, [inc]);
 
   const [progress, setProgress] = useState(0);

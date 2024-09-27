@@ -70,6 +70,7 @@ const MainMenu = ({ localTimer }: Props) => {
   );
   const showSummaryMenu = isNotSelectingCreature && uIState != UIState.Guide;
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
+  const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
 
   function onClickUnlock() {
     if (uIState == UIState.Creating) {
@@ -81,6 +82,14 @@ const MainMenu = ({ localTimer }: Props) => {
     setShowUnlockAnimation(true);
     setTimeout(() => {
       setShowUnlockAnimation(false);
+      onAnimationEnd();
+    }, 1000);
+  }
+
+  function playUpgradeAnimation(onAnimationEnd: () => void) {
+    setShowUpgradeAnimation(true);
+    setTimeout(() => {
+      setShowUpgradeAnimation(false);
       onAnimationEnd();
     }, 1000);
   }
@@ -142,6 +151,8 @@ const MainMenu = ({ localTimer }: Props) => {
   useEffect(() => {
     if (uIState == UIState.PlayUnlockAnimation) {
       playUnlockAnimation(() => sendUpdateProgram(true));
+    } else if (uIState == UIState.PlayUpgradeAnimation) {
+      playUpgradeAnimation(() => sendUpdateProgram(true));
     }
   }, [uIState]);
 
@@ -175,7 +186,10 @@ const MainMenu = ({ localTimer }: Props) => {
               isStop={selectedCreature.isProgramStop}
             />
             {showUnlockAnimation && (
-              <div className="main-bot-creating-animation" />
+              <div className="main-bot-unlock-animation" />
+            )}
+            {showUpgradeAnimation && (
+              <div className="main-bot-upgrade-animation" />
             )}
             {selectedCreaturePrograms.map((program, index) => (
               <MainMenuProgram

@@ -16,6 +16,7 @@ export enum UIState{
   WithdrawPopup,
   DepositPopup,
   UpgradePopup,
+  PlayUpgradeAnimation,
   UnlockPopup,
   PlayUnlockAnimation,
   NewProgramPopup,
