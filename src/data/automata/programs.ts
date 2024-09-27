@@ -64,9 +64,9 @@ export const programsSlice = createSlice({
 });
 
 export const selectProgramsOnCurrentPage = (programs: ProgramModel[]) => (amountPerPage: number) => (state: RootState) => {
-    const startIndex = state.automata.programs.currentPage * amountPerPage;
+    const startIndex = state.automata.programs.currentPage * amountPerPage - 1;
     const endIndex = startIndex + amountPerPage;
-    return programs.slice(startIndex, endIndex);
+    return programs.slice(Math.max(startIndex, 0), endIndex);
 }
 
 export const selectAllPrograms = (state: RootState) => state.automata.programs.programs;

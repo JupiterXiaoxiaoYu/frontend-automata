@@ -44,7 +44,7 @@ const RightMenu = () => {
     selectProgramsOnCurrentPage(programsBeforePaging)(amountPerPage)
   );
   const pageCount = Math.max(
-    Math.ceil(programsBeforePaging.length / amountPerPage),
+    Math.ceil((programsBeforePaging.length + 1) / amountPerPage),
     1
   );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
@@ -78,6 +78,28 @@ const RightMenu = () => {
     dispatch(nextPage({}));
   };
 
+  const programElements =
+    currentPage == 0
+      ? [
+          <NewProgram onSelect={onClickNewProgram} />,
+          ...programs.map((program, index) => (
+            <Program
+              key={index}
+              program={program}
+              isDisabled={false}
+              onSelect={() => onSelectProgram(program.index)}
+            />
+          )),
+        ]
+      : programs.map((program, index) => (
+          <Program
+            key={index}
+            program={program}
+            isDisabled={false}
+            onSelect={() => onSelectProgram(program.index)}
+          />
+        ));
+
   return (
     <div className="right">
       <div className="right-top"></div>
@@ -90,17 +112,7 @@ const RightMenu = () => {
           elementHeight={programGridElementHeight}
           columnCount={programGridColumnCount}
           rowCount={programGridRowCount}
-          elements={[
-            ...programs.map((program, index) => (
-              <Program
-                key={index}
-                program={program}
-                isDisabled={false}
-                onSelect={() => onSelectProgram(program.index)}
-              />
-            )),
-            <NewProgram onSelect={onClickNewProgram} />,
-          ]}
+          elements={programElements}
         />
       </div>
       <div className="right-program-filter-bar-position">
