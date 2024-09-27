@@ -5,6 +5,7 @@ import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,
   selectCurrentCost,
+  selectNonce,
   setUIState,
 } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -14,19 +15,41 @@ import {
   ResourceType,
 } from "../../../data/automata/models";
 import { selectResources } from "../../../data/automata/resources";
+import { sendTransaction } from "../../request";
+import { getNewProgramTransactionCommandArray } from "../../rpc";
+import { selectL2Account } from "../../../data/accountSlice";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResources(ResourceType.Titanium));
+  const l2account = useAppSelector(selectL2Account);
+  const nonce = useAppSelector(selectNonce);
 
   const onClickConfirm = () => {
-    dispatch(setUIState({ uIState: UIState.PlayNewProgramAnimation }));
+    newProgram();
   };
 
   const onClickCancel = () => {
     dispatch(setUIState({ uIState: UIState.Idle }));
   };
+
+  function newProgram() {
+    try {
+      dispatch(
+        sendTransaction({
+          cmd: getNewProgramTransactionCommandArray(nonce),
+          prikey: l2account!.address,
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(setUIState({ uIState: UIState.PlayNewProgramAnimation }));
+        }
+      });
+    } catch (e) {
+      console.log("Error at upgrade bot " + e);
+    }
+  }
 
   return (
     <div className="new-program-popup-container">

@@ -88,7 +88,12 @@ export function createCommand(
 const CMD_INSTALL_PLAYER = 1n;
 const CMD_INSTALL_OBJECT = 2n;
 const CMD_RESTART_OBJECT = 3n;
-export function getTransactionCommandArray(
+const CMD_UPGRADE_OBJECT = 4n;
+const CMD_INSTALL_CARD = 5n;
+const CMD_WITHDRAW = 6n;
+const CMD_DEPOSIT = 7n;
+
+export function getInstallProgramTransactionCommandArray(
   nonce: bigint,
   programIndexes: number[],
   selectingCreatureIndex: number,
@@ -110,5 +115,19 @@ export function getTransactionCommandArray(
 
 export function getInsPlayerTransactionCommandArray(nonce: bigint) {
   const command = createCommand(nonce, CMD_INSTALL_PLAYER, 0n);
+  return [command, 0n, 0n, 0n];
+}
+
+export function getUpgradeBotTransactionCommandArray(
+  nonce: bigint,
+  selectingCreatureIndex: number
+) {
+  const objIndex = BigInt(selectingCreatureIndex);
+  const command = createCommand(nonce, CMD_UPGRADE_OBJECT, objIndex);
+  return [command, 0n, 0n, 0n];
+}
+
+export function getNewProgramTransactionCommandArray(nonce: bigint) {
+  const command = createCommand(nonce, CMD_INSTALL_CARD, 0n);
   return [command, 0n, 0n, 0n];
 }

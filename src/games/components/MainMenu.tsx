@@ -8,7 +8,7 @@ import "./MainMenu.css";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import DiffResourcesInfo from "./DiffResourcesInfo";
 import Rocket from "./Rocket";
-import { getTransactionCommandArray } from "../rpc";
+import { getInstallProgramTransactionCommandArray } from "../rpc";
 import { selectL2Account } from "../../data/accountSlice";
 import { sendTransaction, queryState } from "../request";
 import { getCreatureIconPath, ProgramInfo } from "../../data/automata/models";
@@ -92,7 +92,7 @@ const MainMenu = ({ localTimer }: Props) => {
       dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
-          cmd: getTransactionCommandArray(
+          cmd: getInstallProgramTransactionCommandArray(
             nonce,
             selectedCreature.programIndexes.map((index) => index!),
             selectedCreatureIndexForRequestEncode,

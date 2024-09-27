@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import background from "../../images/backgrounds/upgrade_frame.png";
 // import amountBackground from "../../images/backgrounds/upgrade_amount_background.png";
-import { UIState, setUIState } from "../../../data/automata/properties";
+import {
+  UIState,
+  selectNonce,
+  setUIState,
+} from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UpgradePopup.css";
 import UpgradeConfirmButton from "../Buttons/UpgradeConfirmButton";
@@ -21,7 +25,11 @@ import {
   selectSelectedAttributes,
   selectSelectedCreature,
   selectSelectedCreatureDiffResources,
+  selectSelectedCreatureListIndex,
 } from "../../../data/automata/creatures";
+import { selectL2Account } from "../../../data/accountSlice";
+import { sendTransaction } from "../../request";
+import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 
 enum UpgradeState {
   None,
@@ -46,6 +54,11 @@ const UpgradePopup = () => {
   const productivity = useAppSelector(
     selectSelectedAttributes(AttributeType.Productivity)
   );
+  const l2account = useAppSelector(selectL2Account);
+  const nonce = useAppSelector(selectNonce);
+  const selectedCreatureIndexForRequestEncode = useAppSelector(
+    selectSelectedCreatureListIndex
+  );
 
   const onClickSpeed = () => {
     setUpgradeState(UpgradeState.Speed);
@@ -60,12 +73,32 @@ const UpgradePopup = () => {
   };
 
   const onClickConfirm = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    upgradeBot();
   };
 
   const onClickCancel = () => {
     dispatch(setUIState({ uIState: UIState.Idle }));
   };
+
+  function upgradeBot() {
+    try {
+      dispatch(
+        sendTransaction({
+          cmd: getUpgradeBotTransactionCommandArray(
+            nonce,
+            selectedCreatureIndexForRequestEncode
+          ),
+          prikey: l2account!.address,
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(setUIState({ uIState: UIState.Idle }));
+        }
+      });
+    } catch (e) {
+      console.log("Error at upgrade bot " + e);
+    }
+  }
 
   return (
     <div className="upgrade-popup-container">
