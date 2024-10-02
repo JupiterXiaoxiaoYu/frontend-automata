@@ -4,18 +4,24 @@ import { useAppSelector } from "../../app/hooks";
 import "./Resources.css";
 
 import { selectResources } from "../../data/automata/resources";
-import { getResourceIconPath, resourceTypes } from "../../data/automata/models";
+import {
+  getResourceIconPath,
+  ResourceType,
+  resourceTypes,
+} from "../../data/automata/models";
 
 const Resources = () => {
   return (
     <div className="top-resources-container">
-      {resourceTypes.map((type, index) => (
-        <ResourceDisplay
-          key={index}
-          iconImagePath={getResourceIconPath(type)}
-          amount={useAppSelector(selectResources(type))}
-        />
-      ))}
+      {resourceTypes
+        .filter((type) => type != ResourceType.Titanium)
+        .map((type, index) => (
+          <ResourceDisplay
+            key={index}
+            iconImagePath={getResourceIconPath(type)}
+            amount={useAppSelector(selectResources(type))}
+          />
+        ))}
     </div>
   );
 };

@@ -1,0 +1,68 @@
+.titanium-frame-container{
+    position: absolute;
+    display: flex;
+    top: 27px;
+    left: calc(max(100%, 960px) - 320px);
+    width: 212px;
+    height: 45px;
+    transform: translate(-50%, -50%);
+}
+
+.titanium-frame-background {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.titanium-frame-resource-container {
+    position: absolute;
+    width: 90px;
+    height: 50px;
+    left: 65px;
+    top: 23px;
+    user-select: none;
+    transform: translate(-50%, -50%);
+}
+
+.titanium-frame-resource-display-image {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+    user-select: none;
+}
+
+.titanium-frame-resource-display-text {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    text-align: center;
+    line-height: 100%;
+    margin: 0px;
+    color: white;
+    width: 35px;
+    height: 12px;
+    font-family: "mishmash";
+    pointer-events: none;
+    user-select: none;
+}
+
+.titanium-frame-withdraw{
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    left: 90px;
+    top: 5px;
+}
+
+.titanium-frame-deposit{
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    left: 145px;
+    top: 5px;
+}

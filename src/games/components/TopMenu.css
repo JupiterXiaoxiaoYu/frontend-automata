@@ -34,22 +34,6 @@
     background-repeat: repeat-x;
 }
 
-.top-withdraw{
-    position: absolute;
-    width: 65px;
-    height: 45px;
-    left: calc(max(100%, 960px) - 280px);
-    top: 5px;
-}
-
-.top-deposit{
-    position: absolute;
-    width: 65px;
-    height: 45px;
-    left: calc(max(100%, 960px) - 350px);
-    top: 5px;
-}
-
 .top-upgrade{
     position: absolute;
     width: 58px;

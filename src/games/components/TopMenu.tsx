@@ -3,8 +3,6 @@ import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import Attributes from "./Attributes";
-import WithDrawButton from "./Buttons/WithdrawButton";
-import DepositButton from "./Buttons/DepositButton";
 import {
   selectIsLoading,
   selectIsSelectingUIState,
@@ -12,6 +10,7 @@ import {
   UIState,
 } from "../../data/automata/properties";
 import UpgradeButton from "./Buttons/UpgradeButton";
+import TitaniumFrame from "./TitaniumFrame";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -41,14 +40,12 @@ const TopMenu = () => {
       <div className="top-left"></div>
       <div className="top-middle"></div>
       <div className="top-right"></div>
-      <div className="top-withdraw">
-        <WithDrawButton onClick={onClickWithdraw} />
-      </div>
-      <div className="top-deposit">
-        <DepositButton onClick={onClickDeposit} />
-      </div>
-      <AccountInfo />
+      <TitaniumFrame
+        onClickWithdraw={onClickWithdraw}
+        onClickDeposit={onClickDeposit}
+      />
       <Resources />
+      <AccountInfo />
       <Attributes />
       {!isSelectingUIState && (
         <div className="top-upgrade">
