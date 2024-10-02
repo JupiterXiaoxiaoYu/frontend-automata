@@ -49,3 +49,11 @@
     left: calc(max(100%, 960px) - 350px);
     top: 5px;
 }
+
+.top-upgrade{
+    position: absolute;
+    width: 58px;
+    height: 20px;
+    top: 55px;
+    left: 580px;
+}

@@ -56,18 +56,6 @@
     user-select: none;
 }
 
-.main-circle-upgrade-button {
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: none;
-    background: none;
-}
-
 @keyframes unlockFrames {
     0% { background-image: url('../images/Animations/Unlocks/unlock_animation_01.png'); }
     11% { background-image: url('../images/Animations/Unlocks/unlock_animation_02.png'); }

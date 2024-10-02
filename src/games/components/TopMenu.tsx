@@ -7,13 +7,16 @@ import WithDrawButton from "./Buttons/WithdrawButton";
 import DepositButton from "./Buttons/DepositButton";
 import {
   selectIsLoading,
+  selectIsSelectingUIState,
   setUIState,
   UIState,
 } from "../../data/automata/properties";
+import UpgradeButton from "./Buttons/UpgradeButton";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(selectIsLoading);
+  const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
 
   const onClickWithdraw = () => {
     if (!isLoading) {
@@ -26,6 +29,12 @@ const TopMenu = () => {
       dispatch(setUIState({ uIState: UIState.DepositPopup }));
     }
   };
+
+  function onClickUpgrade() {
+    if (!isLoading && !isSelectingUIState) {
+      dispatch(setUIState({ uIState: UIState.UpgradePopup }));
+    }
+  }
 
   return (
     <div className="top">
@@ -41,6 +50,11 @@ const TopMenu = () => {
       <AccountInfo />
       <Resources />
       <Attributes />
+      {!isSelectingUIState && (
+        <div className="top-upgrade">
+          <UpgradeButton onClick={onClickUpgrade} />
+        </div>
+      )}
     </div>
   );
 };

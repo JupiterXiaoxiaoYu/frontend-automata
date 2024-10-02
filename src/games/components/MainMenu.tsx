@@ -136,12 +136,6 @@ const MainMenu = ({ localTimer }: Props) => {
     }
   }
 
-  function onClickUpgrade() {
-    if (!isLoading && !isSelectingUIState) {
-      dispatch(setUIState({ uIState: UIState.UpgradePopup }));
-    }
-  }
-
   const currentProgramInfo = useAppSelector(
     isSelectingUIState || isLoading
       ? selectSelectedCreatureSelectingProgram
@@ -175,10 +169,6 @@ const MainMenu = ({ localTimer }: Props) => {
               showAnimation={showUnlockAnimation}
             />
             <img src={circleBackground} className="main-circle-background" />
-            <button
-              className="main-circle-upgrade-button"
-              onClick={onClickUpgrade}
-            />
             <MainMenuSelectingFrame
               order={currentProgramInfo.index}
               isReady={!isLoading && !selectedCreature.isStarting}
