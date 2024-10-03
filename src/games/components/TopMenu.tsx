@@ -65,9 +65,11 @@ const TopMenu = () => {
           <UpgradeButton onClick={onClickUpgrade} />
         </div>
       )}
-      <div className="top-redeem">
-        <RedeemButton onClick={onClickRedeem} />
-      </div>
+      {!isNotSelectingCreature && (
+        <div className="top-redeem">
+          <RedeemButton onClick={onClickRedeem} />
+        </div>
+      )}
     </div>
   );
 };
