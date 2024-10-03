@@ -19,7 +19,7 @@ import {
 } from "../../data/automata/models";
 import RedeemDisplay from "./RedeemDisplay";
 import RedeemDisplayEmpty from "./RedeemDisplayEmpty";
-import { sendTransaction } from "../request";
+import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
 import { selectL2Account } from "../../data/accountSlice";
 import { selectResource } from "../../data/automata/resources";
@@ -41,7 +41,13 @@ const RedeemMenu = () => {
       })
     ).then((action) => {
       if (sendTransaction.fulfilled.match(action)) {
-        dispatch(setUIState({ uIState: UIState.Idle }));
+        dispatch(queryState({ cmd: [], prikey: l2account!.address })).then(
+          (action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(setUIState({ uIState: UIState.Idle }));
+            }
+          }
+        );
       }
     });
   };
