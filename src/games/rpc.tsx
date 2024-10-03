@@ -92,6 +92,7 @@ const CMD_UPGRADE_OBJECT = 4n;
 const CMD_INSTALL_CARD = 5n;
 const CMD_WITHDRAW = 6n;
 const CMD_DEPOSIT = 7n;
+const CMD_BOUNTY = 8n;
 
 export function getInstallProgramTransactionCommandArray(
   nonce: bigint,
@@ -129,5 +130,11 @@ export function getUpgradeBotTransactionCommandArray(
 
 export function getNewProgramTransactionCommandArray(nonce: bigint) {
   const command = createCommand(nonce, CMD_INSTALL_CARD, 0n);
+  return [command, 0n, 0n, 0n];
+}
+
+export function getRedeemTransactionCommandArray(nonce: bigint, index: number) {
+  const objIndex = BigInt(index);
+  const command = createCommand(nonce, CMD_BOUNTY, objIndex);
   return [command, 0n, 0n, 0n];
 }

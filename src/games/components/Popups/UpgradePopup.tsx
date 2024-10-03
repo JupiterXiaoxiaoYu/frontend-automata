@@ -82,6 +82,7 @@ const UpgradePopup = () => {
 
   function upgradeBot() {
     try {
+      dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
           cmd: getUpgradeBotTransactionCommandArray(

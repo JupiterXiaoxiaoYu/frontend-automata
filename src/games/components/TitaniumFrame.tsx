@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./TitaniumFrame.css";
 import background from "../images/backgrounds/titan_frame.png";
-import { selectResources } from "../../data/automata/resources";
+import { selectResource } from "../../data/automata/resources";
 import {
   getResourceIconPath,
   ResourceType,
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const TitaniumFrame = ({ onClickWithdraw, onClickDeposit }: Props) => {
-  const titaniumCount = useAppSelector(selectResources(ResourceType.Titanium));
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   return (
     <div className="titanium-frame-container">

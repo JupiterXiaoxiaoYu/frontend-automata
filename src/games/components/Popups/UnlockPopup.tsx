@@ -13,12 +13,12 @@ import {
   getResourceIconPath,
   ResourceType,
 } from "../../../data/automata/models";
-import { selectResources } from "../../../data/automata/resources";
+import { selectResource } from "../../../data/automata/resources";
 
 const UnlockPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
-  const titaniumCount = useAppSelector(selectResources(ResourceType.Titanium));
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const onClickConfirm = () => {
     dispatch(setUIState({ uIState: UIState.PlayUnlockAnimation }));

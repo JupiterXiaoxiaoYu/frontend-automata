@@ -6,6 +6,13 @@ import NecrodermisIcon from "../../games/images/Icons/Necrodermis.png";
 import AlienFloralIcon from "../../games/images/Icons/AlienFloral.png";
 import SpiceMelangeIcon from "../../games/images/Icons/SpiceMelange.png";
 import TitaniumIcon from "../../games/images/Icons/Titanium.png";
+import CrystalDisabledIcon from "../../games/images/Icons/CrystalDisabled.png";
+import InterstellarMineralDisabledIcon from "../../games/images/Icons/InterstellarMineralDisabled.png";
+import BiomassDisabledIcon from "../../games/images/Icons/BiomassDisabled.png";
+import QuantumFoamDisabledIcon from "../../games/images/Icons/QuantumFoamDisabled.png";
+import NecrodermisDisabledIcon from "../../games/images/Icons/NecrodermisDisabled.png";
+import AlienFloralDisabledIcon from "../../games/images/Icons/AlienFloralDisabled.png";
+import SpiceMelangeDisabledIcon from "../../games/images/Icons/SpiceMelangeDisabled.png";
 import LevelIcon from "../../games/images/Icons/level.png";
 import SpeedIcon from "../../games/images/Icons/speed.png";
 import EfficiencyIcon from "../../games/images/Icons/efficiency.png";
@@ -365,6 +372,29 @@ export function getResourceIconPath(type: ResourceType): string {
       return SpiceMelangeIcon;
     case ResourceType.Titanium:
       return TitaniumIcon;
+    default:
+      throw new Error("Unknown ResourceType");
+  }
+}
+
+export function getResourceDisabledIconPath(type: ResourceType): string {
+  switch (type) {
+    case ResourceType.Crystal:
+      return CrystalDisabledIcon;
+    case ResourceType.InterstellarMineral:
+      return InterstellarMineralDisabledIcon;
+    case ResourceType.Biomass:
+      return BiomassDisabledIcon;
+    case ResourceType.QuantumFoam:
+      return QuantumFoamDisabledIcon;
+    case ResourceType.Necrodermis:
+      return NecrodermisDisabledIcon;
+    case ResourceType.AlienFloral:
+      return AlienFloralDisabledIcon;
+    case ResourceType.SpiceMelange:
+      return SpiceMelangeDisabledIcon;
+    // case ResourceType.Titanium:
+    //   return TitaniumIcon;
     default:
       throw new Error("Unknown ResourceType");
   }

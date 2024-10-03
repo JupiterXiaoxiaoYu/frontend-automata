@@ -3,7 +3,7 @@ import ResourceDisplay from "./ResourceDisplay";
 import { useAppSelector } from "../../app/hooks";
 import "./Resources.css";
 
-import { selectResources } from "../../data/automata/resources";
+import { selectResource } from "../../data/automata/resources";
 import {
   getResourceIconPath,
   ResourceType,
@@ -19,7 +19,7 @@ const Resources = () => {
           <ResourceDisplay
             key={index}
             iconImagePath={getResourceIconPath(type)}
-            amount={useAppSelector(selectResources(type))}
+            amount={useAppSelector(selectResource(type))}
           />
         ))}
     </div>

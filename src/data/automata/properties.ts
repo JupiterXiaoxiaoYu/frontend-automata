@@ -30,6 +30,9 @@ interface PropertiesState {
     hasRocket: boolean;
     selectedCreatureDiffResources: ResourceAmountPair[];
     currentCost: number;
+    redeemCostBase: number;
+    redeemRewardBase: number;
+    redeemInfo: number[];
 }
 
 const initialState: PropertiesState = {
@@ -39,6 +42,9 @@ const initialState: PropertiesState = {
     hasRocket: false,
     selectedCreatureDiffResources: [],
     currentCost: 0,
+    redeemCostBase: 0,
+    redeemRewardBase: 0,
+    redeemInfo: [],
 };
 
 export const propertiesSlice = createSlice({
@@ -57,6 +63,8 @@ export const propertiesSlice = createSlice({
     builder
       .addCase(getConfig.fulfilled, (state, action) => {
         state.uIState = UIState.QueryState;
+        state.redeemCostBase = action.payload.redeemCostBase;
+        state.redeemRewardBase = action.payload.redeemRewardBase;
         console.log("query config fulfilled");
       })
       .addCase(getConfig.rejected, (state, action) => {
@@ -78,6 +86,7 @@ export const propertiesSlice = createSlice({
         state.globalTimer = action.payload.globalTimer;
         state.nonce = action.payload.nonce;
         state.currentCost = action.payload.currentCost;
+        state.redeemInfo = action.payload.redeemInfo;
         console.log("send transaction fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -97,6 +106,9 @@ export const selectNonce = (state: RootState) => BigInt(state.automata.propertie
 export const selectHasRocket = (state: RootState) => state.automata.properties.hasRocket;
 export const selectCreatureUnlockCost = (state: RootState) => BigInt(state.automata.properties.nonce);
 export const selectCurrentCost = (state: RootState) => state.automata.properties.currentCost;
-    
+export const selectRedeemCostBase = (state: RootState) => state.automata.properties.redeemCostBase;
+export const selectRedeemRewardBase = (state: RootState) => state.automata.properties.redeemRewardBase;
+export const selectRedeemInfo = (state: RootState) => state.automata.properties.redeemInfo;
+
 export const { setUIState, setHasRocket } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

@@ -26,7 +26,7 @@ export const resourcesSlice = createSlice({
   },
 );
 
-export const selectResources = (type: ResourceType) => (state: RootState) => state.automata.resources.resources.find(resource => resource.type == type)?.amount ?? 0;
+export const selectResource = (type: ResourceType) => (state: RootState) => state.automata.resources.resources.find(resource => resource.type == type)?.amount ?? 0;
     
 // export const { } = resourcesSlice.actions;
 export default resourcesSlice.reducer;

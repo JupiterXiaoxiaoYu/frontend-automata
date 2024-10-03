@@ -35,6 +35,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
 import MainMenuProgressBar from "./MainMenuProgressBar";
 import SummaryMenu from "./SummaryMenu";
+import RedeemMenu from "./RedeemMenu";
 
 interface Props {
   localTimer: number;
@@ -68,7 +69,7 @@ const MainMenu = ({ localTimer }: Props) => {
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
-  const showSummaryMenu = isNotSelectingCreature && uIState != UIState.Guide;
+  const showTaskMenu = isNotSelectingCreature && uIState != UIState.Guide;
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
 
@@ -216,7 +217,7 @@ const MainMenu = ({ localTimer }: Props) => {
           </div>
         </div>
       )}
-      {showSummaryMenu && <SummaryMenu />}
+      {showTaskMenu && <RedeemMenu />}
     </div>
   );
 };

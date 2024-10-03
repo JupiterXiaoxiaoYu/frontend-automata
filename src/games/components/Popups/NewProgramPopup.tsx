@@ -14,7 +14,7 @@ import {
   getResourceIconPath,
   ResourceType,
 } from "../../../data/automata/models";
-import { selectResources } from "../../../data/automata/resources";
+import { selectResource } from "../../../data/automata/resources";
 import { sendTransaction } from "../../request";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
 import { selectL2Account } from "../../../data/accountSlice";
@@ -22,7 +22,7 @@ import { selectL2Account } from "../../../data/accountSlice";
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
-  const titaniumCount = useAppSelector(selectResources(ResourceType.Titanium));
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const l2account = useAppSelector(selectL2Account);
   const nonce = useAppSelector(selectNonce);
 
@@ -36,6 +36,7 @@ const NewProgramPopup = () => {
 
   function newProgram() {
     try {
+      dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
           cmd: getNewProgramTransactionCommandArray(nonce),

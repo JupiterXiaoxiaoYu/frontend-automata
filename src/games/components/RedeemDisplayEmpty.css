@@ -1,0 +1,18 @@
+.redeem-display-empty-container {
+    position: relative;
+    width: 240px;
+    height: 70px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.redeem-display-empty-background {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 227px;
+    height: 60px;
+    user-select: none;
+}
