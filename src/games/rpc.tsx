@@ -135,6 +135,6 @@ export function getNewProgramTransactionCommandArray(nonce: bigint) {
 
 export function getRedeemTransactionCommandArray(nonce: bigint, index: number) {
   const objIndex = BigInt(index);
-  const command = createCommand(nonce, CMD_BOUNTY, objIndex);
-  return [command, 0n, 0n, 0n];
+  const command = createCommand(nonce, CMD_BOUNTY, 0n);
+  return [command, objIndex, 0n, 0n];
 }
