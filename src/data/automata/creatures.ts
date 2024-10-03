@@ -92,6 +92,9 @@ export const creaturesSlice = createSlice({
                 state.selectedCreatureIndex = action.payload.index;
             }
         },
+        clearSelectedCreatureIndex: (state, action) => {
+            state.selectedCreatureIndex = NOT_SELECTING_CREATURE;
+        },
         startCreatingCreature: (state, action) => {
             state.selectedCreatureIndex = state.creatures.length;
             state.creatingCreature = getCreatingCreature(action.payload.creatureType);
@@ -237,5 +240,5 @@ export const selectCreaturesCurrentProgressOnCurrentPage = (creatures: CreatureM
 
 export const selectCurrentPage = (state: RootState) => state.automata.creatures.currentPage;
     
-export const { setSelectedCreatureIndex, startCreatingCreature, startRebootCreature, clearRebootCreature, setProgramIndex, setSelectingProgramIndex, nextPage, prevPage } = creaturesSlice.actions;
+export const { setSelectedCreatureIndex, clearSelectedCreatureIndex, startCreatingCreature, startRebootCreature, clearRebootCreature, setProgramIndex, setSelectingProgramIndex, nextPage, prevPage } = creaturesSlice.actions;
 export default creaturesSlice.reducer;

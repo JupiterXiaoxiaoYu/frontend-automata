@@ -11,6 +11,7 @@ import {
 } from "../../data/automata/properties";
 import UpgradeButton from "./Buttons/UpgradeButton";
 import TitaniumFrame from "./TitaniumFrame";
+import { clearSelectedCreatureIndex } from "../../data/automata/creatures";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,12 @@ const TopMenu = () => {
     }
   }
 
+  function onClickRedeem() {
+    if (!isLoading) {
+      dispatch(clearSelectedCreatureIndex({}));
+    }
+  }
+
   return (
     <div className="top">
       <div className="top-left"></div>
@@ -52,6 +59,9 @@ const TopMenu = () => {
           <UpgradeButton onClick={onClickUpgrade} />
         </div>
       )}
+      <div className="top-redeem">
+        <UpgradeButton onClick={onClickRedeem} />
+      </div>
     </div>
   );
 };
