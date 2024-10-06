@@ -3,6 +3,7 @@ import background from "../../images/backgrounds/upgrade_frame.png";
 // import amountBackground from "../../images/backgrounds/upgrade_amount_background.png";
 import {
   UIState,
+  selectCurrentCost,
   selectNonce,
   setUIState,
 } from "../../../data/automata/properties";
@@ -17,6 +18,7 @@ import {
   CreatureModel,
   getCreatureIconPath,
   getResourceIconPath,
+  ResourceType,
   resourceTypes,
 } from "../../../data/automata/models";
 import UpgradePopupResourceDisplay from "./UpgradePopupResourceDisplay";
@@ -30,6 +32,7 @@ import {
 import { selectL2Account } from "../../../data/accountSlice";
 import { sendTransaction } from "../../request";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
+import { selectResource } from "../../../data/automata/resources";
 
 enum UpgradeState {
   None,
@@ -59,6 +62,8 @@ const UpgradePopup = () => {
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
+  const currentCost = useAppSelector(selectCurrentCost);
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const onClickSpeed = () => {
     setUpgradeState(UpgradeState.Speed);
@@ -136,7 +141,7 @@ const UpgradePopup = () => {
           <p className="upgrade-popup-upgrade-title-text">speed</p>
           <p className="upgrade-popup-upgrade-value-text">
             {speed}
-            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            <span style={{ color: "rgb(85, 221, 85)" }}>+1</span>
           </p>
         </div>
         <div className="upgrade-popup-efficiency-button">
@@ -147,7 +152,7 @@ const UpgradePopup = () => {
           <p className="upgrade-popup-upgrade-title-text">efficiency</p>
           <p className="upgrade-popup-upgrade-value-text">
             {efficiency}
-            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            <span style={{ color: "rgb(85, 221, 85)" }}>+1</span>
           </p>
         </div>
         <div className="upgrade-popup-productivity-button">
@@ -158,14 +163,21 @@ const UpgradePopup = () => {
           <p className="upgrade-popup-upgrade-title-text">productivity</p>
           <p className="upgrade-popup-upgrade-value-text">
             {productivity}
-            <span style={{ color: "rgb(85, 221, 85)" }}>+3</span>
+            <span style={{ color: "rgb(85, 221, 85)" }}>+1</span>
           </p>
         </div>
         <div className="upgrade-popup-confirm-button">
           <UpgradeConfirmButton
-            isDisable={upgradeState == UpgradeState.None}
+            isDisable={
+              titaniumCount < currentCost || upgradeState == UpgradeState.None
+            }
             onClick={onClickConfirm}
           />
+          <img
+            src={getResourceIconPath(ResourceType.Titanium)}
+            className="upgrade-popup-button-icon"
+          />
+          <p className="upgrade-popup-button-text">{currentCost}</p>
         </div>
       </div>
     </div>

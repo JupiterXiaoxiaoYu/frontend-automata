@@ -5,6 +5,7 @@ import EmptyButton from "./Buttons/EmptyButton";
 import { getResourceIconPath, ResourceType } from "../../data/automata/models";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentCost } from "../../data/automata/properties";
+import { selectResource } from "../../data/automata/resources";
 
 interface Props {
   onSelect: () => void;
@@ -12,6 +13,7 @@ interface Props {
 
 const NewProgram = ({ onSelect }: Props) => {
   const currentCost = useAppSelector(selectCurrentCost);
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   return (
     <div className="new-program-container">
@@ -19,7 +21,10 @@ const NewProgram = ({ onSelect }: Props) => {
       <p className="new-program-title-text">Buy New</p>
       <p className="new-program-title-2-text">Program</p>
       <p className="new-program-button">
-        <EmptyButton isDisabled={false} onClick={onSelect} />
+        <EmptyButton
+          isDisabled={titaniumCount < currentCost}
+          onClick={onSelect}
+        />
       </p>
       <img
         src={getResourceIconPath(ResourceType.Titanium)}

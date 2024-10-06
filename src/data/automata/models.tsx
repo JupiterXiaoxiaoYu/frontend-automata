@@ -13,6 +13,7 @@ import QuantumFoamDisabledIcon from "../../games/images/Icons/QuantumFoamDisable
 import NecrodermisDisabledIcon from "../../games/images/Icons/NecrodermisDisabled.png";
 import AlienFloralDisabledIcon from "../../games/images/Icons/AlienFloralDisabled.png";
 import SpiceMelangeDisabledIcon from "../../games/images/Icons/SpiceMelangeDisabled.png";
+import TitaniumDisabledIcon from "../../games/images/Icons/TitaniumDisabled.png";
 import LevelIcon from "../../games/images/Icons/level.png";
 import SpeedIcon from "../../games/images/Icons/speed.png";
 import EfficiencyIcon from "../../games/images/Icons/efficiency.png";
@@ -393,8 +394,8 @@ export function getResourceDisabledIconPath(type: ResourceType): string {
       return AlienFloralDisabledIcon;
     case ResourceType.SpiceMelange:
       return SpiceMelangeDisabledIcon;
-    // case ResourceType.Titanium:
-    //   return TitaniumIcon;
+    case ResourceType.Titanium:
+      return TitaniumDisabledIcon;
     default:
       throw new Error("Unknown ResourceType");
   }

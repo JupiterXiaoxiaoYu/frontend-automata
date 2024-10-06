@@ -142,3 +142,31 @@
     color: white;
     user-select: none;
 }
+
+.upgrade-popup-button-icon {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+.upgrade-popup-button-text {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    text-align: center;
+    line-height: 100%;
+    margin: 0px;
+    width: 50%;
+    height: 13px;
+    font-family: "mishmash";
+    color: white;
+    pointer-events: none;
+    user-select: none;
+}
