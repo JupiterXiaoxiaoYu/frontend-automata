@@ -79,3 +79,10 @@
     background-size: cover;
     animation: unlockFrames 1s steps(11);
 }
+
+.main-redeem{
+    position: absolute;
+    top: 85%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+}

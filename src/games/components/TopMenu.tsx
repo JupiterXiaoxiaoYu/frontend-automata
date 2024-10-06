@@ -10,13 +10,8 @@ import {
   UIState,
 } from "../../data/automata/properties";
 import UpgradeButton from "./Buttons/UpgradeButton";
-import RedeemButton from "./Buttons/RedeemButton";
 import TitaniumFrame from "./TitaniumFrame";
-import {
-  clearSelectedCreatureIndex,
-  selectIsNotSelectingCreature,
-  selectSelectedCreature,
-} from "../../data/automata/creatures";
+import { selectIsNotSelectingCreature } from "../../data/automata/creatures";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -42,12 +37,6 @@ const TopMenu = () => {
     }
   }
 
-  function onClickRedeem() {
-    if (!isLoading) {
-      dispatch(clearSelectedCreatureIndex({}));
-    }
-  }
-
   return (
     <div className="top">
       <div className="top-left"></div>
@@ -63,11 +52,6 @@ const TopMenu = () => {
       {!isSelectingUIState && !isNotSelectingCreature && (
         <div className="top-upgrade">
           <UpgradeButton onClick={onClickUpgrade} />
-        </div>
-      )}
-      {!isNotSelectingCreature && (
-        <div className="top-redeem">
-          <RedeemButton onClick={onClickRedeem} />
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ import Rocket from "./Rocket";
 import { getInstallProgramTransactionCommandArray } from "../rpc";
 import { selectL2Account } from "../../data/accountSlice";
 import { sendTransaction, queryState } from "../request";
-import { getCreatureIconPath, ProgramInfo } from "../../data/automata/models";
+import { getCreatureIconPath } from "../../data/automata/models";
 import {
   UIState,
   selectIsLoading,
@@ -30,12 +30,13 @@ import {
   selectSelectedCreatureListIndex,
   selectSelectedCreatureCurrentProgram,
   selectSelectedCreatureSelectingProgram,
+  clearSelectedCreatureIndex,
 } from "../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
 import MainMenuProgressBar from "./MainMenuProgressBar";
-import SummaryMenu from "./SummaryMenu";
 import RedeemMenu from "./RedeemMenu";
+import RedeemButton from "./Buttons/RedeemButton";
 
 interface Props {
   localTimer: number;
@@ -137,6 +138,12 @@ const MainMenu = ({ localTimer }: Props) => {
     }
   }
 
+  function onClickRedeem() {
+    if (!isLoading) {
+      dispatch(clearSelectedCreatureIndex({}));
+    }
+  }
+
   const currentProgramInfo = useAppSelector(
     isSelectingUIState || isLoading
       ? selectSelectedCreatureSelectingProgram
@@ -213,6 +220,11 @@ const MainMenu = ({ localTimer }: Props) => {
             )}
             {showRebootButton && (
               <CreatureRebootButton onClick={() => onClickReboot()} />
+            )}
+            {!isNotSelectingCreature && (
+              <div className="main-redeem">
+                <RedeemButton onClick={onClickRedeem} />
+              </div>
             )}
           </div>
         </div>
