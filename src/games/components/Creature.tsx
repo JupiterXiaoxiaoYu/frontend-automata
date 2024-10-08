@@ -1,7 +1,8 @@
 import React from "react";
 import "./Creature.css";
 import creatureBackground from "../images/backgrounds/creature_frame.png";
-import creatureStopMask from "../images/backgrounds/creature_frame_mask.png";
+import creatureStopMask from "../images/backgrounds/creature_frame_stop_mask.png";
+import creatureProgressMask from "../images/backgrounds/creature_frame_progress_mask.png";
 import creatureSelectingFrame from "../images/backgrounds/robot_select.png";
 import creatureLock from "../images/backgrounds/robot_lock.png";
 import { UIState, setUIState } from "../../data/automata/properties";
@@ -29,7 +30,8 @@ const Creature = ({ index, creature, progress }: Props) => {
   const isSelected = selectedCreatureListIndex == index;
   const isLoading = useAppSelector(selectIsLoading);
   const creaturesCount = useAppSelector(selectCreaturesCount);
-  const isLocked = index > creaturesCount;
+  const isLocked = index >= creaturesCount;
+  const showLocked = index > creaturesCount;
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
 
   const onSelect = () => {
@@ -60,15 +62,20 @@ const Creature = ({ index, creature, progress }: Props) => {
       {creatureIconPath && (
         <>
           <img src={creatureIconPath} className="creature-image-background" />
-          <img
-            src={creatureIconPath}
-            className="creature-image"
-            style={{
-              clipPath: isLocked
-                ? ""
-                : `polygon(0 ${filterPercentage}%, 100% ${filterPercentage}%, 100% 0, 0 0)`,
-            }}
-          />
+          {isLocked && (
+            <img src={creatureIconPath} className="creature-image" />
+          )}
+
+          {!isLocked && !creature.isProgramStop && (
+            <img
+              src={creatureProgressMask}
+              className="creature-image-mask"
+              style={{
+                clipPath: `polygon(0 ${filterPercentage}%, 100% ${filterPercentage}%, 100% 100%, 0 100%)`,
+              }}
+            />
+          )}
+
           {creature.isProgramStop && (
             <img src={creatureStopMask} className="creature-image-mask" />
           )}
@@ -79,7 +86,7 @@ const Creature = ({ index, creature, progress }: Props) => {
       ) : (
         <p className="creature-text">{creature.name}</p>
       )}
-      {isLocked && <img src={creatureLock} className="creature-lock-image" />}
+      {showLocked && <img src={creatureLock} className="creature-lock-image" />}
     </div>
   );
 };
