@@ -39,25 +39,33 @@ const MainMenuProgram = ({
   };
 
   return (
-    <div
-      className="main-bot-program-container"
-      onClick={onClick}
-      style={{
-        top: `${yPosition}%`,
-        left: `${xPosition}%`,
-      }}
-    >
+    <>
       <div
-        key={program?.index}
-        className={
-          showContainerAnimation
-            ? "main-bot-program-animation-container"
-            : "main-bot-program-normal-container"
-        }
+        className="main-bot-program-bot-container"
+        style={{
+          top: `${yPosition}%`,
+          left: `${xPosition}%`,
+        }}
       >
-        {getProgramComponent(program, showProgramAnimation)}
+        <div
+          key={program?.index}
+          className={
+            showContainerAnimation
+              ? "main-bot-program-animation-container"
+              : "main-bot-program-normal-container"
+          }
+        >
+          {getProgramComponent(program, showProgramAnimation)}
+        </div>
       </div>
-    </div>
+      <div
+        className="main-bot-program-button"
+        onClick={onClick}
+        style={{
+          transform: `translate(-50%, -50%) rotate(${order * 45 - 45}deg)`,
+        }}
+      />
+    </>
   );
 };
 

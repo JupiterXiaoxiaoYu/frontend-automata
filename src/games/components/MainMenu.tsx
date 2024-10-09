@@ -189,22 +189,24 @@ const MainMenu = ({ localTimer }: Props) => {
             {showUpgradeAnimation && (
               <div className="main-bot-upgrade-animation" />
             )}
-            {selectedCreaturePrograms.map((program, index) => (
-              <MainMenuProgram
-                key={index}
-                order={index}
-                program={program}
-                showContainerAnimation={isSelectingUIState}
-                showProgramAnimation={
-                  !selectedCreature.isStarting &&
-                  !isSelectingUIState &&
-                  uIState != UIState.UnlockPopup &&
-                  uIState != UIState.PlayUnlockAnimation &&
-                  currentProgramInfo.index == index &&
-                  !selectedCreature.isProgramStop
-                }
-              />
-            ))}
+            <div className="main-menu-program-container">
+              {selectedCreaturePrograms.map((program, index) => (
+                <MainMenuProgram
+                  key={index}
+                  order={index}
+                  program={program}
+                  showContainerAnimation={isSelectingUIState}
+                  showProgramAnimation={
+                    !selectedCreature.isStarting &&
+                    !isSelectingUIState &&
+                    uIState != UIState.UnlockPopup &&
+                    uIState != UIState.PlayUnlockAnimation &&
+                    currentProgramInfo.index == index &&
+                    !selectedCreature.isProgramStop
+                  }
+                />
+              ))}
+            </div>
             <MainMenuWarning />
             {showConfirmButton && (
               <CreatureConfirmButton
