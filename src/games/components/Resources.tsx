@@ -5,7 +5,9 @@ import "./Resources.css";
 
 import { selectResource } from "../../data/automata/resources";
 import {
+  getResourceDescriptionText,
   getResourceIconPath,
+  getResourceNameText,
   ResourceType,
   resourceTypes,
 } from "../../data/automata/models";
@@ -19,6 +21,8 @@ const Resources = () => {
           <ResourceDisplay
             key={index}
             iconImagePath={getResourceIconPath(type)}
+            title={getResourceNameText(type)}
+            description={getResourceDescriptionText(type)}
             amount={useAppSelector(selectResource(type))}
           />
         ))}

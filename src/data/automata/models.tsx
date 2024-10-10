@@ -439,6 +439,10 @@ export function getResourceNameText(type: ResourceType): string {
   }
 }
 
+export function getResourceDescriptionText(type: ResourceType): string {
+  return "This is " + getResourceNameText(type);
+}
+
 export function getNumberAbbr(num: number): string {
   const abbr = [
     { value: 1e12, suffix: "T" },
