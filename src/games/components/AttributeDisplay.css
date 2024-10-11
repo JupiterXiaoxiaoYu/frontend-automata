@@ -4,6 +4,12 @@
     height: 40px;
 }
 
+.attribute-display-hover-range {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .attribute-display-background {
     position: absolute;
     width: 45px;

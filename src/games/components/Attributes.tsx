@@ -5,6 +5,8 @@ import { useAppSelector } from "../../app/hooks";
 import {
   getAttributeIconPath,
   attributeTypes,
+  getAttributeDescriptionText,
+  getAttributeNameText,
 } from "../../data/automata/models";
 import { selectSelectedAttributes } from "../../data/automata/creatures";
 import "./Attributes.css";
@@ -17,6 +19,8 @@ const Attributes = () => {
           key={index}
           iconImagePath={getAttributeIconPath(type)}
           amount={useAppSelector(selectSelectedAttributes(type))}
+          title={getAttributeNameText(type)}
+          description={getAttributeDescriptionText(type)}
         />
       ))}
     </div>

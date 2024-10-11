@@ -22,14 +22,15 @@ const ResourceDisplay = ({
   const handleMouseLeave = () => setIsHovering(false);
 
   return (
-    <div
-      className="resource-display-container"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="resource-display-container">
       <img src={background} className="resource-display-background" />
       <img src={iconImagePath} className="resource-display-image" />
       <p className="resource-display-text">{getNumberAbbr(amount)}</p>
+      <div
+        className="resource-display-hover-range"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      />
       {isHovering && (
         <p className="resource-display-hover-container">
           <ResourceHover title={title} description={description} />

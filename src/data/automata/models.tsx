@@ -439,8 +439,27 @@ export function getResourceNameText(type: ResourceType): string {
   }
 }
 
+export function getAttributeNameText(type: AttributeType): string {
+  switch (type) {
+    case AttributeType.Level:
+      return "Level";
+    case AttributeType.Speed:
+      return "Speed";
+    case AttributeType.Efficiency:
+      return "Efficiency";
+    case AttributeType.Productivity:
+      return "Productivity";
+    default:
+      throw new Error("Unknown AttributeType");
+  }
+}
+
 export function getResourceDescriptionText(type: ResourceType): string {
   return "This is " + getResourceNameText(type);
+}
+
+export function getAttributeDescriptionText(type: AttributeType): string {
+  return "This is " + getAttributeNameText(type);
 }
 
 export function getNumberAbbr(num: number): string {
