@@ -13,7 +13,7 @@
     justify-content: center;
     font-size: 24px;
     position: relative;
-    z-index: 3;
+    /* z-index: 3; */
 }
 
 .main-content {
@@ -71,11 +71,13 @@
 
 .main-menu-program-container {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 406px;
+    height: 406px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 10;
 }
 
 .main-bot-unlock-animation, .main-bot-upgrade-animation {

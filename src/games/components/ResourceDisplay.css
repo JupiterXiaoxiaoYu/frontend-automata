@@ -49,7 +49,6 @@
 
 .resource-display-hover-container {
     position: absolute;
-    width: 150px;
     top: 50%;
     left: -10%;
     user-select: none;
