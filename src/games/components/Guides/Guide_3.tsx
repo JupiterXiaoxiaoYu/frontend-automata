@@ -1,19 +1,15 @@
 import React from "react";
-import image from "../../images/Guides/image3.png";
-import "./Guide_3.css";
+import image from "../../images/Guides/image2.png";
+import "./Guide_2.css";
 
 const Guide_3 = () => {
   return (
     <div>
-      <img src={image} className="guide-popup-3-image" />
-      <p className="guide-popup-3-content-title">3. Develop Strategies</p>
-      <p className="guide-popup-3-content-text">
-        The Napoleonic Wars (1803–1815) were a series of conflicts fought
-        between the First French Empire under Napoleon Bonaparte (1804–1815) and
-        a fluctuating array of European coalitions. The wars originated in
-        political forces arising from the French Revolution (1789–1799) and from
-        the French Revolutionary Wars (1792–1802) and produced a period of
-        French domination over Continental Europe.
+      <img src={image} className="guide-popup-2-image" />
+      <p className="guide-popup-2-content-title">3. Program List</p>
+      <p className="guide-popup-2-content-text">
+         You can purchase new programs using Titanium and participate in our campaigns to earn your first batch of Titanium, boosting your program inventory.
+         You can also upgrade your automata, optimizing their productivity, efficiency and speed with Titanium.
       </p>
     </div>
   );

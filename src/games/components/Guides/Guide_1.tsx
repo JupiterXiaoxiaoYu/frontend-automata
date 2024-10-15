@@ -6,14 +6,11 @@ const Guide_1 = () => {
   return (
     <div>
       <img src={image} className="guide-popup-1-image" />
-      <p className="guide-popup-1-content-title">1. Develop Strategies</p>
+      <p className="guide-popup-1-content-title">1. Mission</p>
       <p className="guide-popup-1-content-text">
-        The Napoleonic Wars (1801–1815) were a series of conflicts fought
-        between the First French Empire under Napoleon Bonaparte (1804–1815) and
-        a fluctuating array of European coalitions. The wars originated in
-        political forces arising from the French Revolution (1789–1799) and from
-        the French Revolutionary Wars (1792–1802) and produced a period of
-        French domination over Continental Europe.
+          Welcome aboard! This simulation console is an important part of our ambitious outer-space colonization plan for Titan.
+          Your mission: accumulate as much Titanium as possible. This crucial material is not only essential for building our future colony but will also be converted to the primary currency on Titan.
+          Get ready to shape the future!
       </p>
     </div>
   );
