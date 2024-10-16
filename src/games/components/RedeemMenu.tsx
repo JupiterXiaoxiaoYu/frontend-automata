@@ -22,7 +22,7 @@ import RedeemDisplayEmpty from "./RedeemDisplayEmpty";
 import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
 import { selectL2Account } from "../../data/accountSlice";
-import { selectResource } from "../../data/automata/resources";
+import { selectResources } from "../../data/automata/resources";
 
 const RedeemMenu = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +31,10 @@ const RedeemMenu = () => {
   const redeemCostBase = useAppSelector(selectRedeemCostBase);
   const redeemRewardBase = useAppSelector(selectRedeemRewardBase);
   const redeemInfo = useAppSelector(selectRedeemInfo);
+  const resources = useAppSelector(selectResources);
+  const resourcesMap = Object.fromEntries(
+    resources.map((resource) => [resource.type, resource.amount])
+  );
 
   const onClickRedeem = (index: number) => {
     dispatch(setUIState({ uIState: UIState.Loading }));
@@ -68,17 +72,15 @@ const RedeemMenu = () => {
           rowCount={4}
           elements={resourceTypes.map((type, index) =>
             type == ResourceType.Titanium ? (
-              <RedeemDisplayEmpty />
+              <RedeemDisplayEmpty key={-1} />
             ) : (
               <RedeemDisplay
                 key={index}
                 isDisabled={
-                  getRedeemCostAmount(redeemInfo[index]) >
-                  useAppSelector(selectResource(type))
+                  getRedeemCostAmount(redeemInfo[index]) > resourcesMap[type]
                 }
                 costIconImagePath={
-                  getRedeemCostAmount(redeemInfo[index]) >
-                  useAppSelector(selectResource(type))
+                  getRedeemCostAmount(redeemInfo[index]) > resourcesMap[type]
                     ? getResourceDisabledIconPath(type)
                     : getResourceIconPath(type)
                 }

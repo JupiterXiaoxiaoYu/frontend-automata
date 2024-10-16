@@ -20,12 +20,12 @@ const NewProgram = ({ onSelect }: Props) => {
       <img src={background} className="new-program-background" />
       <p className="new-program-title-text">Buy New</p>
       <p className="new-program-title-2-text">Program</p>
-      <p className="new-program-button">
+      <div className="new-program-button">
         <EmptyButton
           isDisabled={titaniumCount < currentCost}
           onClick={onSelect}
         />
-      </p>
+      </div>
       <img
         src={getResourceIconPath(ResourceType.Titanium)}
         className="new-program-icon-image"

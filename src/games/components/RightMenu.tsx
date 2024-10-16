@@ -81,7 +81,7 @@ const RightMenu = () => {
   const programElements =
     currentPage == 0
       ? [
-          <NewProgram onSelect={onClickNewProgram} />,
+          <NewProgram key={-1} onSelect={onClickNewProgram} />,
           ...programs.map((program, index) => (
             <Program
               key={index}

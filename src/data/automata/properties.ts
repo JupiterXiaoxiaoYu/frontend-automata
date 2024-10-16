@@ -27,6 +27,7 @@ interface PropertiesState {
     uIState: UIState;
     globalTimer: number;
     nonce: string;
+    showGuide: boolean;
     hasRocket: boolean;
     selectedCreatureDiffResources: ResourceAmountPair[];
     currentCost: number;
@@ -39,6 +40,7 @@ const initialState: PropertiesState = {
     uIState: UIState.Init,
     globalTimer: 0,
     nonce: "0",
+    showGuide: false,
     hasRocket: false,
     selectedCreatureDiffResources: [],
     currentCost: 0,
@@ -72,7 +74,7 @@ export const propertiesSlice = createSlice({
       })
       .addCase(sendTransaction.fulfilled, (state, action) => {
         if (state.uIState == UIState.CreatePlayer){
-          state.uIState = UIState.Guide;
+          state.uIState = UIState.QueryState;
         }
         console.log("send transaction fulfilled");
       })
@@ -81,17 +83,18 @@ export const propertiesSlice = createSlice({
       })
       .addCase(queryState.fulfilled, (state, action) => {
         if (state.uIState == UIState.QueryState){
-          state.uIState = UIState.Idle;
+          state.uIState = (state.showGuide) ? UIState.Guide : UIState.Idle;
         }
         state.globalTimer = action.payload.globalTimer;
         state.nonce = action.payload.nonce;
         state.currentCost = action.payload.currentCost;
         state.redeemInfo = action.payload.redeemInfo;
-        console.log("send transaction fulfilled");
+        console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
         if (state.uIState == UIState.QueryState){
           state.uIState = UIState.CreatePlayer;
+          state.showGuide = true;
         }
         console.log(`query state rejected: ${action.payload}`);
       });
