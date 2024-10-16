@@ -46,3 +46,10 @@
     pointer-events: none;
     user-select: none;
 }
+
+.attribute-display-hover-container {
+    position: absolute;
+    top: 100%;
+    left: -10%;
+    user-select: none;
+}

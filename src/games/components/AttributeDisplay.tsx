@@ -31,9 +31,9 @@ const AttributeDisplay = ({
         onMouseLeave={handleMouseLeave}
       />
       {isHovering && (
-        <p className="resource-display-hover-container">
+        <div className="attribute-display-hover-container">
           <AttributeHover title={title} description={description} />
-        </p>
+        </div>
       )}
     </div>
   );

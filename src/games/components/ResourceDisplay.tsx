@@ -32,9 +32,9 @@ const ResourceDisplay = ({
         onMouseLeave={handleMouseLeave}
       />
       {isHovering && (
-        <p className="resource-display-hover-container">
+        <div className="resource-display-hover-container">
           <ResourceHover title={title} description={description} />
-        </p>
+        </div>
       )}
     </div>
   );
