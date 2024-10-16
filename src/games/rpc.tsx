@@ -1,37 +1,20 @@
-import axios from "axios";
-import { sign, query } from "./sign";
+import { ZKWasmAppRpc, LeHexBN } from "zkwasm-ts-server";
 
-const instance = axios.create({
-  baseURL: "http://localhost:3000",
-  headers: { "Content-Type": "application/json" },
-});
+const rpc = new ZKWasmAppRpc("http://localhost:3000");
 
 export async function send_transaction(cmd: Array<bigint>, prikey: string) {
   try {
-    const data = sign(cmd, prikey);
-    const response = await instance.post("/send", JSON.stringify(data));
-
-    if (response.status === 201) {
-      const jsonResponse = response.data;
-      return jsonResponse;
-    } else {
-      throw "SendTransactionError";
-    }
+    const state = await rpc.sendTransaction(new BigUint64Array(cmd), prikey);
+    return state;
   } catch (error) {
     throw "SendTransactionError " + error;
   }
 }
 
-export async function query_state(cmd: Array<bigint>, prikey: string) {
+export async function query_state(prikey: string) {
   try {
-    const data = query(prikey);
-    console.log("query data", data);
-    const response = await instance.post("/query", JSON.stringify(data));
-    console.log("query response", response);
-    if (response.status === 201) {
-      const jsonResponse = response.data;
-      return jsonResponse;
-    }
+    const state = await rpc.queryState(prikey);
+    return state;
   } catch (error: any) {
     if (error.response) {
       // The request was made and the server responded with a status code
@@ -54,16 +37,8 @@ export async function query_state(cmd: Array<bigint>, prikey: string) {
 
 export async function query_config() {
   try {
-    const response = await instance("/config", {
-      method: "POST",
-    });
-
-    if (response.status === 201) {
-      const jsonResponse = response.data;
-      return jsonResponse;
-    } else {
-      throw "QueryConfigError";
-    }
+    const state = await rpc.query_config();
+    return state;
   } catch (error) {
     throw "QueryStateError " + error;
   }

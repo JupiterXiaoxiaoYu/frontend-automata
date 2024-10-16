@@ -29,7 +29,6 @@ interface QueryStateRes {
 }
 
 interface QueryStateParams {
-    cmd: Array<bigint>;
     prikey: string;
 }
 
@@ -40,7 +39,7 @@ export const getConfig = createAsyncThunk<
     >(
         'client/getConfig',
         async () => {
-            const res = await query_config();
+            const res: any = await query_config();
             const data = JSON.parse(res.data);
             console.log("(Data-Config)", data);
             const { bounty_cost_base: redeemCostBase, bounty_reward_base: redeemRewardBase} = data;
@@ -60,7 +59,7 @@ export const sendTransaction = createAsyncThunk<
         async (params: {cmd: Array<bigint>, prikey: string }, { rejectWithValue }) => {
             try {
                 const { cmd, prikey } = params;
-                const res = await send_transaction(cmd, prikey);
+                const res: any = await send_transaction(cmd, prikey);
                 console.log("(Data-Transaction)", res);
                 return res;
             } catch (err: any) {
@@ -75,10 +74,10 @@ export const queryState = createAsyncThunk<
     { rejectValue: string }
     >(
         'client/queryState',
-        async (params: {cmd: Array<bigint>, prikey: string }, { rejectWithValue }) => {
+        async (params: {prikey: string }, { rejectWithValue }) => {
             try {
-                const { cmd, prikey } = params;
-                const res = await query_state(cmd, prikey);
+                const { prikey } = params;
+                const res: any = await query_state(prikey);
                 const datas = JSON.parse(res.data);
                 console.log("(Data-QueryState)", datas);
                 const nonce = datas.player.nonce.toString();

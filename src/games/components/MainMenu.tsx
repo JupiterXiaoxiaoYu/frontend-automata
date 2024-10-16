@@ -113,7 +113,7 @@ const MainMenu = ({ localTimer }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ cmd: [], prikey: l2account!.address })).then(
+          dispatch(queryState({ prikey: l2account!.address })).then(
             (action) => {
               if (queryState.fulfilled.match(action)) {
                 dispatch(setUIState({ uIState: UIState.Idle }));

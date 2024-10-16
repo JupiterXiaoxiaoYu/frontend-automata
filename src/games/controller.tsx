@@ -37,7 +37,7 @@ export function GameController() {
 
   function updateState() {
     if (uIState >= UIState.Idle) {
-      dispatch(queryState({ cmd: [], prikey: l2account!.address }));
+      dispatch(queryState({ prikey: l2account!.address }));
     }
     setInc(inc + 1);
   }
@@ -46,7 +46,7 @@ export function GameController() {
     if (uIState == UIState.QueryConfig) {
       dispatch(getConfig({}));
     } else if (uIState == UIState.QueryState) {
-      dispatch(queryState({ cmd: [], prikey: l2account!.address }));
+      dispatch(queryState({ prikey: l2account!.address }));
     } else if (uIState == UIState.CreatePlayer) {
       createPlayer();
     }
