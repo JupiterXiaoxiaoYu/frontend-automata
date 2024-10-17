@@ -108,6 +108,14 @@ export function getNewProgramTransactionCommandArray(nonce: bigint) {
   return [command, 0n, 0n, 0n];
 }
 
+export function getWithdrawTransactionCommandArray(
+  nonce: bigint,
+  amount: bigint
+) {
+  const command = createCommand(nonce, CMD_WITHDRAW, 0n);
+  return [command, amount, 0n, 0n];
+}
+
 export function getRedeemTransactionCommandArray(nonce: bigint, index: number) {
   const objIndex = BigInt(index);
   const command = createCommand(nonce, CMD_BOUNTY, 0n);

@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
-import { UIState, setUIState } from "../../../data/automata/properties";
+import {
+  UIState,
+  selectNonce,
+  selectUIState,
+  setUIState,
+} from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
+import { sendTransaction } from "../../request";
+import { getWithdrawTransactionCommandArray } from "../../rpc";
+import { selectL2Account } from "../../../data/accountSlice";
 
 interface Props {
   isWithdraw: boolean;
@@ -12,15 +20,37 @@ interface Props {
 
 const WithdrawPopup = ({ isWithdraw }: Props) => {
   const dispatch = useAppDispatch();
-  const [amount, setAmount] = useState("");
+  const uiState = useAppSelector(selectUIState);
+  const nonce = useAppSelector(selectNonce);
+  const l2account = useAppSelector(selectL2Account);
+  const [amountString, setAmountString] = useState("");
+
+  const withdraw = (amount: string) => {
+    try {
+      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(
+        sendTransaction({
+          cmd: getWithdrawTransactionCommandArray(nonce, BigInt(amount)),
+          prikey: l2account!.address,
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(setUIState({ uIState: UIState.Idle }));
+        }
+      });
+    } catch (e) {
+      console.log("Error at withdraw " + e);
+    }
+  };
 
   const onClickConfirm = () => {
-    console.log(amount);
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    withdraw(amountString);
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    if (uiState != UIState.Loading) {
+      dispatch(setUIState({ uIState: UIState.Idle }));
+    }
   };
 
   return (
@@ -40,8 +70,8 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           <input
             type="number"
             className="withdraw-popup-amount-input"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={amountString}
+            onChange={(e) => setAmountString(e.target.value)}
             min="0"
           />
         </div>
