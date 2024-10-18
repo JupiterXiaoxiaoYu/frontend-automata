@@ -42,6 +42,7 @@ import "./NewProgramAnimation.css";
 import { selectAllPrograms } from "../../data/automata/programs";
 
 import Program from "./Program";
+import { selectIsSelectingCreatingCreature } from "../../data/automata/creatures";
 
 const NewProgramAnimation = () => {
   const images = [
@@ -84,6 +85,9 @@ const NewProgramAnimation = () => {
   const [animationEnd, setAnimationEnd] = useState(false);
   const programs = useAppSelector(selectAllPrograms);
   const program = programs[programs.length - 1];
+  const isSelectingCreatingCreature = useAppSelector(
+    selectIsSelectingCreatingCreature
+  );
 
   const animationName = "NewProgramAnimation";
   const generateAnimation = () => {
@@ -122,7 +126,13 @@ const NewProgramAnimation = () => {
 
   const onClickCancel = () => {
     if (animationEnd) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
+      dispatch(
+        setUIState({
+          uIState: isSelectingCreatingCreature
+            ? UIState.Creating
+            : UIState.Idle,
+        })
+      );
       setShowAnimation(false);
       setAnimationEnd(false);
     }
