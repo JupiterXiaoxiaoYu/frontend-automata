@@ -1,4 +1,4 @@
-.guide-popup-2-content-title {
+.guide-popup-circle-content-title {
     position: absolute;
     top: 15%;
     left: 30%;
@@ -16,7 +16,7 @@
     user-select: none;
 }
 
-.guide-popup-2-content-text {
+.guide-popup-circle-content-text {
     position: absolute;
     top: 45%;
     left: 28%;
@@ -34,11 +34,11 @@
     user-select: none;
 }
 
-.guide-popup-2-image {
+.guide-popup-circle-image {
     position: absolute;
-    width: 260px;
-    height: 324px;
-    left: 70%;
+    width: 247px;
+    height: 249px;
+    left: 74%;
     top: 41%;
     transform: translate(-50%, -50%);
     user-select: none;
