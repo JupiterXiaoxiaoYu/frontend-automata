@@ -22,132 +22,132 @@ import Bot1 from "../../games/images/CreatureBots/robot1.png";
 import Bot2 from "../../games/images/CreatureBots/robot2.png";
 import Bot3 from "../../games/images/CreatureBots/robot3.png";
 import Bot4 from "../../games/images/CreatureBots/robot4.png";
-import IlluGen from "../../games/components/Programs/IlluGen";
-import EtherForge from "../../games/components/Programs/EtherForge";
-import QuantumScribe from "../../games/components/Programs/QuantumScribe";
-import EvolviFy from "../../games/components/Programs/EvolviFy";
-import QuantumFrost from "../../games/components/Programs/QuantumFrost";
-import QuantumSurge from "../../games/components/Programs/QuantumSurge";
-import CyberPulse from "../../games/components/Programs/CyberPulse";
-import NexuMax from "../../games/components/Programs/NexuMax";
-import QuantaForge from "../../games/components/Programs/QuantaForge";
-import CrysTara from "../../games/components/Programs/CrysTara";
-import PlasmaShift from "../../games/components/Programs/PlasmaShift";
-import Aespa from "../../games/components/Programs/Aespa";
-import SwiftForge from "../../games/components/Programs/SwiftForge";
-import BioGen from "../../games/components/Programs/BioGen";
-import BioFusion from "../../games/components/Programs/BioFusion";
-import AstroMine from "../../games/components/Programs/AstroMine";
-import TitaniumBoost from "../../games/components/Programs/TitaniumBoost";
-import TTgenesis from "../../games/components/Programs/TTgenesis";
-import QuantumLeap from "../../games/components/Programs/QuantumLeap";
-import SpicenRich from "../../games/components/Programs/SpicenRich";
-import BioSurge from "../../games/components/Programs/BioSurge";
-import NeuroForge from "../../games/components/Programs/NeuroForge";
-import SuperNova from "../../games/components/Programs/SuperNova";
-import ResoNex from "../../games/components/Programs/ResoNex";
-import QuiFoam from "../../games/components/Programs/QuiFoam";
-import NovaBurst from "../../games/components/Programs/NovaBurst";
-import StellarCharge from "../../games/components/Programs/StellarCharge";
-import NexroVest from "../../games/components/Programs/NexroVest";
-import PlasmaCharge from "../../games/components/Programs/PlasmaCharge";
-import CogniFy from "../../games/components/Programs/CogniFy";
-import BioHarvest from "../../games/components/Programs/BioHarvest";
-import Abracadabra from "../../games/components/Programs/Abracadabra";
-import CerebraSpark from "../../games/components/Programs/CerebraSpark";
-import EnerGex from "../../games/components/Programs/EnerGex";
-import MegaBoost from "../../games/components/Programs/MegaBoost";
-import NeuroCharge from "../../games/components/Programs/NeuroCharge";
-import StarForge from "../../games/components/Programs/StarForge";
-import EtherWeave from "../../games/components/Programs/EtherWeave";
-import FortiGen from "../../games/components/Programs/FortiGen";
-import BioCast from "../../games/components/Programs/BioCast";
-import FortiFyx from "../../games/components/Programs/FortiFyx";
-import Fortivest from "../../games/components/Programs/Fortivest";
-import AstroCharge from "../../games/components/Programs/AstroCharge";
-import BioSynthesis from "../../games/components/Programs/BioSynthesis";
-import NovaFlux from "../../games/components/Programs/NovaFlux";
-import XenoFloral from "../../games/components/Programs/XenoFloral";
-import SynTitan from "../../games/components/Programs/SynTitan";
-import FoamTap from "../../games/components/Programs/FoamTap";
-import NanoWeave from "../../games/components/Programs/NanoWeave";
-import CrystaBloom from "../../games/components/Programs/CrystaBloom";
-import EtherPulse from "../../games/components/Programs/EtherPulse";
-import EnerPlex from "../../games/components/Programs/EnerPlex";
-import EnerGate from "../../games/components/Programs/EnerGate";
-import PlasmaForge from "../../games/components/Programs/PlasmaForge";
-import NexusField from "../../games/components/Programs/NexusField";
-import StarlightForge from "../../games/components/Programs/StarlightForge";
-import EnerFusion from "../../games/components/Programs/EnerFusion";
-import CogniMelt from "../../games/components/Programs/CogniMelt";
-import NexiMine from "../../games/components/Programs/NexiMine";
-import TitanBloom from "../../games/components/Programs/TitanBloom";
-import QuantumCore from "../../games/components/Programs/QuantumCore";
-import XenoBloom from "../../games/components/Programs/XenoBloom";
-import StarLight from "../../games/components/Programs/StarLight";
-import IlluGenIcon from "../../games/images/Animations/Programs/IlluGen/IlluGen_00.png";
-import EtherForgeIcon from "../../games/images/Animations/Programs/EtherForge/EtherForge_00.png";
-import QuantumScribeIcon from "../../games/images/Animations/Programs/QuantumScribe/QuantumScribe_00.png";
-import EvolviFyIcon from "../../games/images/Animations/Programs/EvolviFy/EvolviFy_00.png";
-import QuantumFrostIcon from "../../games/images/Animations/Programs/QuantumFrost/QuantumFrost_00.png";
-import QuantumSurgeIcon from "../../games/images/Animations/Programs/QuantumSurge/QuantumSurge_00.png";
-import CyberPulseIcon from "../../games/images/Animations/Programs/CyberPulse/CyberPulse_00.png";
-import NexuMaxIcon from "../../games/images/Animations/Programs/NexuMax/NexuMax_00.png";
-import QuantaForgeIcon from "../../games/images/Animations/Programs/QuantaForge/QuantaForge_00.png";
-import CrysTaraIcon from "../../games/images/Animations/Programs/CrysTara/CrysTara_00.png";
-import PlasmaShiftIcon from "../../games/images/Animations/Programs/PlasmaShift/PlasmaShift_00.png";
-import AespaIcon from "../../games/images/Animations/Programs/Aespa/Aespa_00.png";
-import SwiftForgeIcon from "../../games/images/Animations/Programs/SwiftForge/SwiftForge_00.png";
-import BioGenIcon from "../../games/images/Animations/Programs/BioGen/BioGen_00.png";
-import BioFusionIcon from "../../games/images/Animations/Programs/BioFusion/BioFusion_00.png";
-import AstroMineIcon from "../../games/images/Animations/Programs/AstroMine/AstroMine_00.png";
-import TitaniumBoostIcon from "../../games/images/Animations/Programs/TitaniumBoost/TitaniumBoost_00.png";
-import TTgenesisIcon from "../../games/images/Animations/Programs/TTgenesis/TTgenesis_00.png";
-import QuantumLeapIcon from "../../games/images/Animations/Programs/QuantumLeap/QuantumLeap_00.png";
-import SpicenRichIcon from "../../games/images/Animations/Programs/SpicenRich/SpicenRich_00.png";
-import BioSurgeIcon from "../../games/images/Animations/Programs/BioSurge/BioSurge_00.png";
-import NeuroForgeIcon from "../../games/images/Animations/Programs/NeuroForge/NeuroForge_00.png";
-import SuperNovaIcon from "../../games/images/Animations/Programs/SuperNova/SuperNova_00.png";
-import ResoNexIcon from "../../games/images/Animations/Programs/ResoNex/ResoNex_00.png";
-import QuiFoamIcon from "../../games/images/Animations/Programs/QuiFoam/QuiFoam_00.png";
-import NovaBurstIcon from "../../games/images/Animations/Programs/NovaBurst/NovaBurst_00.png";
-import StellarChargeIcon from "../../games/images/Animations/Programs/StellarCharge/StellarCharge_00.png";
-import NexroVestIcon from "../../games/images/Animations/Programs/NexroVest/NexroVest_00.png";
-import PlasmaChargeIcon from "../../games/images/Animations/Programs/PlasmaCharge/PlasmaCharge_00.png";
-import CogniFyIcon from "../../games/images/Animations/Programs/CogniFy/CogniFy_00.png";
-import BioHarvestIcon from "../../games/images/Animations/Programs/BioHarvest/BioHarvest_00.png";
-import AbracadabraIcon from "../../games/images/Animations/Programs/Abracadabra/Abracadabra_00.png";
-import CerebraSparkIcon from "../../games/images/Animations/Programs/CerebraSpark/CerebraSpark_00.png";
-import EnerGexIcon from "../../games/images/Animations/Programs/EnerGex/EnerGex_00.png";
-import MegaBoostIcon from "../../games/images/Animations/Programs/MegaBoost/MegaBoost_00.png";
-import NeuroChargeIcon from "../../games/images/Animations/Programs/NeuroCharge/NeuroCharge_00.png";
-import StarForgeIcon from "../../games/images/Animations/Programs/StarForge/StarForge_00.png";
-import EtherWeaveIcon from "../../games/images/Animations/Programs/EtherWeave/EtherWeave_00.png";
-import FortiGenIcon from "../../games/images/Animations/Programs/FortiGen/FortiGen_00.png";
-import BioCastIcon from "../../games/images/Animations/Programs/BioCast/BioCast_00.png";
-import FortiFyxIcon from "../../games/images/Animations/Programs/FortiFyx/FortiFyx_00.png";
-import FortivestIcon from "../../games/images/Animations/Programs/Fortivest/Fortivest_00.png";
-import AstroChargeIcon from "../../games/images/Animations/Programs/AstroCharge/AstroCharge_00.png";
-import BioSynthesisIcon from "../../games/images/Animations/Programs/BioSynthesis/BioSynthesis_00.png";
-import NovaFluxIcon from "../../games/images/Animations/Programs/NovaFlux/NovaFlux_00.png";
-import XenoFloralIcon from "../../games/images/Animations/Programs/XenoFloral/XenoFloral_00.png";
-import SynTitanIcon from "../../games/images/Animations/Programs/SynTitan/SynTitan_00.png";
-import FoamTapIcon from "../../games/images/Animations/Programs/FoamTap/FoamTap_00.png";
-import NanoWeaveIcon from "../../games/images/Animations/Programs/NanoWeave/NanoWeave_00.png";
-import CrystaBloomIcon from "../../games/images/Animations/Programs/CrystaBloom/CrystaBloom_00.png";
-import EtherPulseIcon from "../../games/images/Animations/Programs/EtherPulse/EtherPulse_00.png";
-import EnerPlexIcon from "../../games/images/Animations/Programs/EnerPlex/EnerPlex_00.png";
-import EnerGateIcon from "../../games/images/Animations/Programs/EnerGate/EnerGate_00.png";
-import PlasmaForgeIcon from "../../games/images/Animations/Programs/PlasmaForge/PlasmaForge_00.png";
-import NexusFieldIcon from "../../games/images/Animations/Programs/NexusField/NexusField_00.png";
-import StarlightForgeIcon from "../../games/images/Animations/Programs/StarlightForge/StarlightForge_00.png";
-import EnerFusionIcon from "../../games/images/Animations/Programs/EnerFusion/EnerFusion_00.png";
-import CogniMeltIcon from "../../games/images/Animations/Programs/CogniMelt/CogniMelt_00.png";
-import NexiMineIcon from "../../games/images/Animations/Programs/NexiMine/NexiMine_00.png";
-import TitanBloomIcon from "../../games/images/Animations/Programs/TitanBloom/TitanBloom_00.png";
-import QuantumCoreIcon from "../../games/images/Animations/Programs/QuantumCore/QuantumCore_00.png";
-import XenoBloomIcon from "../../games/images/Animations/Programs/XenoBloom/XenoBloom_00.png";
-import StarLightIcon from "../../games/images/Animations/Programs/StarLight/StarLight_00.png";
+import IlluGenSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/IlluGen.png";
+import EtherForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EtherForge.png";
+import QuantumScribeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantumScribe.png";
+import EvolviFySpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EvolviFy.png";
+import QuantumFrostSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantumFrost.png";
+import QuantumSurgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantumSurge.png";
+import CyberPulseSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CyberPulse.png";
+import NexuMaxSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NexuMax.png";
+import QuantaForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantaForge.png";
+import CrysTaraSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CrysTara.png";
+import PlasmaShiftSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/PlasmaShift.png";
+import AespaSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/Aespa.png";
+import SwiftForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/SwiftForge.png";
+import BioGenSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioGen.png";
+import BioFusionSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioFusion.png";
+import AstroMineSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/AstroMine.png";
+import TitaniumBoostSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/TitaniumBoost.png";
+import TTgenesisSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/TTgenesis.png";
+import QuantumLeapSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantumLeap.png";
+import SpicenRichSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/SpicenRich.png";
+import BioSurgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioSurge.png";
+import NeuroForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NeuroForge.png";
+import SuperNovaSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/SuperNova.png";
+import ResoNexSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/ResoNex.png";
+import QuiFoamSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuiFoam.png";
+import NovaBurstSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NovaBurst.png";
+import StellarChargeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/StellarCharge.png";
+import NexroVestSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NexroVest.png";
+import PlasmaChargeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/PlasmaCharge.png";
+import CogniFySpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CogniFy.png";
+import BioHarvestSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioHarvest.png";
+import AbracadabraSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/Abracadabra.png";
+import CerebraSparkSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CerebraSpark.png";
+import EnerGexSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EnerGex.png";
+import MegaBoostSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/MegaBoost.png";
+import NeuroChargeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NeuroCharge.png";
+import StarForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/StarForge.png";
+import EtherWeaveSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EtherWeave.png";
+import FortiGenSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/FortiGen.png";
+import BioCastSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioCast.png";
+import FortiFyxSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/FortiFyx.png";
+import FortivestSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/Fortivest.png";
+import AstroChargeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/AstroCharge.png";
+import BioSynthesisSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/BioSynthesis.png";
+import NovaFluxSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NovaFlux.png";
+import XenoFloralSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/XenoFloral.png";
+import SynTitanSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/SynTitan.png";
+import FoamTapSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/FoamTap.png";
+import NanoWeaveSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NanoWeave.png";
+import CrystaBloomSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CrystaBloom.png";
+import EtherPulseSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EtherPulse.png";
+import EnerPlexSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EnerPlex.png";
+import EnerGateSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EnerGate.png";
+import PlasmaForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/PlasmaForge.png";
+import NexusFieldSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NexusField.png";
+import StarlightForgeSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/StarlightForge.png";
+import EnerFusionSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/EnerFusion.png";
+import CogniMeltSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/CogniMelt.png";
+import NexiMineSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/NexiMine.png";
+import TitanBloomSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/TitanBloom.png";
+import QuantumCoreSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/QuantumCore.png";
+import XenoBloomSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/XenoBloom.png";
+import StarLightSpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/StarLight.png";
+import IlluGenIcon from "../../games/images/Animations/Programs/Icons/IlluGen.png";
+import EtherForgeIcon from "../../games/images/Animations/Programs/Icons/EtherForge.png";
+import QuantumScribeIcon from "../../games/images/Animations/Programs/Icons/QuantumScribe.png";
+import EvolviFyIcon from "../../games/images/Animations/Programs/Icons/EvolviFy.png";
+import QuantumFrostIcon from "../../games/images/Animations/Programs/Icons/QuantumFrost.png";
+import QuantumSurgeIcon from "../../games/images/Animations/Programs/Icons/QuantumSurge.png";
+import CyberPulseIcon from "../../games/images/Animations/Programs/Icons/CyberPulse.png";
+import NexuMaxIcon from "../../games/images/Animations/Programs/Icons/NexuMax.png";
+import QuantaForgeIcon from "../../games/images/Animations/Programs/Icons/QuantaForge.png";
+import CrysTaraIcon from "../../games/images/Animations/Programs/Icons/CrysTara.png";
+import PlasmaShiftIcon from "../../games/images/Animations/Programs/Icons/PlasmaShift.png";
+import AespaIcon from "../../games/images/Animations/Programs/Icons/Aespa.png";
+import SwiftForgeIcon from "../../games/images/Animations/Programs/Icons/SwiftForge.png";
+import BioGenIcon from "../../games/images/Animations/Programs/Icons/BioGen.png";
+import BioFusionIcon from "../../games/images/Animations/Programs/Icons/BioFusion.png";
+import AstroMineIcon from "../../games/images/Animations/Programs/Icons/AstroMine.png";
+import TitaniumBoostIcon from "../../games/images/Animations/Programs/Icons/TitaniumBoost.png";
+import TTgenesisIcon from "../../games/images/Animations/Programs/Icons/TTgenesis.png";
+import QuantumLeapIcon from "../../games/images/Animations/Programs/Icons/QuantumLeap.png";
+import SpicenRichIcon from "../../games/images/Animations/Programs/Icons/SpicenRich.png";
+import BioSurgeIcon from "../../games/images/Animations/Programs/Icons/BioSurge.png";
+import NeuroForgeIcon from "../../games/images/Animations/Programs/Icons/NeuroForge.png";
+import SuperNovaIcon from "../../games/images/Animations/Programs/Icons/SuperNova.png";
+import ResoNexIcon from "../../games/images/Animations/Programs/Icons/ResoNex.png";
+import QuiFoamIcon from "../../games/images/Animations/Programs/Icons/QuiFoam.png";
+import NovaBurstIcon from "../../games/images/Animations/Programs/Icons/NovaBurst.png";
+import StellarChargeIcon from "../../games/images/Animations/Programs/Icons/StellarCharge.png";
+import NexroVestIcon from "../../games/images/Animations/Programs/Icons/NexroVest.png";
+import PlasmaChargeIcon from "../../games/images/Animations/Programs/Icons/PlasmaCharge.png";
+import CogniFyIcon from "../../games/images/Animations/Programs/Icons/CogniFy.png";
+import BioHarvestIcon from "../../games/images/Animations/Programs/Icons/BioHarvest.png";
+import AbracadabraIcon from "../../games/images/Animations/Programs/Icons/Abracadabra.png";
+import CerebraSparkIcon from "../../games/images/Animations/Programs/Icons/CerebraSpark.png";
+import EnerGexIcon from "../../games/images/Animations/Programs/Icons/EnerGex.png";
+import MegaBoostIcon from "../../games/images/Animations/Programs/Icons/MegaBoost.png";
+import NeuroChargeIcon from "../../games/images/Animations/Programs/Icons/NeuroCharge.png";
+import StarForgeIcon from "../../games/images/Animations/Programs/Icons/StarForge.png";
+import EtherWeaveIcon from "../../games/images/Animations/Programs/Icons/EtherWeave.png";
+import FortiGenIcon from "../../games/images/Animations/Programs/Icons/FortiGen.png";
+import BioCastIcon from "../../games/images/Animations/Programs/Icons/BioCast.png";
+import FortiFyxIcon from "../../games/images/Animations/Programs/Icons/FortiFyx.png";
+import FortivestIcon from "../../games/images/Animations/Programs/Icons/Fortivest.png";
+import AstroChargeIcon from "../../games/images/Animations/Programs/Icons/AstroCharge.png";
+import BioSynthesisIcon from "../../games/images/Animations/Programs/Icons/BioSynthesis.png";
+import NovaFluxIcon from "../../games/images/Animations/Programs/Icons/NovaFlux.png";
+import XenoFloralIcon from "../../games/images/Animations/Programs/Icons/XenoFloral.png";
+import SynTitanIcon from "../../games/images/Animations/Programs/Icons/SynTitan.png";
+import FoamTapIcon from "../../games/images/Animations/Programs/Icons/FoamTap.png";
+import NanoWeaveIcon from "../../games/images/Animations/Programs/Icons/NanoWeave.png";
+import CrystaBloomIcon from "../../games/images/Animations/Programs/Icons/CrystaBloom.png";
+import EtherPulseIcon from "../../games/images/Animations/Programs/Icons/EtherPulse.png";
+import EnerPlexIcon from "../../games/images/Animations/Programs/Icons/EnerPlex.png";
+import EnerGateIcon from "../../games/images/Animations/Programs/Icons/EnerGate.png";
+import PlasmaForgeIcon from "../../games/images/Animations/Programs/Icons/PlasmaForge.png";
+import NexusFieldIcon from "../../games/images/Animations/Programs/Icons/NexusField.png";
+import StarlightForgeIcon from "../../games/images/Animations/Programs/Icons/StarlightForge.png";
+import EnerFusionIcon from "../../games/images/Animations/Programs/Icons/EnerFusion.png";
+import CogniMeltIcon from "../../games/images/Animations/Programs/Icons/CogniMelt.png";
+import NexiMineIcon from "../../games/images/Animations/Programs/Icons/NexiMine.png";
+import TitanBloomIcon from "../../games/images/Animations/Programs/Icons/TitanBloom.png";
+import QuantumCoreIcon from "../../games/images/Animations/Programs/Icons/QuantumCore.png";
+import XenoBloomIcon from "../../games/images/Animations/Programs/Icons/XenoBloom.png";
+import StarLightIcon from "../../games/images/Animations/Programs/Icons/StarLight.png";
 
 export interface CreatureModel {
   attributes: AttributeAmountPair[];
@@ -223,7 +223,6 @@ export enum ProgramType {
   NovaFlux,
   QuantumCore,
   BioSurge,
-  EtherPulse2,
   StarlightForge,
   QuantumSurge,
 }
@@ -242,6 +241,266 @@ export interface ProgramInfo {
   remainTime: number;
   progress: number;
 }
+
+interface ProgramData {
+  iconPath: string;
+  spriteSheetPath: string;
+}
+
+const programDatas: Record<ProgramType, ProgramData> = {
+  [ProgramType.IlluGen]: {
+    iconPath: IlluGenIcon,
+    spriteSheetPath: IlluGenSpriteSheet,
+  },
+  [ProgramType.EtherForge]: {
+    iconPath: EtherForgeIcon,
+    spriteSheetPath: EtherForgeSpriteSheet,
+  },
+  [ProgramType.QuantumScribe]: {
+    iconPath: QuantumScribeIcon,
+    spriteSheetPath: QuantumScribeSpriteSheet,
+  },
+  [ProgramType.EvolviFy]: {
+    iconPath: EvolviFyIcon,
+    spriteSheetPath: EvolviFySpriteSheet,
+  },
+  [ProgramType.QuantumFrost]: {
+    iconPath: QuantumFrostIcon,
+    spriteSheetPath: QuantumFrostSpriteSheet,
+  },
+  [ProgramType.QuantumSurge]: {
+    iconPath: QuantumSurgeIcon,
+    spriteSheetPath: QuantumSurgeSpriteSheet,
+  },
+  [ProgramType.CyberPulse]: {
+    iconPath: CyberPulseIcon,
+    spriteSheetPath: CyberPulseSpriteSheet,
+  },
+  [ProgramType.NexuMax]: {
+    iconPath: NexuMaxIcon,
+    spriteSheetPath: NexuMaxSpriteSheet,
+  },
+  [ProgramType.QuantaForge]: {
+    iconPath: QuantaForgeIcon,
+    spriteSheetPath: QuantaForgeSpriteSheet,
+  },
+  [ProgramType.CrysTara]: {
+    iconPath: CrysTaraIcon,
+    spriteSheetPath: CrysTaraSpriteSheet,
+  },
+  [ProgramType.PlasmaShift]: {
+    iconPath: PlasmaShiftIcon,
+    spriteSheetPath: PlasmaShiftSpriteSheet,
+  },
+  [ProgramType.Aespa]: {
+    iconPath: AespaIcon,
+    spriteSheetPath: AespaSpriteSheet,
+  },
+  [ProgramType.SwiftForge]: {
+    iconPath: SwiftForgeIcon,
+    spriteSheetPath: SwiftForgeSpriteSheet,
+  },
+  [ProgramType.BioGen]: {
+    iconPath: BioGenIcon,
+    spriteSheetPath: BioGenSpriteSheet,
+  },
+  [ProgramType.BioFusion]: {
+    iconPath: BioFusionIcon,
+    spriteSheetPath: BioFusionSpriteSheet,
+  },
+  [ProgramType.AstroMine]: {
+    iconPath: AstroMineIcon,
+    spriteSheetPath: AstroMineSpriteSheet,
+  },
+  [ProgramType.TitaniumBoost]: {
+    iconPath: TitaniumBoostIcon,
+    spriteSheetPath: TitaniumBoostSpriteSheet,
+  },
+  [ProgramType.TTgenesis]: {
+    iconPath: TTgenesisIcon,
+    spriteSheetPath: TTgenesisSpriteSheet,
+  },
+  [ProgramType.QuantumLeap]: {
+    iconPath: QuantumLeapIcon,
+    spriteSheetPath: QuantumLeapSpriteSheet,
+  },
+  [ProgramType.SpicenRich]: {
+    iconPath: SpicenRichIcon,
+    spriteSheetPath: SpicenRichSpriteSheet,
+  },
+  [ProgramType.BioSurge]: {
+    iconPath: BioSurgeIcon,
+    spriteSheetPath: BioSurgeSpriteSheet,
+  },
+  [ProgramType.NeuroForge]: {
+    iconPath: NeuroForgeIcon,
+    spriteSheetPath: NeuroForgeSpriteSheet,
+  },
+  [ProgramType.SuperNova]: {
+    iconPath: SuperNovaIcon,
+    spriteSheetPath: SuperNovaSpriteSheet,
+  },
+  [ProgramType.ResoNex]: {
+    iconPath: ResoNexIcon,
+    spriteSheetPath: ResoNexSpriteSheet,
+  },
+  [ProgramType.QuiFoam]: {
+    iconPath: QuiFoamIcon,
+    spriteSheetPath: QuiFoamSpriteSheet,
+  },
+  [ProgramType.NovaBurst]: {
+    iconPath: NovaBurstIcon,
+    spriteSheetPath: NovaBurstSpriteSheet,
+  },
+  [ProgramType.StellarCharge]: {
+    iconPath: StellarChargeIcon,
+    spriteSheetPath: StellarChargeSpriteSheet,
+  },
+  [ProgramType.NexroVest]: {
+    iconPath: NexroVestIcon,
+    spriteSheetPath: NexroVestSpriteSheet,
+  },
+  [ProgramType.PlasmaCharge]: {
+    iconPath: PlasmaChargeIcon,
+    spriteSheetPath: PlasmaChargeSpriteSheet,
+  },
+  [ProgramType.CogniFy]: {
+    iconPath: CogniFyIcon,
+    spriteSheetPath: CogniFySpriteSheet,
+  },
+  [ProgramType.BioHarvest]: {
+    iconPath: BioHarvestIcon,
+    spriteSheetPath: BioHarvestSpriteSheet,
+  },
+  [ProgramType.Abracadabra]: {
+    iconPath: AbracadabraIcon,
+    spriteSheetPath: AbracadabraSpriteSheet,
+  },
+  [ProgramType.CerebraSpark]: {
+    iconPath: CerebraSparkIcon,
+    spriteSheetPath: CerebraSparkSpriteSheet,
+  },
+  [ProgramType.EnerGex]: {
+    iconPath: EnerGexIcon,
+    spriteSheetPath: EnerGexSpriteSheet,
+  },
+  [ProgramType.MegaBoost]: {
+    iconPath: MegaBoostIcon,
+    spriteSheetPath: MegaBoostSpriteSheet,
+  },
+  [ProgramType.NeuroCharge]: {
+    iconPath: NeuroChargeIcon,
+    spriteSheetPath: NeuroChargeSpriteSheet,
+  },
+  [ProgramType.StarForge]: {
+    iconPath: StarForgeIcon,
+    spriteSheetPath: StarForgeSpriteSheet,
+  },
+  [ProgramType.EtherWeave]: {
+    iconPath: EtherWeaveIcon,
+    spriteSheetPath: EtherWeaveSpriteSheet,
+  },
+  [ProgramType.FortiGen]: {
+    iconPath: FortiGenIcon,
+    spriteSheetPath: FortiGenSpriteSheet,
+  },
+  [ProgramType.BioCast]: {
+    iconPath: BioCastIcon,
+    spriteSheetPath: BioCastSpriteSheet,
+  },
+  [ProgramType.FortiFyx]: {
+    iconPath: FortiFyxIcon,
+    spriteSheetPath: FortiFyxSpriteSheet,
+  },
+  [ProgramType.Fortivest]: {
+    iconPath: FortivestIcon,
+    spriteSheetPath: FortivestSpriteSheet,
+  },
+  [ProgramType.AstroCharge]: {
+    iconPath: AstroChargeIcon,
+    spriteSheetPath: AstroChargeSpriteSheet,
+  },
+  [ProgramType.BioSynthesis]: {
+    iconPath: BioSynthesisIcon,
+    spriteSheetPath: BioSynthesisSpriteSheet,
+  },
+  [ProgramType.NovaFlux]: {
+    iconPath: NovaFluxIcon,
+    spriteSheetPath: NovaFluxSpriteSheet,
+  },
+  [ProgramType.XenoFloral]: {
+    iconPath: XenoFloralIcon,
+    spriteSheetPath: XenoFloralSpriteSheet,
+  },
+  [ProgramType.SynTitan]: {
+    iconPath: SynTitanIcon,
+    spriteSheetPath: SynTitanSpriteSheet,
+  },
+  [ProgramType.FoamTap]: {
+    iconPath: FoamTapIcon,
+    spriteSheetPath: FoamTapSpriteSheet,
+  },
+  [ProgramType.NanoWeave]: {
+    iconPath: NanoWeaveIcon,
+    spriteSheetPath: NanoWeaveSpriteSheet,
+  },
+  [ProgramType.CrystaBloom]: {
+    iconPath: CrystaBloomIcon,
+    spriteSheetPath: CrystaBloomSpriteSheet,
+  },
+  [ProgramType.EtherPulse]: {
+    iconPath: EtherPulseIcon,
+    spriteSheetPath: EtherPulseSpriteSheet,
+  },
+  [ProgramType.EnerPlex]: {
+    iconPath: EnerPlexIcon,
+    spriteSheetPath: EnerPlexSpriteSheet,
+  },
+  [ProgramType.EnerGate]: {
+    iconPath: EnerGateIcon,
+    spriteSheetPath: EnerGateSpriteSheet,
+  },
+  [ProgramType.PlasmaForge]: {
+    iconPath: PlasmaForgeIcon,
+    spriteSheetPath: PlasmaForgeSpriteSheet,
+  },
+  [ProgramType.NexusField]: {
+    iconPath: NexusFieldIcon,
+    spriteSheetPath: NexusFieldSpriteSheet,
+  },
+  [ProgramType.StarlightForge]: {
+    iconPath: StarlightForgeIcon,
+    spriteSheetPath: StarlightForgeSpriteSheet,
+  },
+  [ProgramType.EnerFusion]: {
+    iconPath: EnerFusionIcon,
+    spriteSheetPath: EnerFusionSpriteSheet,
+  },
+  [ProgramType.CogniMelt]: {
+    iconPath: CogniMeltIcon,
+    spriteSheetPath: CogniMeltSpriteSheet,
+  },
+  [ProgramType.NexiMine]: {
+    iconPath: NexiMineIcon,
+    spriteSheetPath: NexiMineSpriteSheet,
+  },
+  [ProgramType.TitanBloom]: {
+    iconPath: TitanBloomIcon,
+    spriteSheetPath: TitanBloomSpriteSheet,
+  },
+  [ProgramType.QuantumCore]: {
+    iconPath: QuantumCoreIcon,
+    spriteSheetPath: QuantumCoreSpriteSheet,
+  },
+  [ProgramType.XenoBloom]: {
+    iconPath: XenoBloomIcon,
+    spriteSheetPath: XenoBloomSpriteSheet,
+  },
+  [ProgramType.StarLight]: {
+    iconPath: StarLightIcon,
+    spriteSheetPath: StarLightSpriteSheet,
+  },
+};
 
 export enum ResourceType {
   Crystal,
@@ -280,23 +539,100 @@ export enum GuideType {
   First,
 }
 
-export const resourceTypes = [
-  ResourceType.Crystal,
-  ResourceType.InterstellarMineral,
-  ResourceType.Biomass,
-  ResourceType.QuantumFoam,
-  ResourceType.Necrodermis,
-  ResourceType.AlienFloral,
-  ResourceType.SpiceMelange,
-  ResourceType.Titanium,
-];
+interface ResourceData {
+  name: string;
+  description: string;
+  iconPath: string;
+  disableIconPath: string;
+}
 
-export const attributeTypes = [
-  AttributeType.Level,
-  AttributeType.Speed,
-  AttributeType.Efficiency,
-  AttributeType.Productivity,
-];
+const resourceDatas: Record<ResourceType, ResourceData> = {
+  [ResourceType.Crystal]: {
+    name: "Crystal",
+    description: "This is Crystal",
+    iconPath: CrystalIcon,
+    disableIconPath: CrystalDisabledIcon,
+  },
+  [ResourceType.InterstellarMineral]: {
+    name: "Interstellar Mineral",
+    description: "This is Interstellar Mineral",
+    iconPath: InterstellarMineralIcon,
+    disableIconPath: InterstellarMineralDisabledIcon,
+  },
+  [ResourceType.Biomass]: {
+    name: "Biomass",
+    description: "This is Biomass",
+    iconPath: BiomassIcon,
+    disableIconPath: BiomassDisabledIcon,
+  },
+  [ResourceType.QuantumFoam]: {
+    name: "Quantum Foam",
+    description: "This is Quantum Foam",
+    iconPath: QuantumFoamIcon,
+    disableIconPath: QuantumFoamDisabledIcon,
+  },
+  [ResourceType.Necrodermis]: {
+    name: "Necrodermis",
+    description: "This is Necrodermis",
+    iconPath: NecrodermisIcon,
+    disableIconPath: NecrodermisDisabledIcon,
+  },
+  [ResourceType.AlienFloral]: {
+    name: "Alien Floral",
+    description: "This is Alien Floral",
+    iconPath: AlienFloralIcon,
+    disableIconPath: AlienFloralDisabledIcon,
+  },
+  [ResourceType.SpiceMelange]: {
+    name: "Spice Melange",
+    description: "This is Spice Melange",
+    iconPath: SpiceMelangeIcon,
+    disableIconPath: SpiceMelangeDisabledIcon,
+  },
+  [ResourceType.Titanium]: {
+    name: "Titanium",
+    description: "This is Titanium",
+    iconPath: TitaniumIcon,
+    disableIconPath: TitaniumDisabledIcon,
+  },
+};
+
+interface AttributeData {
+  name: string;
+  description: string;
+  iconPath: string;
+}
+
+const attributeDatas: Record<AttributeType, AttributeData> = {
+  [AttributeType.Level]: {
+    name: "Level",
+    description: "This is Level",
+    iconPath: LevelIcon,
+  },
+  [AttributeType.Speed]: {
+    name: "Speed",
+    description: "This is Speed",
+    iconPath: SpeedIcon,
+  },
+  [AttributeType.Efficiency]: {
+    name: "Efficiency",
+    description: "This is Efficiency",
+    iconPath: EfficiencyIcon,
+  },
+  [AttributeType.Productivity]: {
+    name: "Productivity",
+    description: "This is Productivity",
+    iconPath: ProductivityIcon,
+  },
+};
+
+export const resourceTypes = Object.values(ResourceType).filter(
+  (value) => typeof value === "number"
+) as ResourceType[];
+
+export const attributeTypes = Object.values(AttributeType).filter(
+  (value) => typeof value === "number"
+) as AttributeType[];
 
 export const emptyResources = resourceTypes.map((type) => ({
   type,
@@ -356,110 +692,31 @@ export function getAttributes(array: Array<number>) {
 }
 
 export function getResourceIconPath(type: ResourceType): string {
-  switch (type) {
-    case ResourceType.Crystal:
-      return CrystalIcon;
-    case ResourceType.InterstellarMineral:
-      return InterstellarMineralIcon;
-    case ResourceType.Biomass:
-      return BiomassIcon;
-    case ResourceType.QuantumFoam:
-      return QuantumFoamIcon;
-    case ResourceType.Necrodermis:
-      return NecrodermisIcon;
-    case ResourceType.AlienFloral:
-      return AlienFloralIcon;
-    case ResourceType.SpiceMelange:
-      return SpiceMelangeIcon;
-    case ResourceType.Titanium:
-      return TitaniumIcon;
-    default:
-      throw new Error("Unknown ResourceType");
-  }
+  return resourceDatas[type].iconPath;
 }
 
 export function getResourceDisabledIconPath(type: ResourceType): string {
-  switch (type) {
-    case ResourceType.Crystal:
-      return CrystalDisabledIcon;
-    case ResourceType.InterstellarMineral:
-      return InterstellarMineralDisabledIcon;
-    case ResourceType.Biomass:
-      return BiomassDisabledIcon;
-    case ResourceType.QuantumFoam:
-      return QuantumFoamDisabledIcon;
-    case ResourceType.Necrodermis:
-      return NecrodermisDisabledIcon;
-    case ResourceType.AlienFloral:
-      return AlienFloralDisabledIcon;
-    case ResourceType.SpiceMelange:
-      return SpiceMelangeDisabledIcon;
-    case ResourceType.Titanium:
-      return TitaniumDisabledIcon;
-    default:
-      throw new Error("Unknown ResourceType");
-  }
+  return resourceDatas[type].disableIconPath;
 }
 
 export function getAttributeIconPath(type: AttributeType): string {
-  switch (type) {
-    case AttributeType.Level:
-      return LevelIcon;
-    case AttributeType.Speed:
-      return SpeedIcon;
-    case AttributeType.Efficiency:
-      return EfficiencyIcon;
-    case AttributeType.Productivity:
-      return ProductivityIcon;
-    default:
-      throw new Error("Unknown AttributeType");
-  }
+  return attributeDatas[type].iconPath;
 }
 
 export function getResourceNameText(type: ResourceType): string {
-  switch (type) {
-    case ResourceType.Crystal:
-      return "Crystal";
-    case ResourceType.InterstellarMineral:
-      return "Interstellar Mineral";
-    case ResourceType.Biomass:
-      return "Biomass";
-    case ResourceType.QuantumFoam:
-      return "Quantum Foam";
-    case ResourceType.Necrodermis:
-      return "Necrodermis";
-    case ResourceType.AlienFloral:
-      return "Alien Floral";
-    case ResourceType.SpiceMelange:
-      return "Spice Melange";
-    case ResourceType.Titanium:
-      return "Titanium";
-    default:
-      throw new Error("Unknown ResourceType");
-  }
+  return resourceDatas[type].name;
 }
 
 export function getAttributeNameText(type: AttributeType): string {
-  switch (type) {
-    case AttributeType.Level:
-      return "Level";
-    case AttributeType.Speed:
-      return "Speed";
-    case AttributeType.Efficiency:
-      return "Efficiency";
-    case AttributeType.Productivity:
-      return "Productivity";
-    default:
-      throw new Error("Unknown AttributeType");
-  }
+  return attributeDatas[type].name;
 }
 
 export function getResourceDescriptionText(type: ResourceType): string {
-  return "This is " + getResourceNameText(type);
+  return resourceDatas[type].description;
 }
 
 export function getAttributeDescriptionText(type: AttributeType): string {
-  return "This is " + getAttributeNameText(type);
+  return attributeDatas[type].description;
 }
 
 export function getNumberAbbr(num: number): string {
@@ -497,274 +754,10 @@ export function getProgramName(type: ProgramType): string {
   return ProgramType[type];
 }
 
-export function getProgramComponent(
-  program: ProgramModel | null,
-  showAnimation: boolean
-): JSX.Element | null {
-  if (program == null) {
-    return null;
-  }
-
-  switch (program.type) {
-    case ProgramType.IlluGen:
-      return <IlluGen showAnimation={showAnimation} />;
-    case ProgramType.EtherForge:
-      return <EtherForge showAnimation={showAnimation} />;
-    case ProgramType.QuantumScribe:
-      return <QuantumScribe showAnimation={showAnimation} />;
-    case ProgramType.EvolviFy:
-      return <EvolviFy showAnimation={showAnimation} />;
-    case ProgramType.QuantumFrost:
-      return <QuantumFrost showAnimation={showAnimation} />;
-    case ProgramType.QuantumSurge:
-      return <QuantumSurge showAnimation={showAnimation} />;
-    case ProgramType.CyberPulse:
-      return <CyberPulse showAnimation={showAnimation} />;
-    case ProgramType.NexuMax:
-      return <NexuMax showAnimation={showAnimation} />;
-    case ProgramType.QuantaForge:
-      return <QuantaForge showAnimation={showAnimation} />;
-    case ProgramType.CrysTara:
-      return <CrysTara showAnimation={showAnimation} />;
-    case ProgramType.PlasmaShift:
-      return <PlasmaShift showAnimation={showAnimation} />;
-    case ProgramType.Aespa:
-      return <Aespa showAnimation={showAnimation} />;
-    case ProgramType.SwiftForge:
-      return <SwiftForge showAnimation={showAnimation} />;
-    case ProgramType.BioGen:
-      return <BioGen showAnimation={showAnimation} />;
-    case ProgramType.BioFusion:
-      return <BioFusion showAnimation={showAnimation} />;
-    case ProgramType.AstroMine:
-      return <AstroMine showAnimation={showAnimation} />;
-    case ProgramType.TitaniumBoost:
-      return <TitaniumBoost showAnimation={showAnimation} />;
-    case ProgramType.TTgenesis:
-      return <TTgenesis showAnimation={showAnimation} />;
-    case ProgramType.QuantumLeap:
-      return <QuantumLeap showAnimation={showAnimation} />;
-    case ProgramType.SpicenRich:
-      return <SpicenRich showAnimation={showAnimation} />;
-    case ProgramType.BioSurge:
-      return <BioSurge showAnimation={showAnimation} />;
-    case ProgramType.NeuroForge:
-      return <NeuroForge showAnimation={showAnimation} />;
-    case ProgramType.SuperNova:
-      return <SuperNova showAnimation={showAnimation} />;
-    case ProgramType.ResoNex:
-      return <ResoNex showAnimation={showAnimation} />;
-    case ProgramType.QuiFoam:
-      return <QuiFoam showAnimation={showAnimation} />;
-    case ProgramType.NovaBurst:
-      return <NovaBurst showAnimation={showAnimation} />;
-    case ProgramType.StellarCharge:
-      return <StellarCharge showAnimation={showAnimation} />;
-    case ProgramType.NexroVest:
-      return <NexroVest showAnimation={showAnimation} />;
-    case ProgramType.PlasmaCharge:
-      return <PlasmaCharge showAnimation={showAnimation} />;
-    case ProgramType.CogniFy:
-      return <CogniFy showAnimation={showAnimation} />;
-    case ProgramType.BioHarvest:
-      return <BioHarvest showAnimation={showAnimation} />;
-    case ProgramType.Abracadabra:
-      return <Abracadabra showAnimation={showAnimation} />;
-    case ProgramType.CerebraSpark:
-      return <CerebraSpark showAnimation={showAnimation} />;
-    case ProgramType.EnerGex:
-      return <EnerGex showAnimation={showAnimation} />;
-    case ProgramType.MegaBoost:
-      return <MegaBoost showAnimation={showAnimation} />;
-    case ProgramType.NeuroCharge:
-      return <NeuroCharge showAnimation={showAnimation} />;
-    case ProgramType.StarForge:
-      return <StarForge showAnimation={showAnimation} />;
-    case ProgramType.EtherWeave:
-      return <EtherWeave showAnimation={showAnimation} />;
-    case ProgramType.FortiGen:
-      return <FortiGen showAnimation={showAnimation} />;
-    case ProgramType.BioCast:
-      return <BioCast showAnimation={showAnimation} />;
-    case ProgramType.FortiFyx:
-      return <FortiFyx showAnimation={showAnimation} />;
-    case ProgramType.Fortivest:
-      return <Fortivest showAnimation={showAnimation} />;
-    case ProgramType.AstroCharge:
-      return <AstroCharge showAnimation={showAnimation} />;
-    case ProgramType.BioSynthesis:
-      return <BioSynthesis showAnimation={showAnimation} />;
-    case ProgramType.NovaFlux:
-      return <NovaFlux showAnimation={showAnimation} />;
-    case ProgramType.XenoFloral:
-      return <XenoFloral showAnimation={showAnimation} />;
-    case ProgramType.SynTitan:
-      return <SynTitan showAnimation={showAnimation} />;
-    case ProgramType.FoamTap:
-      return <FoamTap showAnimation={showAnimation} />;
-    case ProgramType.NanoWeave:
-      return <NanoWeave showAnimation={showAnimation} />;
-    case ProgramType.CrystaBloom:
-      return <CrystaBloom showAnimation={showAnimation} />;
-    case ProgramType.EtherPulse:
-      return <EtherPulse showAnimation={showAnimation} />;
-    case ProgramType.EnerPlex:
-      return <EnerPlex showAnimation={showAnimation} />;
-    case ProgramType.EnerGate:
-      return <EnerGate showAnimation={showAnimation} />;
-    case ProgramType.PlasmaForge:
-      return <PlasmaForge showAnimation={showAnimation} />;
-    case ProgramType.NexusField:
-      return <NexusField showAnimation={showAnimation} />;
-    case ProgramType.StarlightForge:
-      return <StarlightForge showAnimation={showAnimation} />;
-    case ProgramType.EnerFusion:
-      return <EnerFusion showAnimation={showAnimation} />;
-    case ProgramType.CogniMelt:
-      return <CogniMelt showAnimation={showAnimation} />;
-    case ProgramType.NexiMine:
-      return <NexiMine showAnimation={showAnimation} />;
-    case ProgramType.TitanBloom:
-      return <TitanBloom showAnimation={showAnimation} />;
-    case ProgramType.QuantumCore:
-      return <QuantumCore showAnimation={showAnimation} />;
-    case ProgramType.XenoBloom:
-      return <XenoBloom showAnimation={showAnimation} />;
-    case ProgramType.StarLight:
-      return <StarLight showAnimation={showAnimation} />;
-  }
-
-  return <IlluGen showAnimation={showAnimation} />;
+export function getProgramIconPath(type: ProgramType): string {
+  return programDatas[type].iconPath;
 }
 
-export function getProgramIconPath(type: ProgramType): string {
-  switch (type) {
-    case ProgramType.IlluGen:
-      return IlluGenIcon;
-    case ProgramType.EtherForge:
-      return EtherForgeIcon;
-    case ProgramType.QuantumScribe:
-      return QuantumScribeIcon;
-    case ProgramType.EvolviFy:
-      return EvolviFyIcon;
-    case ProgramType.QuantumFrost:
-      return QuantumFrostIcon;
-    case ProgramType.QuantumSurge:
-      return QuantumSurgeIcon;
-    case ProgramType.CyberPulse:
-      return CyberPulseIcon;
-    case ProgramType.NexuMax:
-      return NexuMaxIcon;
-    case ProgramType.QuantaForge:
-      return QuantaForgeIcon;
-    case ProgramType.CrysTara:
-      return CrysTaraIcon;
-    case ProgramType.PlasmaShift:
-      return PlasmaShiftIcon;
-    case ProgramType.Aespa:
-      return AespaIcon;
-    case ProgramType.SwiftForge:
-      return SwiftForgeIcon;
-    case ProgramType.BioGen:
-      return BioGenIcon;
-    case ProgramType.BioFusion:
-      return BioFusionIcon;
-    case ProgramType.AstroMine:
-      return AstroMineIcon;
-    case ProgramType.TitaniumBoost:
-      return TitaniumBoostIcon;
-    case ProgramType.TTgenesis:
-      return TTgenesisIcon;
-    case ProgramType.QuantumLeap:
-      return QuantumLeapIcon;
-    case ProgramType.SpicenRich:
-      return SpicenRichIcon;
-    case ProgramType.BioSurge:
-      return BioSurgeIcon;
-    case ProgramType.NeuroForge:
-      return NeuroForgeIcon;
-    case ProgramType.SuperNova:
-      return SuperNovaIcon;
-    case ProgramType.ResoNex:
-      return ResoNexIcon;
-    case ProgramType.QuiFoam:
-      return QuiFoamIcon;
-    case ProgramType.NovaBurst:
-      return NovaBurstIcon;
-    case ProgramType.StellarCharge:
-      return StellarChargeIcon;
-    case ProgramType.NexroVest:
-      return NexroVestIcon;
-    case ProgramType.PlasmaCharge:
-      return PlasmaChargeIcon;
-    case ProgramType.CogniFy:
-      return CogniFyIcon;
-    case ProgramType.BioHarvest:
-      return BioHarvestIcon;
-    case ProgramType.Abracadabra:
-      return AbracadabraIcon;
-    case ProgramType.CerebraSpark:
-      return CerebraSparkIcon;
-    case ProgramType.EnerGex:
-      return EnerGexIcon;
-    case ProgramType.MegaBoost:
-      return MegaBoostIcon;
-    case ProgramType.NeuroCharge:
-      return NeuroChargeIcon;
-    case ProgramType.StarForge:
-      return StarForgeIcon;
-    case ProgramType.EtherWeave:
-      return EtherWeaveIcon;
-    case ProgramType.FortiGen:
-      return FortiGenIcon;
-    case ProgramType.BioCast:
-      return BioCastIcon;
-    case ProgramType.FortiFyx:
-      return FortiFyxIcon;
-    case ProgramType.Fortivest:
-      return FortivestIcon;
-    case ProgramType.AstroCharge:
-      return AstroChargeIcon;
-    case ProgramType.BioSynthesis:
-      return BioSynthesisIcon;
-    case ProgramType.NovaFlux:
-      return NovaFluxIcon;
-    case ProgramType.XenoFloral:
-      return XenoFloralIcon;
-    case ProgramType.SynTitan:
-      return SynTitanIcon;
-    case ProgramType.FoamTap:
-      return FoamTapIcon;
-    case ProgramType.NanoWeave:
-      return NanoWeaveIcon;
-    case ProgramType.CrystaBloom:
-      return CrystaBloomIcon;
-    case ProgramType.EtherPulse:
-      return EtherPulseIcon;
-    case ProgramType.EnerPlex:
-      return EnerPlexIcon;
-    case ProgramType.EnerGate:
-      return EnerGateIcon;
-    case ProgramType.PlasmaForge:
-      return PlasmaForgeIcon;
-    case ProgramType.NexusField:
-      return NexusFieldIcon;
-    case ProgramType.StarlightForge:
-      return StarlightForgeIcon;
-    case ProgramType.EnerFusion:
-      return EnerFusionIcon;
-    case ProgramType.CogniMelt:
-      return CogniMeltIcon;
-    case ProgramType.NexiMine:
-      return NexiMineIcon;
-    case ProgramType.TitanBloom:
-      return TitanBloomIcon;
-    case ProgramType.QuantumCore:
-      return QuantumCoreIcon;
-    case ProgramType.XenoBloom:
-      return XenoBloomIcon;
-    case ProgramType.StarLight:
-      return StarLightIcon;
-  }
-  return IlluGenIcon;
+export function getProgramSpriteSheetPath(type: ProgramType): string {
+  return programDatas[type].spriteSheetPath;
 }

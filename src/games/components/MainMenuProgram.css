@@ -45,6 +45,23 @@
     user-select: none;
 }
 
+@keyframes mainBotProgramAnimation {
+    from { background-position: 0px; }
+    to { background-position: -3840px; }
+}
+
+.main-bot-program-animation {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(37.75%, 37.75%);
+    animation: mainBotProgramAnimation 2s steps(24) infinite;
+    background-size: cover;
+    user-select: none;
+}
+
 .main-bot-program-left-hover-container{
     position: absolute;
     top: 50%;

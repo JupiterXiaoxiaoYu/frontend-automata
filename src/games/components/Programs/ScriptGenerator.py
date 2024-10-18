@@ -1,6 +1,6 @@
 import os
 
-base_path = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/images/Animations/Programs/"
+base_path = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/images/Animations/Programs/Raws"
 programs = [dir_name for dir_name in os.listdir(base_path)]
 
 template = """import React, {{ useEffect }} from "react";
@@ -66,7 +66,7 @@ export default {component_name};
 
 output_dir = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/components/Programs/"  # Update this with your output directory
 
-# for program in programs:
+for program in programs:
     # imports = "\n".join(
     #     [f'import image_{i:02} from "../../images/Animations/Programs/{program}/{program}_{i:02}.png";' for i in range(24)]
     # )
@@ -89,9 +89,13 @@ output_dir = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/compon
     #   return <{program} showAnimation={{showAnimation}} />;""")
     
     
-    # print(f'import {program}Icon from "../../games/images/Animations/Programs/{program}/{program}_00.png";')
-    
-    
+    print(f'import {program}Icon from "../../games/images/Animations/Programs/{program}.png";')
+    # print(f'import {program}SpriteSheet from "../../games/images/Animations/Programs/SpriteSheets/{program}.png";')
+#     print(f"""[ProgramType.{program}]: {{
+#   iconPath: {program}Icon,
+#   spriteSheetPath: {program}SpriteSheet,
+# }},""")
+
     # print(f"""case ProgramType.{program}:
     #   return {program}Icon;""")
     
@@ -99,6 +103,8 @@ output_dir = "/Users/charlie/Documents/GitHub/frontend-automata/src/games/compon
     # print(f"""case ProgramType.{program}:
     #   return "{program}";""")
     
-for i in range(0, 72) :
-    print(f"""image_{"{:02d}".format(i)},""")
+
+    
+# for i in range(0, 72) :
+#     print(f"""image_{"{:02d}".format(i)},""")
 

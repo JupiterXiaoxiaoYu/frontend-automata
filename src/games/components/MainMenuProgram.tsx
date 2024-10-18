@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./MainMenuProgram.css";
-import { ProgramModel, getProgramComponent } from "../../data/automata/models";
+import {
+  ProgramModel,
+  getProgramIconPath,
+  getProgramSpriteSheetPath,
+} from "../../data/automata/models";
 
 import {
   selectIsSelectingUIState,
@@ -59,7 +63,24 @@ const MainMenuProgram = ({
               : "main-bot-program-normal-container"
           }
         >
-          {getProgramComponent(program, showProgramAnimation)}
+          {program &&
+            (showProgramAnimation ? (
+              <div
+                className="main-bot-program-animation"
+                style={{
+                  backgroundImage: `url('${getProgramSpriteSheetPath(
+                    program.type
+                  )}')`,
+                }}
+              />
+            ) : (
+              <div
+                className="main-bot-program-image"
+                style={{
+                  backgroundImage: `url('${getProgramIconPath(program.type)}')`,
+                }}
+              />
+            ))}
         </div>
         {isHovering && (
           <div
