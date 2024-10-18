@@ -45,7 +45,7 @@
     user-select: none;
 }
 
-@keyframes mainBotProgramAnimation {
+@keyframes MainBotProgramAnimation {
     from { background-position: 0px; }
     to { background-position: -3840px; }
 }
@@ -57,7 +57,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(37.75%, 37.75%);
-    animation: mainBotProgramAnimation 2s steps(24) infinite;
+    animation: MainBotProgramAnimation 2s steps(24) infinite;
     background-size: cover;
     user-select: none;
 }

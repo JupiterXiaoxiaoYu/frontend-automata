@@ -88,23 +88,17 @@
 }
 
 @keyframes progressFrames {
-    0% { background-image: url('../images/Animations/Waves/wave1.png'); }
-    12.5% { background-image: url('../images/Animations/Waves/wave2.png'); }
-    25% { background-image: url('../images/Animations/Waves/wave3.png'); }
-    37.5% { background-image: url('../images/Animations/Waves/wave4.png'); }
-    50% { background-image: url('../images/Animations/Waves/wave5.png'); }
-    62.5% { background-image: url('../images/Animations/Waves/wave6.png'); }
-    75% { background-image: url('../images/Animations/Waves/wave7.png'); }
-    87.5% { background-image: url('../images/Animations/Waves/wave8.png'); }
-    100% { background-image: url('../images/Animations/Waves/wave1.png'); }
+    from { background-position: 0px; }
+    to { background-position: -2784px; }
 }
 
 .main-progress-sector-top {
-    height: 14px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation: progressFrames 0.7s steps(4) infinite;
+    left: 50%;
+    height: 28px;
+    width: 348px;
+    transform: scale(50%, 50%) translate(-50%, -50%);
+    animation: progressFrames 0.7s steps(8) infinite;
+    background-image: url('../images/Animations/Wave.png');
 }
 
 .main-progress-sector-repeat {
