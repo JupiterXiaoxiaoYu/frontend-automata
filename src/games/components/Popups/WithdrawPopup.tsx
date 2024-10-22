@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { selectL2Account } from "../../../data/accountSlice";
+import { selectL1Account, selectL2Account } from "../../../data/accountSlice";
 
 interface Props {
   isWithdraw: boolean;
@@ -23,6 +23,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const uiState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const l2account = useAppSelector(selectL2Account);
+  const l1account = useAppSelector(selectL1Account);
   const [amountString, setAmountString] = useState("");
 
   const withdraw = (amount: string) => {
@@ -30,7 +31,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
       dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
-          cmd: getWithdrawTransactionCommandArray(nonce, BigInt(amount)),
+          cmd: getWithdrawTransactionCommandArray(nonce, BigInt(amount), l1account!),
           prikey: l2account!.address,
         })
       ).then((action) => {
