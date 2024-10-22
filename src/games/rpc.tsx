@@ -1,4 +1,6 @@
 import { ZKWasmAppRpc, LeHexBN } from "zkwasm-ts-server";
+import {L1AccountInfo} from "../data/accountSlice";
+import BN from "bn.js"
 
 const rpc = new ZKWasmAppRpc("http://localhost:3000");
 
@@ -108,12 +110,27 @@ export function getNewProgramTransactionCommandArray(nonce: bigint) {
   return [command, 0n, 0n, 0n];
 }
 
+function bytesToHex(bytes: Array<number>): string  {
+  return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
 export function getWithdrawTransactionCommandArray(
   nonce: bigint,
-  amount: bigint
+  amount: bigint,
+  account: L1AccountInfo
 ) {
+
+  const address = account!.address.slice(2);
+  const addressBN = new BN(address, 16);
+  const addressBE = addressBN.toArray("be", 20); // 20 bytes = 160 bits and split into 4, 8, 8
+  console.log("address is", address);
+  console.log("address big endian is", addressBE);
+  const firstLimb = BigInt('0x' + bytesToHex(addressBE.slice(0,4).reverse()));
+  const sndLimb = BigInt('0x' + bytesToHex(addressBE.slice(4,12).reverse()));
+  const thirdLimb = BigInt('0x' + bytesToHex(addressBE.slice(12, 20).reverse()));
+
   const command = createCommand(nonce, CMD_WITHDRAW, 0n);
-  return [command, amount, 0n, 0n];
+  return [command, (firstLimb << 32n) + amount, sndLimb, thirdLimb];
 }
 
 export function getRedeemTransactionCommandArray(nonce: bigint, index: number) {

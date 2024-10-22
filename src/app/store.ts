@@ -1,5 +1,4 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import statusReducer from '../data/statusSlice';
 import accountReducer from '../data/accountSlice';
 import endpointReducer from "../data/endpoint";
 import gameReducer from "../data/game";
@@ -29,7 +28,6 @@ export const store = configureStore({
       },
     }),
   reducer: {
-    status: statusReducer,
     account: accountReducer,
     endpoint: endpointReducer,
     game: gameReducer,
