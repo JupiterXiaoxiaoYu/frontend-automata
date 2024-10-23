@@ -199,6 +199,7 @@ const MainMenu = ({ localTimer }: Props) => {
                   showProgramAnimation={
                     !selectedCreature.isStarting &&
                     !isSelectingUIState &&
+                    uIState != UIState.Loading &&
                     uIState != UIState.UnlockPopup &&
                     uIState != UIState.PlayUnlockAnimation &&
                     currentProgramInfo.index == index &&
