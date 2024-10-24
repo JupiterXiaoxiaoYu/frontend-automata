@@ -86,13 +86,22 @@ const UpgradePopup = () => {
   };
 
   function upgradeBot() {
+    let attrIndex = 0n;
+    if (upgradeState == UpgradeState.Speed) {
+      attrIndex = 1n;
+    } else if (upgradeState == UpgradeState.Efficiency) {
+      attrIndex = 2n;
+    } else if (upgradeState == UpgradeState.Productivity) {
+      attrIndex = 3n;
+    }
     try {
       dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
           cmd: getUpgradeBotTransactionCommandArray(
             nonce,
-            selectedCreatureIndexForRequestEncode
+            selectedCreatureIndexForRequestEncode,
+            attrIndex
           ),
           prikey: l2account!.address,
         })

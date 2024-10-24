@@ -98,11 +98,12 @@ export function getInsPlayerTransactionCommandArray(nonce: bigint) {
 
 export function getUpgradeBotTransactionCommandArray(
   nonce: bigint,
-  selectingCreatureIndex: number
+  selectingCreatureIndex: number,
+  attrIndex: bigint
 ) {
   const objIndex = BigInt(selectingCreatureIndex);
   const command = createCommand(nonce, CMD_UPGRADE_OBJECT, objIndex);
-  return [command, 0n, 0n, 0n];
+  return [command, attrIndex, 0n, 0n];
 }
 
 export function getNewProgramTransactionCommandArray(nonce: bigint) {
