@@ -24,6 +24,17 @@ body, html, #root {
     user-select: none;
 }
 
+.welcome-page-logo-image{
+    position: absolute;
+    height: 35px;
+    width: 193px;
+    top: 3%;
+    right: 3%;
+    user-select: none;
+}
+
+
+
 .welcome-page-background-filter{
     position: absolute;
     width: 100%;
