@@ -42,10 +42,24 @@ function rawToModel(raw: CreatureRaw, index: number, globalTimer: number): Creat
     };
 }
 
+function getUnlockableCreature(creatureType: number): CreatureModel {
+    return {
+        attributes: emptyAttributes,
+        name: "New",
+        isLocked: true,
+        creatureType: creatureType,
+        programIndexes: [null, null, null, null, null, null, null, null],
+        currentProgramIndex: 0,
+        isProgramStop: false,
+        startTime: 0,
+        isStarting: false,
+    }
+}
+
 function createLockedCreature(creatureType: number): CreatureModel {
     return {
         attributes: emptyAttributes,
-        name: "Lock",
+        name: "Locked",
         isLocked: true,
         creatureType: creatureType,
         programIndexes: [null, null, null, null, null, null, null, null],
@@ -158,7 +172,7 @@ export const selectCreaturesCount = (state: RootState) => state.automata.creatur
 export const selectCreatures = (state: RootState) => 
     state.automata.creatures.selectedCreatureIndex === state.automata.creatures.creatures.length
         ? fillCreaturesWithLocked([...state.automata.creatures.creatures, state.automata.creatures.creatingCreature])
-        : fillCreaturesWithLocked(state.automata.creatures.creatures);
+        : fillCreaturesWithLocked([...state.automata.creatures.creatures, getUnlockableCreature(state.automata.creatures.creatures.length)]);
 export const selectSelectedCreature = (state: RootState) => 
     state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE
         ? emptyCreature :

@@ -13,9 +13,13 @@ const MainMenuWarning = () => {
   const selectedCreaturePrograms = useAppSelector(
     selectSelectedCreaturePrograms
   );
+  const emptySlotCount = selectedCreaturePrograms.filter(
+    (program) => program === null
+  ).length;
   const notFillInAllSlots =
     (uIState == UIState.Creating || uIState == UIState.Reboot) &&
-    selectedCreaturePrograms.some((program) => program == null);
+    emptySlotCount > 0;
+
   const isLoading = uIState == UIState.Loading;
   return (
     <div className="main-menu-warning-container">
@@ -23,7 +27,9 @@ const MainMenuWarning = () => {
         <p className="main-menu-warning-text">Select a creature to continue</p>
       )}
       {notFillInAllSlots && (
-        <p className="main-menu-warning-text">Install all program slots</p>
+        <p className="main-menu-warning-text">
+          {8 - emptySlotCount} out of 8 slots are installed
+        </p>
       )}
       {isLoading && <p className="main-menu-warning-text">Loading...</p>}
     </div>

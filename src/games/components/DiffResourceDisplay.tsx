@@ -26,7 +26,7 @@ const DiffResourceDisplay = ({
             }
           >
             {amount == 0
-              ? ""
+              ? "0"
               : amount > 0
               ? "+" + getNumberAbbr(amount)
               : getNumberAbbr(amount)}
