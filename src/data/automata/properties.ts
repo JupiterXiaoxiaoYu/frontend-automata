@@ -23,8 +23,15 @@ export enum UIState{
   PlayNewProgramAnimation,
 }
 
+export enum TutorialType{
+  None,
+  Creature,
+  Program,
+}
+
 interface PropertiesState {
     uIState: UIState;
+    tutorialType: TutorialType;
     globalTimer: number;
     nonce: string;
     showGuide: boolean;
@@ -38,6 +45,7 @@ interface PropertiesState {
 
 const initialState: PropertiesState = {
     uIState: UIState.Init,
+    tutorialType: TutorialType.None,
     globalTimer: 0,
     nonce: "0",
     showGuide: false,
@@ -55,6 +63,9 @@ export const propertiesSlice = createSlice({
     reducers: {
       setUIState: (state, action) => {
         state.uIState = action.payload.uIState;
+      },
+      setTutorialType: (state, action) => {
+        state.tutorialType = action.payload.tutorialType;
       },
       setHasRocket: (state, action) => {
         state.hasRocket = action.payload.hasRocket;
@@ -83,7 +94,12 @@ export const propertiesSlice = createSlice({
       })
       .addCase(queryState.fulfilled, (state, action) => {
         if (state.uIState == UIState.QueryState){
-          state.uIState = (state.showGuide) ? UIState.Guide : UIState.Idle;
+          if (state.showGuide){
+            state.uIState = UIState.Guide;
+            state.tutorialType = TutorialType.Creature;
+          } else {
+            state.uIState = UIState.Idle;
+          }
         }
         state.globalTimer = action.payload.globalTimer;
         state.nonce = action.payload.nonce;
@@ -104,6 +120,7 @@ export const propertiesSlice = createSlice({
 export const selectIsLoading = (state: RootState) => state.automata.properties.uIState == UIState.Loading;
 export const selectIsSelectingUIState = (state: RootState) => state.automata.properties.uIState == UIState.Creating || state.automata.properties.uIState == UIState.Reboot;
 export const selectUIState = (state: RootState) => state.automata.properties.uIState;
+export const selectTutorialType = (state: RootState) => state.automata.properties.tutorialType;
 export const selectGlobalTimer = (state: RootState) => state.automata.properties.globalTimer;
 export const selectNonce = (state: RootState) => BigInt(state.automata.properties.nonce);
 export const selectHasRocket = (state: RootState) => state.automata.properties.hasRocket;

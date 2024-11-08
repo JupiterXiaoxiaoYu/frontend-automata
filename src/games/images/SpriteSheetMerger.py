@@ -48,5 +48,5 @@ def merge_images_to_sprite(folder_path, output_path, rows, columns):
 #     merge_images_to_sprite(folder_path, sprite_sheet_output_path, 1, 24)
 #     shutil.copy(icon_input_path, icon_output_path)
 
-merge_images_to_sprite("./Animations/Waves", "./Animations/Wave.png", 1, 8)
+merge_images_to_sprite("./Animations/right", "./Animations/tutorial_program.png", 1, 13)
 
