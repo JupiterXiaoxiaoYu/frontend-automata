@@ -41,3 +41,11 @@
     top: 55px;
     left: 580px;
 }
+
+.top-help{
+    position: absolute;
+    width: 58px;
+    height: 20px;
+    top: 60px;
+    right: 240px;
+}

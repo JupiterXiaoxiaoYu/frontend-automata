@@ -12,6 +12,9 @@ import {
 import UpgradeButton from "./Buttons/UpgradeButton";
 import TitaniumFrame from "./TitaniumFrame";
 import { selectIsNotSelectingCreature } from "../../data/automata/creatures";
+import HelpButton from "./Buttons/HelpButton";
+import { startGuide } from "../../data/automata/guides";
+import { GuideType } from "../../data/automata/models";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +40,11 @@ const TopMenu = () => {
     }
   }
 
+  function onClickHelp() {
+    dispatch(startGuide({ guideType: GuideType.First }));
+    dispatch(setUIState({ uIState: UIState.Guide }));
+  }
+
   return (
     <div className="top">
       <div className="top-left"></div>
@@ -54,6 +62,9 @@ const TopMenu = () => {
           <UpgradeButton onClick={onClickUpgrade} />
         </div>
       )}
+      <div className="top-help">
+        <HelpButton onClick={onClickHelp} />
+      </div>
     </div>
   );
 };
