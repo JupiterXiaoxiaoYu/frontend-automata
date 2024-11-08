@@ -36,10 +36,20 @@
 
 .guide-popup-program-image {
     position: absolute;
-    width: 260px;
-    height: 324px;
-    left: 70%;
-    top: 41%;
+    width: 154px;
+    height: 325px;
+    left: 78%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.guide-popup-program-arrow-image {
+    position: absolute;
+    width: 265px;
+    height: 71px;
+    left: 66.5%;
+    top: 24%;
     transform: translate(-50%, -50%);
     user-select: none;
 }

@@ -19,14 +19,14 @@
 .guide-popup-circle-content-text {
     position: absolute;
     top: 45%;
-    left: 28%;
+    left: 26%;
     transform: translate(-50%, -50%);
     font-size: 12px;
     overflow: auto;
     text-align: left;
     line-height: 100%;
     margin: 0px;
-    width: 46%;
+    width: 43%;
     height: 55%;
     font-family: "mishmash";
     color: white;
@@ -36,10 +36,20 @@
 
 .guide-popup-circle-image {
     position: absolute;
-    width: 247px;
+    width: 270px;
     height: 249px;
-    left: 74%;
-    top: 41%;
+    left: 72.5%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.guide-popup-circle-arrow-image {
+    position: absolute;
+    width: 114px;
+    height: 45px;
+    left: 60%;
+    top: 20%;
     transform: translate(-50%, -50%);
     user-select: none;
 }
