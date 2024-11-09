@@ -11,6 +11,9 @@ import {
   selectIsLoading,
   setUIState,
   UIState,
+  TutorialType,
+  setTutorialType,
+  selectTutorialType,
 } from "../../data/automata/properties";
 import {
   selectFilteredPrograms,
@@ -49,6 +52,7 @@ const RightMenu = () => {
   );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isLoading = useAppSelector(selectIsLoading);
+  const tutorialType = useAppSelector(selectTutorialType);
 
   useEffect(() => {
     updateProgramGridHeight();
@@ -61,6 +65,10 @@ const RightMenu = () => {
   const onSelectProgram = (programIndex: number) => {
     if (isSelectingUIState && !isLoading) {
       dispatch(setProgramIndex({ programIndex }));
+
+      if (tutorialType == TutorialType.Program) {
+        dispatch(setTutorialType({ tutorialType: TutorialType.None }));
+      }
     }
   };
 
@@ -85,6 +93,7 @@ const RightMenu = () => {
           ...programs.map((program, index) => (
             <Program
               key={index}
+              index={index}
               program={program}
               isDisabled={false}
               onSelect={() => onSelectProgram(program.index)}
@@ -94,6 +103,7 @@ const RightMenu = () => {
       : programs.map((program, index) => (
           <Program
             key={index}
+            index={index}
             program={program}
             isDisabled={false}
             onSelect={() => onSelectProgram(program.index)}

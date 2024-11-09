@@ -10,16 +10,19 @@ import {
 import ProgramButton from "./Buttons/ProgramButton";
 
 import { formatTime } from "../../data/automata/creatures";
+import ProgramTutorial from "./ProgramTutorial";
 
 interface Props {
+  index: number;
   program: ProgramModel;
   isDisabled: boolean;
   onSelect: () => void;
 }
 
-const Program = ({ program, isDisabled, onSelect }: Props) => {
+const Program = ({ index, program, isDisabled, onSelect }: Props) => {
   return (
     <div className="program-container">
+      {index == 0 && <ProgramTutorial />}
       <ProgramButton isDisabled={isDisabled} onClick={onSelect} />
       <p className="program-name-text">{program.name}</p>
       <p className="program-time-text">{formatTime(program.processingTime)}</p>

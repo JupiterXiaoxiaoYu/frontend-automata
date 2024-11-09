@@ -130,5 +130,5 @@ export const selectRedeemCostBase = (state: RootState) => state.automata.propert
 export const selectRedeemRewardBase = (state: RootState) => state.automata.properties.redeemRewardBase;
 export const selectRedeemInfo = (state: RootState) => state.automata.properties.redeemInfo;
 
-export const { setUIState, setHasRocket } = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

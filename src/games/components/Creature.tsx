@@ -5,7 +5,13 @@ import creatureStopMask from "../images/backgrounds/creature_frame_stop_mask.png
 import creatureProgressMask from "../images/backgrounds/creature_frame_progress_mask.png";
 import creatureSelectingFrame from "../images/backgrounds/robot_select.png";
 import creatureLock from "../images/backgrounds/robot_lock.png";
-import { UIState, setUIState } from "../../data/automata/properties";
+import {
+  TutorialType,
+  UIState,
+  selectTutorialType,
+  setTutorialType,
+  setUIState,
+} from "../../data/automata/properties";
 import {
   setSelectedCreatureIndex,
   selectSelectedCreatureListIndex,
@@ -15,6 +21,7 @@ import {
 import { selectIsLoading } from "../../data/automata/properties";
 import { CreatureModel, getCreatureIconPath } from "../../data/automata/models";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import CreatureTutorial from "./CreatureTutorial";
 
 interface Props {
   index: number;
@@ -33,6 +40,7 @@ const Creature = ({ index, creature, progress }: Props) => {
   const isLocked = index >= creaturesCount;
   const showLocked = index > creaturesCount;
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
+  const tutorialType = useAppSelector(selectTutorialType);
 
   const onSelect = () => {
     if (!isSelected && !isLoading) {
@@ -41,6 +49,9 @@ const Creature = ({ index, creature, progress }: Props) => {
           startCreatingCreature({ creatureType: creature.creatureType })
         );
         dispatch(setUIState({ uIState: UIState.Creating }));
+        if (tutorialType == TutorialType.Creature) {
+          dispatch(setTutorialType({ tutorialType: TutorialType.Program }));
+        }
       } else if (index < creaturesCount) {
         dispatch(setSelectedCreatureIndex({ index }));
         dispatch(setUIState({ uIState: UIState.Idle }));
@@ -52,6 +63,7 @@ const Creature = ({ index, creature, progress }: Props) => {
 
   return (
     <div className="creature-container" onClick={() => onSelect()}>
+      {index == 0 && <CreatureTutorial />}
       <img src={creatureBackground} className="creature-background" />
       {isSelected && (
         <img

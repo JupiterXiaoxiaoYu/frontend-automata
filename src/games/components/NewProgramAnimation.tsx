@@ -62,6 +62,7 @@ const NewProgramAnimation = () => {
                   className="new-program-animation-spin-image"
                 />
                 <Program
+                  index={-1}
                   program={program}
                   isDisabled={true}
                   onSelect={() => {

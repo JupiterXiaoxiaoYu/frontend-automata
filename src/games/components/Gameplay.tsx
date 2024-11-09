@@ -11,7 +11,6 @@ import { useAppSelector } from "../../app/hooks";
 import ResourceAnimations from "./ResourceAnimations";
 import Popups from "./Popups";
 import NewProgramAnimation from "./NewProgramAnimation";
-import Tutorials from "./Tutorials";
 
 const Gameplay = () => {
   const uIState = useAppSelector(selectUIState);
@@ -97,7 +96,6 @@ const Gameplay = () => {
         <RightMenu />
       </div>
       <Popups />
-      <Tutorials />
     </>
   );
 };
