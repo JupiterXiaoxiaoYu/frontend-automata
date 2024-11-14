@@ -8,11 +8,17 @@ import {
   selectUIState,
   setUIState,
 } from "../../../data/automata/properties";
+import {
+  getResourceIconPath,
+  ResourceType,
+  getNumberAbbr,
+} from "../../../data/automata/models";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
 import { selectL1Account, selectL2Account } from "../../../data/accountSlice";
+import { selectResource } from "../../../data/automata/resources";
 
 interface Props {
   isWithdraw: boolean;
@@ -25,13 +31,19 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const l2account = useAppSelector(selectL2Account);
   const l1account = useAppSelector(selectL1Account);
   const [amountString, setAmountString] = useState("");
+  const [showNotEnoughTitanium, setShowNotEnoughTitanium] = useState(false);
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
-  const withdraw = (amount: string) => {
+  const withdraw = (amount: number) => {
     try {
       dispatch(setUIState({ uIState: UIState.Loading }));
       dispatch(
         sendTransaction({
-          cmd: getWithdrawTransactionCommandArray(nonce, BigInt(amount), l1account!),
+          cmd: getWithdrawTransactionCommandArray(
+            nonce,
+            BigInt(amount),
+            l1account!
+          ),
           prikey: l2account!.address,
         })
       ).then((action) => {
@@ -45,7 +57,13 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   };
 
   const onClickConfirm = () => {
-    withdraw(amountString);
+    const amount = Number(amountString);
+    if (amount > titaniumCount) {
+      setShowNotEnoughTitanium(true);
+    } else {
+      setShowNotEnoughTitanium(false);
+      withdraw(amount);
+    }
   };
 
   const onClickCancel = () => {
@@ -62,7 +80,18 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
         <p className="withdraw-popup-title-text">
           {isWithdraw ? "Withdraw" : "Deposit"}
         </p>
-        <p className="withdraw-popup-amount-text">amount</p>
+        <div className="withdraw-popup-titanium-resource-container">
+          <img
+            src={getResourceIconPath(ResourceType.Titanium)}
+            className="withdraw-popup-titanium-resource-display-image"
+          />
+          <p className="withdraw-popup-titanium-resource-display-text">
+            {getNumberAbbr(titaniumCount)}
+          </p>
+        </div>
+        {showNotEnoughTitanium && (
+          <p className="withdraw-popup-amount-text">Not Enough Titanium</p>
+        )}
         <div className="withdraw-popup-amount-container">
           <img
             src={amountBackground}

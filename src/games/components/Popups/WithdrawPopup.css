@@ -70,7 +70,7 @@
 
 .withdraw-popup-amount-text {
     position: absolute;
-    top: 40%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 10px;
@@ -80,7 +80,7 @@
     width: 80%;
     height: 10px;
     font-family: "mishmash";
-    color: white;
+    color: red;
     user-select: none;
 }
 
@@ -97,6 +97,43 @@
     transform: translate(-50%, -50%);
     width: 80%;
     height: 10px;
+    user-select: none;
+}
+
+.withdraw-popup-titanium-resource-container {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    left: 50%;
+    top: 37%;
+    user-select: none;
+    transform: translate(-50%, -50%);
+}
+
+.withdraw-popup-titanium-resource-display-image {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    user-select: none;
+}
+
+.withdraw-popup-titanium-resource-display-text {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    text-align: center;
+    line-height: 100%;
+    margin: 0px;
+    color: white;
+    width: 35px;
+    height: 12px;
+    font-family: "mishmash";
+    pointer-events: none;
     user-select: none;
 }
 
