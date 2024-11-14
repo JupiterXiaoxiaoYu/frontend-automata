@@ -21,14 +21,13 @@
     top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 12px;
+    font-size: 14px;
     overflow: auto;
     text-align: left;
     line-height: 100%;
     margin: 0px;
     width: 90%;
     height: 55%;
-    font-family: "mishmash";
     color: white;
     pointer-events: none;
     user-select: none;
@@ -40,6 +39,7 @@
     height: 55px;
     left: 50%;
     top: 15%;
+    opacity: 0.7;
     transform: translate(-50%, -50%);
     user-select: none;
 }

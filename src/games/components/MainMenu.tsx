@@ -37,6 +37,7 @@ import MainMenuWarning from "./MainMenuWarning";
 import MainMenuProgressBar from "./MainMenuProgressBar";
 import RedeemMenu from "./RedeemMenu";
 import RedeemButton from "./Buttons/RedeemButton";
+import MainMenuEmptyHint from "./MainMenuEmptyHint";
 
 interface Props {
   localTimer: number;
@@ -177,12 +178,18 @@ const MainMenu = ({ localTimer }: Props) => {
               showAnimation={showUnlockAnimation}
             />
             <img src={circleBackground} className="main-circle-background" />
+
             <MainMenuSelectingFrame
               order={currentProgramInfo.index}
               isReady={!isLoading && !selectedCreature.isStarting}
               isCurrentProgram={!isSelectingUIState}
               isStop={selectedCreature.isProgramStop}
             />
+            {selectedCreaturePrograms.map((program, index) =>
+              program == null ? (
+                <MainMenuEmptyHint key={index} order={index} />
+              ) : null
+            )}
             {showUnlockAnimation && (
               <div className="main-bot-unlock-animation" />
             )}
