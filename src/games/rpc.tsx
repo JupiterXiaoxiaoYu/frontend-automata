@@ -1,4 +1,4 @@
-import { ZKWasmAppRpc, LeHexBN } from "zkwasm-ts-server";
+import { ZKWasmAppRpc, LeHexBN } from "zkwasm-minirollup-rpc";
 import {L1AccountInfo} from "../data/accountSlice";
 import BN from "bn.js"
 

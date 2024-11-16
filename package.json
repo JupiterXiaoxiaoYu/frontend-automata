@@ -19,7 +19,7 @@
     "stream-http": "^3.2.0",
     "web3subscriber": "git+https://github.com/DelphinusLab/delphinus-web3subscriber.git",
     "zkwasm-service-helper": "github:DelphinusLab/zkWasm-service-helper",
-    "zkwasm-ts-server": "https://gitpkg.vercel.app/DelphinusLab/zkwasm-mini-rollup/ts?main"
+    "zkwasm-minirollup-rpc": "github:DelphinusLab/zkWasm-minirollup-rpc"
   },
   "scripts": {
     "start": "npx react-app-rewired start",
