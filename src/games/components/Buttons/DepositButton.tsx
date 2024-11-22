@@ -13,7 +13,7 @@ const DepositButton = ({ onClick }: Props) => {
   return (
     <div className="deposit-button-scale">
       <ImageButton
-        isDisabled={true}
+        isDisabled={false}
         defaultImagePath={depositButtonImage}
         hoverImagePath={depositButtonHoverImage}
         clickedImagePath={depositButtonClickImage}

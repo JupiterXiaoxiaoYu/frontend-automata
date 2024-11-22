@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { selectL1Account, selectL2Account } from "../../../data/accountSlice";
+import { depositAsync, selectL1Account, selectL2Account } from "../../../data/accountSlice";
 import { selectResource } from "../../../data/automata/resources";
 
 interface Props {
@@ -56,13 +56,36 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
     }
   };
 
+  const deposit = (amount: string) => {
+    try {
+      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(
+        depositAsync({
+          amount: parseInt(amount),
+          l2account: l2account!,
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(setUIState({ uIState: UIState.Idle }));
+        }
+      });
+    } catch (e) {
+      console.log("Error at withdraw " + e);
+    }
+  };
+
+
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    if (amount > titaniumCount) {
-      setShowNotEnoughTitanium(true);
-    } else {
-      setShowNotEnoughTitanium(false);
-      withdraw(amount);
+    if (isWithdraw) {
+      if (amount > titaniumCount) {
+        setShowNotEnoughTitanium(true);
+      } else {
+        setShowNotEnoughTitanium(false);
+        withdraw(amount);
+      }
+    } else { // case of deposit
+       deposit(amountString)
     }
   };
 
