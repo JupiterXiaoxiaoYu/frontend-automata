@@ -17,13 +17,13 @@ import {
 import { selectResource } from "../../../data/automata/resources";
 import { sendTransaction } from "../../request";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
-import { selectL2Account } from "../../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
-  const l2account = useAppSelector(selectL2Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
   const nonce = useAppSelector(selectNonce);
 
   const onClickConfirm = () => {

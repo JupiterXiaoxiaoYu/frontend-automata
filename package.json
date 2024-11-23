@@ -18,8 +18,8 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "web3subscriber": "git+https://github.com/DelphinusLab/delphinus-web3subscriber.git",
-    "zkwasm-service-helper": "github:DelphinusLab/zkWasm-service-helper",
-    "zkwasm-minirollup-rpc": "github:DelphinusLab/zkWasm-minirollup-rpc"
+    "zkwasm-minirollup-rpc": "github:DelphinusLab/zkWasm-minirollup-rpc",
+    "zkwasm-service-helper": "github:DelphinusLab/zkWasm-service-helper"
   },
   "scripts": {
     "start": "npx react-app-rewired start",

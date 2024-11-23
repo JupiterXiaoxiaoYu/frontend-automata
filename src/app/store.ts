@@ -1,7 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import accountReducer from '../data/accountSlice';
+import { AccountSliceReducer } from 'zkwasm-minirollup-rpc';
 import endpointReducer from "../data/endpoint";
-import gameReducer from "../data/game";
 import automataReducer from "../data/automata/automata";
 
 export const store = configureStore({
@@ -28,9 +27,8 @@ export const store = configureStore({
       },
     }),
   reducer: {
-    account: accountReducer,
+    account: AccountSliceReducer,
     endpoint: endpointReducer,
-    game: gameReducer,
     automata: automataReducer,
   },
   devTools: {

@@ -29,7 +29,7 @@ import {
   selectSelectedCreatureDiffResources,
   selectSelectedCreatureListIndex,
 } from "../../../data/automata/creatures";
-import { selectL2Account } from "../../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { sendTransaction } from "../../request";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/automata/resources";
@@ -57,7 +57,7 @@ const UpgradePopup = () => {
   const productivity = useAppSelector(
     selectSelectedAttributes(AttributeType.Productivity)
   );
-  const l2account = useAppSelector(selectL2Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
   const nonce = useAppSelector(selectNonce);
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex

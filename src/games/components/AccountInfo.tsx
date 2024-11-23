@@ -2,12 +2,12 @@ import React from "react";
 import "./AccountInfo.css";
 import account_info from "../images/backgrounds/account_info.png";
 import { useAppSelector } from "../../app/hooks";
-import { selectL1Account, selectL2Account } from "../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { addressAbbreviation } from "../../utils/address";
 
 const AccountInfo = () => {
-  const account = useAppSelector(selectL1Account);
-  const l2account = useAppSelector(selectL2Account);
+  const account = useAppSelector(AccountSlice.selectL1Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
 
   return (
     <div className="account-info-container">
