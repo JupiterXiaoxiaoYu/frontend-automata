@@ -61,6 +61,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
       dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
       dispatch(
         AccountSlice.depositAsync({
+          tokenIndex: 0,
           amount: Number(BigInt(amount)),
           l2account: l2account!,
           l1account: l1account!,
