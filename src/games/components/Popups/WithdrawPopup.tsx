@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { selectL1Account, selectL2Account } from "../../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { selectResource } from "../../../data/automata/resources";
 
 interface Props {
@@ -28,8 +28,8 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const dispatch = useAppDispatch();
   const uiState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
-  const l2account = useAppSelector(selectL2Account);
-  const l1account = useAppSelector(selectL1Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const l1account = useAppSelector(AccountSlice.selectL1Account);
   const [amountString, setAmountString] = useState("");
   const [showNotEnoughTitanium, setShowNotEnoughTitanium] = useState(false);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
@@ -56,13 +56,39 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
     }
   };
 
+  const deposit = (amount: string) => {
+    try {
+      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(
+        AccountSlice.depositAsync({
+          amount: parseInt(amount),
+          l2account: l2account!,
+          l1account: l1account!,
+        })
+      ).then((action) => {
+        if (AccountSlice.depositAsync.rejected.match(action)) {
+          dispatch(setUIState({ uIState: UIState.Idle }));
+          console.log("Error at deposit: " + action.error);
+        }
+      });
+    } catch (e) {
+      dispatch(setUIState({ uIState: UIState.Idle }));
+      console.log("Error at deposit uncaught: " + e);
+    }
+  };
+
+
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    if (amount > titaniumCount) {
-      setShowNotEnoughTitanium(true);
-    } else {
-      setShowNotEnoughTitanium(false);
-      withdraw(amount);
+    if (isWithdraw) {
+      if (amount > titaniumCount) {
+        setShowNotEnoughTitanium(true);
+      } else {
+        setShowNotEnoughTitanium(false);
+        withdraw(amount);
+      }
+    } else { // case of deposit
+       deposit(amountString)
     }
   };
 

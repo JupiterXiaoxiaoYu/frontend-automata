@@ -1,5 +1,4 @@
-import { ZKWasmAppRpc, LeHexBN } from "zkwasm-ts-server";
-import {L1AccountInfo} from "../data/accountSlice";
+import { ZKWasmAppRpc, LeHexBN, AccountSlice } from "zkwasm-minirollup-rpc";
 import BN from "bn.js"
 
 const rpc = new ZKWasmAppRpc("http://localhost:3000");
@@ -118,7 +117,7 @@ function bytesToHex(bytes: Array<number>): string  {
 export function getWithdrawTransactionCommandArray(
   nonce: bigint,
   amount: bigint,
-  account: L1AccountInfo
+  account: AccountSlice.L1AccountInfo
 ) {
 
   const address = account!.address.slice(2);

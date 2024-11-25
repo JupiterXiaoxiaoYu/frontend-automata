@@ -33,8 +33,6 @@ module.exports = function override(config, env) {
   ])
   */
 
-
-
   config.module.rules.forEach(rule => {
     (rule.oneOf || []).forEach(oneOf => {
       if (oneOf.test && oneOf.test.toString().indexOf('tsx') >= 0) {
@@ -61,6 +59,12 @@ module.exports = function override(config, env) {
     })
   })
 
+  config.module.rules.push({
+          test: /\.m?js$/,
+          resolve: {
+                  fullySpecified: false,
+          },
+  });
 
   return config
 }

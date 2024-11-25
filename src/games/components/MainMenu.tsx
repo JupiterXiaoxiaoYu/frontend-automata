@@ -9,7 +9,7 @@ import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import DiffResourcesInfo from "./DiffResourcesInfo";
 import Rocket from "./Rocket";
 import { getInstallProgramTransactionCommandArray } from "../rpc";
-import { selectL2Account } from "../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { sendTransaction, queryState } from "../request";
 import { getCreatureIconPath } from "../../data/automata/models";
 import {
@@ -45,7 +45,7 @@ interface Props {
 
 const MainMenu = ({ localTimer }: Props) => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(selectL2Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const isNotSelectingCreature = useAppSelector(selectIsNotSelectingCreature);

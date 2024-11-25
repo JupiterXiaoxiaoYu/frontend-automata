@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { selectL2Account } from "../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { getInsPlayerTransactionCommandArray } from "./rpc";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
-import { selectL1Account, loginL2AccountAsync } from "../data/accountSlice";
 import Gameplay from "./components/Gameplay";
 import WelcomePage from "./components/WelcomePage";
 
@@ -20,7 +19,7 @@ export function GameController() {
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const [inc, setInc] = useState(0);
-  const l2account = useAppSelector(selectL2Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
 
   function createPlayer() {
     try {
@@ -105,7 +104,7 @@ export function GameController() {
     });
   };
 
-  const account = useAppSelector(selectL1Account);
+  const account = useAppSelector(AccountSlice.selectL1Account);
 
   if (l2account && uIState >= UIState.Idle) {
     return <Gameplay />;
@@ -115,7 +114,7 @@ export function GameController() {
         <WelcomePage
           progress={progress}
           message={message}
-          onClick={() => dispatch(loginL2AccountAsync(account!))}
+          onClick={() => dispatch(AccountSlice.loginL2AccountAsync(account!))}
         />
       </>
     );

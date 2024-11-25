@@ -21,12 +21,12 @@ import RedeemDisplay from "./RedeemDisplay";
 import RedeemDisplayEmpty from "./RedeemDisplayEmpty";
 import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
-import { selectL2Account } from "../../data/accountSlice";
+import { AccountSlice } from "zkwasm-minirollup-rpc";
 import { selectResources } from "../../data/automata/resources";
 
 const RedeemMenu = () => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(selectL2Account);
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
   const nonce = useAppSelector(selectNonce);
   const redeemCostBase = useAppSelector(selectRedeemCostBase);
   const redeemRewardBase = useAppSelector(selectRedeemRewardBase);
