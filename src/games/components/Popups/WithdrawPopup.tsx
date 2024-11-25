@@ -31,12 +31,12 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const l2account = useAppSelector(AccountSlice.selectL2Account);
   const l1account = useAppSelector(AccountSlice.selectL1Account);
   const [amountString, setAmountString] = useState("");
-  const [showNotEnoughTitanium, setShowNotEnoughTitanium] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const withdraw = (amount: number) => {
     try {
-      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(setUIState({ uIState: UIState.WithdrawPopupLoading }));
       dispatch(
         sendTransaction({
           cmd: getWithdrawTransactionCommandArray(
@@ -58,42 +58,53 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
 
   const deposit = (amount: string) => {
     try {
-      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
       dispatch(
         AccountSlice.depositAsync({
-          amount: parseInt(amount),
+          amount: Number(BigInt(amount)),
           l2account: l2account!,
           l1account: l1account!,
         })
       ).then((action) => {
-        if (AccountSlice.depositAsync.rejected.match(action)) {
+        if (sendTransaction.fulfilled.match(action)) {
           dispatch(setUIState({ uIState: UIState.Idle }));
-          console.log("Error at deposit: " + action.error);
+          setErrorMessage("");
+        } else if (AccountSlice.depositAsync.rejected.match(action)) {
+          if (action.error.message == null) {
+            setErrorMessage("Unknown Error.");
+          } else if (action.error.message.startsWith("user rejected action")) {
+            setErrorMessage("user rejected action");
+          } else {
+            setErrorMessage(action.error.message);
+          }
+          dispatch(setUIState({ uIState: UIState.DepositPopup }));
         }
       });
     } catch (e) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
-      console.log("Error at deposit uncaught: " + e);
+      console.log("Error at deposit uncaught: ", e);
     }
   };
-
 
   const onClickConfirm = () => {
     const amount = Number(amountString);
     if (isWithdraw) {
       if (amount > titaniumCount) {
-        setShowNotEnoughTitanium(true);
+        setErrorMessage("Not Enough Titanium");
       } else {
-        setShowNotEnoughTitanium(false);
+        setErrorMessage("");
         withdraw(amount);
       }
-    } else { // case of deposit
-       deposit(amountString)
+    } else {
+      // case of deposit
+      deposit(amountString);
     }
   };
 
   const onClickCancel = () => {
-    if (uiState != UIState.Loading) {
+    if (
+      uiState != UIState.WithdrawPopupLoading &&
+      uiState != UIState.DepositPopupLoading
+    ) {
       dispatch(setUIState({ uIState: UIState.Idle }));
     }
   };
@@ -115,8 +126,8 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
             {getNumberAbbr(titaniumCount)}
           </p>
         </div>
-        {showNotEnoughTitanium && (
-          <p className="withdraw-popup-amount-text">Not Enough Titanium</p>
+        {errorMessage != "" && (
+          <p className="withdraw-popup-amount-text">{errorMessage}</p>
         )}
         <div className="withdraw-popup-amount-container">
           <img

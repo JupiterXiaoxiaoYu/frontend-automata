@@ -12,9 +12,9 @@ const Popups = () => {
   const uIState = useAppSelector(selectUIState);
   const showGuidePopup = uIState == UIState.Guide;
   const showWithdrawPopup =
-    uIState == UIState.WithdrawPopup;
+    uIState == UIState.WithdrawPopup || uIState == UIState.WithdrawPopupLoading;
   const showDepositPopup =
-    uIState == UIState.DepositPopup;
+    uIState == UIState.DepositPopup || uIState == UIState.DepositPopupLoading;
   const showUpgradePopup = uIState == UIState.UpgradePopup;
   const showUnlockPopup = uIState == UIState.UnlockPopup;
   const showNewProgramPopup = uIState == UIState.NewProgramPopup;
@@ -22,12 +22,8 @@ const Popups = () => {
   return (
     <>
       {showGuidePopup && <GuidePopup />}
-      {showWithdrawPopup && (
-        <WithdrawPopup isWithdraw={true} />
-      )}
-      {showDepositPopup && (
-        <WithdrawPopup isWithdraw={false} />
-      )}
+      {showWithdrawPopup && <WithdrawPopup isWithdraw={true} />}
+      {showDepositPopup && <WithdrawPopup isWithdraw={false} />}
 
       {showUpgradePopup && <UpgradePopup />}
       {showUnlockPopup && <UnlockPopup />}
