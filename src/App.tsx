@@ -1,7 +1,7 @@
 import { GameController as AutomataController } from "./games/controller";
 import { useAppDispatch } from "./app/hooks";
 import { useEffect } from "react";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import "./App.css";
 
 function App() {

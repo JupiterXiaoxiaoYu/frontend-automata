@@ -9,7 +9,7 @@ import closeIcon from "../assets/main/modal_close.png";
 import { useAppSelector } from "../app/hooks";
 import "./style.scss";
 import React from "react";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 export interface ModalCommonProps {
   btnLabel: React.ReactNode;
   title: string;

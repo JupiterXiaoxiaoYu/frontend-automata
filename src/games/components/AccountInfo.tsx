@@ -2,7 +2,7 @@ import React from "react";
 import "./AccountInfo.css";
 import account_info from "../images/backgrounds/account_info.png";
 import { useAppSelector } from "../../app/hooks";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { addressAbbreviation } from "../../utils/address";
 
 const AccountInfo = () => {

@@ -1,4 +1,5 @@
-import { ZKWasmAppRpc, LeHexBN, AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
+import { ZKWasmAppRpc, LeHexBN } from "zkwasm-minirollup-rpc";
 import BN from "bn.js"
 
 const rpc = new ZKWasmAppRpc("http://localhost:3000");

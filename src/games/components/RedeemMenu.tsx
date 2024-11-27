@@ -21,7 +21,7 @@ import RedeemDisplay from "./RedeemDisplay";
 import RedeemDisplayEmpty from "./RedeemDisplayEmpty";
 import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { selectResources } from "../../data/automata/resources";
 
 const RedeemMenu = () => {

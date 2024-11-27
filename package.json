@@ -18,6 +18,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "web3subscriber": "git+https://github.com/DelphinusLab/delphinus-web3subscriber.git",
+    "zkwasm-minirollup-browser": "github:DelphinusLab/zkWasm-minirollup-browser",
     "zkwasm-minirollup-rpc": "github:DelphinusLab/zkWasm-minirollup-rpc",
     "zkwasm-service-helper": "github:DelphinusLab/zkWasm-service-helper"
   },

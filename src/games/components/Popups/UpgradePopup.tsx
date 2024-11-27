@@ -29,7 +29,7 @@ import {
   selectSelectedCreatureDiffResources,
   selectSelectedCreatureListIndex,
 } from "../../../data/automata/creatures";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { sendTransaction } from "../../request";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/automata/resources";

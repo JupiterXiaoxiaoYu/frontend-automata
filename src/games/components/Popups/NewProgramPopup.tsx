@@ -17,7 +17,7 @@ import {
 import { selectResource } from "../../../data/automata/resources";
 import { sendTransaction } from "../../request";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();

@@ -9,7 +9,7 @@ import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import DiffResourcesInfo from "./DiffResourcesInfo";
 import Rocket from "./Rocket";
 import { getInstallProgramTransactionCommandArray } from "../rpc";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { sendTransaction, queryState } from "../request";
 import { getCreatureIconPath } from "../../data/automata/models";
 import {

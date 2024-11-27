@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { selectResource } from "../../../data/automata/resources";
 
 interface Props {

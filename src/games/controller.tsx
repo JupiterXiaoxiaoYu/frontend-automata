@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AccountSlice } from "zkwasm-minirollup-rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
 import { getInsPlayerTransactionCommandArray } from "./rpc";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
