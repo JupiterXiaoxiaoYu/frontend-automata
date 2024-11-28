@@ -22,8 +22,16 @@ const ConfirmPopup = ({ confirmPopupInfo }: Props) => {
       <div onClick={onClickConfirm} className="confirm-popup-mask" />
       <div className="confirm-popup-main-container">
         <img src={background} className="confirm-popup-main-background" />
-        <p className="confirm-popup-title-text">{confirmPopupInfo.title}</p>
-        <p className="confirm-popup-amount-text">
+        <p
+          className={
+            confirmPopupInfo.isError
+              ? "confirm-popup-title-text-red"
+              : "confirm-popup-title-text-green"
+          }
+        >
+          {confirmPopupInfo.title}
+        </p>
+        <p className="confirm-popup-description-text">
           {confirmPopupInfo.description}
         </p>
         <div className="confirm-popup-ok-button">

@@ -765,9 +765,11 @@ export function getProgramSpriteSheetPath(type: ProgramType): string {
 export interface ConfirmPopupInfo {
   title: string;
   description: string;
+  isError: boolean;
 }
 
 export const emptyConfirmPopupInfo: ConfirmPopupInfo = {
   title: "",
   description: "",
+  isError: false,
 };

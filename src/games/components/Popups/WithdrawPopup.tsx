@@ -49,7 +49,16 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(setUIState({ uIState: UIState.Idle }));
+          dispatch(
+            setConfirmPopupInfo({
+              confirmPopupInfo: {
+                title: "Deposit Success",
+                description: "Hash Number : (TBD)",
+                isError: false,
+              },
+            })
+          );
+          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
         }
       });
     } catch (e) {
@@ -74,6 +83,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
               confirmPopupInfo: {
                 title: "Deposit Success",
                 description: "Hash Number : (TBD)",
+                isError: false,
               },
             })
           );
@@ -86,6 +96,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
                 confirmPopupInfo: {
                   title: "Deposit Fail",
                   description: "Unknown Error",
+                  isError: true,
                 },
               })
             );
@@ -95,6 +106,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
                 confirmPopupInfo: {
                   title: "Deposit Fail",
                   description: "User rejected action",
+                  isError: true,
                 },
               })
             );
@@ -104,6 +116,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
                 confirmPopupInfo: {
                   title: "Deposit Fail",
                   description: action.error.message,
+                  isError: true,
                 },
               })
             );
