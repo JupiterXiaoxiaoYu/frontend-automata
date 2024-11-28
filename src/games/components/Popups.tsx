@@ -3,10 +3,15 @@ import { useAppSelector } from "../../app/hooks";
 import GuidePopup from "./Popups/GuidePopup";
 import WithdrawPopup from "./Popups/WithdrawPopup";
 import UpgradePopup from "./Popups/UpgradePopup";
-import { UIState, selectUIState } from "../../data/automata/properties";
+import {
+  UIState,
+  selectConfirmPopupInfo,
+  selectUIState,
+} from "../../data/automata/properties";
 import "./Popups.css";
 import UnlockPopup from "./Popups/UnlockPopup";
 import NewProgramPopup from "./Popups/NewProgramPopup";
+import ConfirmPopup from "./Popups/ConfirmPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
@@ -18,6 +23,8 @@ const Popups = () => {
   const showUpgradePopup = uIState == UIState.UpgradePopup;
   const showUnlockPopup = uIState == UIState.UnlockPopup;
   const showNewProgramPopup = uIState == UIState.NewProgramPopup;
+  const showConfirmPopup = uIState == UIState.ConfirmPopup;
+  const confirmPopupInfo = useAppSelector(selectConfirmPopupInfo);
 
   return (
     <>
@@ -28,6 +35,7 @@ const Popups = () => {
       {showUpgradePopup && <UpgradePopup />}
       {showUnlockPopup && <UnlockPopup />}
       {showNewProgramPopup && <NewProgramPopup />}
+      {showConfirmPopup && <ConfirmPopup confirmPopupInfo={confirmPopupInfo} />}
     </>
   );
 };

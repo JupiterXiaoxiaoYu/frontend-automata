@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
 import { getConfig, sendTransaction, queryState } from "../../games/request"
-import { ResourceAmountPair, emptyResources } from "./models"
+import { ConfirmPopupInfo, ResourceAmountPair, emptyConfirmPopupInfo, emptyResources } from "./models"
 
 export enum UIState{
   Init,
@@ -23,6 +23,7 @@ export enum UIState{
   PlayUnlockAnimation,
   NewProgramPopup,
   PlayNewProgramAnimation,
+  ConfirmPopup,
 }
 
 export enum TutorialType{
@@ -43,6 +44,7 @@ interface PropertiesState {
     redeemCostBase: number;
     redeemRewardBase: number;
     redeemInfo: number[];
+    confirmPopupInfo: ConfirmPopupInfo;
 }
 
 const initialState: PropertiesState = {
@@ -57,6 +59,7 @@ const initialState: PropertiesState = {
     redeemCostBase: 0,
     redeemRewardBase: 0,
     redeemInfo: [],
+    confirmPopupInfo: emptyConfirmPopupInfo,
 };
 
 export const propertiesSlice = createSlice({
@@ -71,6 +74,9 @@ export const propertiesSlice = createSlice({
       },
       setHasRocket: (state, action) => {
         state.hasRocket = action.payload.hasRocket;
+      },
+      setConfirmPopupInfo: (state, action) => {
+        state.confirmPopupInfo = action.payload.confirmPopupInfo;
       },
     },
 
@@ -131,6 +137,7 @@ export const selectCurrentCost = (state: RootState) => state.automata.properties
 export const selectRedeemCostBase = (state: RootState) => state.automata.properties.redeemCostBase;
 export const selectRedeemRewardBase = (state: RootState) => state.automata.properties.redeemRewardBase;
 export const selectRedeemInfo = (state: RootState) => state.automata.properties.redeemInfo;
+export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
-export const { setUIState, setTutorialType, setHasRocket } = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

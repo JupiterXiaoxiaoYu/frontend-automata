@@ -6,6 +6,7 @@ import {
   UIState,
   selectNonce,
   selectUIState,
+  setConfirmPopupInfo,
   setUIState,
 } from "../../../data/automata/properties";
 import {
@@ -68,17 +69,46 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(setUIState({ uIState: UIState.Idle }));
+          dispatch(
+            setConfirmPopupInfo({
+              confirmPopupInfo: {
+                title: "Deposit Success",
+                description: "Hash Number : (TBD)",
+              },
+            })
+          );
+          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
           setErrorMessage("");
         } else if (AccountSlice.depositAsync.rejected.match(action)) {
           if (action.error.message == null) {
-            setErrorMessage("Unknown Error.");
+            dispatch(
+              setConfirmPopupInfo({
+                confirmPopupInfo: {
+                  title: "Deposit Fail",
+                  description: "Unknown Error",
+                },
+              })
+            );
           } else if (action.error.message.startsWith("user rejected action")) {
-            setErrorMessage("user rejected action");
+            dispatch(
+              setConfirmPopupInfo({
+                confirmPopupInfo: {
+                  title: "Deposit Fail",
+                  description: "User rejected action",
+                },
+              })
+            );
           } else {
-            setErrorMessage(action.error.message);
+            dispatch(
+              setConfirmPopupInfo({
+                confirmPopupInfo: {
+                  title: "Deposit Fail",
+                  description: action.error.message,
+                },
+              })
+            );
           }
-          dispatch(setUIState({ uIState: UIState.DepositPopup }));
+          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
         }
       });
     } catch (e) {

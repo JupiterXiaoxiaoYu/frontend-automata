@@ -761,3 +761,13 @@ export function getProgramIconPath(type: ProgramType): string {
 export function getProgramSpriteSheetPath(type: ProgramType): string {
   return programDatas[type].spriteSheetPath;
 }
+
+export interface ConfirmPopupInfo {
+  title: string;
+  description: string;
+}
+
+export const emptyConfirmPopupInfo: ConfirmPopupInfo = {
+  title: "",
+  description: "",
+};
