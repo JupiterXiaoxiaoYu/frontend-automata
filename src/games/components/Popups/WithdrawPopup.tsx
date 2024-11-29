@@ -77,7 +77,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           l1account: l1account!,
         })
       ).then((action) => {
-        if (sendTransaction.fulfilled.match(action)) {
+        if (AccountSlice.depositAsync.fulfilled.match(action)) {
           dispatch(
             setConfirmPopupInfo({
               confirmPopupInfo: {
