@@ -1,12 +1,27 @@
 import { AccountSlice } from "zkwasm-minirollup-browser";
-import { ZKWasmAppRpc, LeHexBN } from "zkwasm-minirollup-rpc";
+import { ZKWasmAppRpc, LeHexBN, createCommand, createWithdrawCommand } from "zkwasm-minirollup-rpc";
 import BN from "bn.js"
 
-const rpc = new ZKWasmAppRpc("http://localhost:3000");
+// Get the current URL components
+const currentLocation = window.location;
+const protocol = currentLocation.protocol; // e.g., 'http:' or 'https:'
+const hostname = currentLocation.hostname; // e.g., 'sinka' or 'localhost'
 
-export async function send_transaction(cmd: Array<bigint>, prikey: string) {
+const fullUrl = `${protocol}//${hostname}` + ":3000";
+const rpc = new ZKWasmAppRpc(fullUrl);
+
+export async function queryConfig() {
   try {
-    const state = await rpc.sendTransaction(new BigUint64Array(cmd), prikey);
+    const state = await rpc.query_config();
+    return state;
+  } catch (error) {
+    throw "QueryStateError " + error;
+  }
+}
+
+export async function send_transaction(cmd: BigUint64Array, prikey: string) {
+  try {
+    const state = await rpc.sendTransaction(cmd, prikey);
     return state;
   } catch (error) {
     throw "SendTransactionError " + error;
@@ -37,29 +52,12 @@ export async function query_state(prikey: string) {
   }
 }
 
-export async function query_config() {
-  try {
-    const state = await rpc.query_config();
-    return state;
-  } catch (error) {
-    throw "QueryStateError " + error;
-  }
-}
-
 function encode_modifier(modifiers: Array<bigint>) {
   let c = 0n;
   for (const m of modifiers) {
     c = (c << 8n) + m;
   }
   return c;
-}
-
-export function createCommand(
-  nonce: bigint,
-  command: bigint,
-  objindex: bigint
-) {
-  return (nonce << 16n) + (objindex << 8n) + command;
 }
 
 const CMD_INSTALL_PLAYER = 1n;
@@ -76,7 +74,7 @@ export function getInstallProgramTransactionCommandArray(
   programIndexes: number[],
   selectingCreatureIndex: number,
   isCreating: boolean
-) {
+): BigUint64Array {
   const mslice = programIndexes.slice();
   const index = mslice.reverse().map((id) => {
     return BigInt(id);
@@ -86,56 +84,44 @@ export function getInstallProgramTransactionCommandArray(
   const command = createCommand(
     nonce,
     isCreating ? CMD_INSTALL_OBJECT : CMD_RESTART_OBJECT,
-    objIndex
+    [objIndex, modifiers]
   );
-  return [command, modifiers, 0n, 0n];
+  return command;
 }
 
 export function getInsPlayerTransactionCommandArray(nonce: bigint) {
-  const command = createCommand(nonce, CMD_INSTALL_PLAYER, 0n);
-  return [command, 0n, 0n, 0n];
+  const command = createCommand(nonce, CMD_INSTALL_PLAYER, []);
+  return command;
 }
 
-export function getUpgradeBotTransactionCommandArray(
+export function getUpgradeBotTransactionCommandArray (
   nonce: bigint,
   selectingCreatureIndex: number,
   attrIndex: bigint
-) {
+): BigUint64Array {
   const objIndex = BigInt(selectingCreatureIndex);
-  const command = createCommand(nonce, CMD_UPGRADE_OBJECT, objIndex);
-  return [command, attrIndex, 0n, 0n];
+  const command = createCommand(nonce, CMD_UPGRADE_OBJECT, [objIndex, attrIndex]);
+  return command;
 }
 
-export function getNewProgramTransactionCommandArray(nonce: bigint) {
-  const command = createCommand(nonce, CMD_INSTALL_CARD, 0n);
-  return [command, 0n, 0n, 0n];
-}
-
-function bytesToHex(bytes: Array<number>): string  {
-  return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+export function getNewProgramTransactionCommandArray(nonce: bigint): BigUint64Array {
+  const command = createCommand(nonce, CMD_INSTALL_CARD, []);
+  return command;
 }
 
 export function getWithdrawTransactionCommandArray(
   nonce: bigint,
   amount: bigint,
   account: AccountSlice.L1AccountInfo
-) {
+): BigUint64Array {
 
   const address = account!.address.slice(2);
-  const addressBN = new BN(address, 16);
-  const addressBE = addressBN.toArray("be", 20); // 20 bytes = 160 bits and split into 4, 8, 8
-  console.log("address is", address);
-  console.log("address big endian is", addressBE);
-  const firstLimb = BigInt('0x' + bytesToHex(addressBE.slice(0,4).reverse()));
-  const sndLimb = BigInt('0x' + bytesToHex(addressBE.slice(4,12).reverse()));
-  const thirdLimb = BigInt('0x' + bytesToHex(addressBE.slice(12, 20).reverse()));
-
-  const command = createCommand(nonce, CMD_WITHDRAW, 0n);
-  return [command, (firstLimb << 32n) + amount, sndLimb, thirdLimb];
+  const command = createWithdrawCommand(nonce, CMD_WITHDRAW, address, 0n, amount)
+  return command;
 }
 
-export function getRedeemTransactionCommandArray(nonce: bigint, index: number) {
-  const objIndex = BigInt(index);
-  const command = createCommand(nonce, CMD_BOUNTY, 0n);
-  return [command, objIndex, 0n, 0n];
+export function getRedeemTransactionCommandArray(nonce: bigint, index: number): BigUint64Array {
+  const bountyIndex = BigInt(index);
+  const command = createCommand(nonce, CMD_BOUNTY, [bountyIndex]);
+  return command;
 }

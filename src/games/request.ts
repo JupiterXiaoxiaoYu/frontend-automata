@@ -1,4 +1,4 @@
-import { query_config, send_transaction, query_state } from './rpc';
+import { queryConfig, query_state, send_transaction } from './rpc';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const SERVER_TICK_TO_SECOND = 5;
@@ -10,11 +10,11 @@ interface GetConfigRes {
 
 interface SendTransactionRes {
     success: boolean;
-    jobid: string | undefined;
+    jobid: any;
 }
 
 interface SendTransactionParams {
-    cmd: Array<bigint>;
+    cmd: BigUint64Array;
     prikey: string;
 }
 
@@ -39,7 +39,7 @@ export const getConfig = createAsyncThunk<
     >(
         'client/getConfig',
         async () => {
-            const res: any = await query_config();
+            const res: any = await queryConfig();
             const data = JSON.parse(res.data);
             console.log("(Data-Config)", data);
             const { bounty_cost_base: redeemCostBase, bounty_reward_base: redeemRewardBase} = data;
@@ -56,7 +56,7 @@ export const sendTransaction = createAsyncThunk<
     { rejectValue: string }
     >(
         'client/sendTransaction',
-        async (params: {cmd: Array<bigint>, prikey: string }, { rejectWithValue }) => {
+        async (params: {cmd: BigUint64Array, prikey: string }, { rejectWithValue }) => {
             try {
                 const { cmd, prikey } = params;
                 const res: any = await send_transaction(cmd, prikey);
