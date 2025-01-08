@@ -29,9 +29,9 @@ const LeftMenu = ({ localTimer }: Props) => {
       setCreatureGridHeight(creatureGridRef.current.offsetHeight);
     }
   };
-  const creatureGridElementWidth = 75;
+  const creatureGridElementWidth = 152;
   const creatureGridElementHeight = 90;
-  const creatureGridColumnCount = 2;
+  const creatureGridColumnCount = 1;
   const creatureGridRowCount = Math.floor(
     creatureGridHeight / creatureGridElementHeight
   );

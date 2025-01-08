@@ -64,13 +64,10 @@ const Creature = ({ index, creature, progress }: Props) => {
   return (
     <div className="creature-container" onClick={() => onSelect()}>
       {index == 0 && <CreatureTutorial />}
-      <img src={creatureBackground} className="creature-background" />
-      {isSelected && (
-        <img
-          src={creatureSelectingFrame}
-          className="creature-selecting-image"
-        />
-      )}
+      <img
+        src={isSelected ? creatureSelectingFrame : creatureBackground}
+        className="creature-background"
+      />
       {creatureIconPath && (
         <>
           <img src={creatureIconPath} className="creature-image-background" />

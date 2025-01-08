@@ -34,7 +34,7 @@
 .left-creature-grid{
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 150px;
+    width: 152px;
     height: calc(100% - 110px);
     top: 50%;
     left: 45%;
