@@ -52,7 +52,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           dispatch(
             setConfirmPopupInfo({
               confirmPopupInfo: {
-                title: "Deposit Success",
+                title: "Withdraw Success",
                 description: "Hash Number : (TBD)",
                 isError: false,
               },
