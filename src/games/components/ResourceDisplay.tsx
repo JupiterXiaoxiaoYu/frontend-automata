@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../images/backgrounds/top_bar.png";
+import background from "../images/backgrounds/bottom_bar.png";
 import { getNumberAbbr } from "../../data/automata/models";
 import "./ResourceDisplay.css";
 import ResourceHover from "./ResourceHover";
@@ -20,7 +20,6 @@ const ResourceDisplay = ({
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => setIsHovering(true);
   const handleMouseLeave = () => setIsHovering(false);
-
   return (
     <div className="resource-display-container">
       <img src={background} className="resource-display-background" />

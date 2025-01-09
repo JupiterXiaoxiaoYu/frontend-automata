@@ -1,5 +1,4 @@
 import React from "react";
-import ResourceDisplay from "./ResourceDisplay";
 import { useAppSelector } from "../../app/hooks";
 import "./Resources.css";
 
@@ -11,6 +10,7 @@ import {
   ResourceType,
   resourceTypes,
 } from "../../data/automata/models";
+import ResourceDisplay from "./ResourceDisplay";
 
 const Resources = () => {
   return (
