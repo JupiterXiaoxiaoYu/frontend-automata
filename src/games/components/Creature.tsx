@@ -19,9 +19,15 @@ import {
   startCreatingCreature,
 } from "../../data/automata/creatures";
 import { selectIsLoading } from "../../data/automata/properties";
-import { CreatureModel, getCreatureIconPath } from "../../data/automata/models";
+import {
+  AttributeType,
+  CreatureModel,
+  getAttributeIconPath,
+  getCreatureIconPath,
+} from "../../data/automata/models";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreatureTutorial from "./CreatureTutorial";
+import UpgradeButton from "./Buttons/UpgradeButton";
 
 interface Props {
   index: number;
@@ -41,6 +47,10 @@ const Creature = ({ index, creature, progress }: Props) => {
   const showLocked = index > creaturesCount;
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
   const tutorialType = useAppSelector(selectTutorialType);
+  const levelIcon = getAttributeIconPath(AttributeType.Level);
+  const speedIcon = getAttributeIconPath(AttributeType.Speed);
+  const efficiencyIcon = getAttributeIconPath(AttributeType.Efficiency);
+  const productivityIcon = getAttributeIconPath(AttributeType.Productivity);
 
   const onSelect = () => {
     if (!isSelected && !isLoading) {
@@ -58,6 +68,12 @@ const Creature = ({ index, creature, progress }: Props) => {
       }
     }
   };
+
+  function onClickUpgrade() {
+    // if (!isLoading && !isSelectingUIState) {
+    //   dispatch(setUIState({ uIState: UIState.UpgradePopup }));
+    // }
+  }
 
   const filterPercentage = 100 - progress;
 
@@ -90,6 +106,39 @@ const Creature = ({ index, creature, progress }: Props) => {
           )}
         </>
       )}
+      <img src={levelIcon} className="creature-level-icon" />
+      <div className="creature-upgrade-button">
+        <UpgradeButton onClick={onClickUpgrade} />
+      </div>
+      <img src={speedIcon} className="creature-speed-icon" />
+      <img src={efficiencyIcon} className="creature-efficiency-icon" />
+      <img src={productivityIcon} className="creature-productivity-icon" />
+      <p className="creature-level-text">
+        {
+          creature.attributes.find((pair) => pair.type == AttributeType.Level)
+            ?.amount
+        }
+      </p>
+      <p className="creature-speed-text">
+        {
+          creature.attributes.find((pair) => pair.type == AttributeType.Speed)
+            ?.amount
+        }
+      </p>
+      <p className="creature-efficiency-text">
+        {
+          creature.attributes.find(
+            (pair) => pair.type == AttributeType.Efficiency
+          )?.amount
+        }
+      </p>
+      <p className="creature-productivity-text">
+        {
+          creature.attributes.find(
+            (pair) => pair.type == AttributeType.Productivity
+          )?.amount
+        }
+      </p>
       {creature.name === "Creating" ? (
         <p className="creature-creating-text">Creating</p>
       ) : (

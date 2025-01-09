@@ -1,8 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import upgradeButtonImage from "../../images/Buttons/Upgrade/upgrade_normal.png";
-import upgradeButtonHoverImage from "../../images/Buttons/Upgrade/upgrade_hover.png";
+import upgradeButtonImage from "../../images/Buttons/Upgrade/upgrade.png";
+import upgradeButtonHoverImage from "../../images/Buttons/Upgrade/upgrade_hv.png";
 import upgradeButtonClickImage from "../../images/Buttons/Upgrade/upgrade_click.png";
+import upgradeButtonDisabledImage from "../../images/Buttons/Upgrade/upgrade_idle.png";
 import "./UpgradeButton.css";
 
 interface Props {
@@ -17,7 +18,7 @@ const UpgradeButton = ({ onClick }: Props) => {
         defaultImagePath={upgradeButtonImage}
         hoverImagePath={upgradeButtonHoverImage}
         clickedImagePath={upgradeButtonClickImage}
-        disabledImagePath={upgradeButtonClickImage}
+        disabledImagePath={upgradeButtonDisabledImage}
         onClick={onClick}
       />
     </div>
