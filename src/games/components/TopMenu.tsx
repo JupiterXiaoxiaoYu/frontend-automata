@@ -11,6 +11,7 @@ import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
 import { startGuide } from "../../data/automata/guides";
 import { GuideType } from "../../data/automata/models";
+import PlayerInfo from "./PlayerInfo";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ const TopMenu = () => {
         onClickWithdraw={onClickWithdraw}
         onClickDeposit={onClickDeposit}
       />
+      <PlayerInfo />
       <AccountInfo />
       <Resources />
       <div className="top-help">

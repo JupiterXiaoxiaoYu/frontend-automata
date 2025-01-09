@@ -45,6 +45,9 @@ interface PropertiesState {
     redeemRewardBase: number;
     redeemInfo: number[];
     confirmPopupInfo: ConfirmPopupInfo;
+    level: number;
+    exp: number;
+    energy: number;
 }
 
 const initialState: PropertiesState = {
@@ -60,6 +63,9 @@ const initialState: PropertiesState = {
     redeemRewardBase: 0,
     redeemInfo: [],
     confirmPopupInfo: emptyConfirmPopupInfo,
+    level: 0,
+    exp: 0,
+    energy: 0,
 };
 
 export const propertiesSlice = createSlice({
@@ -113,6 +119,9 @@ export const propertiesSlice = createSlice({
         state.nonce = action.payload.nonce;
         state.currentCost = action.payload.currentCost;
         state.redeemInfo = action.payload.redeemInfo;
+        state.level = action.payload.level;
+        state.exp = action.payload.exp;
+        state.energy = action.payload.energy;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -137,6 +146,9 @@ export const selectCurrentCost = (state: RootState) => state.automata.properties
 export const selectRedeemCostBase = (state: RootState) => state.automata.properties.redeemCostBase;
 export const selectRedeemRewardBase = (state: RootState) => state.automata.properties.redeemRewardBase;
 export const selectRedeemInfo = (state: RootState) => state.automata.properties.redeemInfo;
+export const selectLevelInfo = (state: RootState) => state.automata.properties.level;
+export const selectExpInfo = (state: RootState) => state.automata.properties.exp;
+export const selectEnergyInfo = (state: RootState) => state.automata.properties.energy;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
 export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;

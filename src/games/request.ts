@@ -26,6 +26,9 @@ interface QueryStateRes {
     globalTimer: any;
     currentCost: number;
     redeemInfo: number[];
+    level: number;
+    exp: number;
+    energy: number;
 }
 
 interface QueryStateParams {
@@ -82,7 +85,7 @@ export const queryState = createAsyncThunk<
                 console.log("(Data-QueryState)", datas);
                 const nonce = datas.player.nonce.toString();
                 const serverTick = datas.state;
-                const { energy, cost_info, current_cost: currentCost, objects, local, cards, redeem_info: redeemInfo } = datas.player.data;
+                const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, redeem_info: redeemInfo } = datas.player.data;
                 return {
                     nonce,
                     player: local,
@@ -91,6 +94,9 @@ export const queryState = createAsyncThunk<
                     globalTimer: serverTick * SERVER_TICK_TO_SECOND,
                     currentCost,
                     redeemInfo,
+                    level,
+                    exp,
+                    energy
                 };
 
             } catch (err: any) {
