@@ -24,6 +24,7 @@
     transform: translate(-50%, -50%);
     width: 55px;
     height: 55px;
+    pointer-events: none;
     user-select: none;
 }
 
@@ -38,6 +39,7 @@
     transform: translate(-50%, -50%);
     width: 60px;
     height: 67px;
+    pointer-events: none;
     user-select: none;
 }
 
