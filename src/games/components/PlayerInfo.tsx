@@ -25,17 +25,17 @@ const PlayerInfo = () => {
         <p className="player-info-title-text">level</p>
         <p className="player-info-amount-text">{level}</p>
       </div>
-      <div className="player-info-energy-container">
-        <img src={info_background} className="player-info-background" />
-        <img src={energy_icon} className="player-info-icon" />
-        <p className="player-info-title-text">energy</p>
-        <p className="player-info-amount-text">{energy}</p>
-      </div>
       <div className="player-info-xp-container">
         <img src={info_background} className="player-info-background" />
         <img src={xp_icon} className="player-info-icon" />
         <p className="player-info-title-text">xp</p>
         <p className="player-info-amount-text">{exp}</p>
+      </div>
+      <div className="player-info-energy-container">
+        <img src={info_background} className="player-info-background" />
+        <img src={energy_icon} className="player-info-icon" />
+        <p className="player-info-title-text">energy</p>
+        <p className="player-info-amount-text">{energy}</p>
       </div>
     </div>
   );
