@@ -70,19 +70,21 @@ const Creature = ({ index, creature, progress }: Props) => {
   };
 
   function onClickUpgrade() {
-    // if (!isLoading && !isSelectingUIState) {
-    //   dispatch(setUIState({ uIState: UIState.UpgradePopup }));
-    // }
+    onSelect();
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: UIState.UpgradePopup }));
+    }
   }
 
   const filterPercentage = 100 - progress;
 
   return (
-    <div className="creature-container" onClick={() => onSelect()}>
+    <div className="creature-container">
       {index == 0 && <CreatureTutorial />}
       <img
         src={isSelected ? creatureSelectingFrame : creatureBackground}
         className="creature-background"
+        onClick={() => onSelect()}
       />
       {creatureIconPath && (
         <>
@@ -108,7 +110,7 @@ const Creature = ({ index, creature, progress }: Props) => {
       )}
       <img src={levelIcon} className="creature-level-icon" />
       <div className="creature-upgrade-button">
-        <UpgradeButton onClick={onClickUpgrade} />
+        <UpgradeButton isDisabled={isLocked} onClick={onClickUpgrade} />
       </div>
       <img src={speedIcon} className="creature-speed-icon" />
       <img src={efficiencyIcon} className="creature-efficiency-icon" />

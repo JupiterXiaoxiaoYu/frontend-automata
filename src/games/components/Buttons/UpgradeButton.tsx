@@ -7,14 +7,15 @@ import upgradeButtonDisabledImage from "../../images/Buttons/Upgrade/upgrade_idl
 import "./UpgradeButton.css";
 
 interface Props {
+  isDisabled: boolean;
   onClick: () => void;
 }
 
-const UpgradeButton = ({ onClick }: Props) => {
+const UpgradeButton = ({ isDisabled, onClick }: Props) => {
   return (
     <div className="upgrade-button-scale">
       <ImageButton
-        isDisabled={false}
+        isDisabled={isDisabled}
         defaultImagePath={upgradeButtonImage}
         hoverImagePath={upgradeButtonHoverImage}
         clickedImagePath={upgradeButtonClickImage}
