@@ -1,13 +1,11 @@
 import React from "react";
 import image from "../../images/Guides/mission.png";
-import arrowImage from "../../images/Guides/mission_arrow.png";
 import "./GuideMission.css";
 
 const GuideMission = () => {
   return (
     <div>
       <img src={image} className="guide-popup-mission-image" />
-      <img src={arrowImage} className="guide-popup-mission-arrow-image" />
       <p className="guide-popup-mission-content-title">1. Mission</p>
       <p className="guide-popup-mission-content-text">
         Welcome aboard! This simulation console is an important part of our

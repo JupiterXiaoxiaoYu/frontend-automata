@@ -36,21 +36,10 @@
 
 .guide-popup-mission-image {
     position: absolute;
-    width: 120px;
+    width: 172px;
     height: 312px;
-    left: 20%;
-    top: 45%;
+    left: 23%;
+    top: 46%;
     transform: translate(-50%, -50%);
-    user-select: none;
-}
-
-.guide-popup-mission-arrow-image {
-    position: absolute;
-    width: 165px;
-    height: 65px;
-    left: 25.8%;
-    top: 26%;
-    transform: translate(-50%, -50%);
-    opacity: 0.7;
     user-select: none;
 }
