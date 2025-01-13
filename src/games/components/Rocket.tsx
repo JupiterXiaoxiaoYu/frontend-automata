@@ -11,13 +11,13 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const getRandomStartPosition = (width: number, height: number) => {
   const x = Math.random() * 0.3;
-  const y = Math.random();
+  const y = Math.random() * 0.8 + 0.2;
   return { x: x * width, y: y * height };
 };
 
 const getRandomEndPosition = (width: number, height: number) => {
   const x = Math.random() * 0.3 + 0.7;
-  const y = Math.random();
+  const y = Math.random() * 0.8 + 0.2;
   return { x: x * width, y: y * height };
 };
 

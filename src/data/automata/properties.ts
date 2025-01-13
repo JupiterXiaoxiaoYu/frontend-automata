@@ -25,6 +25,7 @@ export enum UIState{
   PlayNewProgramAnimation,
   ConfirmPopup,
   RocketPopup,
+  RocketPopupLoading,
 }
 
 export enum TutorialType{

@@ -26,7 +26,8 @@ const Popups = () => {
   const showNewProgramPopup = uIState == UIState.NewProgramPopup;
   const showConfirmPopup = uIState == UIState.ConfirmPopup;
   const confirmPopupInfo = useAppSelector(selectConfirmPopupInfo);
-  const showRocketPopup = uIState == UIState.RocketPopup;
+  const showRocketPopup =
+    uIState == UIState.RocketPopup || uIState == UIState.RocketPopupLoading;
 
   return (
     <>
