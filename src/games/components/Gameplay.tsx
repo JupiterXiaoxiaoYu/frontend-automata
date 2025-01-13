@@ -5,15 +5,26 @@ import TopMenu from "./TopMenu";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import MainMenu from "./MainMenu";
-import { UIState, selectUIState } from "../../data/automata/properties";
+import {
+  UIState,
+  selectHasRocket,
+  selectLastRedeemEnergy,
+  selectRedeemEnergyCooldown,
+  selectUIState,
+  setHasRocket,
+} from "../../data/automata/properties";
 import { selectGlobalTimer } from "../../data/automata/properties";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ResourceAnimations from "./ResourceAnimations";
 import Popups from "./Popups";
 import NewProgramAnimation from "./NewProgramAnimation";
 
 const Gameplay = () => {
+  const dispatch = useAppDispatch();
   const uIState = useAppSelector(selectUIState);
+  const hasRocket = useAppSelector(selectHasRocket);
+  const lastRedeemEnergy = useAppSelector(selectLastRedeemEnergy);
+  const redeemEnergyCooldown = useAppSelector(selectRedeemEnergyCooldown);
 
   //#region LocalTime
   const globalTimer = useAppSelector(selectGlobalTimer);
@@ -82,6 +93,14 @@ const Gameplay = () => {
 
   useEffect(() => {
     setGlobalTimerCache(globalTimer);
+    if (
+      globalTimer / SERVER_TICK_TO_SECOND - lastRedeemEnergy >=
+        redeemEnergyCooldown &&
+      !hasRocket &&
+      uIState != UIState.RocketPopup
+    ) {
+      dispatch(setHasRocket({ hasRocket: true }));
+    }
   }, [globalTimer]);
   //#endregion
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
 import { getConfig, sendTransaction, queryState } from "../../games/request"
-import { ConfirmPopupInfo, ResourceAmountPair, emptyConfirmPopupInfo, emptyResources } from "./models"
+import { ConfirmPopupInfo, ResourceAmountPair, emptyConfirmPopupInfo, emptyResources, redeemEnergyCooldownBase } from "./models"
 
 export enum UIState{
   Init,
@@ -24,6 +24,7 @@ export enum UIState{
   NewProgramPopup,
   PlayNewProgramAnimation,
   ConfirmPopup,
+  RocketPopup,
 }
 
 export enum TutorialType{
@@ -48,6 +49,7 @@ interface PropertiesState {
     level: number;
     exp: number;
     energy: number;
+    lastRedeemEnergy: number;
 }
 
 const initialState: PropertiesState = {
@@ -63,9 +65,10 @@ const initialState: PropertiesState = {
     redeemRewardBase: 0,
     redeemInfo: [],
     confirmPopupInfo: emptyConfirmPopupInfo,
-    level: 0,
+    level: 1,
     exp: 0,
     energy: 0,
+    lastRedeemEnergy: 0,
 };
 
 export const propertiesSlice = createSlice({
@@ -122,6 +125,7 @@ export const propertiesSlice = createSlice({
         state.level = action.payload.level;
         state.exp = action.payload.exp;
         state.energy = action.payload.energy;
+        state.lastRedeemEnergy = action.payload.lastRedeemEnergy;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -146,9 +150,11 @@ export const selectCurrentCost = (state: RootState) => state.automata.properties
 export const selectRedeemCostBase = (state: RootState) => state.automata.properties.redeemCostBase;
 export const selectRedeemRewardBase = (state: RootState) => state.automata.properties.redeemRewardBase;
 export const selectRedeemInfo = (state: RootState) => state.automata.properties.redeemInfo;
-export const selectLevelInfo = (state: RootState) => state.automata.properties.level;
-export const selectExpInfo = (state: RootState) => state.automata.properties.exp;
-export const selectEnergyInfo = (state: RootState) => state.automata.properties.energy;
+export const selectLevel = (state: RootState) => state.automata.properties.level;
+export const selectExp = (state: RootState) => state.automata.properties.exp;
+export const selectEnergy = (state: RootState) => state.automata.properties.energy;
+export const selectRedeemEnergyCooldown = (state: RootState) => redeemEnergyCooldownBase / state.automata.properties.level;
+export const selectLastRedeemEnergy = (state: RootState) => state.automata.properties.lastRedeemEnergy;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
 export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;

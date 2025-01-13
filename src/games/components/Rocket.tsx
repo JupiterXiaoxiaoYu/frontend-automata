@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { selectHasRocket, setHasRocket } from "../../data/automata/properties";
+import { useEffect, useRef } from "react";
+import {
+  selectHasRocket,
+  setHasRocket,
+  setUIState,
+  UIState,
+} from "../../data/automata/properties";
 
 import "./Rocket.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -24,6 +29,7 @@ const Rocket = () => {
 
   const onClickRocket = () => {
     dispatch(setHasRocket({ hasRocket: false }));
+    dispatch(setUIState({ uIState: UIState.RocketPopup }));
   };
 
   const onAnimationEnd = () => {

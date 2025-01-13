@@ -12,6 +12,7 @@ import "./Popups.css";
 import UnlockPopup from "./Popups/UnlockPopup";
 import NewProgramPopup from "./Popups/NewProgramPopup";
 import ConfirmPopup from "./Popups/ConfirmPopup";
+import RocketPopup from "./Popups/RocketPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
@@ -25,6 +26,7 @@ const Popups = () => {
   const showNewProgramPopup = uIState == UIState.NewProgramPopup;
   const showConfirmPopup = uIState == UIState.ConfirmPopup;
   const confirmPopupInfo = useAppSelector(selectConfirmPopupInfo);
+  const showRocketPopup = uIState == UIState.RocketPopup;
 
   return (
     <>
@@ -36,6 +38,7 @@ const Popups = () => {
       {showUnlockPopup && <UnlockPopup />}
       {showNewProgramPopup && <NewProgramPopup />}
       {showConfirmPopup && <ConfirmPopup confirmPopupInfo={confirmPopupInfo} />}
+      {showRocketPopup && <RocketPopup />}
     </>
   );
 };

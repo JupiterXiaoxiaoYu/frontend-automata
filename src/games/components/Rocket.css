@@ -17,7 +17,7 @@
     position: absolute;
     width: 76px;
     height: 134px;
-    z-index: 4;
+    z-index: 15;
 }
 
 .rocket-image {

@@ -773,3 +773,7 @@ export const emptyConfirmPopupInfo: ConfirmPopupInfo = {
   description: "",
   isError: false,
 };
+
+export const redeemEnergyCooldownBase = 1000;
+export const redeemEnergyAmount = 10;
+export const redeemEnergyTitaniumCost = 1;

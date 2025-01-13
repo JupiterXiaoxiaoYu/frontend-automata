@@ -7,15 +7,15 @@ import level_icon from "../images/backgrounds/player_lv.png";
 import energy_icon from "../images/backgrounds/player_energy.png";
 import xp_icon from "../images/backgrounds/player_xp.png";
 import {
-  selectEnergyInfo,
-  selectExpInfo,
-  selectLevelInfo,
+  selectEnergy,
+  selectExp,
+  selectLevel,
 } from "../../data/automata/properties";
 
 const PlayerInfo = () => {
-  const level = useAppSelector(selectLevelInfo);
-  const exp = useAppSelector(selectExpInfo);
-  const energy = useAppSelector(selectEnergyInfo);
+  const level = useAppSelector(selectLevel);
+  const exp = useAppSelector(selectExp);
+  const energy = useAppSelector(selectEnergy);
 
   return (
     <div className="player-info-container">

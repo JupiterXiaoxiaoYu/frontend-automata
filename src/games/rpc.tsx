@@ -1,6 +1,11 @@
 import { AccountSlice } from "zkwasm-minirollup-browser";
-import { ZKWasmAppRpc, LeHexBN, createCommand, createWithdrawCommand } from "zkwasm-minirollup-rpc";
-import BN from "bn.js"
+import {
+  ZKWasmAppRpc,
+  LeHexBN,
+  createCommand,
+  createWithdrawCommand,
+} from "zkwasm-minirollup-rpc";
+import BN from "bn.js";
 
 // Get the current URL components
 const currentLocation = window.location;
@@ -68,6 +73,7 @@ const CMD_INSTALL_CARD = 5n;
 const CMD_WITHDRAW = 6n;
 const CMD_DEPOSIT = 7n;
 const CMD_BOUNTY = 8n;
+const CMD_COLLECT_ENERGY = 9n;
 
 export function getInstallProgramTransactionCommandArray(
   nonce: bigint,
@@ -94,17 +100,22 @@ export function getInsPlayerTransactionCommandArray(nonce: bigint) {
   return command;
 }
 
-export function getUpgradeBotTransactionCommandArray (
+export function getUpgradeBotTransactionCommandArray(
   nonce: bigint,
   selectingCreatureIndex: number,
   attrIndex: bigint
 ): BigUint64Array {
   const objIndex = BigInt(selectingCreatureIndex);
-  const command = createCommand(nonce, CMD_UPGRADE_OBJECT, [objIndex, attrIndex]);
+  const command = createCommand(nonce, CMD_UPGRADE_OBJECT, [
+    objIndex,
+    attrIndex,
+  ]);
   return command;
 }
 
-export function getNewProgramTransactionCommandArray(nonce: bigint): BigUint64Array {
+export function getNewProgramTransactionCommandArray(
+  nonce: bigint
+): BigUint64Array {
   const command = createCommand(nonce, CMD_INSTALL_CARD, []);
   return command;
 }
@@ -114,14 +125,27 @@ export function getWithdrawTransactionCommandArray(
   amount: bigint,
   account: AccountSlice.L1AccountInfo
 ): BigUint64Array {
-
   const address = account!.address.slice(2);
-  const command = createWithdrawCommand(nonce, CMD_WITHDRAW, address, 0n, amount)
+  const command = createWithdrawCommand(
+    nonce,
+    CMD_WITHDRAW,
+    address,
+    0n,
+    amount
+  );
   return command;
 }
 
-export function getRedeemTransactionCommandArray(nonce: bigint, index: number): BigUint64Array {
+export function getRedeemTransactionCommandArray(
+  nonce: bigint,
+  index: number
+): BigUint64Array {
   const bountyIndex = BigInt(index);
   const command = createCommand(nonce, CMD_BOUNTY, [bountyIndex]);
+  return command;
+}
+
+export function getCollectEnergyTransactionCommandArray(nonce: bigint) {
+  const command = createCommand(nonce, CMD_COLLECT_ENERGY, []);
   return command;
 }
