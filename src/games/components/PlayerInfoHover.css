@@ -1,0 +1,33 @@
+.player-info-hover-container {
+    position: relative;
+    width: 150px;
+    height: 43px;
+    z-index: 15;
+}
+
+.player-info-hover-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.player-info-hover-context-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    text-align: left;
+    line-height: 100%;
+    margin: 0px;
+    color: white;
+    width: 90%;
+    height: 10px;
+    font-family: "mishmash";
+    pointer-events: none;
+    user-select: none;
+}

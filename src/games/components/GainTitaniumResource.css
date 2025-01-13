@@ -14,10 +14,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%) scale(50%, 50%);
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-image: url('../images/Animations/TitaniumScore.png');
-    animation: titaniumScoreFrames 1s steps(12);
+    animation: titaniumScoreFrames 1s steps(12) forwards;
 }
 
 @keyframes titaniumScoreFrames {

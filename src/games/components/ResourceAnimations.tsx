@@ -78,8 +78,8 @@ const ResourceAnimations = ({ localTimer }: Props) => {
     const resourceIndex = resourceTypes.findIndex((t) => t == type);
 
     return {
-      x: 90 * resourceIndex + 30,
-      y: 25,
+      x: 70 * resourceIndex + 265,
+      y: 75,
     };
   };
 
