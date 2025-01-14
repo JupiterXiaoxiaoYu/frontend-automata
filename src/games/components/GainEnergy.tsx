@@ -8,7 +8,6 @@ interface Props {
   endPosition: { x: number; y: number };
   rewardAnimationDelay: number;
   shakeAnimationDelay: number;
-  energyImagePath: string;
   opacity: number;
   onAnimationEnd: () => void;
 }
@@ -21,7 +20,6 @@ const GainEnergy = ({
   rewardAnimationDelay,
   shakeAnimationDelay,
   opacity,
-  energyImagePath,
   onAnimationEnd,
 }: Props) => {
   const getParabolaXStartPositionString = () => {
@@ -148,13 +146,7 @@ const GainEnergy = ({
               className={"gain-energy-shake-animation"}
               style={{ animationDelay: `${shakeAnimationDelay}s` }}
             >
-              <div
-                ref={imageRef}
-                className="gain-energy-image"
-                style={{
-                  backgroundImage: `url(${energyImagePath})`,
-                }}
-              />
+              <div ref={imageRef} className="gain-energy-image" />
             </div>
           </div>
         </div>
