@@ -97,7 +97,7 @@ const MainMenu = ({ localTimer }: Props) => {
     }, 1000);
   }
 
-  function sendUpdateProgram(isCreating: boolean) {
+  function sendUpdateProgram() {
     if (!isLoading) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
@@ -108,7 +108,7 @@ const MainMenu = ({ localTimer }: Props) => {
             nonce,
             selectedCreature.programIndexes.map((index) => index!),
             selectedCreatureIndexForRequestEncode,
-            isCreating
+            true
           ),
           prikey: l2account!.address,
         })
@@ -139,6 +139,12 @@ const MainMenu = ({ localTimer }: Props) => {
     }
   }
 
+  function onClickConfirmReboot() {
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: UIState.RebootPopup }));
+    }
+  }
+
   function onClickRedeem() {
     if (!isLoading) {
       dispatch(clearSelectedCreatureIndex({}));
@@ -153,9 +159,9 @@ const MainMenu = ({ localTimer }: Props) => {
 
   useEffect(() => {
     if (uIState == UIState.PlayUnlockAnimation) {
-      playUnlockAnimation(() => sendUpdateProgram(true));
+      playUnlockAnimation(() => sendUpdateProgram());
     } else if (uIState == UIState.PlayUpgradeAnimation) {
-      playUpgradeAnimation(() => sendUpdateProgram(true));
+      playUpgradeAnimation(() => sendUpdateProgram());
     }
   }, [uIState]);
 
@@ -219,7 +225,7 @@ const MainMenu = ({ localTimer }: Props) => {
             {showConfirmButton && (
               <CreatureConfirmButton
                 isDisabled={!enableConfirmButton}
-                onClick={() => sendUpdateProgram(false)}
+                onClick={onClickConfirmReboot}
               />
             )}
             {showUnlockButton && (

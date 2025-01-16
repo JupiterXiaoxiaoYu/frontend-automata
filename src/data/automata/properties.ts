@@ -20,6 +20,8 @@ export enum UIState{
   UpgradePopup,
   PlayUpgradeAnimation,
   UnlockPopup,
+  RebootPopup,
+  RebootPopupLoading,
   PlayUnlockAnimation,
   NewProgramPopup,
   PlayNewProgramAnimation,

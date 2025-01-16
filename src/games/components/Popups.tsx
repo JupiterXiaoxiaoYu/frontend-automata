@@ -13,6 +13,7 @@ import UnlockPopup from "./Popups/UnlockPopup";
 import NewProgramPopup from "./Popups/NewProgramPopup";
 import ConfirmPopup from "./Popups/ConfirmPopup";
 import RocketPopup from "./Popups/RocketPopup";
+import RebootPopup from "./Popups/RebootPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
@@ -23,6 +24,8 @@ const Popups = () => {
     uIState == UIState.DepositPopup || uIState == UIState.DepositPopupLoading;
   const showUpgradePopup = uIState == UIState.UpgradePopup;
   const showUnlockPopup = uIState == UIState.UnlockPopup;
+  const showRebootPopup =
+    uIState == UIState.RebootPopup || uIState == UIState.RebootPopupLoading;
   const showNewProgramPopup = uIState == UIState.NewProgramPopup;
   const showConfirmPopup = uIState == UIState.ConfirmPopup;
   const confirmPopupInfo = useAppSelector(selectConfirmPopupInfo);
@@ -37,6 +40,7 @@ const Popups = () => {
 
       {showUpgradePopup && <UpgradePopup />}
       {showUnlockPopup && <UnlockPopup />}
+      {showRebootPopup && <RebootPopup />}
       {showNewProgramPopup && <NewProgramPopup />}
       {showConfirmPopup && <ConfirmPopup confirmPopupInfo={confirmPopupInfo} />}
       {showRocketPopup && <RocketPopup />}
