@@ -143,7 +143,7 @@ const RocketPopup = () => {
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Creating }));
+    dispatch(setUIState({ uIState: UIState.Idle }));
   };
 
   const onAnimationEnd = () => {
