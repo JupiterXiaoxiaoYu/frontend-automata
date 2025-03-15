@@ -3,12 +3,16 @@ import "./MainMenuWarning.css";
 import { UIState, selectUIState } from "../../data/automata/properties";
 import {
   selectIsNotSelectingCreature,
+  selectSelectedCreatureListIndex,
   selectSelectedCreaturePrograms,
 } from "../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const MainMenuWarning = () => {
   const uIState = useAppSelector(selectUIState);
+  const selectedCreatureListIndex = useAppSelector(
+    selectSelectedCreatureListIndex
+  );
   const notSelectingCreature = useAppSelector(selectIsNotSelectingCreature);
   const selectedCreaturePrograms = useAppSelector(
     selectSelectedCreaturePrograms
@@ -23,6 +27,9 @@ const MainMenuWarning = () => {
   const isLoading = uIState == UIState.Loading;
   return (
     <div className="main-menu-warning-container">
+      <p className="main-menu-energy-text">
+        Consume {selectedCreatureListIndex + 1} enery every cycle
+      </p>
       {notSelectingCreature && (
         <p className="main-menu-warning-text">Select a creature to continue</p>
       )}

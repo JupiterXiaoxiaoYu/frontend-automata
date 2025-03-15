@@ -16,10 +16,32 @@ body, html, #root {
     transform: translate(-50%, -50%);
 }
 
-.welcome-page-background{
+.welcome-page-background-back{
+    position: absolute;
     height: 100%;
     width: 100%;
-    background-image: url('../images/backgrounds/welcome.png');
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: contain;
+    user-select: none;
+}
+
+.welcome-page-background-front{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    user-select: none;
+}
+
+.welcome-page-sponsor-frame{
+    position: absolute;
+    height: 200px;
+    width: 310px;
+    top: 20%;
+    left: 70%;
+    transform: translate(-50%, -50%);
     background-size: contain;
     user-select: none;
 }
@@ -32,8 +54,6 @@ body, html, #root {
     right: 3%;
     user-select: none;
 }
-
-
 
 .welcome-page-background-filter{
     position: absolute;
