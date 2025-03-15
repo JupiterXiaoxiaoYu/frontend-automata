@@ -12,6 +12,7 @@ import {
 } from "../../data/automata/properties";
 import PlayerInfoDisplay from "./PlayerInfoDisplay";
 import { expToLevelUp } from "../../data/automata/models";
+import PlayerInfoLevelDisplay from "./PlayerInfoLevelDisplay";
 
 const PlayerInfo = () => {
   const level = useAppSelector(selectLevel);
@@ -21,11 +22,14 @@ const PlayerInfo = () => {
   return (
     <div className="player-info-container">
       <div className="player-info-level-container">
-        <PlayerInfoDisplay
+        <PlayerInfoLevelDisplay
           icon={level_icon}
           title={"level"}
           amount={level}
-          description={"Increasing Rockets Spawn When Leveling Up"}
+          interestRate={0.01 * level}
+          description={
+            "Increasing Rockets Spawn and Interest Rate When Leveling Up"
+          }
         />
       </div>
       <div className="player-info-xp-container">
