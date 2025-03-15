@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import background from "../images/backgrounds/guide_frame.png";
 import Grid from "./Grid";
 import {
+  selectInterest,
   selectNonce,
   selectRedeemCostBase,
   selectRedeemInfo,
@@ -32,6 +33,7 @@ const RedeemMenu = () => {
   const redeemRewardBase = useAppSelector(selectRedeemRewardBase);
   const redeemInfo = useAppSelector(selectRedeemInfo);
   const resources = useAppSelector(selectResources);
+  const interest = useAppSelector(selectInterest);
   const resourcesMap = Object.fromEntries(
     resources.map((resource) => [resource.type, resource.amount])
   );
@@ -63,7 +65,7 @@ const RedeemMenu = () => {
   };
 
   const onClickCollectInterest = () => {
-    /* */
+    dispatch(setUIState({ uIState: UIState.CollectInterestPopup }));
   };
 
   return (
@@ -77,9 +79,10 @@ const RedeemMenu = () => {
           elements={resourceTypes.map((type, index) =>
             type == ResourceType.Titanium ? (
               <RedeemDisplayCollectInterest
-                isDisabled={false}
+                key={index}
+                isDisabled={interest <= 100}
                 rewardIconImagePath={getResourceIconPath(ResourceType.Titanium)}
-                rewardAmount={0}
+                rewardAmount={interest}
                 onClickCollectInterest={onClickCollectInterest}
               />
             ) : (

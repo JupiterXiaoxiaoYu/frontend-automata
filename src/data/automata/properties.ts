@@ -26,6 +26,8 @@ export enum UIState{
   NewProgramPopup,
   PlayNewProgramAnimation,
   ConfirmPopup,
+  CollectInterestPopup,
+  CollectInterestPopupLoading,
   RocketPopup,
   RocketPopupLoading,
 }
@@ -53,6 +55,7 @@ interface PropertiesState {
     exp: number;
     energy: number;
     lastRedeemEnergy: number;
+    interest: number;
 }
 
 const initialState: PropertiesState = {
@@ -72,6 +75,7 @@ const initialState: PropertiesState = {
     exp: 0,
     energy: 0,
     lastRedeemEnergy: 0,
+    interest: 0,
 };
 
 export const propertiesSlice = createSlice({
@@ -129,6 +133,7 @@ export const propertiesSlice = createSlice({
         state.exp = action.payload.exp;
         state.energy = action.payload.energy;
         state.lastRedeemEnergy = action.payload.lastRedeemEnergy;
+        state.interest = action.payload.interest;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -158,6 +163,7 @@ export const selectExp = (state: RootState) => state.automata.properties.exp;
 export const selectEnergy = (state: RootState) => state.automata.properties.energy;
 export const selectRedeemEnergyCooldown = (state: RootState) => redeemEnergyCooldownBase / state.automata.properties.level;
 export const selectLastRedeemEnergy = (state: RootState) => state.automata.properties.lastRedeemEnergy;
+export const selectInterest = (state: RootState) => state.automata.properties.interest;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
 export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;

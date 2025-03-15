@@ -30,6 +30,7 @@ interface QueryStateRes {
     exp: number;
     energy: number;
     lastRedeemEnergy: number;
+    interest: number;
 }
 
 interface QueryStateParams {
@@ -86,7 +87,10 @@ export const queryState = createAsyncThunk<
                 console.log("(Data-QueryState)", datas);
                 const nonce = datas.player.nonce.toString();
                 const serverTick = datas.state;
-                const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy } = datas.player.data;
+                const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, last_interest_stamp: interestInfo, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy } = datas.player.data;
+                const balance = interestInfo >> 32;
+                const lastInterestStamp = interestInfo & 0xFFFFFFFF;
+                const interest = Math.floor(level * balance * (serverTick - lastInterestStamp) / (100000 * 20000));
                 return {
                     nonce,
                     player: local,
@@ -98,7 +102,8 @@ export const queryState = createAsyncThunk<
                     level,
                     exp,
                     energy,
-                    lastRedeemEnergy
+                    lastRedeemEnergy,
+                    interest,
                 };
 
             } catch (err: any) {

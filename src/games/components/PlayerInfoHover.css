@@ -1,7 +1,7 @@
 .player-info-hover-container {
     position: relative;
     width: 150px;
-    height: 43px;
+    height: 50px;
     z-index: 15;
 }
 
@@ -17,7 +17,7 @@
 
 .player-info-hover-context-text {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 10px;
