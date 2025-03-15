@@ -1,7 +1,6 @@
 import React from "react";
 import "./RedeemDisplay.css";
 import background from "../images/backgrounds/redeem_frame.png";
-import { getResourceIconPath, ResourceType } from "../../data/automata/models";
 import RedeemButton from "./Buttons/RedeemDisplayButton";
 
 interface Props {

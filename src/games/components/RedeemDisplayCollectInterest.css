@@ -1,0 +1,67 @@
+.redeem-display-collect-interest-container {
+    position: relative;
+    width: 240px;
+    height: 70px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.redeem-display-collect-interest-background {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 227px;
+    height: 60px;
+    user-select: none;
+}
+
+.redeem-display-collect-interest-button {
+    position: absolute;
+    left: 73%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.redeem-display-collect-interest-reward-icon {
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.redeem-display-collect-interest-reward-cross-text{
+    position: absolute;
+    top: 55%;
+    left: 27%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    text-align: center;
+    line-height: 15px;
+    margin: 0px;
+    width: 80%;
+    height: 15px;
+    font-family: "mishmash";
+    color: white;
+    user-select: none;
+}
+
+.redeem-display-collect-interest-reward-amount-text{
+    position: absolute;
+    top: 55%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    text-align: left;
+    line-height: 18px;
+    margin: 0px;
+    width: 10%;
+    height: 18px;
+    font-family: "mishmash";
+    color: white;
+    user-select: none;
+}

@@ -18,7 +18,7 @@ import {
   resourceTypes,
 } from "../../data/automata/models";
 import RedeemDisplay from "./RedeemDisplay";
-import RedeemDisplayEmpty from "./RedeemDisplayEmpty";
+import RedeemDisplayCollectInterest from "./RedeemDisplayCollectInterest";
 import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
 import { AccountSlice } from "zkwasm-minirollup-browser";
@@ -62,6 +62,10 @@ const RedeemMenu = () => {
     return redeemRewardBase * (level + 1);
   };
 
+  const onClickCollectInterest = () => {
+    /* */
+  };
+
   return (
     <div className="redeem-menu-container">
       <img src={background} className="redeem-menu-background" />
@@ -72,7 +76,12 @@ const RedeemMenu = () => {
           rowCount={4}
           elements={resourceTypes.map((type, index) =>
             type == ResourceType.Titanium ? (
-              <RedeemDisplayEmpty key={-1} />
+              <RedeemDisplayCollectInterest
+                isDisabled={false}
+                rewardIconImagePath={getResourceIconPath(ResourceType.Titanium)}
+                rewardAmount={0}
+                onClickCollectInterest={onClickCollectInterest}
+              />
             ) : (
               <RedeemDisplay
                 key={index}

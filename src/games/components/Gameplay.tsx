@@ -36,6 +36,8 @@ const Gameplay = () => {
   const elapsedTimeMultiplierRef = useRef<number>(1);
   const lastLocalTimerRef = useRef<number>(globalTimer);
 
+  console.log("state", uIState);
+
   const resetStartTimeRef = () => {
     startTimeRef.current = 0;
     lastLocalTimerRef.current =
