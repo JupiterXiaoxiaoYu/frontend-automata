@@ -4,8 +4,9 @@ import background from "../images/backgrounds/new_program_normal.png";
 import EmptyButton from "./Buttons/EmptyButton";
 import { getResourceIconPath, ResourceType } from "../../data/automata/models";
 import { useAppSelector } from "../../app/hooks";
-import { selectCurrentCost } from "../../data/automata/properties";
+import { selectCurrentCost, selectLevel } from "../../data/automata/properties";
 import { selectResource } from "../../data/automata/resources";
+import { selectProgramCount } from "../../data/automata/programs";
 
 interface Props {
   onSelect: () => void;
@@ -14,6 +15,8 @@ interface Props {
 const NewProgram = ({ onSelect }: Props) => {
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
+  const programCount = useAppSelector(selectProgramCount);
+  const level = useAppSelector(selectLevel);
 
   return (
     <div className="new-program-container">
@@ -22,7 +25,9 @@ const NewProgram = ({ onSelect }: Props) => {
       <p className="new-program-title-2-text">Program</p>
       <div className="new-program-button">
         <EmptyButton
-          isDisabled={titaniumCount < currentCost}
+          isDisabled={
+            titaniumCount < currentCost || programCount >= level * 4 + 4
+          }
           onClick={onSelect}
         />
       </div>

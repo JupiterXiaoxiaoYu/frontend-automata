@@ -88,6 +88,7 @@ export const selectIsAllResourcesToggled = (state: RootState) =>
 export const selectIsResourceTypeToggled = (type: ResourceType) => (state: RootState) => state.automata.programs.filter.dict[type] ?? false;
 
 export const selectCurrentPage = (state: RootState) => state.automata.programs.currentPage;
+export const selectProgramCount = (state: RootState) => state.automata.programs.programs.length;
 
 export const {
     resetFilter,

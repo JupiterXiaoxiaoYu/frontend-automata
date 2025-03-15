@@ -8,6 +8,7 @@ import creatureLock from "../images/backgrounds/robot_lock.png";
 import {
   TutorialType,
   UIState,
+  selectLevel,
   selectTutorialType,
   setTutorialType,
   setUIState,
@@ -43,8 +44,10 @@ const Creature = ({ index, creature, progress }: Props) => {
   const isSelected = selectedCreatureListIndex == index;
   const isLoading = useAppSelector(selectIsLoading);
   const creaturesCount = useAppSelector(selectCreaturesCount);
+  const level = useAppSelector(selectLevel);
   const isLocked = index >= creaturesCount;
   const showLocked = index > creaturesCount;
+  const unlockLevel = Math.floor(index / 2) + 1;
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
   const tutorialType = useAppSelector(selectTutorialType);
   const levelIcon = getAttributeIconPath(AttributeType.Level);
@@ -146,7 +149,16 @@ const Creature = ({ index, creature, progress }: Props) => {
       ) : (
         <p className="creature-text">{creature.name}</p>
       )}
-      {showLocked && <img src={creatureLock} className="creature-lock-image" />}
+      {showLocked && (
+        <>
+          <img src={creatureLock} className="creature-lock-image" />
+          <p className="creature-lock-text">
+            {unlockLevel > level
+              ? `Level ${unlockLevel}`
+              : "Unlock Previous Robot First"}
+          </p>
+        </>
+      )}
     </div>
   );
 };
