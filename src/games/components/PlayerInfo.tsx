@@ -37,7 +37,7 @@ const PlayerInfo = () => {
           icon={xp_icon}
           title={"xp"}
           amount={exp}
-          description={`${expToLevelUp - exp} Exp Before Leveling Up`}
+          description={`${expToLevelUp + level * 10 - exp} Exp Before Leveling Up`}
         />
       </div>
       <div className="player-info-energy-container">
