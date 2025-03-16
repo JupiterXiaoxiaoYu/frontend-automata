@@ -91,8 +91,8 @@ export const queryState = createAsyncThunk<
                 const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, last_interest_stamp: interestInfo, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy } = datas.player.data;
                 const balance = BigInt(interestInfo) >> 32n;
                 const lastInterestStamp = BigInt(interestInfo) & 0xFFFFFFFFn;
-                const delta = serverTick - lastInterestStamp;
-                const interest = Number(BigInt(level) * balance * (serverTickBn - lastInterestStamp) / (100000n * 20000n));
+                const delta = serverTickBn - lastInterestStamp;
+                const interest = Number(BigInt(level) * balance * delta / (100000n * 20000n));
                 return {
                     nonce,
                     player: local,
