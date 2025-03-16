@@ -47,7 +47,7 @@ const Creature = ({ index, creature, progress }: Props) => {
   const level = useAppSelector(selectLevel);
   const isLocked = index >= creaturesCount;
   const showLocked = index > creaturesCount;
-  const unlockLevel = Math.floor(index / 2) + 1;
+  const unlockLevel = Math.max(index * 2 - 1, 1);
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
   const tutorialType = useAppSelector(selectTutorialType);
   const levelIcon = getAttributeIconPath(AttributeType.Level);
