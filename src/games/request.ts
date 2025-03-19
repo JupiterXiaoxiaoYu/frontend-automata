@@ -92,7 +92,7 @@ export const queryState = createAsyncThunk<
                 const balance = BigInt(interestInfo) >> 32n;
                 const lastInterestStamp = BigInt(interestInfo) & 0xFFFFFFFFn;
                 const delta = serverTickBn - lastInterestStamp;
-                const interest = Number(BigInt(level) * balance * delta / (10000n * 1728n));
+                const interest = Number(BigInt(level) * balance * delta / (10000n * 17280n));
                 return {
                     nonce,
                     player: local,
