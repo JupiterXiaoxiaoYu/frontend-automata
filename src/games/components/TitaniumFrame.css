@@ -2,8 +2,8 @@
     position: absolute;
     display: flex;
     top: 27px;
-    left: calc(max(100%, 960px) - 320px);
-    width: 212px;
+    left: calc(max(100%, 960px) - 360px);
+    width: 246px;
     height: 45px;
     transform: translate(-50%, -50%);
 }
@@ -37,14 +37,14 @@
 .titanium-frame-resource-display-text {
     position: absolute;
     top: 50%;
-    left: 55%;
+    left: 70%;
     transform: translate(-50%, -50%);
     font-size: 12px;
     text-align: center;
     line-height: 100%;
     margin: 0px;
     color: white;
-    width: 35px;
+    width: 70px;
     height: 12px;
     font-family: "mishmash";
     pointer-events: none;
@@ -55,7 +55,7 @@
     position: absolute;
     width: 65px;
     height: 45px;
-    left: 90px;
+    left: 130px;
     top: 5px;
 }
 
@@ -63,6 +63,6 @@
     position: absolute;
     width: 65px;
     height: 45px;
-    left: 145px;
+    left: 185px;
     top: 5px;
 }

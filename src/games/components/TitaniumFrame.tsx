@@ -27,9 +27,7 @@ const TitaniumFrame = ({ onClickWithdraw, onClickDeposit }: Props) => {
           src={getResourceIconPath(ResourceType.Titanium)}
           className="titanium-frame-resource-display-image"
         />
-        <p className="titanium-frame-resource-display-text">
-          {getNumberAbbr(titaniumCount)}
-        </p>
+        <p className="titanium-frame-resource-display-text">{titaniumCount}</p>
       </div>
       <div className="titanium-frame-withdraw">
         <WithdrawButton onClick={onClickWithdraw} />
