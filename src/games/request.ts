@@ -86,13 +86,13 @@ export const queryState = createAsyncThunk<
                 const datas = JSON.parse(res.data);
                 console.log("(Data-QueryState)", datas);
                 const nonce = datas.player.nonce.toString();
-                const serverTick = datas.state;
+                const serverTick = datas.state.counter;
                 const serverTickBn = BigInt(serverTick);
                 const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, last_interest_stamp: interestInfo, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy } = datas.player.data;
                 const balance = BigInt(interestInfo) >> 32n;
                 const lastInterestStamp = BigInt(interestInfo) & 0xFFFFFFFFn;
                 const delta = serverTickBn - lastInterestStamp;
-                const interest = Number(BigInt(level) * balance * delta / (100000n * 20000n));
+                const interest = Number(BigInt(level) * balance * delta / (10000n * 17280n));
                 return {
                     nonce,
                     player: local,

@@ -24,7 +24,7 @@ const ResourceDisplay = ({
     <div className="resource-display-container">
       <img src={background} className="resource-display-background" />
       <img src={iconImagePath} className="resource-display-image" />
-      <p className="resource-display-text">{getNumberAbbr(amount)}</p>
+      <p className="resource-display-text" title={amount.toLocaleString()}>{getNumberAbbr(amount)}</p>
       <div
         className="resource-display-hover-range"
         onMouseEnter={handleMouseEnter}
