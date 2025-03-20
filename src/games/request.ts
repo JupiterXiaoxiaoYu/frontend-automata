@@ -88,8 +88,9 @@ export const queryState = createAsyncThunk<
                 console.log("(Data-QueryState)", datas);
                 const nonce = datas.player.nonce.toString();
                 const serverTick = datas.state.counter;
+                const bountyPool = datas.state.bounty_pool;
                 const serverTickBn = BigInt(serverTick);
-                const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, last_interest_stamp: interestInfo, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy, bounty_pool: bountyPool } = datas.player.data;
+                const { level, exp, energy, cost_info, current_cost: currentCost, objects, local, cards, last_interest_stamp: interestInfo, redeem_info: redeemInfo, last_check_point: lastRedeemEnergy } = datas.player.data;
                 const balance = BigInt(interestInfo) >> 32n;
                 const lastInterestStamp = BigInt(interestInfo) & 0xFFFFFFFFn;
                 const delta = serverTickBn - lastInterestStamp;
