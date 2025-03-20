@@ -15,11 +15,10 @@ const AccountInfo = () => {
       <p
         className={"account-info-account-text"}
       >{`Account  : ${addressAbbreviation(account?.address ?? "", 12)}`}</p>
-      <p className={"account-info-key-text"}>{`Key      : ${addressAbbreviation(
+      <p className={"account-info-key-text"}>{`Player ID: ${addressAbbreviation(
         l2account?.pubkey.toString(16) ?? "",
         12
       )}`}</p>
-      <p className={"account-info-player-id-text"}>{`PlayerId : ID`}</p>
     </div>
   );
 };
