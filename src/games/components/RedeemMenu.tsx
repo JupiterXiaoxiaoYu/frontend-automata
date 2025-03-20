@@ -43,11 +43,11 @@ const RedeemMenu = () => {
     dispatch(
       sendTransaction({
         cmd: getRedeemTransactionCommandArray(nonce, index),
-        prikey: l2account!.address,
+        prikey: l2account!.getPrivateKey(),
       })
     ).then((action) => {
       if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState({ prikey: l2account!.address })).then((action) => {
+        dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then((action) => {
           if (queryState.fulfilled.match(action)) {
             dispatch(setUIState({ uIState: UIState.Idle }));
           }

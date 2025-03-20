@@ -103,7 +103,7 @@ const UpgradePopup = () => {
             selectedCreatureIndexForRequestEncode,
             attrIndex
           ),
-          prikey: l2account!.address,
+          prikey: l2account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
