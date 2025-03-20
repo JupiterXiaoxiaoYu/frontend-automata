@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import background from "../images/backgrounds/guide_frame.png";
 import Grid from "./Grid";
 import {
+        selectBountyPool,
   selectInterest,
   selectNonce,
   selectRedeemCostBase,
@@ -34,6 +35,7 @@ const RedeemMenu = () => {
   const redeemInfo = useAppSelector(selectRedeemInfo);
   const resources = useAppSelector(selectResources);
   const interest = useAppSelector(selectInterest);
+  const bountyPool = useAppSelector(selectBountyPool);
   const resourcesMap = Object.fromEntries(
     resources.map((resource) => [resource.type, resource.amount])
   );
@@ -71,7 +73,7 @@ const RedeemMenu = () => {
   return (
     <div className="redeem-menu-container">
       <img src={background} className="redeem-menu-background" />
-      <p className="redeem-resource-title-text">Redeem</p>
+            <p className="redeem-resource-title-text">Redeem [bounty pool volume: {bountyPool}] </p>
       <div className="redeem-menu-grid">
         <Grid
           columnCount={2}

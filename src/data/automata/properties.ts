@@ -56,6 +56,7 @@ interface PropertiesState {
     energy: number;
     lastRedeemEnergy: number;
     interest: number;
+    bountyPool: number;
 }
 
 const initialState: PropertiesState = {
@@ -76,6 +77,7 @@ const initialState: PropertiesState = {
     energy: 0,
     lastRedeemEnergy: 0,
     interest: 0,
+    bountyPool: 0,
 };
 
 export const propertiesSlice = createSlice({
@@ -134,6 +136,7 @@ export const propertiesSlice = createSlice({
         state.energy = action.payload.energy;
         state.lastRedeemEnergy = action.payload.lastRedeemEnergy;
         state.interest = action.payload.interest;
+        state.bountyPool = action.payload.bountyPool;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -164,6 +167,7 @@ export const selectEnergy = (state: RootState) => state.automata.properties.ener
 export const selectRedeemEnergyCooldown = (state: RootState) => redeemEnergyCooldownBase / state.automata.properties.level;
 export const selectLastRedeemEnergy = (state: RootState) => state.automata.properties.lastRedeemEnergy;
 export const selectInterest = (state: RootState) => state.automata.properties.interest;
+export const selectBountyPool = (state: RootState) => state.automata.properties.bountyPool;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
 export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;
