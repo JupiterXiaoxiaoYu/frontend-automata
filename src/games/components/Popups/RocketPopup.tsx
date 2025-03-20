@@ -126,11 +126,11 @@ const RocketPopup = () => {
       dispatch(
         sendTransaction({
           cmd: getCollectEnergyTransactionCommandArray(nonce),
-          prikey: l2account!.address,
+          prikey: l2account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.address })).then(
+          dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then(
             (action) => {
               if (queryState.fulfilled.match(action)) {
                 setFinishQuery(true);

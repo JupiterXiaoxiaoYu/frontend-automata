@@ -26,7 +26,7 @@ export function GameController() {
       dispatch(
         sendTransaction({
           cmd: getInsPlayerTransactionCommandArray(nonce),
-          prikey: l2account!.address,
+          prikey: l2account!.getPrivateKey(),
         })
       );
     } catch (e) {
@@ -36,7 +36,7 @@ export function GameController() {
 
   function updateState() {
     if (uIState >= UIState.Idle) {
-      dispatch(queryState({ prikey: l2account!.address }));
+      dispatch(queryState({ prikey: l2account!.getPrivateKey()}));
     }
     setInc(inc + 1);
   }
@@ -45,7 +45,7 @@ export function GameController() {
     if (uIState == UIState.QueryConfig) {
       dispatch(getConfig({}));
     } else if (uIState == UIState.QueryState) {
-      dispatch(queryState({ prikey: l2account!.address }));
+      dispatch(queryState({ prikey: l2account!.getPrivateKey()}));
     } else if (uIState == UIState.CreatePlayer) {
       createPlayer();
     }
@@ -104,8 +104,6 @@ export function GameController() {
     });
   };
 
-  const account = useAppSelector(AccountSlice.selectL1Account);
-
   if (l2account && uIState >= UIState.Idle) {
     return <Gameplay />;
   } else {
@@ -114,7 +112,7 @@ export function GameController() {
         <WelcomePage
           progress={progress}
           message={message}
-          onClick={() => dispatch(AccountSlice.loginL2AccountAsync(account!))}
+          onClick={() => dispatch(AccountSlice.loginL2AccountAsync("0xAUTOMATA"))}
         />
       </>
     );

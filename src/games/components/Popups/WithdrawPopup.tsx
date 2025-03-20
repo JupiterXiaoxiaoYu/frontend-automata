@@ -45,7 +45,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
             BigInt(amount),
             l1account!
           ),
-          prikey: l2account!.address,
+          prikey: l2account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {

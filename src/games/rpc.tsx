@@ -17,7 +17,7 @@ const rpc = new ZKWasmAppRpc(fullUrl);
 
 export async function queryConfig() {
   try {
-    const state = await rpc.query_config();
+    const state = await rpc.queryConfig();
     return state;
   } catch (error) {
     throw "QueryStateError " + error;

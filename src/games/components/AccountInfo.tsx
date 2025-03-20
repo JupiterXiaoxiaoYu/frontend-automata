@@ -16,7 +16,7 @@ const AccountInfo = () => {
         className={"account-info-account-text"}
       >{`Account  : ${addressAbbreviation(account?.address ?? "", 12)}`}</p>
       <p className={"account-info-key-text"}>{`Key      : ${addressAbbreviation(
-        l2account?.address ?? "",
+        l2account?.pubkey.toString(16) ?? "",
         12
       )}`}</p>
       <p className={"account-info-player-id-text"}>{`PlayerId : ID`}</p>
