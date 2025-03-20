@@ -73,7 +73,7 @@ const RedeemMenu = () => {
   return (
     <div className="redeem-menu-container">
       <img src={background} className="redeem-menu-background" />
-            <p className="redeem-resource-title-text">Redeem [bounty pool volume: {bountyPool}] </p>
+            <p className="redeem-resource-title-text">Redeem [available: {bountyPool}] </p>
       <div className="redeem-menu-grid">
         <Grid
           columnCount={2}
