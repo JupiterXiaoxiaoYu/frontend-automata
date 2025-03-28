@@ -40,7 +40,7 @@ const UnlockPopup = () => {
             src={getResourceIconPath(ResourceType.Titanium)}
             className="unlock-popup-cost-icon"
           />
-          <p className="unlock-popup-cost-text">{currentCost}</p>
+          <p className="unlock-popup-cost-text">{currentCost + 1000}</p>
           <img
             src={amountBackground}
             className="unlock-popup-cost-background"
@@ -48,7 +48,7 @@ const UnlockPopup = () => {
         </div>
         <div className="unlock-popup-confirm-button">
           <ConfirmButton
-            isDisabled={titaniumCount < currentCost}
+            isDisabled={titaniumCount < currentCost + 1000}
             onClick={onClickConfirm}
           />
         </div>
