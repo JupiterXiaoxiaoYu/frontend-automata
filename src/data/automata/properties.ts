@@ -139,6 +139,7 @@ export const propertiesSlice = createSlice({
         state.lastRedeemEnergy = action.payload.lastRedeemEnergy;
         state.interest = action.payload.interest;
         state.bountyPool = action.payload.bountyPool;
+        state.redeemEnergy = action.payload.redeemEnergy;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {

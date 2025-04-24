@@ -9,6 +9,7 @@ import {
   selectEnergy,
   selectExp,
   selectLevel,
+  selectRedeemEnergy,
 } from "../../data/automata/properties";
 import PlayerInfoDisplay from "./PlayerInfoDisplay";
 import { expToLevelUp } from "../../data/automata/models";
@@ -18,6 +19,7 @@ const PlayerInfo = () => {
   const level = useAppSelector(selectLevel);
   const exp = useAppSelector(selectExp);
   const energy = useAppSelector(selectEnergy);
+  const redeemEnergy = useAppSelector(selectRedeemEnergy);
 
   return (
     <div className="player-info-container">
@@ -45,7 +47,7 @@ const PlayerInfo = () => {
           icon={energy_icon}
           title={"energy"}
           amount={energy}
-          description={"Automatas Use Energy To Operate"}
+          description={`Automatas Use Energy To Operate, you can collect ${redeemEnergy} in rocket`}
         />
       </div>
     </div>
