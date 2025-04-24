@@ -54,6 +54,7 @@ interface PropertiesState {
     level: number;
     exp: number;
     energy: number;
+    redeemEnergy: number;
     lastRedeemEnergy: number;
     interest: number;
     bountyPool: number;
@@ -75,6 +76,7 @@ const initialState: PropertiesState = {
     level: 1,
     exp: 0,
     energy: 0,
+    redeemEnergy: 0,
     lastRedeemEnergy: 0,
     interest: 0,
     bountyPool: 0,
@@ -164,7 +166,8 @@ export const selectRedeemInfo = (state: RootState) => state.automata.properties.
 export const selectLevel = (state: RootState) => state.automata.properties.level;
 export const selectExp = (state: RootState) => state.automata.properties.exp;
 export const selectEnergy = (state: RootState) => state.automata.properties.energy;
-export const selectRedeemEnergyCooldown = (state: RootState) => redeemEnergyCooldownBase / state.automata.properties.level;
+export const selectRedeemEnergy = (state: RootState) => state.automata.properties.redeemEnergy;
+export const selectRedeemEnergyCooldown = (state: RootState) => redeemEnergyCooldownBase;
 export const selectLastRedeemEnergy = (state: RootState) => state.automata.properties.lastRedeemEnergy;
 export const selectInterest = (state: RootState) => state.automata.properties.interest;
 export const selectBountyPool = (state: RootState) => state.automata.properties.bountyPool;

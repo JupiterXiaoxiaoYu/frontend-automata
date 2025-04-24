@@ -12,11 +12,11 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./RocketPopup.css";
 import {
   getResourceIconPath,
-  redeemEnergyAmount,
   redeemEnergyTitaniumCost,
   ResourceType,
 } from "../../../data/automata/models";
 import { selectResource } from "../../../data/automata/resources";
+import { selectRedeemEnergy } from "../../../data/automata/properties";
 import { AccountSlice } from "zkwasm-minirollup-browser";
 import { queryState, sendTransaction } from "../../request";
 import { getCollectEnergyTransactionCommandArray } from "../../rpc";
@@ -98,6 +98,7 @@ const RocketPopup = () => {
   const l2account = useAppSelector(AccountSlice.selectL2Account);
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
+  const redeemEnergy = useAppSelector(selectRedeemEnergy);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const [rewardAnimation, setRewardAnimation] = useState(false);
   const [finishQuery, setFinishQuery] = useState(false);
@@ -164,7 +165,7 @@ const RocketPopup = () => {
       <div className="rocket-popup-main-container">
         <img src={background} className="rocket-popup-main-background" />
         <p className="rocket-popup-title-text">
-          Redeem {redeemEnergyAmount} Energy
+          Redeem {redeemEnergy} Energy
         </p>
         <p className="rocket-popup-subtitle-text">Cost</p>
         <div className="rocket-popup-cost-container">
