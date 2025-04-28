@@ -30,12 +30,20 @@ export enum UIState{
   CollectInterestPopupLoading,
   RocketPopup,
   RocketPopupLoading,
+  MarketPopup,
+  MarketPopupLoading,
 }
 
 export enum TutorialType{
   None,
   Creature,
   Program,
+}
+
+export enum MarketTabType{
+  Market,
+  Bid,
+  Sell,
 }
 
 interface PropertiesState {
@@ -58,6 +66,7 @@ interface PropertiesState {
     lastRedeemEnergy: number;
     interest: number;
     bountyPool: number;
+    marketTabType: MarketTabType;
 }
 
 const initialState: PropertiesState = {
@@ -80,6 +89,7 @@ const initialState: PropertiesState = {
     lastRedeemEnergy: 0,
     interest: 0,
     bountyPool: 0,
+    marketTabType: MarketTabType.Market,
 };
 
 export const propertiesSlice = createSlice({
@@ -97,6 +107,9 @@ export const propertiesSlice = createSlice({
       },
       setConfirmPopupInfo: (state, action) => {
         state.confirmPopupInfo = action.payload.confirmPopupInfo;
+      },
+      setMarketTabType: (state, action) => {
+        state.marketTabType = action.payload.marketTabType;
       },
     },
 
@@ -173,6 +186,7 @@ export const selectLastRedeemEnergy = (state: RootState) => state.automata.prope
 export const selectInterest = (state: RootState) => state.automata.properties.interest;
 export const selectBountyPool = (state: RootState) => state.automata.properties.bountyPool;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
+export const selectMarketTabType = (state: RootState) => state.automata.properties.marketTabType;
 
-export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo, setMarketTabType } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

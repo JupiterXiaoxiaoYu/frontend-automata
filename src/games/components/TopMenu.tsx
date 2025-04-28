@@ -3,12 +3,15 @@ import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
+  MarketTabType,
   selectIsLoading,
+  setMarketTabType,
   setUIState,
   UIState,
 } from "../../data/automata/properties";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
+import MarketButton from "./Buttons/MarketButton";
 import { startGuide } from "../../data/automata/guides";
 import { GuideType } from "../../data/automata/models";
 import PlayerInfo from "./PlayerInfo";
@@ -34,6 +37,11 @@ const TopMenu = () => {
     dispatch(setUIState({ uIState: UIState.Guide }));
   }
 
+  function onClickMarket() {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Market }));
+    dispatch(setUIState({ uIState: UIState.MarketPopup }));
+  }
+
   return (
     <div className="top">
       <div className="top-left"></div>
@@ -46,6 +54,9 @@ const TopMenu = () => {
       <AccountInfo />
       <Resources />
       <PlayerInfo />
+      <div className="top-market">
+        <MarketButton onClick={onClickMarket} />
+      </div>
       <div className="top-help">
         <HelpButton onClick={onClickHelp} />
       </div>

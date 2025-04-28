@@ -1,43 +1,53 @@
 .top {
-    height: 110px;
-    min-height: 110px;
-    width: 100%;
-    min-width: 960px;
-    display: flex;
-    font-size: 24px;
-    z-index: 10;
+  height: 110px;
+  min-height: 110px;
+  width: 100%;
+  min-width: 960px;
+  display: flex;
+  font-size: 24px;
+  z-index: 10;
 }
 
-.top-left, .top-right, .top-middle {
-    height: 100%;
-    background-size: contain;
+.top-left,
+.top-right,
+.top-middle {
+  height: 100%;
+  background-size: contain;
 }
 
 .top-left {
-    width: 480px;
-    height: 110px;
-    background-image: url('../images/backgrounds/top_left.png');
-    background-repeat: no-repeat;
+  width: 480px;
+  height: 110px;
+  background-image: url("../images/backgrounds/top_left.png");
+  background-repeat: no-repeat;
 }
 
 .top-right {
-    width: 480px;
-    height: 110px;
-    background-image: url('../images/backgrounds/top_right.png');
-    background-repeat: no-repeat;
+  width: 480px;
+  height: 110px;
+  background-image: url("../images/backgrounds/top_right.png");
+  background-repeat: no-repeat;
 }
 
 .top-middle {
-    flex-grow: 1;
-    height: 110px;
-    background-image: url('../images/backgrounds/top_mid.png');
-    background-repeat: repeat-x;
+  flex-grow: 1;
+  height: 110px;
+  background-image: url("../images/backgrounds/top_mid.png");
+  background-repeat: repeat-x;
 }
 
-.top-help{
-    position: absolute;
-    width: 58px;
-    height: 20px;
-    top: 60px;
-    right: 240px;
+.top-help {
+  position: absolute;
+  width: 58px;
+  height: 20px;
+  top: 60px;
+  right: 240px;
+}
+
+.top-market {
+  position: absolute;
+  width: 58px;
+  height: 20px;
+  top: 60px;
+  right: 296px;
 }

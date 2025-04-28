@@ -102,6 +102,7 @@ const LeftMenu = ({ localTimer }: Props) => {
         <PageSelector
           currentPage={currentPage}
           pageCount={pageCount}
+          isHorizontal={false}
           onClickPrevPageButton={onClickPrevPageButton}
           onClickNextPageButton={onClickNextPageButton}
         />
