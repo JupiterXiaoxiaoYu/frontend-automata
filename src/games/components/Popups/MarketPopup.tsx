@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import background from "../../images/backgrounds/market_frame.png";
 import amountBackground from "../../images/backgrounds/market_money_background.png";
 import {
@@ -18,11 +18,44 @@ import { selectResource } from "../../../data/automata/resources";
 import MarketButton from "../Buttons/MarketButton";
 import MarketTabButton from "../Buttons/MarketTabButton";
 import PageSelector from "../PageSelector";
+import Grid from "../Grid";
+import MarketProgram from "../MarketProgram";
+import { selectAllPrograms } from "../../../data/automata/programs";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const marketTabType = useAppSelector(selectMarketTabType);
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const columnCount = 3;
+  const rowCount = 2;
+  const [elementWidth, setElementWidth] = useState<number>(0);
+  const [elementHeight, setElementHeight] = useState<number>(0);
+  const programs = useAppSelector(selectAllPrograms);
+  const elements =
+    marketTabType == MarketTabType.Market
+      ? programs.map((program, index) => (
+          <MarketProgram key={index} program={program} />
+        ))
+      : [];
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      const width = containerRef.current.offsetWidth / columnCount;
+      const height = containerRef.current.offsetHeight / rowCount;
+      setElementWidth(width);
+      setElementHeight(height);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, []);
 
   const onClickCancel = () => {
     dispatch(setUIState({ uIState: UIState.Creating }));
@@ -91,6 +124,17 @@ const MarketPopup = () => {
             selectColor="black"
           />
         </div>
+
+        <div ref={containerRef} className="market-popup-page-grid">
+          <Grid
+            elementWidth={elementWidth}
+            elementHeight={elementHeight}
+            columnCount={columnCount}
+            rowCount={rowCount}
+            elements={elements}
+          />
+        </div>
+
         <div className="market-popup-page-selector">
           <PageSelector
             currentPage={98}

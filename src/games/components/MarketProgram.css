@@ -1,0 +1,122 @@
+.market-program-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.market-program-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-name-text {
+  position: absolute;
+  top: 9%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 10px;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-time-text {
+  position: absolute;
+  top: 9%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  text-align: right;
+  line-height: 100%;
+  margin: 0px;
+  width: 25%;
+  height: 8px;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-icon-image {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 45%;
+  left: 22%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-resource-grid {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 88px;
+  height: 64px;
+  top: 45%;
+  left: 67%;
+  pointer-events: none;
+}
+
+.market-program-bid-title-text {
+  position: absolute;
+  top: 85%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  font-size: 6px;
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 6px;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-bid-icon {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 84.3%;
+  left: 46.2%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.market-program-bid-text {
+  position: absolute;
+  top: 85%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 10px;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-button {
+  position: absolute;
+  top: 82.5%;
+  left: 84%;
+  transform: translate(-50%, -50%);
+}

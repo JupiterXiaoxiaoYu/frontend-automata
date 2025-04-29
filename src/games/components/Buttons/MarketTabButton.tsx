@@ -1,6 +1,6 @@
 import normalImage from "../../images/Buttons/MarketTab/tab.png";
 import hoverImage from "../../images/Buttons/MarketTab/tab_hv.png";
-import clickImage from "../../images/Buttons/MarketTab/tab_select.png";
+import clickImage from "../../images/Buttons/MarketTab/tab_click.png";
 import ImageTextButton from "./ImageTextButton";
 
 interface Props {
@@ -33,7 +33,7 @@ const MarketTabButton = ({
         style={{
           position: "absolute",
           left: "50%",
-          top: "50%",
+          top: "45%",
           width: "90%",
           height: "auto",
           transform: "translate(-50%, -50%)",

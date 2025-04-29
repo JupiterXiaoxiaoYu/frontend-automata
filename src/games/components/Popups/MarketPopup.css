@@ -77,7 +77,7 @@
   height: 10%;
   aspect-ratio: 177/74;
   left: 14.5%;
-  top: 11%;
+  top: 12.6%;
   transform: translate(-50%, -50%);
 }
 
@@ -87,7 +87,7 @@
   height: 10%;
   aspect-ratio: 177/74;
   left: 33%;
-  top: 11%;
+  top: 12.6%;
   transform: translate(-50%, -50%);
 }
 
@@ -97,15 +97,25 @@
   height: 10%;
   aspect-ratio: 177/74;
   left: 51.5%;
-  top: 11%;
+  top: 12.6%;
   transform: translate(-50%, -50%);
 }
 
 .market-popup-page-selector {
   position: absolute;
-  width: 20%;
-  height: 10%;
+  width: 170px;
+  height: 40px;
   left: 50%;
   top: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.market-popup-page-grid {
+  position: absolute;
+  width: 85%;
+  height: auto;
+  aspect-ratio: 891/396;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
