@@ -11,6 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./MarketPopup.css";
 import {
+  CommodityModel,
   getResourceIconPath,
   ResourceType,
 } from "../../../data/automata/models";
@@ -21,6 +22,7 @@ import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
+import { getMarketList } from "../../express";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
@@ -32,12 +34,14 @@ const MarketPopup = () => {
   const [elementWidth, setElementWidth] = useState<number>(0);
   const [elementHeight, setElementHeight] = useState<number>(0);
   const programs = useAppSelector(selectAllPrograms);
+  const [marketList, setMarketList] = useState<CommodityModel[]>([]);
   const elements =
     marketTabType == MarketTabType.Market
-      ? programs.map((program, index) => (
-          <MarketProgram key={index} program={program} />
+      ? marketList.map((commodity, index) => (
+          <MarketProgram key={index} program={commodity.program} />
         ))
       : [];
+  const [isFirst, setIsFirst] = useState<boolean>(true);
 
   const adjustSize = () => {
     if (containerRef.current) {
@@ -57,8 +61,22 @@ const MarketPopup = () => {
     };
   }, []);
 
+  const getMarketMapAsync = async () => {
+    const ret = await getMarketList();
+    console.log("ret", ret);
+    setMarketList(ret);
+  };
+
+  useEffect(() => {
+    if (isFirst) {
+      setIsFirst(false);
+      getMarketMapAsync();
+    }
+  }, [isFirst]);
+
   const onClickCancel = () => {
     dispatch(setUIState({ uIState: UIState.Creating }));
+    setIsFirst(true);
   };
 
   const onClickMarketTab = () => {

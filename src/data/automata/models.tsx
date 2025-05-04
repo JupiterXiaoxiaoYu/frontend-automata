@@ -148,6 +148,7 @@ import TitanBloomIcon from "../../games/images/Animations/Programs/Icons/TitanBl
 import QuantumCoreIcon from "../../games/images/Animations/Programs/Icons/QuantumCore.png";
 import XenoBloomIcon from "../../games/images/Animations/Programs/Icons/XenoBloom.png";
 import StarLightIcon from "../../games/images/Animations/Programs/Icons/StarLight.png";
+import { SERVER_TICK_TO_SECOND } from "../../games/request";
 
 export interface CreatureModel {
   attributes: AttributeAmountPair[];
@@ -233,6 +234,30 @@ export interface ProgramModel {
   processingTime: number;
   resources: Array<ResourceAmountPair>;
   name: string;
+}
+
+export function decodeProgram(programRaw: any, index = 0) {
+  const { duration, attributes } = programRaw;
+  const type = index as ProgramType;
+  const program: ProgramModel = {
+    index,
+    type,
+    processingTime: duration * SERVER_TICK_TO_SECOND,
+    resources: getResources(attributes).filter(
+      (resource) => resource.amount !== 0
+    ),
+    name: getProgramName(type),
+  };
+
+  return program;
+}
+
+export function decodePrograms(programRaws: any) {
+  const programs: ProgramModel[] = [];
+  for (let i = 0; i < programRaws.length; i++) {
+    programs.push(decodeProgram(programRaws[i], i));
+  }
+  return programs;
 }
 
 export interface ProgramInfo {
@@ -546,6 +571,14 @@ interface ResourceData {
   disableIconPath: string;
 }
 
+export interface CommodityModel {
+  id: number;
+  askPrice: number;
+  program: ProgramModel;
+  bidPrice: number;
+  bidders: string[];
+}
+
 const resourceDatas: Record<ResourceType, ResourceData> = {
   [ResourceType.Crystal]: {
     name: "Crystal",
@@ -680,7 +713,7 @@ export const allResourcesToggleFilter: FilterModel = {
 export function getResources(array: Array<number>) {
   return resourceTypes.map((type, index) => ({
     type,
-    amount: array[index],
+    amount: array[index] ?? 0,
   }));
 }
 

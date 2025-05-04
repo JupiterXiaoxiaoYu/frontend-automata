@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store";
-import { queryState, SERVER_TICK_TO_SECOND } from "../../games/request";
-import { ProgramModel, FilterModel, allResourcesToggleFilter, getResources, ResourceType, resourceTypes, ProgramType, getProgramName
+import { queryState } from "../../games/request";
+import { ProgramModel, FilterModel, allResourcesToggleFilter, getResources, ResourceType, resourceTypes, ProgramType, getProgramName, decodePrograms
  } from "./models";
 
 interface ProgramsState {
@@ -15,25 +15,6 @@ const initialState: ProgramsState = {
     filter: allResourcesToggleFilter,
     currentPage: 0,
 };
-
-function decodePrograms(programRaws: any) {
-    const programs: ProgramModel[] = [];
-    for(let i=0; i<programRaws.length; i++) {
-        const { duration, attributes} = programRaws[i];
-        const type = i as ProgramType;
-        const program: ProgramModel = {
-            index: i,
-            type,
-            processingTime: duration * SERVER_TICK_TO_SECOND,
-            resources: 
-                getResources(attributes).filter(resource => resource.amount !== 0),
-            name: getProgramName(type),
-        };
-        
-        programs.push(program);
-    }
-    return programs;
-}
 
 export const programsSlice = createSlice({
     name: 'programs',

@@ -32,6 +32,8 @@ export enum UIState{
   RocketPopupLoading,
   MarketPopup,
   MarketPopupLoading,
+  BidAmountPopup,
+  BidAmountPopupLoading,
 }
 
 export enum TutorialType{
