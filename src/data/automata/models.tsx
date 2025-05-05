@@ -238,6 +238,7 @@ export interface ProgramModel {
 
 export function decodeProgram(programRaw: any, index = 0) {
   const { duration, attributes } = programRaw;
+  console.log("Program Raw", programRaw);
   const type = index as ProgramType;
   const program: ProgramModel = {
     index,

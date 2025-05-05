@@ -74,6 +74,9 @@ const CMD_WITHDRAW = 6n;
 const CMD_DEPOSIT = 7n;
 const CMD_BOUNTY = 8n;
 const CMD_COLLECT_ENERGY = 9n;
+const CMD_LIST_CARD = 10n;
+const CMD_BID_CARD = 11n;
+const CMD_SELL_CARD = 12n;
 
 export function getInstallProgramTransactionCommandArray(
   nonce: bigint,
@@ -147,5 +150,37 @@ export function getRedeemTransactionCommandArray(
 
 export function getCollectEnergyTransactionCommandArray(nonce: bigint) {
   const command = createCommand(nonce, CMD_COLLECT_ENERGY, []);
+  return command;
+}
+
+export function getListCardTransactionCommandArray(
+  nonce: bigint,
+  index: number,
+  askPrice: number
+): BigUint64Array {
+  const command = createCommand(nonce, CMD_LIST_CARD, [
+    BigInt(index),
+    BigInt(askPrice),
+  ]);
+  return command;
+}
+
+export function getBidCardTransactionCommandArray(
+  nonce: bigint,
+  marketId: number,
+  askPrice: number
+): BigUint64Array {
+  const command = createCommand(nonce, CMD_BID_CARD, [
+    BigInt(marketId),
+    BigInt(askPrice),
+  ]);
+  return command;
+}
+
+export function getSellCardTransactionCommandArray(
+  nonce: bigint,
+  index: number
+): BigUint64Array {
+  const command = createCommand(nonce, CMD_SELL_CARD, [BigInt(index)]);
   return command;
 }

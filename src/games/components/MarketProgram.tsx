@@ -3,37 +3,38 @@ import "./MarketProgram.css";
 import Grid from "./Grid";
 import ProgramResourceDisplay from "./ProgramResourceDisplay";
 import {
-  ProgramModel,
   getResourceIconPath,
   getProgramIconPath,
   ResourceType,
+  CommodityModel,
 } from "../../data/automata/models";
 import { formatTime } from "../../data/automata/creatures";
 import background from "../images/backgrounds/market_card_frame.png";
 import SellButton from "./Buttons/SellButton";
+import BidButton from "./Buttons/BidButton";
 
 interface Props {
-  program: ProgramModel;
+  commodity: CommodityModel;
+  onClickBid?: () => void;
+  onClickSell?: () => void;
+  onClickList?: () => void;
 }
 
-const MarketProgram = ({ program }: Props) => {
-  const onClickSell = () => {
-    /**/
-  };
-
-  const onClickBid = () => {
-    /**/
-  };
-
+const MarketProgram = ({
+  commodity,
+  onClickBid = undefined,
+  onClickSell = undefined,
+  onClickList = undefined,
+}: Props) => {
   return (
     <div className="market-program-container">
       <img src={background} className="market-program-background" />
-      <p className="market-program-name-text">{program.name}</p>
+      <p className="market-program-name-text">{commodity.program.name}</p>
       <p className="market-program-time-text">
-        {formatTime(program.processingTime)}
+        {formatTime(commodity.program.processingTime)}
       </p>
       <img
-        src={getProgramIconPath(program.type)}
+        src={getProgramIconPath(commodity.program.type)}
         className="market-program-icon-image"
       />
       <div className="market-program-resource-grid">
@@ -42,7 +43,7 @@ const MarketProgram = ({ program }: Props) => {
           elementHeight={16}
           columnCount={2}
           rowCount={4}
-          elements={program.resources.map((resource, index) => (
+          elements={commodity.program.resources.map((resource, index) => (
             <ProgramResourceDisplay
               key={index}
               iconImagePath={getResourceIconPath(resource.type)}
@@ -56,10 +57,22 @@ const MarketProgram = ({ program }: Props) => {
         src={getResourceIconPath(ResourceType.Titanium)}
         className="market-program-bid-icon"
       />
-      <p className="market-program-bid-text">12345</p>
-      <div className="market-program-button">
-        <SellButton isDisabled={false} onClick={onClickSell} />
-      </div>
+      <p className="market-program-bid-text">{commodity.bidPrice}</p>
+      {onClickBid && (
+        <div className="market-program-button">
+          <BidButton isDisabled={false} onClick={onClickBid} />
+        </div>
+      )}
+      {onClickSell && (
+        <div className="market-program-button">
+          <SellButton isDisabled={false} onClick={onClickSell} />
+        </div>
+      )}
+      {onClickList && (
+        <div className="market-program-button">
+          <SellButton isDisabled={false} onClick={onClickList} />
+        </div>
+      )}
     </div>
   );
 };

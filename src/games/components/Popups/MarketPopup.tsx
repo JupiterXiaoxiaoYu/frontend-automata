@@ -5,6 +5,7 @@ import {
   MarketTabType,
   UIState,
   selectMarketTabType,
+  selectNonce,
   setMarketTabType,
   setUIState,
 } from "../../../data/automata/properties";
@@ -16,31 +17,62 @@ import {
   ResourceType,
 } from "../../../data/automata/models";
 import { selectResource } from "../../../data/automata/resources";
-import MarketButton from "../Buttons/MarketButton";
 import MarketTabButton from "../Buttons/MarketTabButton";
 import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
 import { getMarketList } from "../../express";
+import { sendTransaction } from "zkwasm-minirollup-browser/src/connect";
+import {
+  getBidCardTransactionCommandArray,
+  getListCardTransactionCommandArray,
+  getSellCardTransactionCommandArray,
+} from "../../rpc";
+import { AccountSlice } from "zkwasm-minirollup-browser";
+import { queryState } from "../../request";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
+  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const nonce = useAppSelector(selectNonce);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const marketTabType = useAppSelector(selectMarketTabType);
+  const [isLoading, setIsLoading] = useState(false);
   const containerRef = useRef<HTMLParagraphElement>(null);
   const columnCount = 3;
   const rowCount = 2;
   const [elementWidth, setElementWidth] = useState<number>(0);
   const [elementHeight, setElementHeight] = useState<number>(0);
   const programs = useAppSelector(selectAllPrograms);
+  const sellList = programs.map((program) => {
+    return {
+      id: 0,
+      askPrice: 0,
+      program,
+      bidPrice: 0,
+      bidders: [],
+    };
+  });
   const [marketList, setMarketList] = useState<CommodityModel[]>([]);
   const elements =
     marketTabType == MarketTabType.Market
       ? marketList.map((commodity, index) => (
-          <MarketProgram key={index} program={commodity.program} />
+          <MarketProgram
+            key={index}
+            commodity={commodity}
+            onClickBid={() => onClickBid(commodity)}
+          />
         ))
-      : [];
+      : marketTabType == MarketTabType.Bid
+      ? []
+      : sellList.map((commodity, index) => (
+          <MarketProgram
+            key={index}
+            commodity={commodity}
+            onClickList={() => onClickList(index)}
+          />
+        ));
   const [isFirst, setIsFirst] = useState<boolean>(true);
 
   const adjustSize = () => {
@@ -97,6 +129,84 @@ const MarketPopup = () => {
 
   const onClickNextPageButton = () => {
     // dispatch(nextPage({}));
+  };
+
+  const sendSellCmd = (commodity: CommodityModel) => {
+    dispatch(
+      sendTransaction({
+        cmd: getSellCardTransactionCommandArray(nonce, commodity.id),
+        prikey: l2account!.getPrivateKey(),
+      })
+    ).then((action) => {
+      if (sendTransaction.fulfilled.match(action)) {
+        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+          (action) => {
+            if (queryState.fulfilled.match(action)) {
+              setIsLoading(false);
+            }
+          }
+        );
+      }
+    });
+  };
+
+  const onClickSell = (commodity: CommodityModel) => {
+    if (!isLoading) {
+      setIsLoading(true);
+      sendSellCmd(commodity);
+    }
+  };
+
+  const sendBidCmd = (commodity: CommodityModel) => {
+    dispatch(
+      sendTransaction({
+        cmd: getBidCardTransactionCommandArray(nonce, commodity.id, 10),
+        prikey: l2account!.getPrivateKey(),
+      })
+    ).then((action) => {
+      if (sendTransaction.fulfilled.match(action)) {
+        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+          (action) => {
+            if (queryState.fulfilled.match(action)) {
+              setIsLoading(false);
+            }
+          }
+        );
+      }
+    });
+  };
+
+  const onClickBid = (commodity: CommodityModel) => {
+    if (!isLoading) {
+      setIsLoading(true);
+      sendBidCmd(commodity);
+    }
+  };
+
+  const onClickList = (index: number) => {
+    dispatch(
+      sendTransaction({
+        cmd: getListCardTransactionCommandArray(nonce, index, 10),
+        prikey: l2account!.getPrivateKey(),
+      })
+    ).then((action) => {
+      if (sendTransaction.fulfilled.match(action)) {
+        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+          (action) => {
+            if (queryState.fulfilled.match(action)) {
+              setIsLoading(false);
+            }
+          }
+        );
+      }
+    });
+  };
+
+  const sendListCmd = (index: number) => {
+    if (!isLoading) {
+      setIsLoading(true);
+      onClickList(index);
+    }
   };
 
   return (

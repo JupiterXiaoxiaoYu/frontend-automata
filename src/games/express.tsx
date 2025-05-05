@@ -31,8 +31,8 @@ export async function getMarketList(): Promise<CommodityModel[]> {
       id: marketid,
       askPrice: askprice,
       program: decodeProgram(card),
-      bidPrice: bidder.bidprice,
-      bidders: bidder.bidder,
+      bidPrice: bidder?.bidprice ?? 0,
+      bidders: bidder?.bidder ?? [],
     })
   );
 
