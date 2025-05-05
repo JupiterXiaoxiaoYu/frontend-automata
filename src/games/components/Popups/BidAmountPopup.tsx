@@ -1,153 +1,43 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
-  UIState,
-  selectNonce,
-  selectUIState,
-  setConfirmPopupInfo,
-  setUIState,
-} from "../../../data/automata/properties";
-import {
   getResourceIconPath,
   ResourceType,
-  getNumberAbbr,
+  CommodityModel,
 } from "../../../data/automata/models";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./BidAmountPopup.css";
-import { sendTransaction } from "../../request";
-import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
-import { selectResource } from "../../../data/automata/resources";
 
 interface Props {
-  isWithdraw: boolean;
+  minBidAmount: number;
+  maxBidAmount: number;
+  commodity: CommodityModel;
+  onConfirmBidAmount: (amount: number, commodity: CommodityModel) => void;
+  onCancelBid: () => void;
 }
 
-const BidAmountPopup = ({ isWithdraw }: Props) => {
-  const dispatch = useAppDispatch();
-  const uiState = useAppSelector(selectUIState);
-  const nonce = useAppSelector(selectNonce);
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
-  const l1account = useAppSelector(AccountSlice.selectL1Account);
+const BidAmountPopup = ({
+  minBidAmount,
+  maxBidAmount,
+  commodity,
+  onConfirmBidAmount,
+  onCancelBid,
+}: Props) => {
   const [amountString, setAmountString] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
-
-  const withdraw = (amount: number) => {
-    try {
-      dispatch(setUIState({ uIState: UIState.BidAmountPopupLoading }));
-      dispatch(
-        sendTransaction({
-          cmd: getWithdrawTransactionCommandArray(
-            nonce,
-            BigInt(amount),
-            l1account!
-          ),
-          prikey: l2account!.getPrivateKey(),
-        })
-      ).then((action) => {
-        if (sendTransaction.fulfilled.match(action)) {
-          dispatch(
-            setConfirmPopupInfo({
-              confirmPopupInfo: {
-                title: "Withdraw Success",
-                description: "Hash Number : (TBD)",
-                isError: false,
-              },
-            })
-          );
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
-        }
-      });
-    } catch (e) {
-      console.log("Error at bid-amount " + e);
-    }
-  };
-
-  const deposit = (amount: string) => {
-    try {
-      dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
-      dispatch(
-        AccountSlice.depositAsync({
-          tokenIndex: 0,
-          amount: Number(BigInt(amount)),
-          l2account: l2account!,
-          l1account: l1account!,
-        })
-      ).then((action) => {
-        if (AccountSlice.depositAsync.fulfilled.match(action)) {
-          dispatch(
-            setConfirmPopupInfo({
-              confirmPopupInfo: {
-                title: "Deposit Success",
-                description: "Hash Number : (TBD)",
-                isError: false,
-              },
-            })
-          );
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
-          setErrorMessage("");
-        } else if (AccountSlice.depositAsync.rejected.match(action)) {
-          if (action.error.message == null) {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: "Unknown Error",
-                  isError: true,
-                },
-              })
-            );
-          } else if (action.error.message.startsWith("user rejected action")) {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: "User rejected action",
-                  isError: true,
-                },
-              })
-            );
-          } else {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: action.error.message,
-                  isError: true,
-                },
-              })
-            );
-          }
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
-        }
-      });
-    } catch (e) {
-      console.log("Error at deposit uncaught: ", e);
-    }
-  };
 
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    if (isWithdraw) {
-      if (amount > titaniumCount) {
-        setErrorMessage("Not Enough Titanium");
-      } else {
-        setErrorMessage("");
-        withdraw(amount);
-      }
+    if (amount > maxBidAmount || amount < minBidAmount) {
+      setErrorMessage("Please enter a valid amount");
     } else {
-      // case of deposit
-      deposit(amountString);
+      onConfirmBidAmount(amount, commodity);
     }
   };
 
   const onClickCancel = () => {
-    if (uiState != UIState.BidAmountPopupLoading) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
-    }
+    onCancelBid();
   };
 
   return (
@@ -155,16 +45,14 @@ const BidAmountPopup = ({ isWithdraw }: Props) => {
       <div onClick={onClickCancel} className="bid-amount-popup-mask" />
       <div className="bid-amount-popup-main-container">
         <img src={background} className="bid-amount-popup-main-background" />
-        <p className="bid-amount-popup-title-text">
-          {isWithdraw ? "Withdraw" : "Deposit"}
-        </p>
+        <p className="bid-amount-popup-title-text">Price</p>
         <div className="bid-amount-popup-titanium-resource-container">
           <img
             src={getResourceIconPath(ResourceType.Titanium)}
             className="bid-amount-popup-titanium-resource-display-image"
           />
           <p className="bid-amount-popup-titanium-resource-display-text">
-            {getNumberAbbr(titaniumCount)}
+            {minBidAmount}
           </p>
         </div>
         {errorMessage != "" && (

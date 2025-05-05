@@ -234,10 +234,11 @@ export interface ProgramModel {
   processingTime: number;
   resources: Array<ResourceAmountPair>;
   name: string;
+  isMarket: boolean;
 }
 
 export function decodeProgram(programRaw: any, index = 0) {
-  const { duration, attributes } = programRaw;
+  const { duration, attributes, marketid } = programRaw;
   console.log("Program Raw", programRaw);
   const type = index as ProgramType;
   const program: ProgramModel = {
@@ -248,6 +249,7 @@ export function decodeProgram(programRaw: any, index = 0) {
       (resource) => resource.amount !== 0
     ),
     name: getProgramName(type),
+    isMarket: marketid != 0,
   };
 
   return program;

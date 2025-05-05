@@ -81,7 +81,7 @@
   transform: translate(-50%, -50%);
 }
 
-.market-popup-bid-tab-button {
+.market-popup-sell-tab-button {
   position: absolute;
   width: auto;
   height: 10%;
@@ -91,7 +91,7 @@
   transform: translate(-50%, -50%);
 }
 
-.market-popup-sell-tab-button {
+.market-popup-list-tab-button {
   position: absolute;
   width: auto;
   height: 10%;

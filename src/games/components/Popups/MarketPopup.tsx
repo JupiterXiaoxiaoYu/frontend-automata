@@ -31,6 +31,8 @@ import {
 } from "../../rpc";
 import { AccountSlice } from "zkwasm-minirollup-browser";
 import { queryState } from "../../request";
+import BidAmountPopup from "./BidAmountPopup";
+import ListAmountPopup from "./ListAmountPopup";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
@@ -44,17 +46,37 @@ const MarketPopup = () => {
   const rowCount = 2;
   const [elementWidth, setElementWidth] = useState<number>(0);
   const [elementHeight, setElementHeight] = useState<number>(0);
+  const [showBidAmountPopup, setShowBidAmountPopup] = useState<boolean>(false);
+  const [showListAmountPopup, setShowListAmountPopup] =
+    useState<boolean>(false);
+  const [maxBidAmount, setMaxBidAmount] = useState<number>(0);
+  const [minBidAmount, setMinBidAmount] = useState<number>(0);
+  const [currentCommodityPopup, setCurrentCommodityPopup] =
+    useState<CommodityModel>();
   const programs = useAppSelector(selectAllPrograms);
-  const sellList = programs.map((program) => {
-    return {
-      id: 0,
-      askPrice: 0,
-      program,
-      bidPrice: 0,
-      bidders: [],
-    };
-  });
   const [marketList, setMarketList] = useState<CommodityModel[]>([]);
+  const sellList = programs
+    .filter((program) => program.isMarket)
+    .map((program) => {
+      return {
+        id: program.index,
+        askPrice: 0,
+        program,
+        bidPrice: 0,
+        bidders: [],
+      };
+    });
+  const listList = programs
+    .filter((program) => !program.isMarket)
+    .map((program) => {
+      return {
+        id: program.index,
+        askPrice: 0,
+        program,
+        bidPrice: 0,
+        bidders: [],
+      };
+    });
   const elements =
     marketTabType == MarketTabType.Market
       ? marketList.map((commodity, index) => (
@@ -64,13 +86,19 @@ const MarketPopup = () => {
             onClickBid={() => onClickBid(commodity)}
           />
         ))
-      : marketTabType == MarketTabType.Bid
-      ? []
-      : sellList.map((commodity, index) => (
+      : marketTabType == MarketTabType.Sell
+      ? sellList.map((commodity, index) => (
           <MarketProgram
             key={index}
             commodity={commodity}
-            onClickList={() => onClickList(index)}
+            onClickSell={() => onClickSell(commodity)}
+          />
+        ))
+      : listList.map((commodity, index) => (
+          <MarketProgram
+            key={index}
+            commodity={commodity}
+            onClickList={() => onClickList(commodity)}
           />
         ));
   const [isFirst, setIsFirst] = useState<boolean>(true);
@@ -115,12 +143,12 @@ const MarketPopup = () => {
     dispatch(setMarketTabType({ marketTabType: MarketTabType.Market }));
   };
 
-  const onClickBidTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Bid }));
-  };
-
   const onClickSellTab = () => {
     dispatch(setMarketTabType({ marketTabType: MarketTabType.Sell }));
+  };
+
+  const onClickListTab = () => {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.List }));
   };
 
   const onClickPrevPageButton = () => {
@@ -132,81 +160,92 @@ const MarketPopup = () => {
   };
 
   const sendSellCmd = (commodity: CommodityModel) => {
-    dispatch(
-      sendTransaction({
-        cmd: getSellCardTransactionCommandArray(nonce, commodity.id),
-        prikey: l2account!.getPrivateKey(),
-      })
-    ).then((action) => {
-      if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-          (action) => {
-            if (queryState.fulfilled.match(action)) {
-              setIsLoading(false);
+    if (!isLoading) {
+      setIsLoading(true);
+      dispatch(
+        sendTransaction({
+          cmd: getSellCardTransactionCommandArray(nonce, commodity.id),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+            (action) => {
+              if (queryState.fulfilled.match(action)) {
+                setIsLoading(false);
+              }
             }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
+    }
   };
 
   const onClickSell = (commodity: CommodityModel) => {
+    /**n */
+  };
+
+  const onConfirmBidAmount = (amount: number, commodity: CommodityModel) => {
+    setShowBidAmountPopup(false);
     if (!isLoading) {
       setIsLoading(true);
-      sendSellCmd(commodity);
+      dispatch(
+        sendTransaction({
+          cmd: getBidCardTransactionCommandArray(nonce, commodity.id, amount),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          getMarketMapAsync();
+        }
+      });
     }
   };
 
-  const sendBidCmd = (commodity: CommodityModel) => {
-    dispatch(
-      sendTransaction({
-        cmd: getBidCardTransactionCommandArray(nonce, commodity.id, 10),
-        prikey: l2account!.getPrivateKey(),
-      })
-    ).then((action) => {
-      if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-          (action) => {
-            if (queryState.fulfilled.match(action)) {
-              setIsLoading(false);
-            }
-          }
-        );
-      }
-    });
+  const onCancelBid = () => {
+    setShowBidAmountPopup(false);
   };
 
   const onClickBid = (commodity: CommodityModel) => {
-    if (!isLoading) {
-      setIsLoading(true);
-      sendBidCmd(commodity);
-    }
+    setCurrentCommodityPopup(commodity);
+    setMaxBidAmount(Math.max(titaniumCount, commodity.askPrice));
+    setMinBidAmount(commodity.bidPrice);
+    setShowBidAmountPopup(true);
   };
 
-  const onClickList = (index: number) => {
-    dispatch(
-      sendTransaction({
-        cmd: getListCardTransactionCommandArray(nonce, index, 10),
-        prikey: l2account!.getPrivateKey(),
-      })
-    ).then((action) => {
-      if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-          (action) => {
-            if (queryState.fulfilled.match(action)) {
-              setIsLoading(false);
+  const onConfirmListAmount = (amount: number, commodity: CommodityModel) => {
+    setShowListAmountPopup(false);
+    if (!isLoading) {
+      setIsLoading(true);
+      const index = programs.findIndex(
+        (program) => program.index == commodity.id
+      );
+      dispatch(
+        sendTransaction({
+          cmd: getListCardTransactionCommandArray(nonce, index, amount),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+            (action) => {
+              if (queryState.fulfilled.match(action)) {
+                setIsLoading(false);
+              }
             }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
+    }
   };
 
-  const sendListCmd = (index: number) => {
-    if (!isLoading) {
-      setIsLoading(true);
-      onClickList(index);
-    }
+  const onCancelList = () => {
+    setShowListAmountPopup(false);
+  };
+
+  const onClickList = (commodity: CommodityModel) => {
+    setCurrentCommodityPopup(commodity);
+    setShowListAmountPopup(true);
   };
 
   return (
@@ -214,6 +253,22 @@ const MarketPopup = () => {
       <div onClick={onClickCancel} className="market-popup-mask" />
       <div className="market-popup-main-container">
         <img src={background} className="market-popup-main-background" />
+        {showBidAmountPopup && (
+          <BidAmountPopup
+            minBidAmount={minBidAmount}
+            maxBidAmount={maxBidAmount}
+            commodity={currentCommodityPopup!}
+            onConfirmBidAmount={onConfirmBidAmount}
+            onCancelBid={onCancelBid}
+          />
+        )}
+        {showListAmountPopup && (
+          <ListAmountPopup
+            commodity={currentCommodityPopup!}
+            onConfirmListAmount={onConfirmListAmount}
+            onCancelList={onCancelList}
+          />
+        )}
         <div className="market-popup-cost-container">
           <img
             src={getResourceIconPath(ResourceType.Titanium)}
@@ -234,20 +289,20 @@ const MarketPopup = () => {
             selectColor="black"
           />
         </div>
-        <div className="market-popup-bid-tab-button">
+        <div className="market-popup-sell-tab-button">
           <MarketTabButton
             text={"Bid"}
-            onClick={onClickBidTab}
-            isSelect={marketTabType == MarketTabType.Bid}
+            onClick={onClickSellTab}
+            isSelect={marketTabType == MarketTabType.Sell}
             normalColor="#5CFFFF"
             selectColor="black"
           />
         </div>
-        <div className="market-popup-sell-tab-button">
+        <div className="market-popup-list-tab-button">
           <MarketTabButton
-            text={"Sell"}
-            onClick={onClickSellTab}
-            isSelect={marketTabType == MarketTabType.Sell}
+            text={"List"}
+            onClick={onClickListTab}
+            isSelect={marketTabType == MarketTabType.List}
             normalColor="#5CFFFF"
             selectColor="black"
           />

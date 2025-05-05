@@ -44,8 +44,8 @@ export enum TutorialType{
 
 export enum MarketTabType{
   Market,
-  Bid,
   Sell,
+  List,
 }
 
 interface PropertiesState {
