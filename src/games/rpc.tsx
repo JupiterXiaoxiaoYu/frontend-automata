@@ -12,7 +12,7 @@ const currentLocation = window.location;
 const protocol = currentLocation.protocol; // e.g., 'http:' or 'https:'
 const hostname = currentLocation.hostname; // e.g., 'sinka' or 'localhost'
 
-const fullUrl = `${protocol}//${hostname}` + ":3000";
+export const fullUrl = `${protocol}//${hostname}` + ":3000";
 const rpc = new ZKWasmAppRpc(fullUrl);
 
 export async function queryConfig() {

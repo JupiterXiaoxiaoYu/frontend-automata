@@ -1,13 +1,9 @@
 import axios from "axios";
 import { CommodityModel, decodeProgram } from "../data/automata/models";
-
-// Get the current URL components
-const currentLocation = window.location;
-const protocol = currentLocation.protocol; // e.g., 'http:' or 'https:'
-const hostname = currentLocation.hostname; // e.g., 'sinka' or 'localhost'
+import { fullUrl } from "./rpc";
 
 const instance = axios.create({
-  baseURL: `${protocol}//${hostname}` + ":3000",
+  baseURL: fullUrl,
   headers: {
     "Content-Type": "multipart/form-data",
   },
