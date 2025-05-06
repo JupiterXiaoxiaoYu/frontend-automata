@@ -23,14 +23,13 @@ import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
 import { getMarketList } from "../../express";
-import { sendTransaction } from "zkwasm-minirollup-browser/src/connect";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
   getSellCardTransactionCommandArray,
 } from "../../rpc";
 import { AccountSlice } from "zkwasm-minirollup-browser";
-import { queryState } from "../../request";
+import { queryState, sendTransaction } from "../../request";
 import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
 
