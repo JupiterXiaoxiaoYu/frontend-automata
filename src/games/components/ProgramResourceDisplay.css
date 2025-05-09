@@ -3,10 +3,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 44px;
+    width: 44px; /* 增加宽度以容纳更多文本 */
     height: 16px;
 }
 
+/* 图标样式 - 基础样式 */
 .program-resource-display-image {
     position: absolute;
     top: 50%;
@@ -17,8 +18,14 @@
     user-select: none;
 }
 
-.program-resource-display-positive-text, 
-.program-resource-display-zero-text, 
+/* 双值显示时图标位置向左移 */
+.program-resource-display-container.dual-values .program-resource-display-image {
+    left: 2px;
+}
+
+/* 文本样式 - 基础文本样式 */
+.program-resource-display-positive-text,
+.program-resource-display-zero-text,
 .program-resource-display-negative-text {
     position: absolute;
     top: 50%;
@@ -32,6 +39,17 @@
     height: 10px;
     font-family: "mishmash";
     user-select: none;
+    white-space: nowrap;
+}
+
+/* 双值显示时文本位置向右移 */
+.program-resource-display-container.dual-values .program-resource-display-positive-text,
+.program-resource-display-container.dual-values .program-resource-display-zero-text,
+.program-resource-display-container.dual-values .program-resource-display-negative-text {
+    left: 33px;
+    width: 50px;
+    font-size: 10px;
+    letter-spacing: -0.3px;
 }
 
 .program-resource-display-positive-text {

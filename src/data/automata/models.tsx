@@ -160,6 +160,7 @@ export interface CreatureModel {
   isProgramStop: boolean;
   startTime: number;
   isStarting: boolean;
+  cycleTime?: number;  // 循环时间 (Cycle time)
 }
 
 export enum ProgramType {
