@@ -58,6 +58,12 @@ const MarketProgram = ({
         className="market-program-bid-icon"
       />
       <p className="market-program-bid-text">{commodity.bidPrice}</p>
+      <p className="market-program-ask-title-text">Ask Price:</p>
+      <img
+        src={getResourceIconPath(ResourceType.Titanium)}
+        className="market-program-ask-icon"
+      />
+      <p className="market-program-ask-text">{commodity.askPrice}</p>
       {onClickBid && (
         <div className="market-program-button">
           <BidButton isDisabled={false} onClick={onClickBid} />

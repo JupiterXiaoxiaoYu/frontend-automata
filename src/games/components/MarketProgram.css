@@ -114,6 +114,50 @@
   user-select: none;
 }
 
+.market-program-ask-title-text {
+  position: absolute;
+  top: 70%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  font-size: 6px;
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 6px;
+  font-family: "mishmash";
+  color: black;
+  pointer-events: none;
+  user-select: none;
+}
+
+.market-program-ask-icon {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 69.3%;
+  left: 46.2%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.market-program-ask-text {
+  position: absolute;
+  top: 70%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 10px;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+
 .market-program-button {
   position: absolute;
   top: 82.5%;
