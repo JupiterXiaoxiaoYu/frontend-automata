@@ -16,6 +16,7 @@ import ListButton from "./Buttons/ListButton";
 
 interface Props {
   commodity: CommodityModel;
+  isDisabled: boolean;
   onClickBid?: () => void;
   onClickSell?: () => void;
   onClickList?: () => void;
@@ -23,6 +24,7 @@ interface Props {
 
 const MarketProgram = ({
   commodity,
+  isDisabled,
   onClickBid = undefined,
   onClickSell = undefined,
   onClickList = undefined,
@@ -67,17 +69,17 @@ const MarketProgram = ({
       <p className="market-program-ask-text">{commodity.askPrice}</p>
       {onClickBid && (
         <div className="market-program-button">
-          <BidButton isDisabled={false} onClick={onClickBid} />
+          <BidButton isDisabled={isDisabled} onClick={onClickBid} />
         </div>
       )}
       {onClickSell && (
         <div className="market-program-button">
-          <SellButton isDisabled={false} onClick={onClickSell} />
+          <SellButton isDisabled={isDisabled} onClick={onClickSell} />
         </div>
       )}
       {onClickList && (
         <div className="market-program-button">
-          <ListButton isDisabled={false} onClick={onClickList} />
+          <ListButton isDisabled={isDisabled} onClick={onClickList} />
         </div>
       )}
     </div>

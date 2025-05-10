@@ -95,7 +95,7 @@ const RightMenu = () => {
               key={index}
               index={index}
               program={program}
-              isDisabled={false}
+              isDisabled={program.marketId > 0}
               onSelect={() => onSelectProgram(program.index)}
             />
           )),
@@ -105,7 +105,7 @@ const RightMenu = () => {
             key={index}
             index={index}
             program={program}
-            isDisabled={false}
+            isDisabled={program.marketId > 0}
             onSelect={() => onSelectProgram(program.index)}
           />
         ));

@@ -34,6 +34,7 @@ import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
+import { selectInstalledProgramIds } from "../../../data/automata/creatures";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
@@ -58,6 +59,8 @@ const MarketPopup = () => {
   const [auctionList, setAuctionList] = useState<CommodityModel[]>([]);
   const [lotList, setLotList] = useState<CommodityModel[]>([]);
   const [sellingList, setSellingList] = useState<CommodityModel[]>([]);
+  const installedProgramIds = useAppSelector(selectInstalledProgramIds);
+  console.log("installedProgramIds", installedProgramIds);
   const pids = l2account?.pubkey
     ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
     : ["", "", "", ""];
@@ -77,6 +80,7 @@ const MarketPopup = () => {
       ? auctionList.map((commodity, index) => (
           <MarketProgram
             key={index}
+            isDisabled={false}
             commodity={commodity}
             onClickBid={() => onClickBid(commodity)}
           />
@@ -85,6 +89,7 @@ const MarketPopup = () => {
       ? lotList.map((commodity, index) => (
           <MarketProgram
             key={index}
+            isDisabled={false}
             commodity={commodity}
             onClickBid={() => onClickBid(commodity)}
           />
@@ -93,6 +98,7 @@ const MarketPopup = () => {
       ? sellingList.map((commodity, index) => (
           <MarketProgram
             key={index}
+            isDisabled={false}
             commodity={commodity}
             onClickSell={() => onClickSell(commodity)}
           />
@@ -100,6 +106,7 @@ const MarketPopup = () => {
       : inventoryList.map((commodity, index) => (
           <MarketProgram
             key={index}
+            isDisabled={installedProgramIds.includes(commodity.program.index)}
             commodity={commodity}
             onClickList={() => onClickList(commodity)}
           />

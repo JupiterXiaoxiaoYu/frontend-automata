@@ -401,6 +401,11 @@ export const selectCreaturesCurrentProgressOnCurrentPage = (creatures: CreatureM
 }
 
 export const selectCurrentPage = (state: RootState) => state.automata.creatures.currentPage;
-
+export const selectInstalledProgramIds = (state: RootState): number[] => {
+    const allProgramIndexes = state.automata.creatures.creatures
+        .flatMap(creature => creature.programIndexes)
+        .filter((programIndex): programIndex is number => programIndex !== null);
+    return Array.from(new Set(allProgramIndexes));
+};
 export const { setSelectedCreatureIndex, clearSelectedCreatureIndex, startCreatingCreature, startRebootCreature, clearRebootCreature, setProgramIndex, setSelectingProgramIndex, nextPage, prevPage } = creaturesSlice.actions;
 export default creaturesSlice.reducer;
