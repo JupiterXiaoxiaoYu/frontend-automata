@@ -43,9 +43,10 @@ export enum TutorialType{
 }
 
 export enum MarketTabType{
-  Market,
-  Sell,
-  List,
+  Auction,
+  Lot,
+  Selling,
+  Inventory,
 }
 
 interface PropertiesState {
@@ -91,7 +92,7 @@ const initialState: PropertiesState = {
     lastRedeemEnergy: 0,
     interest: 0,
     bountyPool: 0,
-    marketTabType: MarketTabType.Market,
+    marketTabType: MarketTabType.Auction,
 };
 
 export const propertiesSlice = createSlice({

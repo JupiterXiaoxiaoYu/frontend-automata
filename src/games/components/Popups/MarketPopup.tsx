@@ -53,8 +53,9 @@ const MarketPopup = () => {
   const [currentCommodityPopup, setCurrentCommodityPopup] =
     useState<CommodityModel>();
   const programs = useAppSelector(selectAllPrograms);
-  const [marketList, setMarketList] = useState<CommodityModel[]>([]);
-  const sellList = programs
+  const [auctionList, setAuctionList] = useState<CommodityModel[]>([]);
+  const [lotList, setLotList] = useState<CommodityModel[]>([]);
+  const sellingList = programs
     .filter((program) => program.isMarket)
     .map((program) => {
       return {
@@ -65,7 +66,7 @@ const MarketPopup = () => {
         bidders: [],
       };
     });
-  const listList = programs
+  const inventoryList = programs
     .filter((program) => !program.isMarket)
     .map((program) => {
       return {
@@ -77,23 +78,31 @@ const MarketPopup = () => {
       };
     });
   const elements =
-    marketTabType == MarketTabType.Market
-      ? marketList.map((commodity, index) => (
+    marketTabType == MarketTabType.Auction
+      ? auctionList.map((commodity, index) => (
           <MarketProgram
             key={index}
             commodity={commodity}
             onClickBid={() => onClickBid(commodity)}
           />
         ))
-      : marketTabType == MarketTabType.Sell
-      ? sellList.map((commodity, index) => (
+      : marketTabType == MarketTabType.Lot
+      ? lotList.map((commodity, index) => (
           <MarketProgram
             key={index}
             commodity={commodity}
-            onClickSell={() => onClickSell(commodity)}
+            onClickSell={() => onClickBid(commodity)}
           />
         ))
-      : listList.map((commodity, index) => (
+      : marketTabType == MarketTabType.Selling
+      ? sellingList.map((commodity, index) => (
+          <MarketProgram
+            key={index}
+            commodity={commodity}
+            onClickList={() => onClickSell(commodity)}
+          />
+        ))
+      : inventoryList.map((commodity, index) => (
           <MarketProgram
             key={index}
             commodity={commodity}
@@ -123,7 +132,15 @@ const MarketPopup = () => {
   const getMarketMapAsync = async () => {
     const ret = await getMarketList();
     console.log("ret", ret);
-    setMarketList(ret);
+    setAuctionList(ret);
+    setLotList(
+      ret.filter(
+        (commodity) =>
+          commodity.bidders.find(
+            (bidder) => bidder == l2account?.pubkey.toString()
+          ) != undefined
+      )
+    );
   };
 
   useEffect(() => {
@@ -138,16 +155,20 @@ const MarketPopup = () => {
     setIsFirst(true);
   };
 
-  const onClickMarketTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Market }));
+  const onClickAuctionTab = () => {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Auction }));
   };
 
-  const onClickSellTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Sell }));
+  const onClickLotTab = () => {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Lot }));
   };
 
-  const onClickListTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.List }));
+  const onClickSellingTab = () => {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Selling }));
+  };
+
+  const onClickInventoryTab = () => {
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Inventory }));
   };
 
   const onClickPrevPageButton = () => {
@@ -279,29 +300,38 @@ const MarketPopup = () => {
             className="market-popup-cost-background"
           />
         </div>
-        <div className="market-popup-market-tab-button">
+        <div className="market-popup-auction-tab-button">
           <MarketTabButton
-            text={"Market"}
-            onClick={onClickMarketTab}
-            isSelect={marketTabType == MarketTabType.Market}
+            text={"Auction"}
+            onClick={onClickAuctionTab}
+            isSelect={marketTabType == MarketTabType.Auction}
             normalColor="#5CFFFF"
             selectColor="black"
           />
         </div>
-        <div className="market-popup-sell-tab-button">
+        <div className="market-popup-lot-tab-button">
           <MarketTabButton
-            text={"Bid"}
-            onClick={onClickSellTab}
-            isSelect={marketTabType == MarketTabType.Sell}
+            text={"Lot"}
+            onClick={onClickLotTab}
+            isSelect={marketTabType == MarketTabType.Lot}
             normalColor="#5CFFFF"
             selectColor="black"
           />
         </div>
-        <div className="market-popup-list-tab-button">
+        <div className="market-popup-selling-tab-button">
           <MarketTabButton
-            text={"List"}
-            onClick={onClickListTab}
-            isSelect={marketTabType == MarketTabType.List}
+            text={"Selling"}
+            onClick={onClickSellingTab}
+            isSelect={marketTabType == MarketTabType.Selling}
+            normalColor="#5CFFFF"
+            selectColor="black"
+          />
+        </div>
+        <div className="market-popup-inventory-tab-button">
+          <MarketTabButton
+            text={"Inventory"}
+            onClick={onClickInventoryTab}
+            isSelect={marketTabType == MarketTabType.Inventory}
             normalColor="#5CFFFF"
             selectColor="black"
           />

@@ -38,7 +38,7 @@ const TopMenu = () => {
   }
 
   function onClickMarket() {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Market }));
+    dispatch(setMarketTabType({ marketTabType: MarketTabType.Auction }));
     dispatch(setUIState({ uIState: UIState.MarketPopup }));
   }
 

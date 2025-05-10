@@ -12,6 +12,7 @@ import { formatTime } from "../../data/automata/creatures";
 import background from "../images/backgrounds/market_card_frame.png";
 import SellButton from "./Buttons/SellButton";
 import BidButton from "./Buttons/BidButton";
+import ListButton from "./Buttons/ListButton";
 
 interface Props {
   commodity: CommodityModel;
@@ -76,7 +77,7 @@ const MarketProgram = ({
       )}
       {onClickList && (
         <div className="market-program-button">
-          <SellButton isDisabled={false} onClick={onClickList} />
+          <ListButton isDisabled={false} onClick={onClickList} />
         </div>
       )}
     </div>
