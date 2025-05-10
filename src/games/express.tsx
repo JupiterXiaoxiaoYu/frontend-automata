@@ -54,6 +54,54 @@ export async function getMarketList(): Promise<CommodityModel[]> {
   return marketList;
 }
 
+export async function getCommodity(
+  pid1: string,
+  pid2: string
+): Promise<CommodityModel[]> {
+  const res = await getRequest(`/data/bid/${pid1}/${pid2}`);
+  const raws = res.data.map(JSON.parse);
+  const decodeCard = (
+    marketid: number,
+    card: { duration: number; attributes: number }
+  ) => {
+    const value = BigInt(card.attributes);
+    const attributes = [];
+    for (let i = 0; i < 8; i++) {
+      const shift = BigInt(i * 8);
+      const byte = Number((value >> shift) & 0xffn);
+      const signed = byte >= 128 ? byte - 256 : byte;
+      attributes.push(signed);
+    }
+    console.log(attributes);
+    return {
+      duration: card.duration,
+      attributes: attributes,
+      marketid,
+    };
+  };
+  const marketList: CommodityModel[] = raws.map(
+    ({
+      marketid,
+      askprice,
+      card,
+      bidder,
+    }: {
+      marketid: number;
+      askprice: number;
+      card: { duration: number; attributes: number };
+      bidder: { bidprice: number; bidder: string[] };
+    }) => ({
+      id: marketid,
+      askPrice: askprice,
+      program: decodeProgram(decodeCard(marketid, card)),
+      bidPrice: bidder?.bidprice ?? 0,
+      bidders: bidder?.bidder ?? [],
+    })
+  );
+
+  return marketList;
+}
+
 async function getRequest(path: string) {
   try {
     const response = await instance.get(path);

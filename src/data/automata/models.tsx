@@ -160,7 +160,7 @@ export interface CreatureModel {
   isProgramStop: boolean;
   startTime: number;
   isStarting: boolean;
-  cycleTime?: number;  // 循环时间 (Cycle time)
+  cycleTime?: number; // 循环时间 (Cycle time)
 }
 
 export enum ProgramType {
@@ -235,7 +235,7 @@ export interface ProgramModel {
   processingTime: number;
   resources: Array<ResourceAmountPair>;
   name: string;
-  isMarket: boolean;
+  marketId: number;
 }
 
 export function decodeProgram(programRaw: any, index = 0) {
@@ -250,7 +250,7 @@ export function decodeProgram(programRaw: any, index = 0) {
       (resource) => resource.amount !== 0
     ),
     name: getProgramName(type),
-    isMarket: marketid != 0,
+    marketId: marketid,
   };
 
   return program;

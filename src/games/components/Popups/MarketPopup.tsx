@@ -22,7 +22,7 @@ import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
-import { getMarketList } from "../../express";
+import { getCommodity, getMarketList } from "../../express";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
@@ -57,22 +57,12 @@ const MarketPopup = () => {
   const programs = useAppSelector(selectAllPrograms);
   const [auctionList, setAuctionList] = useState<CommodityModel[]>([]);
   const [lotList, setLotList] = useState<CommodityModel[]>([]);
-  const bidId = l2account?.pubkey
-    ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()[2]
-    : "";
-  const sellingList = programs
-    .filter((program) => program.isMarket)
-    .map((program) => {
-      return {
-        id: program.index,
-        askPrice: 0,
-        program,
-        bidPrice: 0,
-        bidders: [],
-      };
-    });
+  const [sellingList, setSellingList] = useState<CommodityModel[]>([]);
+  const pids = l2account?.pubkey
+    ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
+    : ["", "", "", ""];
   const inventoryList = programs
-    .filter((program) => !program.isMarket)
+    .filter((program) => program.marketId == 0)
     .map((program) => {
       return {
         id: program.index,
@@ -96,7 +86,7 @@ const MarketPopup = () => {
           <MarketProgram
             key={index}
             commodity={commodity}
-            onClickSell={() => onClickBid(commodity)}
+            onClickBid={() => onClickBid(commodity)}
           />
         ))
       : marketTabType == MarketTabType.Selling
@@ -104,7 +94,7 @@ const MarketPopup = () => {
           <MarketProgram
             key={index}
             commodity={commodity}
-            onClickList={() => onClickSell(commodity)}
+            onClickSell={() => onClickSell(commodity)}
           />
         ))
       : inventoryList.map((commodity, index) => (
@@ -134,22 +124,48 @@ const MarketPopup = () => {
     };
   }, []);
 
+  const updateSellings = (markets: CommodityModel[]) => {
+    const sellings = programs.filter((program) => program.marketId != 0);
+    setSellingList(
+      sellings.map((program) => {
+        return {
+          id: program.index,
+          askPrice:
+            markets.find((commodity) => commodity.id == program.marketId)
+              ?.askPrice ?? 0,
+          program,
+          bidPrice:
+            markets.find((commodity) => commodity.id == program.marketId)
+              ?.bidPrice ?? 0,
+          bidders: [],
+        };
+      })
+    );
+    return sellings.map((program) => program.marketId);
+  };
+
   const getMarketMapAsync = async () => {
-    const ret = await getMarketList();
-    console.log("ret", ret);
-    setAuctionList(ret);
-    setLotList(
-      ret.filter(
-        (commodity) =>
-          commodity.bidders.find((bidder) => bidder == bidId) != undefined
+    const markets = await getMarketList();
+    console.log("ret", markets);
+    const sellingIds = updateSellings(markets);
+    setAuctionList(
+      markets.filter(
+        (commodity) => sellingIds.find((id) => id == commodity.id) == undefined
       )
     );
+  };
+
+  const getLotAsync = async () => {
+    const ret = await getCommodity(pids[1].toString(), pids[2].toString());
+    console.log("lot", ret);
+    setLotList(ret);
   };
 
   useEffect(() => {
     if (isFirst) {
       setIsFirst(false);
       getMarketMapAsync();
+      getLotAsync();
     }
   }, [isFirst]);
 
@@ -205,7 +221,7 @@ const MarketPopup = () => {
   };
 
   const onClickSell = (commodity: CommodityModel) => {
-    /**n */
+    sendSellCmd(commodity);
   };
 
   const onConfirmBidAmount = (amount: number, commodity: CommodityModel) => {
@@ -251,8 +267,9 @@ const MarketPopup = () => {
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-            (action) => {
+            async (action) => {
               if (queryState.fulfilled.match(action)) {
+                await getMarketMapAsync();
                 setIsLoading(false);
               }
             }
