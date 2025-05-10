@@ -32,6 +32,8 @@ import { AccountSlice } from "zkwasm-minirollup-browser";
 import { queryState, sendTransaction } from "../../request";
 import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
+import { bnToHexLe } from "delphinus-curves/src/altjubjub";
+import { LeHexBN } from "zkwasm-minirollup-rpc";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
@@ -55,6 +57,9 @@ const MarketPopup = () => {
   const programs = useAppSelector(selectAllPrograms);
   const [auctionList, setAuctionList] = useState<CommodityModel[]>([]);
   const [lotList, setLotList] = useState<CommodityModel[]>([]);
+  const bidId = l2account?.pubkey
+    ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()[2]
+    : "";
   const sellingList = programs
     .filter((program) => program.isMarket)
     .map((program) => {
@@ -136,9 +141,7 @@ const MarketPopup = () => {
     setLotList(
       ret.filter(
         (commodity) =>
-          commodity.bidders.find(
-            (bidder) => bidder == l2account?.pubkey.toString()
-          ) != undefined
+          commodity.bidders.find((bidder) => bidder == bidId) != undefined
       )
     );
   };
