@@ -240,7 +240,6 @@ export interface ProgramModel {
 
 export function decodeProgram(programRaw: any, index = 0) {
   const { duration, attributes, marketid } = programRaw;
-  console.log("Program Raw", programRaw);
   const type = index as ProgramType;
   const program: ProgramModel = {
     index,
@@ -578,7 +577,7 @@ interface ResourceData {
 export interface CommodityModel {
   id: number;
   askPrice: number;
-  program: ProgramModel;
+  object: ProgramModel;
   bidPrice: number;
   bidders: string[];
 }

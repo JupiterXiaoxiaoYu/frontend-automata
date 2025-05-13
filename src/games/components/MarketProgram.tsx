@@ -32,12 +32,12 @@ const MarketProgram = ({
   return (
     <div className="market-program-container">
       <img src={background} className="market-program-background" />
-      <p className="market-program-name-text">{commodity.program.name}</p>
+      <p className="market-program-name-text">{commodity.object.name}</p>
       <p className="market-program-time-text">
-        {formatTime(commodity.program.processingTime)}
+        {formatTime(commodity.object.processingTime)}
       </p>
       <img
-        src={getProgramIconPath(commodity.program.type)}
+        src={getProgramIconPath(commodity.object.type)}
         className="market-program-icon-image"
       />
       <div className="market-program-resource-grid">
@@ -46,7 +46,7 @@ const MarketProgram = ({
           elementHeight={16}
           columnCount={2}
           rowCount={4}
-          elements={commodity.program.resources.map((resource, index) => (
+          elements={commodity.object.resources.map((resource, index) => (
             <ProgramResourceDisplay
               key={index}
               iconImagePath={getResourceIconPath(resource.type)}

@@ -60,7 +60,6 @@ const MarketPopup = () => {
   const [lotList, setLotList] = useState<CommodityModel[]>([]);
   const [sellingList, setSellingList] = useState<CommodityModel[]>([]);
   const installedProgramIds = useAppSelector(selectInstalledProgramIds);
-  console.log("installedProgramIds", installedProgramIds);
   const pids = l2account?.pubkey
     ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
     : ["", "", "", ""];
@@ -70,7 +69,7 @@ const MarketPopup = () => {
       return {
         id: program.index,
         askPrice: 0,
-        program,
+        object: program,
         bidPrice: 0,
         bidders: [],
       };
@@ -106,7 +105,7 @@ const MarketPopup = () => {
       : inventoryList.map((commodity, index) => (
           <MarketProgram
             key={index}
-            isDisabled={installedProgramIds.includes(commodity.program.index)}
+            isDisabled={installedProgramIds.includes(commodity.object.index)}
             commodity={commodity}
             onClickList={() => onClickList(commodity)}
           />
@@ -140,7 +139,7 @@ const MarketPopup = () => {
           askPrice:
             markets.find((commodity) => commodity.id == program.marketId)
               ?.askPrice ?? 0,
-          program,
+          object: program,
           bidPrice:
             markets.find((commodity) => commodity.id == program.marketId)
               ?.bidPrice ?? 0,

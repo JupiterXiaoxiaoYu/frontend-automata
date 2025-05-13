@@ -11,12 +11,12 @@ const instance = axios.create({
 
 export async function getMarketList(): Promise<CommodityModel[]> {
   const res = await getRequest("/data/markets");
-  const raws = res.data.map(JSON.parse);
+  const raws = res.data;
   const decodeCard = (
     marketid: number,
-    card: { duration: number; attributes: number }
+    object: { duration: number; attributes: number }
   ) => {
-    const value = BigInt(card.attributes);
+    const value = BigInt(object.attributes);
     const attributes = [];
     for (let i = 0; i < 8; i++) {
       const shift = BigInt(i * 8);
@@ -26,7 +26,7 @@ export async function getMarketList(): Promise<CommodityModel[]> {
     }
     console.log(attributes);
     return {
-      duration: card.duration,
+      duration: object.duration,
       attributes: attributes,
       marketid,
     };
@@ -35,18 +35,18 @@ export async function getMarketList(): Promise<CommodityModel[]> {
     ({
       marketid,
       askprice,
-      card,
+      object,
       bidder,
     }: {
       marketid: number;
       askprice: number;
-      card: { duration: number; attributes: number };
+      object: { duration: number; attributes: number };
       bidder: { bidprice: number; bidder: string[] };
     }) => ({
-      id: marketid,
-      askPrice: askprice,
-      program: decodeProgram(decodeCard(marketid, card)),
-      bidPrice: bidder?.bidprice ?? 0,
+      id: Number(marketid),
+      askPrice: Number(askprice),
+      object: decodeProgram(decodeCard(Number(marketid), object)),
+      bidPrice: Number(bidder?.bidprice) ?? 0,
       bidders: bidder?.bidder ?? [],
     })
   );
@@ -59,12 +59,12 @@ export async function getCommodity(
   pid2: string
 ): Promise<CommodityModel[]> {
   const res = await getRequest(`/data/bid/${pid1}/${pid2}`);
-  const raws = res.data.map(JSON.parse);
+  const raws = res.data;
   const decodeCard = (
     marketid: number,
-    card: { duration: number; attributes: number }
+    object: { duration: number; attributes: number }
   ) => {
-    const value = BigInt(card.attributes);
+    const value = BigInt(object.attributes);
     const attributes = [];
     for (let i = 0; i < 8; i++) {
       const shift = BigInt(i * 8);
@@ -74,7 +74,7 @@ export async function getCommodity(
     }
     console.log(attributes);
     return {
-      duration: card.duration,
+      duration: object.duration,
       attributes: attributes,
       marketid,
     };
@@ -83,18 +83,18 @@ export async function getCommodity(
     ({
       marketid,
       askprice,
-      card,
+      object,
       bidder,
     }: {
       marketid: number;
       askprice: number;
-      card: { duration: number; attributes: number };
+      object: { duration: number; attributes: number };
       bidder: { bidprice: number; bidder: string[] };
     }) => ({
-      id: marketid,
-      askPrice: askprice,
-      program: decodeProgram(decodeCard(marketid, card)),
-      bidPrice: bidder?.bidprice ?? 0,
+      id: Number(marketid),
+      askPrice: Number(askprice),
+      object: decodeProgram(decodeCard(Number(marketid), object)),
+      bidPrice: Number(bidder?.bidprice) ?? 0,
       bidders: bidder?.bidder ?? [],
     })
   );
