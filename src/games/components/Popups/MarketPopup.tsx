@@ -22,7 +22,7 @@ import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
-import { getCommodity, getMarketList } from "../../express";
+import { getBidList, getSellingList, getMarketList } from "../../express";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
@@ -130,48 +130,28 @@ const MarketPopup = () => {
     };
   }, []);
 
-  const updateSellings = (markets: CommodityModel[]) => {
-    const sellings = programs.filter((program) => program.marketId != 0);
-    setSellingList(
-      sellings.map((program) => {
-        return {
-          id: program.index,
-          askPrice:
-            markets.find((commodity) => commodity.id == program.marketId)
-              ?.askPrice ?? 0,
-          object: program,
-          bidPrice:
-            markets.find((commodity) => commodity.id == program.marketId)
-              ?.bidPrice ?? 0,
-          bidders: [],
-        };
-      })
-    );
-    return sellings.map((program) => program.marketId);
+  const getMarketListAsync = async () => {
+    const ret = await getMarketList();
+    setAuctionList(ret);
   };
 
-  const getMarketMapAsync = async () => {
-    const markets = await getMarketList();
-    console.log("ret", markets);
-    const sellingIds = updateSellings(markets);
-    setAuctionList(
-      markets.filter(
-        (commodity) => sellingIds.find((id) => id == commodity.id) == undefined
-      )
-    );
-  };
-
-  const getLotAsync = async () => {
-    const ret = await getCommodity(pids[1].toString(), pids[2].toString());
-    console.log("lot", ret);
+  const getLotListAsync = async () => {
+    const ret = await getBidList(pids[1].toString(), pids[2].toString());
     setLotList(ret);
+  };
+
+  const getSellingListAsync = async () => {
+    const ret = await getSellingList(pids[1].toString(), pids[2].toString());
+    console.log("selling list", ret);
+    setSellingList(ret);
   };
 
   useEffect(() => {
     if (isFirst) {
       setIsFirst(false);
-      getMarketMapAsync();
-      getLotAsync();
+      getMarketListAsync();
+      getLotListAsync();
+      getSellingListAsync();
     }
   }, [isFirst]);
 
@@ -241,7 +221,7 @@ const MarketPopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          getMarketMapAsync();
+          getMarketListAsync();
         }
       });
     }
@@ -253,7 +233,7 @@ const MarketPopup = () => {
 
   const onClickBid = (commodity: CommodityModel) => {
     setCurrentCommodityPopup(commodity);
-    setMaxBidAmount(Math.max(titaniumCount, commodity.askPrice));
+    setMaxBidAmount(Math.min(titaniumCount, commodity.askPrice));
     setMinBidAmount(commodity.bidPrice);
     setShowBidAmountPopup(true);
   };
@@ -275,7 +255,8 @@ const MarketPopup = () => {
           dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
             async (action) => {
               if (queryState.fulfilled.match(action)) {
-                await getMarketMapAsync();
+                await getMarketListAsync();
+                await getSellingListAsync();
                 setIsLoading(false);
               }
             }

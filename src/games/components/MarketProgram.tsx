@@ -55,13 +55,13 @@ const MarketProgram = ({
           ))}
         />
       </div>
-      <p className="market-program-bid-title-text">Highest Bid:</p>
+      <p className="market-program-bid-title-text">Highest Bid :</p>
       <img
         src={getResourceIconPath(ResourceType.Titanium)}
         className="market-program-bid-icon"
       />
       <p className="market-program-bid-text">{commodity.bidPrice}</p>
-      <p className="market-program-ask-title-text">Ask Price:</p>
+      <p className="market-program-ask-title-text">Ask Price :</p>
       <img
         src={getResourceIconPath(ResourceType.Titanium)}
         className="market-program-ask-icon"

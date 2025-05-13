@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import marketButtonImage from "../../images/Buttons/Help/help.png";
-import marketButtonHoverImage from "../../images/Buttons/Help/help_hover.png";
-import marketButtonClickImage from "../../images/Buttons/Help/help_click.png";
+import marketButtonImage from "../../images/Buttons/Market/market.png";
+import marketButtonHoverImage from "../../images/Buttons/Market/market_hv.png";
+import marketButtonClickImage from "../../images/Buttons/Market/market_click.png";
 import "./MarketButton.css";
 
 interface Props {
