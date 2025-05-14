@@ -79,7 +79,7 @@ const MarketPopup = () => {
       ? auctionList.map((commodity, index) => (
           <MarketProgram
             key={index}
-            isDisabled={false}
+            isInstalled={false}
             commodity={commodity}
             onClickBid={() => onClickBid(commodity)}
           />
@@ -88,7 +88,7 @@ const MarketPopup = () => {
       ? lotList.map((commodity, index) => (
           <MarketProgram
             key={index}
-            isDisabled={false}
+            isInstalled={false}
             commodity={commodity}
             onClickBid={() => onClickBid(commodity)}
           />
@@ -97,7 +97,7 @@ const MarketPopup = () => {
       ? sellingList.map((commodity, index) => (
           <MarketProgram
             key={index}
-            isDisabled={false}
+            isInstalled={false}
             commodity={commodity}
             onClickSell={() => onClickSell(commodity)}
           />
@@ -105,7 +105,7 @@ const MarketPopup = () => {
       : inventoryList.map((commodity, index) => (
           <MarketProgram
             key={index}
-            isDisabled={installedProgramIds.includes(commodity.object.index)}
+            isInstalled={installedProgramIds.includes(commodity.object.index)}
             commodity={commodity}
             onClickList={() => onClickList(commodity)}
           />

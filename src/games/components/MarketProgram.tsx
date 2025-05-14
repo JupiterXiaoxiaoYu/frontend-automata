@@ -16,7 +16,7 @@ import ListButton from "./Buttons/ListButton";
 
 interface Props {
   commodity: CommodityModel;
-  isDisabled: boolean;
+  isInstalled: boolean;
   onClickBid?: () => void;
   onClickSell?: () => void;
   onClickList?: () => void;
@@ -24,7 +24,7 @@ interface Props {
 
 const MarketProgram = ({
   commodity,
-  isDisabled,
+  isInstalled,
   onClickBid = undefined,
   onClickSell = undefined,
   onClickList = undefined,
@@ -55,31 +55,36 @@ const MarketProgram = ({
           ))}
         />
       </div>
-      <p className="market-program-bid-title-text">Highest Bid :</p>
-      <img
-        src={getResourceIconPath(ResourceType.Titanium)}
-        className="market-program-bid-icon"
-      />
-      <p className="market-program-bid-text">{commodity.bidPrice}</p>
-      <p className="market-program-ask-title-text">Ask Price :</p>
-      <img
-        src={getResourceIconPath(ResourceType.Titanium)}
-        className="market-program-ask-icon"
-      />
-      <p className="market-program-ask-text">{commodity.askPrice}</p>
+      {!onClickList && (
+        <>
+          <p className="market-program-bid-title-text">Highest Bid :</p>
+          <img
+            src={getResourceIconPath(ResourceType.Titanium)}
+            className="market-program-bid-icon"
+          />
+          <p className="market-program-bid-text">{commodity.bidPrice}</p>
+          <p className="market-program-ask-title-text">Ask Price :</p>
+          <img
+            src={getResourceIconPath(ResourceType.Titanium)}
+            className="market-program-ask-icon"
+          />
+          <p className="market-program-ask-text">{commodity.askPrice}</p>
+        </>
+      )}
+      {isInstalled && <p className="market-program-installed-text">In use</p>}
       {onClickBid && (
         <div className="market-program-button">
-          <BidButton isDisabled={isDisabled} onClick={onClickBid} />
+          <BidButton isDisabled={false} onClick={onClickBid} />
         </div>
       )}
       {onClickSell && (
         <div className="market-program-button">
-          <SellButton isDisabled={isDisabled} onClick={onClickSell} />
+          <SellButton isDisabled={false} onClick={onClickSell} />
         </div>
       )}
-      {onClickList && (
+      {!isInstalled && onClickList && (
         <div className="market-program-button">
-          <ListButton isDisabled={isDisabled} onClick={onClickList} />
+          <ListButton isDisabled={false} onClick={onClickList} />
         </div>
       )}
     </div>

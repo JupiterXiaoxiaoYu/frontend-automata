@@ -158,6 +158,23 @@
   user-select: none;
 }
 
+.market-program-installed-text {
+  position: absolute;
+  top: 84%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  text-align: center;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 12px;
+  font-family: "mishmash";
+  color: red;
+  pointer-events: none;
+  user-select: none;
+}
+
 .market-program-button {
   position: absolute;
   top: 82.5%;

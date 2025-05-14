@@ -9,9 +9,7 @@ const instance = axios.create({
   },
 });
 
-export async function getMarketList(): Promise<CommodityModel[]> {
-  const res = await getRequest("/data/markets");
-  const raws = res.data;
+function getCommodityList(raws: any): CommodityModel[] {
   const decodeCard = (
     marketid: number,
     object: { duration: number; attributes: number }
@@ -31,7 +29,7 @@ export async function getMarketList(): Promise<CommodityModel[]> {
       marketid,
     };
   };
-  const marketList: CommodityModel[] = raws.map(
+  const commodityList: CommodityModel[] = raws.map(
     ({
       marketid,
       askprice,
@@ -51,7 +49,13 @@ export async function getMarketList(): Promise<CommodityModel[]> {
     })
   );
 
-  return marketList;
+  return commodityList;
+}
+
+export async function getMarketList(): Promise<CommodityModel[]> {
+  const res = await getRequest("/data/markets");
+  const raws = res.data;
+  return getCommodityList(raws);
 }
 
 export async function getBidList(
@@ -60,46 +64,7 @@ export async function getBidList(
 ): Promise<CommodityModel[]> {
   const res = await getRequest(`/data/bid/${pid1}/${pid2}`);
   const raws = res.data;
-  const decodeCard = (
-    marketid: number,
-    object: { duration: number; attributes: number }
-  ) => {
-    const value = BigInt(object.attributes);
-    const attributes = [];
-    for (let i = 0; i < 8; i++) {
-      const shift = BigInt(i * 8);
-      const byte = Number((value >> shift) & 0xffn);
-      const signed = byte >= 128 ? byte - 256 : byte;
-      attributes.push(signed);
-    }
-    console.log(attributes);
-    return {
-      duration: object.duration,
-      attributes: attributes,
-      marketid,
-    };
-  };
-  const marketList: CommodityModel[] = raws.map(
-    ({
-      marketid,
-      askprice,
-      object,
-      bidder,
-    }: {
-      marketid: number;
-      askprice: number;
-      object: { duration: number; attributes: number };
-      bidder: { bidprice: number; bidder: string[] };
-    }) => ({
-      id: Number(marketid),
-      askPrice: Number(askprice),
-      object: decodeProgram(decodeCard(Number(marketid), object)),
-      bidPrice: Number(bidder?.bidprice) ?? 0,
-      bidders: bidder?.bidder ?? [],
-    })
-  );
-
-  return marketList;
+  return getCommodityList(raws);
 }
 
 export async function getSellingList(
@@ -108,46 +73,7 @@ export async function getSellingList(
 ): Promise<CommodityModel[]> {
   const res = await getRequest(`/data/sell/${pid1}/${pid2}`);
   const raws = res.data;
-  const decodeCard = (
-    marketid: number,
-    object: { duration: number; attributes: number }
-  ) => {
-    const value = BigInt(object.attributes);
-    const attributes = [];
-    for (let i = 0; i < 8; i++) {
-      const shift = BigInt(i * 8);
-      const byte = Number((value >> shift) & 0xffn);
-      const signed = byte >= 128 ? byte - 256 : byte;
-      attributes.push(signed);
-    }
-    console.log(attributes);
-    return {
-      duration: object.duration,
-      attributes: attributes,
-      marketid,
-    };
-  };
-  const marketList: CommodityModel[] = raws.map(
-    ({
-      marketid,
-      askprice,
-      object,
-      bidder,
-    }: {
-      marketid: number;
-      askprice: number;
-      object: { duration: number; attributes: number };
-      bidder: { bidprice: number; bidder: string[] };
-    }) => ({
-      id: Number(marketid),
-      askPrice: Number(askprice),
-      object: decodeProgram(decodeCard(Number(marketid), object)),
-      bidPrice: Number(bidder?.bidprice) ?? 0,
-      bidders: bidder?.bidder ?? [],
-    })
-  );
-
-  return marketList;
+  return getCommodityList(raws);
 }
 
 async function getRequest(path: string) {
