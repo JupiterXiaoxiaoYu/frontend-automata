@@ -30,8 +30,6 @@ export enum UIState{
   CollectInterestPopupLoading,
   RocketPopup,
   RocketPopupLoading,
-  MarketPopup,
-  MarketPopupLoading,
   BidAmountPopup,
   BidAmountPopupLoading,
 }

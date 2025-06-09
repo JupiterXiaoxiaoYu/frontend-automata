@@ -30,7 +30,8 @@ import {
   selectSelectedCreatureListIndex,
   selectSelectedCreatureCurrentProgram,
   selectSelectedCreatureSelectingProgram,
-  clearSelectedCreatureIndex,
+  setNotSelectingCreature,
+  selectIsSelectingMarket,
 } from "../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -38,6 +39,7 @@ import MainMenuProgressBar from "./MainMenuProgressBar";
 import RedeemMenu from "./RedeemMenu";
 import RedeemButton from "./Buttons/RedeemButton";
 import MainMenuEmptyHint from "./MainMenuEmptyHint";
+import MarketPopup from "./Popups/MarketPopup";
 
 interface Props {
   localTimer: number;
@@ -49,6 +51,7 @@ const MainMenu = ({ localTimer }: Props) => {
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const isNotSelectingCreature = useAppSelector(selectIsNotSelectingCreature);
+  const isSelectingMarket = useAppSelector(selectIsSelectingMarket);
   const selectedCreature = useAppSelector(selectSelectedCreature);
   const selectedCreaturePrograms = useAppSelector(
     selectSelectedCreaturePrograms
@@ -72,6 +75,7 @@ const MainMenu = ({ localTimer }: Props) => {
     selectSelectedCreatureListIndex
   );
   const showTaskMenu = isNotSelectingCreature && uIState != UIState.Guide;
+  const showMarketPopup = isSelectingMarket;
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
 
@@ -114,7 +118,7 @@ const MainMenu = ({ localTimer }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then(
+          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
             (action) => {
               if (queryState.fulfilled.match(action)) {
                 dispatch(setUIState({ uIState: UIState.Idle }));
@@ -147,7 +151,7 @@ const MainMenu = ({ localTimer }: Props) => {
 
   function onClickRedeem() {
     if (!isLoading) {
-      dispatch(clearSelectedCreatureIndex({}));
+      dispatch(setNotSelectingCreature({}));
     }
   }
 
@@ -168,7 +172,7 @@ const MainMenu = ({ localTimer }: Props) => {
   return (
     <div className="main">
       <Rocket />
-      {!isNotSelectingCreature && (
+      {!isNotSelectingCreature && !isSelectingMarket && (
         <div className="main-content">
           <div className="main-info-container">
             <DiffResourcesInfo diffResources={selectedCreatureDiffResources} />
@@ -237,7 +241,7 @@ const MainMenu = ({ localTimer }: Props) => {
             {showRebootButton && (
               <CreatureRebootButton onClick={() => onClickReboot()} />
             )}
-            {!isNotSelectingCreature && (
+            {!isNotSelectingCreature && !isSelectingMarket && (
               <div className="main-redeem">
                 <RedeemButton onClick={onClickRedeem} />
               </div>
@@ -246,6 +250,7 @@ const MainMenu = ({ localTimer }: Props) => {
         </div>
       )}
       {showTaskMenu && <RedeemMenu />}
+      {showMarketPopup && <MarketPopup />}
     </div>
   );
 };

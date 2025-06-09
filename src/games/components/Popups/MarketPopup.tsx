@@ -277,7 +277,6 @@ const MarketPopup = () => {
 
   return (
     <div className="market-popup-container">
-      <div onClick={onClickCancel} className="market-popup-mask" />
       <div className="market-popup-main-container">
         <img src={background} className="market-popup-main-background" />
         {showBidAmountPopup && (

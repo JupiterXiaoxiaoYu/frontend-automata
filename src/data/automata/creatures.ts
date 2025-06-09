@@ -125,8 +125,9 @@ function fillCreaturesWithLocked(origin: CreatureModel[]): CreatureModel[] {
 }
 
 const NOT_SELECTING_CREATURE = "NotSelecting"
+const SELECTING_MARKET = "SelectingMarket";
 interface CreaturesState {
-    selectedCreatureIndex: number | typeof NOT_SELECTING_CREATURE;
+    selectedCreatureIndex: number | typeof NOT_SELECTING_CREATURE | typeof SELECTING_MARKET;
     creatures: CreatureModel[];
     creatingCreature: CreatureModel;
     rebootCreature: CreatureModel | null;
@@ -152,8 +153,11 @@ export const creaturesSlice = createSlice({
                 state.selectedCreatureIndex = action.payload.index;
             }
         },
-        clearSelectedCreatureIndex: (state, action) => {
+        setNotSelectingCreature: (state, action) => {
             state.selectedCreatureIndex = NOT_SELECTING_CREATURE;
+        },
+        setSelectingMarket: (state, action) => {
+            state.selectedCreatureIndex = SELECTING_MARKET;
         },
         startCreatingCreature: (state, action) => {
             state.selectedCreatureIndex = state.creatures.length;
@@ -161,7 +165,7 @@ export const creaturesSlice = createSlice({
             state.selectingProgramIndex = 0;
         },
         startRebootCreature: (state, action) => {
-            if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE){
+            if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE && state.selectedCreatureIndex != SELECTING_MARKET){
                 state.rebootCreature = state.creatures[state.selectedCreatureIndex];
                 state.selectingProgramIndex = 0;
             }
@@ -170,7 +174,7 @@ export const creaturesSlice = createSlice({
             state.rebootCreature = null;
         },
         setProgramIndex: (state, action) => {
-            if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE){
+            if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE && state.selectedCreatureIndex != SELECTING_MARKET){
                 const selectedCreature =
                     state.selectedCreatureIndex === state.creatures.length
                         ? state.creatingCreature
@@ -209,10 +213,11 @@ export const selectCreaturesOnCurrentPage = (creatures: CreatureModel[]) => (amo
 }
 
 export const selectIsNotSelectingCreature = (state: RootState) => state.automata.creatures.selectedCreatureIndex == NOT_SELECTING_CREATURE;
+export const selectIsSelectingMarket = (state: RootState) => state.automata.creatures.selectedCreatureIndex == SELECTING_MARKET;
 export const selectIsSelectingCreatingCreature = (state: RootState) => state.automata.creatures.selectedCreatureIndex == state.automata.creatures.creatures.length;
 export const selectSelectedCreatureIndex = (state: RootState) => state.automata.creatures.selectedCreatureIndex;
 export const selectSelectedCreatureListIndex = (state: RootState) =>
-    state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE
+    state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE || state.automata.creatures.selectedCreatureIndex === SELECTING_MARKET
         ? -1
         : state.automata.creatures.selectedCreatureIndex;
 export const selectCreaturesCount = (state: RootState) => state.automata.creatures.creatures.length
@@ -221,7 +226,7 @@ export const selectCreatures = (state: RootState) =>
         ? fillCreaturesWithLocked([...state.automata.creatures.creatures, state.automata.creatures.creatingCreature])
         : fillCreaturesWithLocked([...state.automata.creatures.creatures, getUnlockableCreature(state.automata.creatures.creatures.length)]);
 export const selectSelectedCreature = (state: RootState) =>
-    state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE
+    state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE || state.automata.creatures.selectedCreatureIndex === SELECTING_MARKET
         ? emptyCreature :
     state.automata.creatures.selectedCreatureIndex === state.automata.creatures.creatures.length
         ? state.automata.creatures.creatingCreature :
@@ -407,5 +412,5 @@ export const selectInstalledProgramIds = (state: RootState): number[] => {
         .filter((programIndex): programIndex is number => programIndex !== null);
     return Array.from(new Set(allProgramIndexes));
 };
-export const { setSelectedCreatureIndex, clearSelectedCreatureIndex, startCreatingCreature, startRebootCreature, clearRebootCreature, setProgramIndex, setSelectingProgramIndex, nextPage, prevPage } = creaturesSlice.actions;
+export const { setSelectedCreatureIndex, setNotSelectingCreature, setSelectingMarket, startCreatingCreature, startRebootCreature, clearRebootCreature, setProgramIndex, setSelectingProgramIndex, nextPage, prevPage } = creaturesSlice.actions;
 export default creaturesSlice.reducer;

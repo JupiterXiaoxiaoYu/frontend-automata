@@ -15,6 +15,7 @@ import MarketButton from "./Buttons/MarketButton";
 import { startGuide } from "../../data/automata/guides";
 import { GuideType } from "../../data/automata/models";
 import PlayerInfo from "./PlayerInfo";
+import { setSelectingMarket } from "../../data/automata/creatures";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ const TopMenu = () => {
 
   function onClickMarket() {
     dispatch(setMarketTabType({ marketTabType: MarketTabType.Auction }));
-    dispatch(setUIState({ uIState: UIState.MarketPopup }));
+    dispatch(setSelectingMarket({}));
   }
 
   return (
