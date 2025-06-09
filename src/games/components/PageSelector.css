@@ -1,22 +1,27 @@
 .page-selector-container {
   position: absolute;
-  width: 170px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .page-selector-page-number-background {
   position: absolute;
-  bottom: 25%;
+  width: auto;
+  height: 60%;
+  aspect-ratio: 56/25;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 56px;
-  height: 25px;
+  pointer-events: none;
   user-select: none;
 }
 
 .page-selector-page-number-text {
   position: absolute;
-  bottom: 25%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -34,8 +39,11 @@
 .page-selector-prev-button,
 .page-selector-prev-button-horizontal {
   position: absolute;
-  bottom: 25%;
-  left: 20%;
+  top: 50%;
+  left: 15%;
+  height: 40%;
+  width: auto;
+  aspect-ratio: 52 / 45;
 }
 
 .page-selector-prev-button {
@@ -49,8 +57,11 @@
 .page-selector-next-button,
 .page-selector-next-button-horizontal {
   position: absolute;
-  bottom: 25%;
-  left: 80%;
+  top: 50%;
+  left: 85%;
+  height: 40%;
+  width: auto;
+  aspect-ratio: 52 / 45;
 }
 
 .page-selector-next-button {
