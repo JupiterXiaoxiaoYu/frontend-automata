@@ -1,7 +1,7 @@
 .market-popup-container {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -10,115 +10,65 @@
 
 .market-popup-main-container {
   position: absolute;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 90%;
   left: 50%;
-  top: 50%;
-  width: 552px;
-  height: 413px;
+  top: 0;
+  transform: translate(-50%, 0);
 }
 
-.market-popup-main-background {
-  width: 100%;
+.market-popup-main-grid-container {
+  position: absolute;
+  width: 81%;
   height: 100%;
-  user-select: none;
+  left: 19%;
+  top: 0;
+  background-color: red;
 }
 
-.market-popup-cost-container {
+.market-popup-main-tab-container {
   position: absolute;
-  width: 70px;
-  height: 18px;
-  left: 88%;
-  top: 12%;
-  transform: translate(-50%, -50%);
-}
-
-.market-popup-cost-background {
-  width: 100%;
+  width: 19%;
   height: 100%;
-  user-select: none;
+  left: 0;
+  top: 0;
+  background-color: green;
 }
 
-.market-popup-cost-icon {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 50%;
-  left: 0%;
-  transform: translate(-50%, -50%);
-  user-select: none;
-}
-
-.market-popup-cost-text {
-  position: absolute;
-  top: 55%;
-  left: 37%;
-  transform: translate(-50%, -50%);
-  font-size: 10px;
-  text-align: left;
-  line-height: 10px;
-  margin: 0px;
-  width: 40%;
-  height: 10px;
-  font-family: "mishmash";
-  color: white;
-  user-select: none;
-}
-
-.market-popup-auction-tab-button {
-  position: absolute;
-  width: auto;
-  height: 10%;
-  aspect-ratio: 177/74;
-  left: 14.5%;
-  top: 12.6%;
-  transform: translate(-50%, -50%);
-}
-
+.market-popup-inventory-tab-button,
+.market-popup-selling-tab-button,
+.market-popup-auction-tab-button,
 .market-popup-lot-tab-button {
   position: absolute;
-  width: auto;
-  height: 10%;
-  aspect-ratio: 177/74;
-  left: 33%;
-  top: 12.6%;
-  transform: translate(-50%, -50%);
-}
-
-.market-popup-selling-tab-button {
-  position: absolute;
-  width: auto;
-  height: 10%;
-  aspect-ratio: 177/74;
-  left: 51.5%;
-  top: 12.6%;
-  transform: translate(-50%, -50%);
+  width: 70%;
+  height: auto;
+  aspect-ratio: 132/45;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .market-popup-inventory-tab-button {
+  top: 2%;
+}
+
+.market-popup-selling-tab-button {
+  top: 10%;
+}
+
+.market-popup-auction-tab-button {
+  top: 18%;
+}
+
+.market-popup-lot-tab-button {
+  top: 26%;
+}
+
+.market-popup-page-selector-container {
   position: absolute;
   width: auto;
   height: 10%;
-  aspect-ratio: 177/74;
-  left: 70%;
-  top: 12.6%;
-  transform: translate(-50%, -50%);
-}
-
-.market-popup-page-selector {
-  position: absolute;
-  width: 170px;
-  height: 40px;
+  aspect-ratio: 3/1;
   left: 50%;
-  top: 90%;
-  transform: translate(-50%, -50%);
-}
-
-.market-popup-page-grid {
-  position: absolute;
-  width: 85%;
-  height: auto;
-  aspect-ratio: 891/410;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  transform: translate(-50%, 0);
 }

@@ -35,6 +35,10 @@ import ListAmountPopup from "./ListAmountPopup";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
 import { selectInstalledProgramIds } from "../../../data/automata/creatures";
+import MarketInventoryButton from "../Buttons/MarketInventoryButton";
+import MarketAuctionButton from "../Buttons/MarketAuctionButton";
+import MarketLotButton from "../Buttons/MarketLotButton";
+import MarketSellingButton from "../Buttons/MarketSellingButton";
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
@@ -74,42 +78,14 @@ const MarketPopup = () => {
         bidders: [],
       };
     });
-  const elements =
-    marketTabType == MarketTabType.Auction
-      ? auctionList.map((commodity, index) => (
-          <MarketProgram
-            key={index}
-            isInstalled={false}
-            commodity={commodity}
-            onClickBid={() => onClickBid(commodity)}
-          />
-        ))
-      : marketTabType == MarketTabType.Lot
-      ? lotList.map((commodity, index) => (
-          <MarketProgram
-            key={index}
-            isInstalled={false}
-            commodity={commodity}
-            onClickBid={() => onClickBid(commodity)}
-          />
-        ))
-      : marketTabType == MarketTabType.Selling
-      ? sellingList.map((commodity, index) => (
-          <MarketProgram
-            key={index}
-            isInstalled={false}
-            commodity={commodity}
-            onClickSell={() => onClickSell(commodity)}
-          />
-        ))
-      : inventoryList.map((commodity, index) => (
-          <MarketProgram
-            key={index}
-            isInstalled={installedProgramIds.includes(commodity.object.index)}
-            commodity={commodity}
-            onClickList={() => onClickList(commodity)}
-          />
-        ));
+  const elements = inventoryList.map((commodity, index) => (
+    <MarketProgram
+      key={index}
+      isInstalled={installedProgramIds.includes(commodity.object.index)}
+      commodity={commodity}
+      onClickList={() => onClickList(commodity)}
+    />
+  ));
   const [isFirst, setIsFirst] = useState<boolean>(true);
 
   const adjustSize = () => {
@@ -278,72 +254,33 @@ const MarketPopup = () => {
   return (
     <div className="market-popup-container">
       <div className="market-popup-main-container">
-        <img src={background} className="market-popup-main-background" />
-        {showBidAmountPopup && (
-          <BidAmountPopup
-            minBidAmount={minBidAmount}
-            maxBidAmount={maxBidAmount}
-            commodity={currentCommodityPopup!}
-            onConfirmBidAmount={onConfirmBidAmount}
-            onCancelBid={onCancelBid}
-          />
-        )}
-        {showListAmountPopup && (
-          <ListAmountPopup
-            commodity={currentCommodityPopup!}
-            onConfirmListAmount={onConfirmListAmount}
-            onCancelList={onCancelList}
-          />
-        )}
-        <div className="market-popup-cost-container">
-          <img
-            src={getResourceIconPath(ResourceType.Titanium)}
-            className="market-popup-cost-icon"
-          />
-          <p className="market-popup-cost-text">{titaniumCount}</p>
-          <img
-            src={amountBackground}
-            className="market-popup-cost-background"
-          />
+        <div className="market-popup-main-tab-container">
+          <div className="market-popup-inventory-tab-button">
+            <MarketInventoryButton
+              onClick={onClickInventoryTab}
+              isSelect={marketTabType == MarketTabType.Inventory}
+            />
+          </div>
+          <div className="market-popup-selling-tab-button">
+            <MarketSellingButton
+              onClick={onClickSellingTab}
+              isSelect={marketTabType == MarketTabType.Selling}
+            />
+          </div>
+          <div className="market-popup-auction-tab-button">
+            <MarketAuctionButton
+              onClick={onClickAuctionTab}
+              isSelect={marketTabType == MarketTabType.Auction}
+            />
+          </div>
+          <div className="market-popup-lot-tab-button">
+            <MarketLotButton
+              onClick={onClickLotTab}
+              isSelect={marketTabType == MarketTabType.Lot}
+            />
+          </div>
         </div>
-        <div className="market-popup-auction-tab-button">
-          <MarketTabButton
-            text={"Auction"}
-            onClick={onClickAuctionTab}
-            isSelect={marketTabType == MarketTabType.Auction}
-            normalColor="#5CFFFF"
-            selectColor="black"
-          />
-        </div>
-        <div className="market-popup-lot-tab-button">
-          <MarketTabButton
-            text={"Lot"}
-            onClick={onClickLotTab}
-            isSelect={marketTabType == MarketTabType.Lot}
-            normalColor="#5CFFFF"
-            selectColor="black"
-          />
-        </div>
-        <div className="market-popup-selling-tab-button">
-          <MarketTabButton
-            text={"Selling"}
-            onClick={onClickSellingTab}
-            isSelect={marketTabType == MarketTabType.Selling}
-            normalColor="#5CFFFF"
-            selectColor="black"
-          />
-        </div>
-        <div className="market-popup-inventory-tab-button">
-          <MarketTabButton
-            text={"Inventory"}
-            onClick={onClickInventoryTab}
-            isSelect={marketTabType == MarketTabType.Inventory}
-            normalColor="#5CFFFF"
-            selectColor="black"
-          />
-        </div>
-
-        <div ref={containerRef} className="market-popup-page-grid">
+        <div ref={containerRef} className="market-popup-main-grid-container">
           <Grid
             elementWidth={elementWidth}
             elementHeight={elementHeight}
@@ -352,16 +289,15 @@ const MarketPopup = () => {
             elements={elements}
           />
         </div>
-
-        <div className="market-popup-page-selector">
-          <PageSelector
-            currentPage={98}
-            pageCount={99}
-            isHorizontal={true}
-            onClickPrevPageButton={onClickPrevPageButton}
-            onClickNextPageButton={onClickNextPageButton}
-          />
-        </div>
+      </div>
+      <div className="market-popup-page-selector-container">
+        <PageSelector
+          currentPage={1}
+          pageCount={1}
+          isHorizontal={true}
+          onClickPrevPageButton={onClickPrevPageButton}
+          onClickNextPageButton={onClickNextPageButton}
+        />
       </div>
     </div>
   );
