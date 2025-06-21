@@ -32,10 +32,6 @@ export enum UIState{
   RocketPopupLoading,
   BidAmountPopup,
   BidAmountPopupLoading,
-  MarketInventoryInfoPopup,
-  MarketSellingInfoPopup,
-  MarketAuctionInfoPopup,
-  MarketLotInfoPopup,
 }
 
 export enum TutorialType{
@@ -64,9 +60,6 @@ interface PropertiesState {
     lastRedeemEnergy: number;
     interest: number;
     bountyPool: number;
-    marketProgramIndex: number,
-    isShowingListAmountPopup: boolean,
-    isShowingBidAmountPopup: boolean,
 }
 
 const initialState: PropertiesState = {
@@ -89,9 +82,6 @@ const initialState: PropertiesState = {
     lastRedeemEnergy: 0,
     interest: 0,
     bountyPool: 0,
-    marketProgramIndex: 0,
-    isShowingListAmountPopup: false,
-    isShowingBidAmountPopup: false,
 };
 
 export const propertiesSlice = createSlice({
@@ -110,15 +100,6 @@ export const propertiesSlice = createSlice({
       setConfirmPopupInfo: (state, action) => {
         state.confirmPopupInfo = action.payload.confirmPopupInfo;
       },
-      setMarketProgramIndex: (state, action) => {
-        state.marketProgramIndex = action.payload.marketProgramIndex;
-      },
-      setIsShowingListAmountPopup: (state, action) => {
-        state.isShowingListAmountPopup = action.payload.isShowingListAmountPopup;
-      },
-      setIsShowingBidAmountPopup: (state, action) => {
-        state.isShowingBidAmountPopup = action.payload.isShowingBidAmountPopup;
-      }
     },
 
   extraReducers: (builder) => {
@@ -195,5 +176,5 @@ export const selectInterest = (state: RootState) => state.automata.properties.in
 export const selectBountyPool = (state: RootState) => state.automata.properties.bountyPool;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
 
-export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo, setMarketProgramIndex, setIsShowingListAmountPopup, setIsShowingBidAmountPopup  } = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

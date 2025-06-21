@@ -1,36 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import background from "../../images/backgrounds/market_frame.png";
-import amountBackground from "../../images/backgrounds/market_money_background.png";
-import {
-  UIState,
-  selectUIState,
-  setIsShowingBidAmountPopup,
-  setIsShowingListAmountPopup,
-  setMarketProgramIndex,
-  setUIState,
-} from "../../../data/automata/properties";
+import { useEffect, useRef, useState } from "react";
+import { selectUIState } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./MarketPopup.css";
-import {
-  getResourceIconPath,
-  ResourceType,
-} from "../../../data/automata/models";
-import { selectResource } from "../../../data/automata/resources";
-import MarketTabButton from "../Buttons/MarketTabButton";
 import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
 import { getSellingAsync, getAuctionAsync, getLotAsync } from "../../express";
-import {
-  getBidCardTransactionCommandArray,
-  getListCardTransactionCommandArray,
-  getSellCardTransactionCommandArray,
-} from "../../rpc";
 import { AccountSlice } from "zkwasm-minirollup-browser";
-import { queryState, sendTransaction } from "../../request";
-import BidAmountPopup from "./BidAmountPopup";
-import ListAmountPopup from "./ListAmountPopup";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
 import { selectInstalledProgramIds } from "../../../data/automata/creatures";
@@ -352,49 +329,6 @@ const MarketPopup = () => {
     setPage(page + 1);
   };
 
-  const onClickInventoryMore = (index: number) => {
-    if (uIState == UIState.Idle) {
-      dispatch(setUIState({ uIState: UIState.MarketInventoryInfoPopup }));
-      dispatch(
-        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
-      );
-      dispatch(
-        setIsShowingListAmountPopup({ isShowingListAmountPopup: false })
-      );
-    }
-  };
-
-  const onClickSellingMore = (index: number) => {
-    if (uIState == UIState.Idle) {
-      dispatch(setUIState({ uIState: UIState.MarketSellingInfoPopup }));
-      dispatch(
-        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
-      );
-    }
-  };
-
-  const onClickMarketMore = (index: number) => {
-    if (uIState == UIState.Idle) {
-      dispatch(setUIState({ uIState: UIState.MarketAuctionInfoPopup }));
-      dispatch(
-        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
-      );
-      dispatch(setIsShowingBidAmountPopup({ isShowingBidAmountPopup: false }));
-    }
-  };
-
-  const onClickBidMore = (index: number) => {
-    if (uIState == UIState.Idle) {
-      dispatch(
-        setUIState({
-          type: UIState.MarketLotInfoPopup,
-          nuggetIndex: page * pageSize + index,
-          isShowingBidAmountPopup: false,
-        })
-      );
-    }
-  };
-
   const onClickInventoryTab = () => {
     dispatch(setTabState(MarketTabState.Inventory));
   };
@@ -412,25 +346,25 @@ const MarketPopup = () => {
     <div className="market-popup-container">
       <div className="market-popup-main-container">
         <div className="market-popup-main-tab-container">
-          <div className="market-popup-inventory-tab-button">
+          <div className="market-popup-tab-button">
             <MarketInventoryButton
               onClick={onClickInventoryTab}
               isSelect={tabState == MarketTabState.Inventory}
             />
           </div>
-          <div className="market-popup-selling-tab-button">
+          <div className="market-popup-tab-button">
             <MarketSellingButton
               onClick={onClickSellingTab}
               isSelect={tabState == MarketTabState.Selling}
             />
           </div>
-          <div className="market-popup-auction-tab-button">
+          <div className="market-popup-tab-button">
             <MarketAuctionButton
               onClick={onClickAuctionTab}
               isSelect={tabState == MarketTabState.Auction}
             />
           </div>
-          <div className="market-popup-lot-tab-button">
+          <div className="market-popup-tab-button">
             <MarketLotButton
               onClick={onClickLotTab}
               isSelect={tabState == MarketTabState.Lot}
