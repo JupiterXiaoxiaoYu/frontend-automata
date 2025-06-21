@@ -4,23 +4,24 @@ import amountBackground from "../../images/backgrounds/withdraw_amount_backgroun
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   getResourceIconPath,
+  ProgramModel,
   ResourceType,
-  CommodityModel,
 } from "../../../data/automata/models";
 import "./BidAmountPopup.css";
 
 interface Props {
   minBidAmount: number;
   maxBidAmount: number;
-  commodity: CommodityModel;
-  onConfirmBidAmount: (amount: number, commodity: CommodityModel) => void;
+  program: ProgramModel;
+
+  onConfirmBidAmount: (amount: number, program: ProgramModel) => void;
   onCancelBid: () => void;
 }
 
 const BidAmountPopup = ({
   minBidAmount,
   maxBidAmount,
-  commodity,
+  program,
   onConfirmBidAmount,
   onCancelBid,
 }: Props) => {
@@ -32,7 +33,7 @@ const BidAmountPopup = ({
     if (amount > maxBidAmount || amount < minBidAmount) {
       setErrorMessage("Please enter a valid amount");
     } else {
-      onConfirmBidAmount(amount, commodity);
+      onConfirmBidAmount(amount, program);
     }
   };
 

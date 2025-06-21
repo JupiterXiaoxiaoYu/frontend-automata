@@ -32,19 +32,16 @@ export enum UIState{
   RocketPopupLoading,
   BidAmountPopup,
   BidAmountPopupLoading,
+  MarketInventoryInfoPopup,
+  MarketSellingInfoPopup,
+  MarketAuctionInfoPopup,
+  MarketLotInfoPopup,
 }
 
 export enum TutorialType{
   None,
   Creature,
   Program,
-}
-
-export enum MarketTabType{
-  Auction,
-  Lot,
-  Selling,
-  Inventory,
 }
 
 interface PropertiesState {
@@ -67,7 +64,9 @@ interface PropertiesState {
     lastRedeemEnergy: number;
     interest: number;
     bountyPool: number;
-    marketTabType: MarketTabType;
+    marketProgramIndex: number,
+    isShowingListAmountPopup: boolean,
+    isShowingBidAmountPopup: boolean,
 }
 
 const initialState: PropertiesState = {
@@ -90,7 +89,9 @@ const initialState: PropertiesState = {
     lastRedeemEnergy: 0,
     interest: 0,
     bountyPool: 0,
-    marketTabType: MarketTabType.Auction,
+    marketProgramIndex: 0,
+    isShowingListAmountPopup: false,
+    isShowingBidAmountPopup: false,
 };
 
 export const propertiesSlice = createSlice({
@@ -109,9 +110,15 @@ export const propertiesSlice = createSlice({
       setConfirmPopupInfo: (state, action) => {
         state.confirmPopupInfo = action.payload.confirmPopupInfo;
       },
-      setMarketTabType: (state, action) => {
-        state.marketTabType = action.payload.marketTabType;
+      setMarketProgramIndex: (state, action) => {
+        state.marketProgramIndex = action.payload.marketProgramIndex;
       },
+      setIsShowingListAmountPopup: (state, action) => {
+        state.isShowingListAmountPopup = action.payload.isShowingListAmountPopup;
+      },
+      setIsShowingBidAmountPopup: (state, action) => {
+        state.isShowingBidAmountPopup = action.payload.isShowingBidAmountPopup;
+      }
     },
 
   extraReducers: (builder) => {
@@ -187,7 +194,6 @@ export const selectLastRedeemEnergy = (state: RootState) => state.automata.prope
 export const selectInterest = (state: RootState) => state.automata.properties.interest;
 export const selectBountyPool = (state: RootState) => state.automata.properties.bountyPool;
 export const selectConfirmPopupInfo = (state: RootState) => state.automata.properties.confirmPopupInfo;
-export const selectMarketTabType = (state: RootState) => state.automata.properties.marketTabType;
 
-export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo, setMarketTabType } = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket, setConfirmPopupInfo, setMarketProgramIndex, setIsShowingListAmountPopup, setIsShowingBidAmountPopup  } = propertiesSlice.actions;
 export default propertiesSlice.reducer;

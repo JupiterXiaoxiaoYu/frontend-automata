@@ -1,5 +1,10 @@
 import axios from "axios";
-import { CommodityModel, decodeProgram } from "../data/automata/models";
+import {
+  Bid,
+  decodeProgram,
+  MarketTabData,
+  ProgramModel,
+} from "../data/automata/models";
 import { fullUrl } from "./rpc";
 
 const instance = axios.create({
@@ -9,7 +14,7 @@ const instance = axios.create({
   },
 });
 
-function getCommodityList(raws: any): CommodityModel[] {
+function getProgramList(raws: any): ProgramModel[] {
   const decodeCard = (
     marketid: number,
     object: { duration: number; attributes: number }
@@ -29,52 +34,72 @@ function getCommodityList(raws: any): CommodityModel[] {
       marketid,
     };
   };
-  const commodityList: CommodityModel[] = raws.map(
+  const programList: ProgramModel[] = raws.map(
     ({
       marketid,
       askprice,
+      sysprice,
       object,
+      owner,
       bidder,
     }: {
       marketid: number;
       askprice: number;
+      sysprice: number;
       object: { duration: number; attributes: number };
-      bidder: { bidprice: number; bidder: string[] };
-    }) => ({
-      id: Number(marketid),
-      askPrice: Number(askprice ?? 0),
-      object: decodeProgram(decodeCard(Number(marketid), object)),
-      bidPrice: Number(bidder?.bidprice ?? 0),
-      bidders: bidder?.bidder ?? [],
-    })
+      owner: number[];
+      bidder: Bid;
+    }) =>
+      decodeProgram(
+        decodeCard(Number(marketid), object),
+        0,
+        Number(askprice ?? 0),
+        Number(sysprice ?? 0),
+        owner,
+        bidder
+      )
   );
 
-  return commodityList;
+  return programList;
 }
 
-export async function getMarketList(): Promise<CommodityModel[]> {
-  const res = await getRequest("/data/markets");
-  const raws = res.data;
-  return getCommodityList(raws);
-}
-
-export async function getBidList(
+export const getSellingAsync = async (
+  skip: number,
+  limit: number,
   pid1: string,
   pid2: string
-): Promise<CommodityModel[]> {
-  const res = await getRequest(`/data/bid/${pid1}/${pid2}`);
+): Promise<MarketTabData> => {
+  const res = await getRequest(
+    `/data/sell/${pid1}/${pid2}?skip=${skip}&limit=${limit}`
+  );
   const raws = res.data;
-  return getCommodityList(raws);
-}
+  console.log("getSelling", raws);
+  return { programs: getProgramList(raws), programCount: res.count };
+};
 
-export async function getSellingList(
+export const getAuctionAsync = async (
+  skip: number,
+  limit: number
+): Promise<MarketTabData> => {
+  const res = await getRequest(`/data/markets?skip=${skip}&limit=${limit}`);
+  const raws = res.data;
+  console.log("getAuction", res, skip, limit);
+  return { programs: getProgramList(raws), programCount: res.count };
+};
+
+export const getLotAsync = async (
+  skip: number,
+  limit: number,
   pid1: string,
   pid2: string
-): Promise<CommodityModel[]> {
-  const res = await getRequest(`/data/sell/${pid1}/${pid2}`);
+): Promise<MarketTabData> => {
+  const res = await getRequest(
+    `/data/bid/${pid1}/${pid2}?skip=${skip}&limit=${limit}`
+  );
   const raws = res.data;
-  return getCommodityList(raws);
-}
+  console.log("getLot", raws);
+  return { programs: getProgramList(raws), programCount: res.count };
+};
 
 async function getRequest(path: string) {
   try {

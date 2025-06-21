@@ -4,9 +4,8 @@ import Grid from "./Grid";
 import ProgramResourceDisplay from "./ProgramResourceDisplay";
 import {
   getResourceIconPath,
-  getProgramIconPath,
   ResourceType,
-  CommodityModel,
+  ProgramModel,
 } from "../../data/automata/models";
 import { formatTime } from "../../data/automata/creatures";
 import background from "../images/backgrounds/market_card_frame.png";
@@ -15,7 +14,7 @@ import BidButton from "./Buttons/BidButton";
 import ListButton from "./Buttons/ListButton";
 
 interface Props {
-  commodity: CommodityModel;
+  program: ProgramModel;
   isInstalled: boolean;
   onClickBid?: () => void;
   onClickSell?: () => void;
@@ -23,7 +22,7 @@ interface Props {
 }
 
 const MarketProgram = ({
-  commodity,
+  program,
   isInstalled,
   onClickBid = undefined,
   onClickSell = undefined,
@@ -32,21 +31,17 @@ const MarketProgram = ({
   return (
     <div className="market-program-container">
       <img src={background} className="market-program-background" />
-      <p className="market-program-name-text">{commodity.object.name}</p>
+      <p className="market-program-name-text">{program.name}</p>
       <p className="market-program-time-text">
-        {formatTime(commodity.object.processingTime)}
+        {formatTime(program.processingTime)}
       </p>
-      <img
-        src={getProgramIconPath(commodity.object.type)}
-        className="market-program-icon-image"
-      />
       <div className="market-program-resource-grid">
         <Grid
           elementWidth={44}
           elementHeight={16}
           columnCount={2}
           rowCount={4}
-          elements={commodity.object.resources.map((resource, index) => (
+          elements={program.resources.map((resource, index) => (
             <ProgramResourceDisplay
               key={index}
               iconImagePath={getResourceIconPath(resource.type)}
@@ -62,13 +57,13 @@ const MarketProgram = ({
             src={getResourceIconPath(ResourceType.Titanium)}
             className="market-program-bid-icon"
           />
-          <p className="market-program-bid-text">{commodity.bidPrice}</p>
+          <p className="market-program-bid-text">{program.bid?.bidprice}</p>
           <p className="market-program-ask-title-text">Ask Price :</p>
           <img
             src={getResourceIconPath(ResourceType.Titanium)}
             className="market-program-ask-icon"
           />
-          <p className="market-program-ask-text">{commodity.askPrice}</p>
+          <p className="market-program-ask-text">{program.askPrice}</p>
         </>
       )}
       {isInstalled && <p className="market-program-installed-text">In use</p>}

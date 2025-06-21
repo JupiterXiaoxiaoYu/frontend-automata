@@ -2,17 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import background from "../../images/backgrounds/market_frame.png";
 import amountBackground from "../../images/backgrounds/market_money_background.png";
 import {
-  MarketTabType,
   UIState,
-  selectMarketTabType,
-  selectNonce,
-  setMarketTabType,
+  selectUIState,
+  setIsShowingBidAmountPopup,
+  setIsShowingListAmountPopup,
+  setMarketProgramIndex,
   setUIState,
 } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./MarketPopup.css";
 import {
-  CommodityModel,
   getResourceIconPath,
   ResourceType,
 } from "../../../data/automata/models";
@@ -22,7 +21,7 @@ import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
-import { getBidList, getSellingList, getMarketList } from "../../express";
+import { getSellingAsync, getAuctionAsync, getLotAsync } from "../../express";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
@@ -39,61 +38,68 @@ import MarketInventoryButton from "../Buttons/MarketInventoryButton";
 import MarketAuctionButton from "../Buttons/MarketAuctionButton";
 import MarketLotButton from "../Buttons/MarketLotButton";
 import MarketSellingButton from "../Buttons/MarketSellingButton";
+import {
+  addAuctionTab,
+  addLotTab,
+  addSellingTab,
+  resetAuctionTab,
+  resetLotTab,
+  resetSellingTab,
+  selectAuctionTab,
+  selectInventoryTab,
+  selectIsInventoryChanged,
+  selectLotTab,
+  selectMarketForceUpdate,
+  selectSellingTab,
+  selectTabState,
+  setInventoryTab,
+  setMarketForceUpdate,
+  setTabState,
+  MarketTabState,
+  setInventoryChanged,
+} from "../../../data/automata/market";
+
+const ELEMENT_PER_REQUEST = 30;
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
   const l2account = useAppSelector(AccountSlice.selectL2Account);
-  const nonce = useAppSelector(selectNonce);
-  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
-  const marketTabType = useAppSelector(selectMarketTabType);
-  const [isLoading, setIsLoading] = useState(false);
-  const containerRef = useRef<HTMLParagraphElement>(null);
-  const columnCount = 3;
-  const rowCount = 2;
-  const [elementWidth, setElementWidth] = useState<number>(0);
-  const [elementHeight, setElementHeight] = useState<number>(0);
-  const [showBidAmountPopup, setShowBidAmountPopup] = useState<boolean>(false);
-  const [showListAmountPopup, setShowListAmountPopup] =
-    useState<boolean>(false);
-  const [maxBidAmount, setMaxBidAmount] = useState<number>(0);
-  const [minBidAmount, setMinBidAmount] = useState<number>(0);
-  const [currentCommodityPopup, setCurrentCommodityPopup] =
-    useState<CommodityModel>();
-  const programs = useAppSelector(selectAllPrograms);
-  const [auctionList, setAuctionList] = useState<CommodityModel[]>([]);
-  const [lotList, setLotList] = useState<CommodityModel[]>([]);
-  const [sellingList, setSellingList] = useState<CommodityModel[]>([]);
-  const installedProgramIds = useAppSelector(selectInstalledProgramIds);
+  const uIState = useAppSelector(selectUIState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const pids = l2account?.pubkey
     ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
     : ["", "", "", ""];
-  const inventoryList = programs
-    .filter((program) => program.marketId == 0)
-    .map((program) => {
-      return {
-        id: program.index,
-        askPrice: 0,
-        object: program,
-        bidPrice: 0,
-        bidders: [],
-      };
-    });
-  const elements = inventoryList.map((commodity, index) => (
-    <MarketProgram
-      key={index}
-      isInstalled={installedProgramIds.includes(commodity.object.index)}
-      commodity={commodity}
-      onClickList={() => onClickList(commodity)}
-    />
-  ));
-  const [isFirst, setIsFirst] = useState<boolean>(true);
+
+  const elementRatio = 297 / 205;
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const [elementWidth, setElementWidth] = useState<number>(0);
+  const [elementHeight, setElementHeight] = useState<number>(0);
+  const columnCount = 3;
+  const [rowCount, setRowCount] = useState<number>(0);
+
+  const tabState = useAppSelector(selectTabState);
+  const [page, setPage] = useState<number>(0);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const pageSize = rowCount * columnCount;
+
+  const isInventoryChanged = useAppSelector(selectIsInventoryChanged);
+  const inventoryNuggetTab = useAppSelector(selectInventoryTab);
+  const sellingNuggetTab = useAppSelector(selectSellingTab);
+  const auctionNuggetTab = useAppSelector(selectAuctionTab);
+  const lotNuggetTab = useAppSelector(selectLotTab);
+  const nuggetsForceUpdate = useAppSelector(selectMarketForceUpdate);
+  const [elements, setElements] = useState<JSX.Element[]>([]);
+
+  const programs = useAppSelector(selectAllPrograms);
+  const installedProgramIds = useAppSelector(selectInstalledProgramIds);
 
   const adjustSize = () => {
     if (containerRef.current) {
       const width = containerRef.current.offsetWidth / columnCount;
-      const height = containerRef.current.offsetHeight / rowCount;
+      const height = width / elementRatio + 10;
       setElementWidth(width);
       setElementHeight(height);
+      setRowCount(Math.floor(containerRef.current.offsetHeight / height));
     }
   };
 
@@ -106,149 +112,300 @@ const MarketPopup = () => {
     };
   }, []);
 
-  const getMarketListAsync = async () => {
-    const ret = await getMarketList();
-    setAuctionList(ret);
+  useEffect(() => {
+    checkTabData();
+  }, [page]);
+
+  useEffect(() => {
+    setPage(0);
+    if (page == 0) {
+      checkTabData();
+    }
+  }, [tabState]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [pageSize]);
+
+  useEffect(() => {
+    if (nuggetsForceUpdate) {
+      dispatch(setMarketForceUpdate(false));
+      checkTabData();
+    }
+  }, [nuggetsForceUpdate]);
+
+  const checkTabData = async () => {
+    if (isLoading) {
+      return;
+    }
+
+    if (needUpdateTabData()) {
+      await updateTabData();
+      dispatch(setMarketForceUpdate(true));
+    } else {
+      updateElements();
+    }
   };
 
-  const getLotListAsync = async () => {
-    const ret = await getBidList(pids[1].toString(), pids[2].toString());
-    setLotList(ret);
+  const updateElements = () => {
+    if (tabState == MarketTabState.Inventory) {
+      setElements(
+        inventoryNuggetTab.programs
+          .slice(page * pageSize, (page + 1) * pageSize)
+          .map((program, index) => (
+            <MarketProgram
+              key={index}
+              isInstalled={installedProgramIds.includes(program.index)}
+              program={program}
+              onClickList={() => {
+                /*onClickList(program)*/
+              }}
+            />
+          ))
+      );
+      setTotalPage(
+        Math.max(Math.ceil(inventoryNuggetTab.programCount / pageSize), 1)
+      );
+    } else if (tabState == MarketTabState.Selling) {
+      setElements(
+        sellingNuggetTab.programs
+          .slice(page * pageSize, (page + 1) * pageSize)
+          .map((program, index) => (
+            <MarketProgram
+              key={index}
+              isInstalled={installedProgramIds.includes(program.index)}
+              program={program}
+              onClickSell={() => {
+                /*onClickSell(program)*/
+              }}
+            />
+          ))
+      );
+      setTotalPage(
+        Math.max(Math.ceil(sellingNuggetTab.programCount / pageSize), 1)
+      );
+    } else if (tabState == MarketTabState.Auction) {
+      setElements(
+        auctionNuggetTab.programs
+          .slice(page * pageSize, (page + 1) * pageSize)
+          .map((program, index) => (
+            <MarketProgram
+              key={index}
+              isInstalled={installedProgramIds.includes(program.index)}
+              program={program}
+              onClickBid={() => {
+                /*onClickBid(program)*/
+              }}
+            />
+          ))
+      );
+      setTotalPage(
+        Math.max(Math.ceil(auctionNuggetTab.programCount / pageSize), 1)
+      );
+    } else if (tabState == MarketTabState.Lot) {
+      setElements(
+        lotNuggetTab.programs
+          .slice(page * pageSize, (page + 1) * pageSize)
+          .map((program, index) => (
+            <MarketProgram
+              key={index}
+              isInstalled={installedProgramIds.includes(program.index)}
+              program={program}
+              onClickBid={() => {
+                /*onClickBid(program)*/
+              }}
+            />
+          ))
+      );
+      setTotalPage(
+        Math.max(Math.ceil(lotNuggetTab.programCount / pageSize), 1)
+      );
+    }
   };
 
-  const getSellingListAsync = async () => {
-    const ret = await getSellingList(pids[1].toString(), pids[2].toString());
-    console.log("selling list", ret);
-    setSellingList(ret);
+  const needUpdateTabData = () => {
+    if (tabState == MarketTabState.Inventory) {
+      return inventoryNuggetTab.programCount == -1 || isInventoryChanged;
+    } else if (tabState == MarketTabState.Selling) {
+      return (
+        sellingNuggetTab.programCount == -1 ||
+        (sellingNuggetTab.programCount > sellingNuggetTab.programs.length &&
+          (page + 1) * pageSize >= sellingNuggetTab.programs.length)
+      );
+    } else if (tabState == MarketTabState.Auction) {
+      return (
+        auctionNuggetTab.programCount == -1 ||
+        (auctionNuggetTab.programCount > auctionNuggetTab.programs.length &&
+          (page + 1) * pageSize >= auctionNuggetTab.programs.length)
+      );
+    } else if (tabState == MarketTabState.Lot) {
+      return (
+        lotNuggetTab.programCount == -1 ||
+        (lotNuggetTab.programCount > lotNuggetTab.programs.length &&
+          (page + 1) * pageSize >= lotNuggetTab.programs.length)
+      );
+    }
+    return false;
+  };
+
+  const updateTabData = async () => {
+    setIsLoading(true);
+
+    if (tabState == MarketTabState.Inventory) {
+      await updateInventoryPage();
+    } else if (tabState == MarketTabState.Selling) {
+      await addSellingPage(
+        sellingNuggetTab.programs.length,
+        ELEMENT_PER_REQUEST
+      );
+    } else if (tabState == MarketTabState.Auction) {
+      await addAuctionPage(
+        auctionNuggetTab.programs.length,
+        ELEMENT_PER_REQUEST
+      );
+    } else if (tabState == MarketTabState.Lot) {
+      await addLotPage(lotNuggetTab.programs.length, ELEMENT_PER_REQUEST);
+    }
+    setIsLoading(false);
+  };
+
+  const reloadTabData = async () => {
+    if (tabState == MarketTabState.Inventory) {
+      dispatch(setInventoryChanged());
+    } else if (tabState == MarketTabState.Selling) {
+      dispatch(resetSellingTab());
+    } else if (tabState == MarketTabState.Auction) {
+      dispatch(resetAuctionTab());
+    } else if (tabState == MarketTabState.Lot) {
+      dispatch(resetLotTab());
+    }
+
+    //ensure the page is only reload once
+    if (page == 0) {
+      dispatch(setMarketForceUpdate(true));
+    } else {
+      setPage(0);
+    }
+  };
+
+  const updateInventoryPage = async () => {
+    const inventoryPrograms = programs.filter(
+      (program) => program.marketId == 0
+    );
+    dispatch(
+      setInventoryTab({
+        programs: inventoryPrograms,
+        programCount: inventoryPrograms.length,
+      })
+    );
+  };
+
+  const addSellingPage = async (skip: number, limit: number) => {
+    const sellingMarketTabData = await getSellingAsync(
+      skip,
+      limit,
+      pids[1].toString(),
+      pids[2].toString()
+    );
+    dispatch(
+      addSellingTab({
+        programs: sellingMarketTabData.programs,
+        programCount: sellingMarketTabData.programCount,
+      })
+    );
+  };
+
+  const addAuctionPage = async (skip: number, limit: number) => {
+    const auctionMarketTabData = await getAuctionAsync(skip, limit);
+    dispatch(
+      addAuctionTab({
+        programs: auctionMarketTabData.programs,
+        programCount: auctionMarketTabData.programCount,
+      })
+    );
+  };
+
+  const addLotPage = async (skip: number, limit: number) => {
+    const lotMarketTabData = await getLotAsync(
+      skip,
+      limit,
+      pids[1].toString(),
+      pids[2].toString()
+    );
+    dispatch(
+      addLotTab({
+        programs: lotMarketTabData.programs,
+        programCount: lotMarketTabData.programCount,
+      })
+    );
   };
 
   useEffect(() => {
-    if (isFirst) {
-      setIsFirst(false);
-      getMarketListAsync();
-      getLotListAsync();
-      getSellingListAsync();
-    }
-  }, [isFirst]);
-
-  const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Creating }));
-    setIsFirst(true);
-  };
-
-  const onClickAuctionTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Auction }));
-  };
-
-  const onClickLotTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Lot }));
-  };
-
-  const onClickSellingTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Selling }));
-  };
-
-  const onClickInventoryTab = () => {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Inventory }));
-  };
+    setPage(0);
+  }, [pageSize]);
 
   const onClickPrevPageButton = () => {
-    // dispatch(prevPage({}));
+    setPage(page - 1);
   };
 
   const onClickNextPageButton = () => {
-    // dispatch(nextPage({}));
+    setPage(page + 1);
   };
 
-  const sendSellCmd = (commodity: CommodityModel) => {
-    if (!isLoading) {
-      setIsLoading(true);
+  const onClickInventoryMore = (index: number) => {
+    if (uIState == UIState.Idle) {
+      dispatch(setUIState({ uIState: UIState.MarketInventoryInfoPopup }));
       dispatch(
-        sendTransaction({
-          cmd: getSellCardTransactionCommandArray(nonce, commodity.id),
-          prikey: l2account!.getPrivateKey(),
-        })
-      ).then((action) => {
-        if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-            (action) => {
-              if (queryState.fulfilled.match(action)) {
-                setIsLoading(false);
-              }
-            }
-          );
-        }
-      });
-    }
-  };
-
-  const onClickSell = (commodity: CommodityModel) => {
-    sendSellCmd(commodity);
-  };
-
-  const onConfirmBidAmount = (amount: number, commodity: CommodityModel) => {
-    setShowBidAmountPopup(false);
-    if (!isLoading) {
-      setIsLoading(true);
-      dispatch(
-        sendTransaction({
-          cmd: getBidCardTransactionCommandArray(nonce, commodity.id, amount),
-          prikey: l2account!.getPrivateKey(),
-        })
-      ).then((action) => {
-        if (sendTransaction.fulfilled.match(action)) {
-          getMarketListAsync();
-        }
-      });
-    }
-  };
-
-  const onCancelBid = () => {
-    setShowBidAmountPopup(false);
-  };
-
-  const onClickBid = (commodity: CommodityModel) => {
-    setCurrentCommodityPopup(commodity);
-    setMaxBidAmount(Math.min(titaniumCount, commodity.askPrice));
-    setMinBidAmount(commodity.bidPrice);
-    setShowBidAmountPopup(true);
-  };
-
-  const onConfirmListAmount = (amount: number, commodity: CommodityModel) => {
-    setShowListAmountPopup(false);
-    if (!isLoading) {
-      setIsLoading(true);
-      const index = programs.findIndex(
-        (program) => program.index == commodity.id
+        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
       );
       dispatch(
-        sendTransaction({
-          cmd: getListCardTransactionCommandArray(nonce, index, amount),
-          prikey: l2account!.getPrivateKey(),
-        })
-      ).then((action) => {
-        if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-            async (action) => {
-              if (queryState.fulfilled.match(action)) {
-                await getMarketListAsync();
-                await getSellingListAsync();
-                setIsLoading(false);
-              }
-            }
-          );
-        }
-      });
+        setIsShowingListAmountPopup({ isShowingListAmountPopup: false })
+      );
     }
   };
 
-  const onCancelList = () => {
-    setShowListAmountPopup(false);
+  const onClickSellingMore = (index: number) => {
+    if (uIState == UIState.Idle) {
+      dispatch(setUIState({ uIState: UIState.MarketSellingInfoPopup }));
+      dispatch(
+        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
+      );
+    }
   };
 
-  const onClickList = (commodity: CommodityModel) => {
-    setCurrentCommodityPopup(commodity);
-    setShowListAmountPopup(true);
+  const onClickMarketMore = (index: number) => {
+    if (uIState == UIState.Idle) {
+      dispatch(setUIState({ uIState: UIState.MarketAuctionInfoPopup }));
+      dispatch(
+        setMarketProgramIndex({ marketProgramIndex: page * pageSize + index })
+      );
+      dispatch(setIsShowingBidAmountPopup({ isShowingBidAmountPopup: false }));
+    }
+  };
+
+  const onClickBidMore = (index: number) => {
+    if (uIState == UIState.Idle) {
+      dispatch(
+        setUIState({
+          type: UIState.MarketLotInfoPopup,
+          nuggetIndex: page * pageSize + index,
+          isShowingBidAmountPopup: false,
+        })
+      );
+    }
+  };
+
+  const onClickInventoryTab = () => {
+    dispatch(setTabState(MarketTabState.Inventory));
+  };
+  const onClickSellingTab = () => {
+    dispatch(setTabState(MarketTabState.Selling));
+  };
+  const onClickAuctionTab = () => {
+    dispatch(setTabState(MarketTabState.Auction));
+  };
+  const onClickLotTab = () => {
+    dispatch(setTabState(MarketTabState.Lot));
   };
 
   return (
@@ -258,25 +415,25 @@ const MarketPopup = () => {
           <div className="market-popup-inventory-tab-button">
             <MarketInventoryButton
               onClick={onClickInventoryTab}
-              isSelect={marketTabType == MarketTabType.Inventory}
+              isSelect={tabState == MarketTabState.Inventory}
             />
           </div>
           <div className="market-popup-selling-tab-button">
             <MarketSellingButton
               onClick={onClickSellingTab}
-              isSelect={marketTabType == MarketTabType.Selling}
+              isSelect={tabState == MarketTabState.Selling}
             />
           </div>
           <div className="market-popup-auction-tab-button">
             <MarketAuctionButton
               onClick={onClickAuctionTab}
-              isSelect={marketTabType == MarketTabType.Auction}
+              isSelect={tabState == MarketTabState.Auction}
             />
           </div>
           <div className="market-popup-lot-tab-button">
             <MarketLotButton
               onClick={onClickLotTab}
-              isSelect={marketTabType == MarketTabType.Lot}
+              isSelect={tabState == MarketTabState.Lot}
             />
           </div>
         </div>
@@ -292,8 +449,8 @@ const MarketPopup = () => {
       </div>
       <div className="market-popup-page-selector-container">
         <PageSelector
-          currentPage={1}
-          pageCount={1}
+          currentPage={page}
+          pageCount={totalPage}
           isHorizontal={true}
           onClickPrevPageButton={onClickPrevPageButton}
           onClickNextPageButton={onClickNextPageButton}

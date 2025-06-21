@@ -2,21 +2,17 @@ import { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
-import {
-  getResourceIconPath,
-  ResourceType,
-  CommodityModel,
-} from "../../../data/automata/models";
 import "./ListAmountPopup.css";
+import { ProgramModel } from "../../../data/automata/models";
 
 interface Props {
-  commodity: CommodityModel;
-  onConfirmListAmount: (amount: number, commodity: CommodityModel) => void;
+  program: ProgramModel;
+  onConfirmListAmount: (amount: number, program: ProgramModel) => void;
   onCancelList: () => void;
 }
 
 const ListAmountPopup = ({
-  commodity,
+  program,
   onConfirmListAmount,
   onCancelList,
 }: Props) => {
@@ -24,7 +20,7 @@ const ListAmountPopup = ({
 
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    onConfirmListAmount(amount, commodity);
+    onConfirmListAmount(amount, program);
   };
 
   const onClickCancel = () => {

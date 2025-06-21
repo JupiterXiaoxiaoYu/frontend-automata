@@ -229,27 +229,60 @@ export enum ProgramType {
   QuantumSurge,
 }
 
+export interface Bid {
+  bidprice: number;
+  bidder: number[];
+}
+
 export interface ProgramModel {
   index: number;
+  marketId: number;
   type: ProgramType;
   processingTime: number;
   resources: Array<ResourceAmountPair>;
   name: string;
-  marketId: number;
+  askPrice: number;
+  sysPrice: number;
+  owner: number[];
+  bid: Bid | null;
 }
 
-export function decodeProgram(programRaw: any, index = 0) {
+export const emptyProgramModel: ProgramModel = {
+  index: 0,
+  marketId: 0,
+  type: ProgramType.BioGen,
+  processingTime: 0,
+  resources: [],
+  name: "",
+  askPrice: 0,
+  sysPrice: 0,
+  owner: [],
+  bid: null,
+};
+
+export function decodeProgram(
+  programRaw: any,
+  index = 0,
+  askPrice = 0,
+  sysPrice = 0,
+  owner: number[] = [],
+  bid: Bid | null = null
+): ProgramModel {
   const { duration, attributes, marketid } = programRaw;
   const type = index as ProgramType;
   const program: ProgramModel = {
     index,
+    marketId: marketid,
     type,
     processingTime: duration * SERVER_TICK_TO_SECOND,
     resources: getResources(attributes).filter(
       (resource) => resource.amount !== 0
     ),
     name: getProgramName(type),
-    marketId: marketid,
+    askPrice,
+    sysPrice,
+    owner,
+    bid,
   };
 
   return program;
@@ -574,13 +607,27 @@ interface ResourceData {
   disableIconPath: string;
 }
 
-export interface CommodityModel {
-  id: number;
-  askPrice: number;
-  object: ProgramModel;
-  bidPrice: number;
-  bidders: string[];
+export interface MarketTabData {
+  programs: ProgramModel[];
+  programCount: number;
 }
+
+export const emptyMarketTabData: MarketTabData = {
+  programs: [],
+  programCount: -1,
+};
+
+export interface MarketPageData {
+  programs: ProgramModel[];
+  page: number;
+  pageCount: number;
+}
+
+export const emptyNuggetPageData: MarketPageData = {
+  programs: [],
+  page: 0,
+  pageCount: 0,
+};
 
 const resourceDatas: Record<ResourceType, ResourceData> = {
   [ResourceType.Crystal]: {

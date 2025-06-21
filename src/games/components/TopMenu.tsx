@@ -3,9 +3,7 @@ import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
-  MarketTabType,
   selectIsLoading,
-  setMarketTabType,
   setUIState,
   UIState,
 } from "../../data/automata/properties";
@@ -16,6 +14,7 @@ import { startGuide } from "../../data/automata/guides";
 import { GuideType } from "../../data/automata/models";
 import PlayerInfo from "./PlayerInfo";
 import { setSelectingMarket } from "../../data/automata/creatures";
+import { MarketTabState, setTabState } from "../../data/automata/market";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +38,7 @@ const TopMenu = () => {
   }
 
   function onClickMarket() {
-    dispatch(setMarketTabType({ marketTabType: MarketTabType.Auction }));
+    dispatch(setTabState(MarketTabState.Auction));
     dispatch(setSelectingMarket({}));
   }
 

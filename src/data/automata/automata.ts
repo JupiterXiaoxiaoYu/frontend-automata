@@ -4,6 +4,7 @@ import propertiesReducer from "./properties"
 import creaturesReducer from "./creatures"
 import programsReducer from "./programs"
 import guidesReducer from "./guides"
+import marketReducer from "./market"
 
 export default combineReducers({
     resources: resourcesReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     creatures: creaturesReducer,
     programs: programsReducer,
     guides: guidesReducer,
+    market: marketReducer,
 })
