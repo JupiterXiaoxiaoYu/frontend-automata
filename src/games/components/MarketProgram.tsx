@@ -57,7 +57,7 @@ const MarketProgram = ({
             src={getResourceIconPath(ResourceType.Titanium)}
             className="market-program-bid-icon"
           />
-          <p className="market-program-bid-text">{program.bid?.bidprice}</p>
+          <p className="market-program-bid-text">{program.bid?.bidPrice}</p>
           <p className="market-program-ask-title-text">Ask Price :</p>
           <img
             src={getResourceIconPath(ResourceType.Titanium)}

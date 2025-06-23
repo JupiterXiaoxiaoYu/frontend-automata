@@ -38,7 +38,7 @@ const TopMenu = () => {
   }
 
   function onClickMarket() {
-    dispatch(setTabState(MarketTabState.Auction));
+    dispatch(setTabState(MarketTabState.Inventory));
     dispatch(setSelectingMarket({}));
   }
 

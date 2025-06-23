@@ -230,7 +230,7 @@ export enum ProgramType {
 }
 
 export interface Bid {
-  bidprice: number;
+  bidPrice: number;
   bidder: number[];
 }
 

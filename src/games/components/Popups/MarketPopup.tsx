@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { selectUIState } from "../../../data/automata/properties";
+import {
+  selectIsLoading,
+  selectNonce,
+  selectUIState,
+} from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./MarketPopup.css";
 import PageSelector from "../PageSelector";
@@ -34,15 +38,28 @@ import {
   setTabState,
   MarketTabState,
   setInventoryChanged,
+  setIsLoading,
 } from "../../../data/automata/market";
+import BidAmountPopup from "./BidAmountPopup";
+import ListAmountPopup from "./ListAmountPopup";
+import { ProgramModel, ResourceType } from "../../../data/automata/models";
+import { queryState, sendTransaction } from "../../request";
+import {
+  getBidCardTransactionCommandArray,
+  getListCardTransactionCommandArray,
+  getSellCardTransactionCommandArray,
+} from "../../rpc";
+import { selectResource } from "../../../data/automata/resources";
 
 const ELEMENT_PER_REQUEST = 30;
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
   const l2account = useAppSelector(AccountSlice.selectL2Account);
-  const uIState = useAppSelector(selectUIState);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const nonce = useAppSelector(selectNonce);
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
+  const isLoading = useAppSelector(selectIsLoading);
+
   const pids = l2account?.pubkey
     ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
     : ["", "", "", ""];
@@ -69,6 +86,13 @@ const MarketPopup = () => {
 
   const programs = useAppSelector(selectAllPrograms);
   const installedProgramIds = useAppSelector(selectInstalledProgramIds);
+  const [showBidAmountPopup, setShowBidAmountPopup] = useState<boolean>(false);
+  const [showListAmountPopup, setShowListAmountPopup] =
+    useState<boolean>(false);
+  const [maxBidAmount, setMaxBidAmount] = useState<number>(0);
+  const [minBidAmount, setMinBidAmount] = useState<number>(0);
+  const [currentPopupProgram, setCurrentPopupProgram] =
+    useState<ProgramModel>();
 
   const adjustSize = () => {
     if (containerRef.current) {
@@ -102,6 +126,7 @@ const MarketPopup = () => {
 
   useEffect(() => {
     setPage(0);
+    reloadTabData();
   }, [pageSize]);
 
   useEffect(() => {
@@ -116,10 +141,13 @@ const MarketPopup = () => {
       return;
     }
 
+    console.log("check elements update");
+
     if (needUpdateTabData()) {
       await updateTabData();
       dispatch(setMarketForceUpdate(true));
     } else {
+      console.log("update elements");
       updateElements();
     }
   };
@@ -134,9 +162,7 @@ const MarketPopup = () => {
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
               program={program}
-              onClickList={() => {
-                /*onClickList(program)*/
-              }}
+              onClickList={() => onClickList(program)}
             />
           ))
       );
@@ -152,9 +178,7 @@ const MarketPopup = () => {
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
               program={program}
-              onClickSell={() => {
-                /*onClickSell(program)*/
-              }}
+              onClickSell={() => onClickSell(program)}
             />
           ))
       );
@@ -170,9 +194,7 @@ const MarketPopup = () => {
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
               program={program}
-              onClickBid={() => {
-                /*onClickBid(program)*/
-              }}
+              onClickBid={() => onClickBid(program)}
             />
           ))
       );
@@ -188,9 +210,7 @@ const MarketPopup = () => {
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
               program={program}
-              onClickBid={() => {
-                /*onClickBid(program)*/
-              }}
+              onClickBid={() => onClickBid(program)}
             />
           ))
       );
@@ -226,7 +246,7 @@ const MarketPopup = () => {
   };
 
   const updateTabData = async () => {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
 
     if (tabState == MarketTabState.Inventory) {
       await updateInventoryPage();
@@ -243,7 +263,7 @@ const MarketPopup = () => {
     } else if (tabState == MarketTabState.Lot) {
       await addLotPage(lotNuggetTab.programs.length, ELEMENT_PER_REQUEST);
     }
-    setIsLoading(false);
+    dispatch(setIsLoading(false));
   };
 
   const reloadTabData = async () => {
@@ -342,6 +362,99 @@ const MarketPopup = () => {
     dispatch(setTabState(MarketTabState.Lot));
   };
 
+  const sendSellCmd = (program: ProgramModel) => {
+    if (!isLoading) {
+      dispatch(setIsLoading(true));
+      dispatch(
+        sendTransaction({
+          cmd: getSellCardTransactionCommandArray(nonce, program.index),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+            (action) => {
+              if (queryState.fulfilled.match(action)) {
+                dispatch(setIsLoading(false));
+              }
+            }
+          );
+        }
+      });
+    }
+  };
+
+  const onClickSell = (program: ProgramModel) => {
+    sendSellCmd(program);
+  };
+
+  const onConfirmBidAmount = (amount: number, program: ProgramModel) => {
+    setShowBidAmountPopup(false);
+    if (!isLoading) {
+      dispatch(setIsLoading(true));
+      dispatch(
+        sendTransaction({
+          cmd: getBidCardTransactionCommandArray(nonce, program.index, amount),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(resetAuctionTab());
+          dispatch(resetLotTab());
+          dispatch(setMarketForceUpdate(true));
+          dispatch(setIsLoading(false));
+        }
+      });
+    }
+  };
+
+  const onCancelBid = () => {
+    setShowBidAmountPopup(false);
+  };
+
+  const onClickBid = (program: ProgramModel) => {
+    setCurrentPopupProgram(program);
+    setMaxBidAmount(Math.min(titaniumCount, program.askPrice));
+    setMinBidAmount(program.bid?.bidPrice ?? 0);
+    setShowBidAmountPopup(true);
+  };
+
+  const onConfirmListAmount = (amount: number, program: ProgramModel) => {
+    setShowListAmountPopup(false);
+    if (!isLoading) {
+      dispatch(setIsLoading(true));
+      const index = programs.findIndex((p) => p.index == program.index);
+      dispatch(
+        sendTransaction({
+          cmd: getListCardTransactionCommandArray(nonce, index, amount),
+          prikey: l2account!.getPrivateKey(),
+        })
+      ).then((action) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+            async (action) => {
+              if (queryState.fulfilled.match(action)) {
+                dispatch(resetSellingTab());
+                dispatch(setInventoryChanged());
+                dispatch(setMarketForceUpdate(true));
+                dispatch(setIsLoading(false));
+              }
+            }
+          );
+        }
+      });
+    }
+  };
+
+  const onCancelList = () => {
+    setShowListAmountPopup(false);
+  };
+
+  const onClickList = (program: ProgramModel) => {
+    setCurrentPopupProgram(program);
+    setShowListAmountPopup(true);
+  };
+
   return (
     <div className="market-popup-container">
       <div className="market-popup-main-container">
@@ -381,6 +494,22 @@ const MarketPopup = () => {
           />
         </div>
       </div>
+      {showListAmountPopup && (
+        <ListAmountPopup
+          program={currentPopupProgram!}
+          onConfirmListAmount={onConfirmListAmount}
+          onCancelList={onCancelList}
+        />
+      )}
+      {showBidAmountPopup && (
+        <BidAmountPopup
+          minBidAmount={minBidAmount}
+          maxBidAmount={maxBidAmount}
+          program={currentPopupProgram!}
+          onConfirmBidAmount={onConfirmBidAmount}
+          onCancelBid={onCancelBid}
+        />
+      )}
       <div className="market-popup-page-selector-container">
         <PageSelector
           currentPage={page}
