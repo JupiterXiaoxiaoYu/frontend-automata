@@ -12,7 +12,7 @@ const currentLocation = window.location;
 const protocol = currentLocation.protocol; // e.g., 'http:' or 'https:'
 const hostname = currentLocation.hostname; // e.g., 'sinka' or 'localhost'
 
-export const fullUrl = `${protocol}//${hostname}` + ":3000";
+export const fullUrl = "https://rpc.automata.zkwasm.ai";
 const rpc = new ZKWasmAppRpc(fullUrl);
 
 export async function queryConfig() {
