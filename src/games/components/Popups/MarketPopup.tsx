@@ -66,10 +66,10 @@ const MarketPopup = () => {
 
   const elementRatio = 297 / 205;
   const containerRef = useRef<HTMLParagraphElement>(null);
-  const [elementWidth, setElementWidth] = useState<number>(0);
-  const [elementHeight, setElementHeight] = useState<number>(0);
-  const columnCount = 3;
+  const elementWidth = 165;
+  const elementHeight = 114;
   const [rowCount, setRowCount] = useState<number>(0);
+  const [columnCount, setColumnCount] = useState<number>(0);
 
   const tabState = useAppSelector(selectTabState);
   const [page, setPage] = useState<number>(0);
@@ -96,11 +96,12 @@ const MarketPopup = () => {
 
   const adjustSize = () => {
     if (containerRef.current) {
-      const width = containerRef.current.offsetWidth / columnCount;
-      const height = width / elementRatio + 10;
-      setElementWidth(width);
-      setElementHeight(height);
-      setRowCount(Math.floor(containerRef.current.offsetHeight / height));
+      setRowCount(
+        Math.floor(containerRef.current.offsetHeight / elementHeight)
+      );
+      setColumnCount(
+        Math.floor(containerRef.current.offsetWidth / elementWidth)
+      );
     }
   };
 
