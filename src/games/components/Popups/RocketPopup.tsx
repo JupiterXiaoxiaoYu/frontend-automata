@@ -17,8 +17,11 @@ import {
 } from "../../../data/automata/models";
 import { selectResource } from "../../../data/automata/resources";
 import { selectRedeemEnergy } from "../../../data/automata/properties";
-import { AccountSlice } from "zkwasm-minirollup-browser";
-import { queryState, sendTransaction } from "../../request";
+import {
+  useWalletContext,
+  queryState,
+  sendTransaction,
+} from "zkwasm-minirollup-browser";
 import { getCollectEnergyTransactionCommandArray } from "../../rpc";
 import GainEnergy from "../GainEnergy";
 import { useEffect, useRef, useState } from "react";
@@ -95,7 +98,7 @@ const gainnergyProps: GainEnergyProps[] = [
 
 const RocketPopup = () => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
   const redeemEnergy = useAppSelector(selectRedeemEnergy);
@@ -127,12 +130,12 @@ const RocketPopup = () => {
       dispatch(
         sendTransaction({
           cmd: getCollectEnergyTransactionCommandArray(nonce),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
-      ).then((action) => {
+      ).then((action: any) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then(
-            (action) => {
+          dispatch(queryState(l2Account.getPrivateKey())).then(
+            (action: any) => {
               if (queryState.fulfilled.match(action)) {
                 setFinishQuery(true);
               }
@@ -164,9 +167,7 @@ const RocketPopup = () => {
       <div onClick={onClickCancel} className="rocket-popup-mask" />
       <div className="rocket-popup-main-container">
         <img src={background} className="rocket-popup-main-background" />
-        <p className="rocket-popup-title-text">
-          Redeem {redeemEnergy} Energy
-        </p>
+        <p className="rocket-popup-title-text">Redeem {redeemEnergy} Energy</p>
         <p className="rocket-popup-subtitle-text">Cost</p>
         <div className="rocket-popup-cost-container">
           <img

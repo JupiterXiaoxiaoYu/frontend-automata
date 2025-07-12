@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import background from "../images/backgrounds/guide_frame.png";
 import Grid from "./Grid";
 import {
-        selectBountyPool,
+  selectBountyPool,
   selectInterest,
   selectNonce,
   selectRedeemCostBase,
@@ -21,14 +21,18 @@ import {
 } from "../../data/automata/models";
 import RedeemDisplay from "./RedeemDisplay";
 import RedeemDisplayCollectInterest from "./RedeemDisplayCollectInterest";
-import { queryState, sendTransaction } from "../request";
 import { getRedeemTransactionCommandArray } from "../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import {
+  useWalletContext,
+  queryState,
+  sendTransaction,
+} from "zkwasm-minirollup-browser";
+
 import { selectResources } from "../../data/automata/resources";
 
 const RedeemMenu = () => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const redeemCostBase = useAppSelector(selectRedeemCostBase);
   const redeemRewardBase = useAppSelector(selectRedeemRewardBase);
@@ -37,7 +41,7 @@ const RedeemMenu = () => {
   const interest = useAppSelector(selectInterest);
   const bountyPool = useAppSelector(selectBountyPool);
   const resourcesMap = Object.fromEntries(
-    resources.map((resource) => [resource.type, resource.amount])
+    resources.map((resource: any) => [resource.type, resource.amount])
   );
 
   const onClickRedeem = (index: number) => {
@@ -45,11 +49,11 @@ const RedeemMenu = () => {
     dispatch(
       sendTransaction({
         cmd: getRedeemTransactionCommandArray(nonce, index),
-        prikey: l2account!.getPrivateKey(),
+        prikey: l2Account!.getPrivateKey(),
       })
-    ).then((action) => {
+    ).then((action: any) => {
       if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then((action) => {
+        dispatch(queryState(l2Account.getPrivateKey())).then((action: any) => {
           if (queryState.fulfilled.match(action)) {
             dispatch(setUIState({ uIState: UIState.Idle }));
           }
@@ -73,7 +77,9 @@ const RedeemMenu = () => {
   return (
     <div className="redeem-menu-container">
       <img src={background} className="redeem-menu-background" />
-            <p className="redeem-resource-title-text">Redeem [available: {bountyPool}] </p>
+      <p className="redeem-resource-title-text">
+        Redeem [available: {bountyPool}]{" "}
+      </p>
       <div className="redeem-menu-grid">
         <Grid
           columnCount={2}

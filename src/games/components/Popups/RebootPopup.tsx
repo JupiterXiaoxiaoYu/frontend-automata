@@ -16,9 +16,12 @@ import {
   ResourceType,
 } from "../../../data/automata/models";
 import { selectResource } from "../../../data/automata/resources";
-import { queryState, sendTransaction } from "../../request";
 import { getInstallProgramTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import {
+  useWalletContext,
+  queryState,
+  sendTransaction,
+} from "zkwasm-minirollup-browser";
 import {
   clearRebootCreature,
   selectSelectedCreature,
@@ -29,7 +32,7 @@ const RebootPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const selectedCreature = useAppSelector(selectSelectedCreature);
@@ -46,25 +49,23 @@ const RebootPopup = () => {
         sendTransaction({
           cmd: getInstallProgramTransactionCommandArray(
             nonce,
-            selectedCreature.programIndexes.map((index) => index!),
+            selectedCreature.programIndexes.map((index: any) => index!),
             selectedCreatureIndexForRequestEncode,
             false
           ),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then(
-            (action) => {
-              if (queryState.fulfilled.match(action)) {
-                dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
-              } else {
-                dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
-              }
+          dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(clearRebootCreature({}));
+            } else {
+              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(clearRebootCreature({}));
             }
-          );
+          });
         } else if (sendTransaction.rejected.match(action)) {
           dispatch(setUIState({ uIState: UIState.Idle }));
         }

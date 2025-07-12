@@ -6,9 +6,6 @@ import {
   MarketTabData,
   ProgramModel,
 } from "./models";
-import { queryState } from "../../games/request";
-import { sendTransaction } from "zkwasm-minirollup-browser/src/connect";
-import { isEqual } from "../../games/Utility";
 
 export enum MarketTabState {
   Inventory,

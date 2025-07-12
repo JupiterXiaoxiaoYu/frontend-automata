@@ -5,7 +5,7 @@ import {
   MarketTabData,
   ProgramModel,
 } from "../data/automata/models";
-import { fullUrl } from "./rpc";
+import { fullUrl } from "./request";
 
 const instance = axios.create({
   baseURL: fullUrl,

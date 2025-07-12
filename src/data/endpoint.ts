@@ -33,15 +33,9 @@ function getLastUsedEndpoint() {
 }
 
 const initialState: {
-  zkWasmServiceHelper: ZkWasmServiceHelper;
   currentEndpoint: Endpoint;
   endpointList: Endpoint[];
 } = {
-  zkWasmServiceHelper: new ZkWasmServiceHelper(
-    getLastUsedEndpoint().url,
-    "",
-    ""
-  ),
   currentEndpoint: getLastUsedEndpoint(),
   endpointList: [...customEndpoints()],
 };
@@ -54,11 +48,6 @@ export const endpointSlice = createSlice({
       //add updated array to local storage
       localStorage.setItem("lastUsedEndpoint", JSON.stringify(d.payload));
       state.currentEndpoint = d.payload;
-      state.zkWasmServiceHelper = new ZkWasmServiceHelper(
-        d.payload.url,
-        "",
-        ""
-      );
     },
     setEndpointList: (state, d) => {
       //add updated array to local storage
@@ -74,7 +63,11 @@ export const selectEndpointList = (state: RootState) =>
   state.endpoint.endpointList;
 export const selectCurrentEndpoint = (state: RootState) =>
   state.endpoint.currentEndpoint;
-export const selectZkWasmServiceHelper = (state: RootState) =>
-  state.endpoint.zkWasmServiceHelper;
+
+// Create a helper function that creates a new ZkWasmServiceHelper when needed
+export const createZkWasmServiceHelper = (endpoint?: Endpoint) => {
+  const currentEndpoint = endpoint || getLastUsedEndpoint();
+  return new ZkWasmServiceHelper(currentEndpoint.url, "", "");
+};
 
 export default endpointSlice.reducer;

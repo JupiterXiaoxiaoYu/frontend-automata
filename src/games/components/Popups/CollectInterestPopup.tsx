@@ -10,15 +10,18 @@ import {
 } from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./CollectInterestPopup.css";
-import { AccountSlice } from "zkwasm-minirollup-browser";
-import { sendTransaction, queryState } from "../../request";
+import {
+  useWalletContext,
+  sendTransaction,
+  queryState,
+} from "zkwasm-minirollup-browser";
 import { getRedeemTransactionCommandArray } from "../../rpc";
 
 const COLLECT_INTEREST_BOUNTY_PARAM = 7;
 
 const CollectInterestPopup = () => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
   const interest = useAppSelector(selectInterest);
@@ -32,20 +35,18 @@ const CollectInterestPopup = () => {
             nonce,
             COLLECT_INTEREST_BOUNTY_PARAM
           ),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (
           sendTransaction.fulfilled.match(action) ||
           sendTransaction.rejected.match(action)
         ) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey()})).then(
-            (action) => {
-              if (queryState.fulfilled.match(action)) {
-                dispatch(setUIState({ uIState: UIState.Idle }));
-              }
+          dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(setUIState({ uIState: UIState.Idle }));
             }
-          );
+          });
         }
       });
     }

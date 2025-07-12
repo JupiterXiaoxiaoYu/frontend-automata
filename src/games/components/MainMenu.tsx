@@ -9,7 +9,7 @@ import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import DiffResourcesInfo from "./DiffResourcesInfo";
 import Rocket from "./Rocket";
 import { getInstallProgramTransactionCommandArray } from "../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import { useWalletContext } from "zkwasm-minirollup-browser";
 import { sendTransaction, queryState } from "../request";
 import { getCreatureIconPath } from "../../data/automata/models";
 import {
@@ -47,7 +47,8 @@ interface Props {
 
 const MainMenu = ({ localTimer }: Props) => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
+
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const isNotSelectingCreature = useAppSelector(selectIsNotSelectingCreature);
@@ -110,25 +111,23 @@ const MainMenu = ({ localTimer }: Props) => {
         sendTransaction({
           cmd: getInstallProgramTransactionCommandArray(
             nonce,
-            selectedCreature.programIndexes.map((index) => index!),
+            selectedCreature.programIndexes.map((index: any) => index!),
             selectedCreatureIndexForRequestEncode,
             true
           ),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-            (action) => {
-              if (queryState.fulfilled.match(action)) {
-                dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
-              } else {
-                dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
-              }
+          dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(clearRebootCreature({}));
+            } else {
+              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(clearRebootCreature({}));
             }
-          );
+          });
         } else if (sendTransaction.rejected.match(action)) {
           dispatch(setUIState({ uIState: UIState.Idle }));
         }

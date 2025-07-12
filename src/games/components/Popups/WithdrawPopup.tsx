@@ -16,9 +16,8 @@ import {
 } from "../../../data/automata/models";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
-import { sendTransaction } from "../../request";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import { sendTransaction, useWalletContext } from "zkwasm-minirollup-browser";
 import { selectResource } from "../../../data/automata/resources";
 
 interface Props {
@@ -29,8 +28,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const dispatch = useAppDispatch();
   const uiState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
-  const l1account = useAppSelector(AccountSlice.selectL1Account);
+  const { l1Account, l2Account, deposit } = useWalletContext();
   const [amountString, setAmountString] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
@@ -43,9 +41,9 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           cmd: getWithdrawTransactionCommandArray(
             nonce,
             BigInt(amount),
-            l1account!
+            l1Account!
           ),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
@@ -66,67 +64,37 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
     }
   };
 
-  const deposit = (amount: string) => {
-    try {
-      dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
-      dispatch(
-        AccountSlice.depositAsync({
-          tokenIndex: 0,
-          amount: Number(BigInt(amount)),
-          l2account: l2account!,
-          l1account: l1account!,
-        })
-      ).then((action) => {
-        if (AccountSlice.depositAsync.fulfilled.match(action)) {
-          dispatch(
-            setConfirmPopupInfo({
-              confirmPopupInfo: {
-                title: "Deposit Success",
-                description: "Hash Number : (TBD)",
-                isError: false,
-              },
-            })
-          );
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
-          setErrorMessage("");
-        } else if (AccountSlice.depositAsync.rejected.match(action)) {
-          if (action.error.message == null) {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: "Unknown Error",
-                  isError: true,
-                },
-              })
-            );
-          } else if (action.error.message.startsWith("user rejected action")) {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: "User rejected action",
-                  isError: true,
-                },
-              })
-            );
-          } else {
-            dispatch(
-              setConfirmPopupInfo({
-                confirmPopupInfo: {
-                  title: "Deposit Fail",
-                  description: action.error.message,
-                  isError: true,
-                },
-              })
-            );
-          }
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
-        }
+  const onDeposit = (amount: string) => {
+    dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
+    deposit({
+      tokenIndex: 0,
+      amount: Number(BigInt(amount)),
+    })
+      .then((result) => {
+        dispatch(
+          setConfirmPopupInfo({
+            confirmPopupInfo: {
+              title: "Deposit Success",
+              description: `Hash Number : (TBD)${result.hash}`,
+              isError: false,
+            },
+          })
+        );
+        dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        dispatch(
+          setConfirmPopupInfo({
+            confirmPopupInfo: {
+              title: "Deposit Fail",
+              description: error.message,
+              isError: true,
+            },
+          })
+        );
+        dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
       });
-    } catch (e) {
-      console.log("Error at deposit uncaught: ", e);
-    }
   };
 
   const onClickConfirm = () => {
@@ -140,7 +108,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
       }
     } else {
       // case of deposit
-      deposit(amountString);
+      onDeposit(amountString);
     }
   };
 

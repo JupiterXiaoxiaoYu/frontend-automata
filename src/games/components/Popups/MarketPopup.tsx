@@ -11,7 +11,7 @@ import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
 import { selectAllPrograms } from "../../../data/automata/programs";
 import { getSellingAsync, getAuctionAsync, getLotAsync } from "../../express";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import { useWalletContext } from "zkwasm-minirollup-browser";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
 import { selectInstalledProgramIds } from "../../../data/automata/creatures";
@@ -43,7 +43,7 @@ import {
 import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
 import { ProgramModel, ResourceType } from "../../../data/automata/models";
-import { queryState, sendTransaction } from "../../request";
+import { queryState, sendTransaction } from "zkwasm-minirollup-browser";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
@@ -55,13 +55,13 @@ const ELEMENT_PER_REQUEST = 30;
 
 const MarketPopup = () => {
   const dispatch = useAppDispatch();
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const isLoading = useAppSelector(selectIsLoading);
 
-  const pids = l2account?.pubkey
-    ? new LeHexBN(bnToHexLe(l2account?.pubkey)).toU64Array()
+  const pids = l2Account?.pubkey
+    ? new LeHexBN(bnToHexLe(l2Account?.pubkey)).toU64Array()
     : ["", "", "", ""];
 
   const elementRatio = 297 / 205;
@@ -288,7 +288,7 @@ const MarketPopup = () => {
 
   const updateInventoryPage = async () => {
     const inventoryPrograms = programs.filter(
-      (program) => program.marketId == 0
+      (program: any) => program.marketId == 0
     );
     dispatch(
       setInventoryTab({
@@ -369,17 +369,15 @@ const MarketPopup = () => {
       dispatch(
         sendTransaction({
           cmd: getSellCardTransactionCommandArray(nonce, program.index),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
-            (action) => {
-              if (queryState.fulfilled.match(action)) {
-                dispatch(setIsLoading(false));
-              }
+          dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(setIsLoading(false));
             }
-          );
+          });
         }
       });
     }
@@ -396,7 +394,7 @@ const MarketPopup = () => {
       dispatch(
         sendTransaction({
           cmd: getBidCardTransactionCommandArray(nonce, program.index, amount),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
@@ -424,15 +422,15 @@ const MarketPopup = () => {
     setShowListAmountPopup(false);
     if (!isLoading) {
       dispatch(setIsLoading(true));
-      const index = programs.findIndex((p) => p.index == program.index);
+      const index = programs.findIndex((p: any) => p.index == program.index);
       dispatch(
         sendTransaction({
           cmd: getListCardTransactionCommandArray(nonce, index, amount),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState({ prikey: l2account!.getPrivateKey() })).then(
+          dispatch(queryState(l2Account.getPrivateKey())).then(
             async (action) => {
               if (queryState.fulfilled.match(action)) {
                 dispatch(resetSellingTab());

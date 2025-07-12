@@ -29,8 +29,7 @@ import {
   selectSelectedCreatureDiffResources,
   selectSelectedCreatureListIndex,
 } from "../../../data/automata/creatures";
-import { AccountSlice } from "zkwasm-minirollup-browser";
-import { sendTransaction } from "../../request";
+import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/automata/resources";
 
@@ -57,7 +56,7 @@ const UpgradePopup = () => {
   const productivity = useAppSelector(
     selectSelectedAttributes(AttributeType.Productivity)
   );
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
@@ -103,7 +102,7 @@ const UpgradePopup = () => {
             selectedCreatureIndexForRequestEncode,
             attrIndex
           ),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {

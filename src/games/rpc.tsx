@@ -1,4 +1,4 @@
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import type { L1AccountInfo } from "zkwasm-minirollup-browser";
 import {
   ZKWasmAppRpc,
   LeHexBN,
@@ -6,56 +6,6 @@ import {
   createWithdrawCommand,
 } from "zkwasm-minirollup-rpc";
 import BN from "bn.js";
-
-// Get the current URL components
-const currentLocation = window.location;
-const protocol = currentLocation.protocol; // e.g., 'http:' or 'https:'
-const hostname = currentLocation.hostname; // e.g., 'sinka' or 'localhost'
-
-export const fullUrl = `${protocol}//${hostname}` + ":3000";
-const rpc = new ZKWasmAppRpc(fullUrl);
-
-export async function queryConfig() {
-  try {
-    const state = await rpc.queryConfig();
-    return state;
-  } catch (error) {
-    throw "QueryStateError " + error;
-  }
-}
-
-export async function send_transaction(cmd: BigUint64Array, prikey: string) {
-  try {
-    const state = await rpc.sendTransaction(cmd, prikey);
-    return state;
-  } catch (error) {
-    throw "SendTransactionError " + error;
-  }
-}
-
-export async function query_state(prikey: string) {
-  try {
-    const state = await rpc.queryState(prikey);
-    return state;
-  } catch (error: any) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      if (error.response.status === 500) {
-        throw "QueryStateError";
-      } else {
-        throw "UnknownError";
-      }
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      throw "No response was received from the server, please check your network connection.";
-    } else {
-      throw "UnknownError";
-    }
-  }
-}
 
 function encode_modifier(modifiers: Array<bigint>) {
   let c = 0n;
@@ -126,7 +76,7 @@ export function getNewProgramTransactionCommandArray(
 export function getWithdrawTransactionCommandArray(
   nonce: bigint,
   amount: bigint,
-  account: AccountSlice.L1AccountInfo
+  account: L1AccountInfo
 ): BigUint64Array {
   const address = account!.address.slice(2);
   const command = createWithdrawCommand(

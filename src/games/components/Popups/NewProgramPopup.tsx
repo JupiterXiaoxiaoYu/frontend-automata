@@ -15,15 +15,14 @@ import {
   ResourceType,
 } from "../../../data/automata/models";
 import { selectResource } from "../../../data/automata/resources";
-import { sendTransaction } from "../../request";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
-import { AccountSlice } from "zkwasm-minirollup-browser";
+import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
-  const l2account = useAppSelector(AccountSlice.selectL2Account);
+  const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
 
   const onClickConfirm = () => {
@@ -40,7 +39,7 @@ const NewProgramPopup = () => {
       dispatch(
         sendTransaction({
           cmd: getNewProgramTransactionCommandArray(nonce),
-          prikey: l2account!.getPrivateKey(),
+          prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
