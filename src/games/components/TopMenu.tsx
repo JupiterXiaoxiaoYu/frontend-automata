@@ -47,11 +47,11 @@ const TopMenu = () => {
       <div className="top-left"></div>
       <div className="top-middle"></div>
       <div className="top-right"></div>
-      <TitaniumFrame
-        onClickWithdraw={onClickWithdraw}
-        onClickDeposit={onClickDeposit}
-      />
       <div className="top-info">
+        <TitaniumFrame
+          onClickWithdraw={onClickWithdraw}
+          onClickDeposit={onClickDeposit}
+        />
         <AccountInfo />
         <Resources />
         <PlayerInfo />
