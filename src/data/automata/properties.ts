@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { getConfig, sendTransaction, queryState } from "../../games/request";
+import {
+  getConfig,
+  sendTransaction,
+  queryState,
+  SERVER_TICK_TO_SECOND,
+} from "../../games/request";
 import {
   ConfirmPopupInfo,
   ResourceAmountPair,
@@ -114,8 +119,8 @@ export const propertiesSlice = createSlice({
     builder
       .addCase(getConfig.fulfilled, (state, action) => {
         state.uIState = UIState.QueryState;
-        state.redeemCostBase = action.payload.redeemCostBase;
-        state.redeemRewardBase = action.payload.redeemRewardBase;
+        state.redeemCostBase = action.payload.bounty_cost_base;
+        state.redeemRewardBase = action.payload.bounty_reward_base;
         console.log("query config fulfilled");
       })
       .addCase(getConfig.rejected, (state, action) => {
@@ -139,17 +144,28 @@ export const propertiesSlice = createSlice({
             state.uIState = UIState.Idle;
           }
         }
-        state.globalTimer = action.payload.globalTimer;
-        state.nonce = action.payload.nonce;
-        state.currentCost = action.payload.currentCost;
-        state.redeemInfo = action.payload.redeemInfo;
-        state.level = action.payload.level;
-        state.exp = action.payload.exp;
-        state.energy = action.payload.energy;
-        state.lastRedeemEnergy = action.payload.lastRedeemEnergy;
-        state.interest = action.payload.interest;
-        state.bountyPool = action.payload.bountyPool;
-        state.redeemEnergy = action.payload.redeemEnergy;
+        state.globalTimer =
+          action.payload.state.counter * SERVER_TICK_TO_SECOND;
+        state.nonce = action.payload.player.nonce;
+        state.currentCost = action.payload.player.data.current_cost;
+        state.redeemInfo = action.payload.player.data.redeem_info;
+        state.level = action.payload.player.data.level;
+        state.exp = action.payload.player.data.exp;
+        state.energy = action.payload.player.data.energy;
+        state.lastRedeemEnergy = action.payload.player.data.last_check_point;
+
+        const level = action.payload.player.data.level;
+        const interestInfo = action.payload.player.data.last_interest_stamp;
+        const serverTickBn = BigInt(action.payload.state.counter);
+        const lastInterestStamp = BigInt(interestInfo) & 0xffffffffn;
+        const balance = BigInt(interestInfo) >> 32n;
+        const delta = serverTickBn - lastInterestStamp;
+        state.interest = Number(
+          (BigInt(level) * balance * delta) / (10000n * 17280n)
+        );
+        state.bountyPool = action.payload.player.data.bounty_pool;
+        state.redeemEnergy =
+          Math.floor(Math.log2(Number(balance / 10000n) + 1)) * level;
         console.log("query state fulfilled");
       })
       .addCase(queryState.rejected, (state, action) => {

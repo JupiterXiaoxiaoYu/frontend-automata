@@ -223,9 +223,9 @@ export const creaturesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(queryState.fulfilled, (state, action) => {
-      const creatures = action.payload.creatures as CreatureRaw[];
-      const globalTimer = action.payload.globalTimer;
-      const rawcards = action.payload.cards as any[];
+      const creatures = action.payload.player.data.objects as CreatureRaw[];
+      const globalTimer = action.payload.state.counter * SERVER_TICK_TO_SECOND;
+      const rawcards = action.payload.player.data.cards as any[];
       state.creatures = creatures.map((creature, index) =>
         rawToModel(creature, index, globalTimer, rawcards)
       );

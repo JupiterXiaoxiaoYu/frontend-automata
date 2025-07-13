@@ -47,7 +47,7 @@ export const programsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(queryState.fulfilled, (state, action) => {
-      state.programs = decodePrograms(action.payload.cards);
+      state.programs = decodePrograms(action.payload.player.data.cards);
     });
   },
 });

@@ -22,7 +22,7 @@ export const resourcesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(queryState.fulfilled, (state, action) => {
-      state.resources = getResources(action.payload.player);
+      state.resources = getResources(action.payload.player.data.local);
     });
   },
 });
