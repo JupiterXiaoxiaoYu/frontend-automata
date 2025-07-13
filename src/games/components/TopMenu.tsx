@@ -51,9 +51,11 @@ const TopMenu = () => {
         onClickWithdraw={onClickWithdraw}
         onClickDeposit={onClickDeposit}
       />
-      <AccountInfo />
-      <Resources />
-      <PlayerInfo />
+      <div className="top-info">
+        <AccountInfo />
+        <Resources />
+        <PlayerInfo />
+      </div>
       <div className="top-market">
         <MarketButton onClick={onClickMarket} />
       </div>
