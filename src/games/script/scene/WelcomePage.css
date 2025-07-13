@@ -51,22 +51,22 @@
   user-select: none;
 }
 
-.welcome-page-panel-connect-wallet-button {
+.welcome-page-connect-wallet-button {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  width: 20%;
+  top: 45%;
+  left: 37%;
+  width: 15%;
   height: auto;
-  aspect-ratio: 250 / 45;
+  aspect-ratio: 307 / 157;
   transform: translate(-50%, -50%);
 }
 
-.welcome-page-panel-play-button {
+.welcome-page-play-button {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  width: 10%;
+  top: 45%;
+  left: 37%;
+  width: 15%;
   height: auto;
-  aspect-ratio: 152 / 45;
+  aspect-ratio: 307 / 157;
   transform: translate(-50%, -50%);
 }
