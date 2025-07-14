@@ -18,6 +18,7 @@ export function LoadingController() {
   const connectStateRef = useRef(connectState);
   const userStateRef = useRef(userState);
   const [inc, setInc] = useState(0);
+  const [startGameplay, setStartGameplay] = useState(false);
 
   // update State
   function updateState() {
@@ -56,13 +57,14 @@ export function LoadingController() {
   };
 
   const onStartGameplay = () => {
-    /* */
+    setStartGameplay(true);
   };
 
   if (
     config &&
     userState?.player &&
-    Object.keys(userState.player!).length > 0
+    Object.keys(userState.player!).length > 0 &&
+    startGameplay
   ) {
     return <Gameplay />;
   } else {

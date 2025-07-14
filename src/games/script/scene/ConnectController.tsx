@@ -116,17 +116,6 @@ export function ConnectController({
       loadImages().then(() => {
         dispatch(getConfig());
       });
-    } else if (
-      connectState == ConnectState.InstallPlayer ||
-      connectState == ConnectState.ConnectionError
-    ) {
-      const command = createCommand(0n, CREATE_PLAYER, []);
-      dispatch(
-        sendTransaction({
-          cmd: command,
-          prikey: l2Account!.getPrivateKey(),
-        })
-      );
     }
   }, [connectState]);
 
@@ -142,8 +131,24 @@ export function ConnectController({
       return;
     }
 
-    dispatch(queryState(l2Account!.getPrivateKey()));
-    onStartGameplay();
+    dispatch(queryState(l2Account!.getPrivateKey())).then(async (action) => {
+      if (queryState.fulfilled.match(action)) {
+        onStartGameplay();
+      } else if (queryState.rejected.match(action)) {
+        const command = createCommand(0n, CREATE_PLAYER, []);
+        dispatch(
+          sendTransaction({
+            cmd: command,
+            prikey: l2Account!.getPrivateKey(),
+          })
+        ).then(async (action) => {
+          if (sendTransaction.fulfilled.match(action)) {
+            dispatch(queryState(l2Account.getPrivateKey()));
+            onStartGameplay();
+          }
+        });
+      }
+    });
   };
 
   if (connectState == ConnectState.Init) {

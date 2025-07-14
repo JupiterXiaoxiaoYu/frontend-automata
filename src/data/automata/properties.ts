@@ -10,11 +10,8 @@ import {
   ConfirmPopupInfo,
   ResourceAmountPair,
   emptyConfirmPopupInfo,
-  emptyResources,
   redeemEnergyCooldownBase,
 } from "./models";
-import { setConnectState } from "../state";
-import { ConnectState } from "zkwasm-minirollup-browser";
 
 export enum UIState {
   Init,
@@ -144,29 +141,31 @@ export const propertiesSlice = createSlice({
             state.uIState = UIState.Idle;
           }
         }
-        state.globalTimer =
-          action.payload.state.counter * SERVER_TICK_TO_SECOND;
-        state.nonce = action.payload.player.nonce;
-        state.currentCost = action.payload.player.data.current_cost;
-        state.redeemInfo = action.payload.player.data.redeem_info;
-        state.level = action.payload.player.data.level;
-        state.exp = action.payload.player.data.exp;
-        state.energy = action.payload.player.data.energy;
-        state.lastRedeemEnergy = action.payload.player.data.last_check_point;
 
-        const level = action.payload.player.data.level;
-        const interestInfo = action.payload.player.data.last_interest_stamp;
-        const serverTickBn = BigInt(action.payload.state.counter);
-        const lastInterestStamp = BigInt(interestInfo) & 0xffffffffn;
-        const balance = BigInt(interestInfo) >> 32n;
-        const delta = serverTickBn - lastInterestStamp;
-        state.interest = Number(
-          (BigInt(level) * balance * delta) / (10000n * 17280n)
-        );
-        state.bountyPool = action.payload.player.data.bounty_pool;
-        state.redeemEnergy =
-          Math.floor(Math.log2(Number(balance / 10000n) + 1)) * level;
-        console.log("query state fulfilled");
+        if (action.payload.player) {
+          state.globalTimer =
+            action.payload.state.counter * SERVER_TICK_TO_SECOND;
+          state.nonce = action.payload.player.nonce;
+          state.currentCost = action.payload.player.data.current_cost;
+          state.redeemInfo = action.payload.player.data.redeem_info;
+          state.level = action.payload.player.data.level;
+          state.exp = action.payload.player.data.exp;
+          state.energy = action.payload.player.data.energy;
+          state.lastRedeemEnergy = action.payload.player.data.last_check_point;
+
+          const level = action.payload.player.data.level;
+          const interestInfo = action.payload.player.data.last_interest_stamp;
+          const serverTickBn = BigInt(action.payload.state.counter);
+          const lastInterestStamp = BigInt(interestInfo) & 0xffffffffn;
+          const balance = BigInt(interestInfo) >> 32n;
+          const delta = serverTickBn - lastInterestStamp;
+          state.interest = Number(
+            (BigInt(level) * balance * delta) / (10000n * 17280n)
+          );
+          state.bountyPool = action.payload.player.data.bounty_pool;
+          state.redeemEnergy =
+            Math.floor(Math.log2(Number(balance / 10000n) + 1)) * level;
+        }
       })
       .addCase(queryState.rejected, (state, action) => {
         if (state.uIState == UIState.QueryState) {

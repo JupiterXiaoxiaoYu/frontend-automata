@@ -223,12 +223,15 @@ export const creaturesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(queryState.fulfilled, (state, action) => {
-      const creatures = action.payload.player.data.objects as CreatureRaw[];
-      const globalTimer = action.payload.state.counter * SERVER_TICK_TO_SECOND;
-      const rawcards = action.payload.player.data.cards as any[];
-      state.creatures = creatures.map((creature, index) =>
-        rawToModel(creature, index, globalTimer, rawcards)
-      );
+      if (action.payload.player) {
+        const creatures = action.payload.player.data.objects as CreatureRaw[];
+        const globalTimer =
+          action.payload.state.counter * SERVER_TICK_TO_SECOND;
+        const rawcards = action.payload.player.data.cards as any[];
+        state.creatures = creatures.map((creature, index) =>
+          rawToModel(creature, index, globalTimer, rawcards)
+        );
+      }
     });
   },
 });
