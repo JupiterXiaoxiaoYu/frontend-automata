@@ -3,10 +3,11 @@ import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
-  selectIsLoading,
   setUIState,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
+import { selectIsLoading } from "../../data/errors";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
 import MarketButton from "./Buttons/MarketButton";
@@ -22,19 +23,19 @@ const TopMenu = () => {
 
   const onClickWithdraw = () => {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.WithdrawPopup }));
+      dispatch(setUIState({ uIState: { type: UIStateType.WithdrawPopup } }));
     }
   };
 
   const onClickDeposit = () => {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.DepositPopup }));
+      dispatch(setUIState({ uIState: { type: UIStateType.DepositPopup } }));
     }
   };
 
   function onClickHelp() {
     dispatch(startGuide({ guideType: GuideType.First }));
-    dispatch(setUIState({ uIState: UIState.Guide }));
+    dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
   }
 
   function onClickMarket() {

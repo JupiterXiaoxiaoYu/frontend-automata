@@ -7,6 +7,7 @@ import RightMenu from "./RightMenu";
 import MainMenu from "./MainMenu";
 import {
   UIState,
+  UIStateType,
   selectHasRocket,
   selectLastRedeemEnergy,
   selectRedeemEnergyCooldown,
@@ -97,7 +98,7 @@ const Gameplay = () => {
       globalTimer / SERVER_TICK_TO_SECOND - lastRedeemEnergy >=
         redeemEnergyCooldown &&
       !hasRocket &&
-      uIState != UIState.RocketPopup
+      uIState.type != UIStateType.RocketPopup
     ) {
       dispatch(setHasRocket({ hasRocket: true }));
     }

@@ -3,7 +3,11 @@ import background from "../../images/backgrounds/guide_frame.png";
 import EndGuideButton from "../Buttons/EndGuideButton";
 import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
 import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";
-import { UIState, setUIState } from "../../../data/automata/properties";
+import {
+  UIState,
+  UIStateType,
+  setUIState,
+} from "../../../data/automata/properties";
 import {
   nextPage,
   prevPage,
@@ -26,7 +30,7 @@ const GuidePopup = () => {
 
   const onClickEndGuide = () => {
     if (enableSkipButton) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
+      dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
     }
   };
 

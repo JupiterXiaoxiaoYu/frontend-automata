@@ -4,7 +4,11 @@ import background from "../images/backgrounds/guide_frame.png";
 import GuideButton from "./Buttons/GuideButton";
 import Grid from "./Grid";
 import SummaryResourceDisplay from "./SummaryResourceDisplay";
-import { setUIState, UIState } from "../../data/automata/properties";
+import {
+  setUIState,
+  UIState,
+  UIStateType,
+} from "../../data/automata/properties";
 import "./SummaryMenu.css";
 import {
   getResourceIconPath,
@@ -15,7 +19,7 @@ import {
 const SummaryMenu = () => {
   const dispatch = useAppDispatch();
   const onClickGuide = () => {
-    dispatch(setUIState({ uIState: UIState.Guide }));
+    dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
   };
   return (
     <div className="summary-menu-container">

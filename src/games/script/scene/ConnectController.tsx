@@ -14,6 +14,12 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectConnectState, setConnectState } from "../../../data/state";
 import LoadingPage from "./LoadingPage";
 import WelcomePage from "./WelcomePage";
+import {
+  setTutorialType,
+  setUIState,
+  TutorialType,
+  UIStateType,
+} from "../../../data/automata/properties";
 
 const CREATE_PLAYER = 1n;
 
@@ -144,6 +150,8 @@ export function ConnectController({
         ).then(async (action) => {
           if (sendTransaction.fulfilled.match(action)) {
             dispatch(queryState(l2Account.getPrivateKey()));
+            dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
+            dispatch(setTutorialType({ tutorialType: TutorialType.Creature }));
             onStartGameplay();
           }
         });

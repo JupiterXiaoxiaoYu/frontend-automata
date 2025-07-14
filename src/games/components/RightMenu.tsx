@@ -8,13 +8,13 @@ import ProgramFilterBar from "./ProgramFilterBar";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   selectIsSelectingUIState,
-  selectIsLoading,
   setUIState,
-  UIState,
   TutorialType,
   setTutorialType,
   selectTutorialType,
+  UIStateType,
 } from "../../data/automata/properties";
+import { selectIsLoading } from "../../data/errors";
 import {
   selectFilteredPrograms,
   selectProgramsOnCurrentPage,
@@ -74,7 +74,7 @@ const RightMenu = () => {
 
   const onClickNewProgram = () => {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.NewProgramPopup }));
+      dispatch(setUIState({ uIState: { type: UIStateType.NewProgramPopup } }));
     }
   };
 

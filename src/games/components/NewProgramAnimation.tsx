@@ -4,6 +4,7 @@ import {
   selectUIState,
   setUIState,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import image_00 from "../images/Animations/NewProgram.png";
@@ -26,7 +27,7 @@ const NewProgramAnimation = () => {
   );
 
   useEffect(() => {
-    if (uIState == UIState.PlayNewProgramAnimation) {
+    if (uIState.type == UIStateType.PlayNewProgramAnimation) {
       setShowAnimation(true);
       setTimeout(() => {
         setAnimationEnd(true);
@@ -36,13 +37,11 @@ const NewProgramAnimation = () => {
 
   const onClickCancel = () => {
     if (animationEnd) {
-      dispatch(
-        setUIState({
-          uIState: isSelectingCreatingCreature
-            ? UIState.Creating
-            : UIState.Idle,
-        })
-      );
+      if (isSelectingCreatingCreature) {
+        dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
+      } else {
+        dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+      }
       setShowAnimation(false);
       setAnimationEnd(false);
     }

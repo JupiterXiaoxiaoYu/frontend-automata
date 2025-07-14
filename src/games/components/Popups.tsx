@@ -5,6 +5,7 @@ import WithdrawPopup from "./Popups/WithdrawPopup";
 import UpgradePopup from "./Popups/UpgradePopup";
 import {
   UIState,
+  UIStateType,
   selectConfirmPopupInfo,
   selectUIState,
 } from "../../data/automata/properties";
@@ -18,23 +19,18 @@ import CollectInterestPopup from "./Popups/CollectInterestPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
-  const showGuidePopup = uIState == UIState.Guide;
-  const showWithdrawPopup =
-    uIState == UIState.WithdrawPopup || uIState == UIState.WithdrawPopupLoading;
-  const showDepositPopup =
-    uIState == UIState.DepositPopup || uIState == UIState.DepositPopupLoading;
-  const showUpgradePopup = uIState == UIState.UpgradePopup;
-  const showUnlockPopup = uIState == UIState.UnlockPopup;
-  const showRebootPopup =
-    uIState == UIState.RebootPopup || uIState == UIState.RebootPopupLoading;
-  const showNewProgramPopup = uIState == UIState.NewProgramPopup;
-  const showConfirmPopup = uIState == UIState.ConfirmPopup;
+  const showGuidePopup = uIState.type == UIStateType.GuidePopup;
+  const showWithdrawPopup = uIState.type == UIStateType.WithdrawPopup;
+  const showDepositPopup = uIState.type == UIStateType.DepositPopup;
+  const showUpgradePopup = uIState.type == UIStateType.UpgradePopup;
+  const showUnlockPopup = uIState.type == UIStateType.UnlockPopup;
+  const showRebootPopup = uIState.type == UIStateType.RebootPopup;
+  const showNewProgramPopup = uIState.type == UIStateType.NewProgramPopup;
+  const showConfirmPopup = uIState.type == UIStateType.ConfirmPopup;
   const confirmPopupInfo = useAppSelector(selectConfirmPopupInfo);
   const showCollectInterestPopup =
-    uIState == UIState.CollectInterestPopup ||
-    uIState == UIState.CollectInterestPopupLoading;
-  const showRocketPopup =
-    uIState == UIState.RocketPopup || uIState == UIState.RocketPopupLoading;
+    uIState.type == UIStateType.CollectInterestPopup;
+  const showRocketPopup = uIState.type == UIStateType.RocketPopup;
 
   return (
     <>

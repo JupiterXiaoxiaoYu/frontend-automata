@@ -3,6 +3,7 @@ import amountBackground from "../../images/backgrounds/withdraw_amount_backgroun
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,
+  UIStateType,
   selectCurrentCost,
   selectNonce,
   selectUIState,
@@ -25,6 +26,7 @@ import {
 import { getCollectEnergyTransactionCommandArray } from "../../rpc";
 import GainEnergy from "../GainEnergy";
 import { useEffect, useRef, useState } from "react";
+import { setLoadingType, LoadingType } from "../../../data/errors";
 
 interface GainEnergyProps {
   startPosition: { x: number; y: number };
@@ -123,8 +125,8 @@ const RocketPopup = () => {
     if (titaniumCount < redeemEnergyTitaniumCost) {
       return;
     }
-    if (uIState == UIState.RocketPopup) {
-      dispatch(setUIState({ uIState: UIState.RocketPopupLoading }));
+    if (uIState.type == UIStateType.RocketPopup) {
+      dispatch(setLoadingType(LoadingType.Default));
       setFinishQuery(false);
       setRewardAnimation(true);
       dispatch(
@@ -147,7 +149,7 @@ const RocketPopup = () => {
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
   const onAnimationEnd = () => {
@@ -158,7 +160,8 @@ const RocketPopup = () => {
 
   useEffect(() => {
     if (!rewardAnimation && finishQuery) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
+      dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+      dispatch(setLoadingType(LoadingType.None));
     }
   }, [rewardAnimation, finishQuery]);
 

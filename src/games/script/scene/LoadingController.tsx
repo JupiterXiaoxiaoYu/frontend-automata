@@ -6,7 +6,11 @@ import {
   selectNullableUserState,
 } from "../../../data/state";
 import Gameplay from "../../components/Gameplay";
-import { queryInitialState } from "zkwasm-minirollup-browser/";
+import {
+  queryInitialState,
+  queryState,
+  useWalletContext,
+} from "zkwasm-minirollup-browser/";
 import { ConnectState } from "zkwasm-minirollup-browser";
 import { ConnectController } from "./ConnectController";
 
@@ -19,6 +23,8 @@ export function LoadingController() {
   const userStateRef = useRef(userState);
   const [inc, setInc] = useState(0);
   const [startGameplay, setStartGameplay] = useState(false);
+  const { l2Account } = useWalletContext();
+  const l2AccountRef = useRef(l2Account);
 
   // update State
   function updateState() {
@@ -27,6 +33,11 @@ export function LoadingController() {
       userStateRef.current == null
     ) {
       dispatch(queryInitialState("1"));
+    } else if (
+      connectStateRef.current == ConnectState.Idle &&
+      l2AccountRef.current != null
+    ) {
+      dispatch(queryState(l2AccountRef.current.getPrivateKey()));
     }
     setInc(inc + 1);
   }
@@ -44,6 +55,10 @@ export function LoadingController() {
   useEffect(() => {
     userStateRef.current = userState;
   }, [userState]);
+
+  useEffect(() => {
+    l2AccountRef.current = l2Account;
+  }, [l2Account]);
 
   const requireContext = require.context(
     "../../images",

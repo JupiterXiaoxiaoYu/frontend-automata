@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import OkButton from "../Buttons/OkButton";
-import { UIState, setUIState } from "../../../data/automata/properties";
+import {
+  UIState,
+  UIStateType,
+  setUIState,
+} from "../../../data/automata/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./ConfirmPopup.css";
 import { ConfirmPopupInfo } from "../../../data/automata/models";
@@ -14,7 +18,7 @@ const ConfirmPopup = ({ confirmPopupInfo }: Props) => {
   const dispatch = useAppDispatch();
 
   const onClickConfirm = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
   return (

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { selectNonce } from "../../../data/automata/properties";
 import {
+  LoadingType,
   selectIsLoading,
-  selectNonce,
-  selectUIState,
-} from "../../../data/automata/properties";
+  setLoadingType,
+} from "../../../data/errors";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./MarketPopup.css";
 import PageSelector from "../PageSelector";
@@ -38,7 +39,6 @@ import {
   setTabState,
   MarketTabState,
   setInventoryChanged,
-  setIsLoading,
 } from "../../../data/automata/market";
 import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
@@ -247,7 +247,7 @@ const MarketPopup = () => {
   };
 
   const updateTabData = async () => {
-    dispatch(setIsLoading(true));
+    dispatch(setLoadingType(LoadingType.Default));
 
     if (tabState == MarketTabState.Inventory) {
       await updateInventoryPage();
@@ -264,7 +264,7 @@ const MarketPopup = () => {
     } else if (tabState == MarketTabState.Lot) {
       await addLotPage(lotNuggetTab.programs.length, ELEMENT_PER_REQUEST);
     }
-    dispatch(setIsLoading(false));
+    dispatch(setLoadingType(LoadingType.None));
   };
 
   const reloadTabData = async () => {
@@ -365,7 +365,7 @@ const MarketPopup = () => {
 
   const sendSellCmd = (program: ProgramModel) => {
     if (!isLoading) {
-      dispatch(setIsLoading(true));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getSellCardTransactionCommandArray(nonce, program.index),
@@ -375,7 +375,7 @@ const MarketPopup = () => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
-              dispatch(setIsLoading(false));
+              dispatch(setLoadingType(LoadingType.None));
             }
           });
         }
@@ -390,7 +390,7 @@ const MarketPopup = () => {
   const onConfirmBidAmount = (amount: number, program: ProgramModel) => {
     setShowBidAmountPopup(false);
     if (!isLoading) {
-      dispatch(setIsLoading(true));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getBidCardTransactionCommandArray(nonce, program.index, amount),
@@ -401,7 +401,7 @@ const MarketPopup = () => {
           dispatch(resetAuctionTab());
           dispatch(resetLotTab());
           dispatch(setMarketForceUpdate(true));
-          dispatch(setIsLoading(false));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }
@@ -421,7 +421,7 @@ const MarketPopup = () => {
   const onConfirmListAmount = (amount: number, program: ProgramModel) => {
     setShowListAmountPopup(false);
     if (!isLoading) {
-      dispatch(setIsLoading(true));
+      dispatch(setLoadingType(LoadingType.Default));
       const index = programs.findIndex((p: any) => p.index == program.index);
       dispatch(
         sendTransaction({
@@ -436,7 +436,7 @@ const MarketPopup = () => {
                 dispatch(resetSellingTab());
                 dispatch(setInventoryChanged());
                 dispatch(setMarketForceUpdate(true));
-                dispatch(setIsLoading(false));
+                dispatch(setLoadingType(LoadingType.None));
               }
             }
           );

@@ -5,6 +5,7 @@ import {
   selectUIState,
   TutorialType,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
 import background from "../images/backgrounds/tutorial_frame.png";
 import "./CreatureTutorial.css";
@@ -13,7 +14,7 @@ const CreatureTutorial = () => {
   const tutorialType = useAppSelector(selectTutorialType);
   const uIState = useAppSelector(selectUIState);
   const showCreatureTutorial =
-    tutorialType == TutorialType.Creature && uIState == UIState.Idle;
+    tutorialType == TutorialType.Creature && uIState.type == UIStateType.Idle;
 
   return (
     <>

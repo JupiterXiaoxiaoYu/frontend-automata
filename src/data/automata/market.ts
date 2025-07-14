@@ -21,7 +21,6 @@ export interface MarketState {
   lotTab: MarketTabData;
   forceUpdate: boolean;
   isInventoryChanged: boolean;
-  isLoading: boolean;
 }
 
 const initialState: MarketState = {
@@ -32,7 +31,6 @@ const initialState: MarketState = {
   lotTab: emptyMarketTabData,
   forceUpdate: false,
   isInventoryChanged: true,
-  isLoading: false,
 };
 
 const marketSlice = createSlice({
@@ -81,9 +79,6 @@ const marketSlice = createSlice({
     setInventoryChanged: (state) => {
       state.isInventoryChanged = true;
     },
-    setIsLoading: (state, d: PayloadAction<boolean>) => {
-      state.isLoading = d.payload;
-    },
   },
 });
 
@@ -114,8 +109,6 @@ export const selectLotTab = (state: RootState): MarketTabData =>
   state.automata.market.lotTab;
 export const selectMarketForceUpdate = (state: RootState): boolean =>
   state.automata.market.forceUpdate;
-export const selectIsLoading = (state: RootState): boolean =>
-  state.automata.market.isLoading;
 
 export const {
   setTabState,
@@ -129,6 +122,5 @@ export const {
   addLotTab,
   setMarketForceUpdate,
   setInventoryChanged,
-  setIsLoading,
 } = marketSlice.actions;
 export default marketSlice.reducer;
