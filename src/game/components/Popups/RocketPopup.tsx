@@ -1,6 +1,6 @@
 import background from "../../image/backgrounds/withdraw_frame.png";
 import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
+import OrangeButton from "../../script/button/OrangeButton";
 import {
   UIState,
   UIStateType,
@@ -184,9 +184,11 @@ const RocketPopup = () => {
           />
         </div>
         <div className="rocket-popup-confirm-button">
-          <ConfirmButton
-            isDisabled={titaniumCount < redeemEnergyTitaniumCost}
+          <OrangeButton
+            text={"Confirm"}
             onClick={onClickConfirm}
+            isDisabled={titaniumCount < redeemEnergyTitaniumCost}
+            fontSizeRatio={0.7}
           />
         </div>
       </div>

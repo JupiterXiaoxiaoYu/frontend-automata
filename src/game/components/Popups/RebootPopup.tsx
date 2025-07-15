@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import background from "../../image/backgrounds/withdraw_frame.png";
 import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
+import OrangeButton from "../../script/button/OrangeButton";
 import {
   UIState,
   UIStateType,
@@ -99,9 +99,11 @@ const RebootPopup = () => {
           />
         </div>
         <div className="reboot-popup-confirm-button">
-          <ConfirmButton
-            isDisabled={titaniumCount < currentCost}
+          <OrangeButton
+            text={"Confirm"}
             onClick={onClickConfirm}
+            isDisabled={titaniumCount < currentCost}
+            fontSizeRatio={0.7}
           />
         </div>
       </div>

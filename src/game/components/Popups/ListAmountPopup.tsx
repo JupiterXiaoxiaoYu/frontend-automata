@@ -1,9 +1,9 @@
 import { useState } from "react";
 import background from "../../image/backgrounds/withdraw_frame.png";
 import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
 import "./ListAmountPopup.css";
 import { ProgramModel } from "../../../data/models";
+import OrangeButton from "../../script/button/OrangeButton";
 
 interface Props {
   program: ProgramModel;
@@ -47,7 +47,12 @@ const ListAmountPopup = ({
           />
         </div>
         <div className="list-amount-popup-confirm-button">
-          <ConfirmButton isDisabled={false} onClick={onClickConfirm} />
+          <OrangeButton
+            text={"Confirm"}
+            onClick={onClickConfirm}
+            isDisabled={false}
+            fontSizeRatio={0.7}
+          />
         </div>
       </div>
     </div>

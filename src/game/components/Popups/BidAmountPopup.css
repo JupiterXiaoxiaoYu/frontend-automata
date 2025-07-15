@@ -34,6 +34,9 @@
   position: absolute;
   top: 70%;
   left: 50%;
+  width: auto;
+  height: 13%;
+  aspect-ratio: 203 / 56;
   transform: translate(-50%, -50%);
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import background from "../../image/backgrounds/withdraw_frame.png";
 import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
+import OrangeButton from "../../script/button/OrangeButton";
 import {
   UIState,
   UIStateType,
@@ -47,9 +47,11 @@ const UnlockPopup = () => {
           />
         </div>
         <div className="unlock-popup-confirm-button">
-          <ConfirmButton
-            isDisabled={titaniumCount < currentCost + 1000}
+          <OrangeButton
+            text={"Confirm"}
             onClick={onClickConfirm}
+            isDisabled={titaniumCount < currentCost + 1000}
+            fontSizeRatio={0.7}
           />
         </div>
       </div>

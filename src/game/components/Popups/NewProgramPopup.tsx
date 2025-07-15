@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import background from "../../image/backgrounds/withdraw_frame.png";
 import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
-import ConfirmButton from "../Buttons/ConfirmButton";
 import {
-  UIState,
   UIStateType,
   selectCurrentCost,
   selectNonce,
@@ -16,6 +14,7 @@ import { selectResource } from "../../../data/resources";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { setLoadingType, LoadingType } from "../../../data/errors";
+import OrangeButton from "../../script/button/OrangeButton";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
@@ -74,9 +73,11 @@ const NewProgramPopup = () => {
           />
         </div>
         <div className="new-program-popup-confirm-button">
-          <ConfirmButton
-            isDisabled={titaniumCount < currentCost}
+          <OrangeButton
+            text={"Confirm"}
             onClick={onClickConfirm}
+            isDisabled={titaniumCount < currentCost}
+            fontSizeRatio={0.7}
           />
         </div>
       </div>
