@@ -6,12 +6,7 @@ import {
   queryState,
   SERVER_TICK_TO_SECOND,
 } from "../../games/request";
-import {
-  ConfirmPopupInfo,
-  ResourceAmountPair,
-  emptyConfirmPopupInfo,
-  redeemEnergyCooldownBase,
-} from "./models";
+import { ConfirmPopupInfo, redeemEnergyCooldownBase } from "./models";
 
 export enum UIStateType {
   Idle,
@@ -49,7 +44,7 @@ export type UIState =
   | { type: UIStateType.PlayUnlockAnimation }
   | { type: UIStateType.NewProgramPopup }
   | { type: UIStateType.PlayNewProgramAnimation }
-  | { type: UIStateType.ConfirmPopup }
+  | { type: UIStateType.ConfirmPopup; confirmPopupInfo: ConfirmPopupInfo }
   | { type: UIStateType.CollectInterestPopup }
   | { type: UIStateType.RocketPopup }
   | { type: UIStateType.BidAmountPopup };
@@ -66,12 +61,10 @@ interface PropertiesState {
   globalTimer: number;
   nonce: string;
   hasRocket: boolean;
-  selectedCreatureDiffResources: ResourceAmountPair[];
   currentCost: number;
   redeemCostBase: number;
   redeemRewardBase: number;
   redeemInfo: number[];
-  confirmPopupInfo: ConfirmPopupInfo;
   level: number;
   exp: number;
   energy: number;
@@ -87,12 +80,10 @@ const initialState: PropertiesState = {
   globalTimer: 0,
   nonce: "0",
   hasRocket: false,
-  selectedCreatureDiffResources: [],
   currentCost: 0,
   redeemCostBase: 0,
   redeemRewardBase: 0,
   redeemInfo: [],
-  confirmPopupInfo: emptyConfirmPopupInfo,
   level: 1,
   exp: 0,
   energy: 0,
@@ -114,9 +105,6 @@ export const propertiesSlice = createSlice({
     },
     setHasRocket: (state, action) => {
       state.hasRocket = action.payload.hasRocket;
-    },
-    setConfirmPopupInfo: (state, action) => {
-      state.confirmPopupInfo = action.payload.confirmPopupInfo;
     },
   },
 
@@ -206,13 +194,7 @@ export const selectInterest = (state: RootState) =>
   state.automata.properties.interest;
 export const selectBountyPool = (state: RootState) =>
   state.automata.properties.bountyPool;
-export const selectConfirmPopupInfo = (state: RootState) =>
-  state.automata.properties.confirmPopupInfo;
 
-export const {
-  setUIState,
-  setTutorialType,
-  setHasRocket,
-  setConfirmPopupInfo,
-} = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket } =
+  propertiesSlice.actions;
 export default propertiesSlice.reducer;

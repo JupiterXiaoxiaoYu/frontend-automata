@@ -6,7 +6,6 @@ import {
   UIStateType,
   selectNonce,
   selectUIState,
-  setConfirmPopupInfo,
   setUIState,
 } from "../../../data/automata/properties";
 import {
@@ -54,15 +53,17 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(
-            setConfirmPopupInfo({
-              confirmPopupInfo: {
-                title: "Withdraw Success",
-                description: "Hash Number : (TBD)",
-                isError: false,
+            setUIState({
+              uIState: {
+                type: UIStateType.ConfirmPopup,
+                confirmPopupInfo: {
+                  title: "Withdraw Success",
+                  description: "Hash Number : (TBD)",
+                  isError: false,
+                },
               },
             })
           );
-          dispatch(setUIState({ uIState: { type: UIStateType.ConfirmPopup } }));
           dispatch(setLoadingType(LoadingType.None));
         }
       });
@@ -79,30 +80,34 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
     })
       .then((result) => {
         dispatch(
-          setConfirmPopupInfo({
-            confirmPopupInfo: {
-              title: "Deposit Success",
-              description: `Hash Number : (TBD)${result.hash}`,
-              isError: false,
+          setUIState({
+            uIState: {
+              type: UIStateType.ConfirmPopup,
+              confirmPopupInfo: {
+                title: "Deposit Success",
+                description: `Hash Number : (TBD)${result.hash}`,
+                isError: false,
+              },
             },
           })
         );
-        dispatch(setUIState({ uIState: { type: UIStateType.ConfirmPopup } }));
         dispatch(setLoadingType(LoadingType.None));
 
         setErrorMessage("");
       })
       .catch((error) => {
         dispatch(
-          setConfirmPopupInfo({
-            confirmPopupInfo: {
-              title: "Deposit Fail",
-              description: error.message,
-              isError: true,
+          setUIState({
+            uIState: {
+              type: UIStateType.ConfirmPopup,
+              confirmPopupInfo: {
+                title: "Deposit Fail",
+                description: error.message,
+                isError: true,
+              },
             },
           })
         );
-        dispatch(setUIState({ uIState: { type: UIStateType.ConfirmPopup } }));
         dispatch(setLoadingType(LoadingType.None));
       });
   };
