@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../../images/backgrounds/withdraw_frame.png";
+import background from "../../image/backgrounds/withdraw_frame.png";
 import OkButton from "../Buttons/OkButton";
 import { UIState, UIStateType, setUIState } from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";

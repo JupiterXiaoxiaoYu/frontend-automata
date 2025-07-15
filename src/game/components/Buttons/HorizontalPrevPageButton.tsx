@@ -1,9 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import backButtonImage from "../../images/Buttons/HorizontalPrevPage/back.png";
-import backButtonHoverImage from "../../images/Buttons/HorizontalPrevPage/back_hover.png";
-import backButtonClickImage from "../../images/Buttons/HorizontalPrevPage/back_click.png";
-import disabledButtonClickImage from "../../images/Buttons/HorizontalPrevPage/back_idle.png";
+import backButtonImage from "../../image/Buttons/HorizontalPrevPage/back.png";
+import backButtonHoverImage from "../../image/Buttons/HorizontalPrevPage/back_hover.png";
+import backButtonClickImage from "../../image/Buttons/HorizontalPrevPage/back_click.png";
+import disabledButtonClickImage from "../../image/Buttons/HorizontalPrevPage/back_idle.png";
 import "./HorizontalPrevPageButton.css";
 
 interface Props {

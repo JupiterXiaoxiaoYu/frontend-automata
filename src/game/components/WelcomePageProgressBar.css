@@ -1,70 +1,71 @@
 .welcome-page-progress-bar-container {
-    position: absolute;
-    top: 46.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48%;
-    height: 7%;
+  position: absolute;
+  top: 46.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48%;
+  height: 7%;
 }
 
 .welcome-page-progress-bar-frame {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    user-select: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
 }
 
 .welcome-page-progress-bar-background {
-    position: absolute;
-    width: 91.8%;
-    height: 56%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    user-select: none;
+  position: absolute;
+  width: 91.8%;
+  height: 56%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
 }
 
 .welcome-page-progress-container {
-    position: absolute;
-    width: 91.8%;
-    height: 56%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  width: 91.8%;
+  height: 56%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .welcome-page-progress-sector {
-    position: absolute;
-    height: 100%;
-    max-width: 100%;
-    min-width: 0%;
-    background-image: url('../images/backgrounds/loading.png');
-    background-repeat: repeat-x;
+  position: absolute;
+  height: 100%;
+  max-width: 100%;
+  min-width: 0%;
+  background-image: url("../image/backgrounds/loading.png");
+  background-repeat: repeat-x;
 }
 
-.welcome-page-progress-bar-progress-text, .welcome-page-progress-bar-message-text{
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 15px;
-    text-align: center;
-    line-height: 15px;
-    margin: 0px;
-    color: white;
-    width: 100%;
-    height: 15px;
-    font-family: "mishmash";
-    user-select: none;
+.welcome-page-progress-bar-progress-text,
+.welcome-page-progress-bar-message-text {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  text-align: center;
+  line-height: 15px;
+  margin: 0px;
+  color: white;
+  width: 100%;
+  height: 15px;
+  font-family: "mishmash";
+  user-select: none;
 }
 
-.welcome-page-progress-bar-progress-text{
-    top: -20%;
+.welcome-page-progress-bar-progress-text {
+  top: -20%;
 }
 
-.welcome-page-progress-bar-message-text{
-    top: 120%;
+.welcome-page-progress-bar-message-text {
+  top: 120%;
 }

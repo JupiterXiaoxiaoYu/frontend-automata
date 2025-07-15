@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import background from "../../images/backgrounds/upgrade_frame.png";
-// import amountBackground from "../../images/backgrounds/upgrade_amount_background.png";
+import background from "../../image/backgrounds/upgrade_frame.png";
+// import amountBackground from "../../image/backgrounds/upgrade_amount_background.png";
 import {
   UIState,
   UIStateType,

@@ -1,14 +1,14 @@
 import React from "react";
-import currentFrame from "../images/MainMenu/selecting_frame.png";
-import currentFrameStop from "../images/MainMenu/selecting_frame_red.png";
-import selectingFrame1 from "../images/MainMenu/select1.png";
-import selectingFrame2 from "../images/MainMenu/select2.png";
-import selectingFrame3 from "../images/MainMenu/select3.png";
-import selectingFrame4 from "../images/MainMenu/select4.png";
-import selectingFrame5 from "../images/MainMenu/select5.png";
-import selectingFrame6 from "../images/MainMenu/select6.png";
-import selectingFrame7 from "../images/MainMenu/select7.png";
-import selectingFrame8 from "../images/MainMenu/select8.png";
+import currentFrame from "../image/MainMenu/selecting_frame.png";
+import currentFrameStop from "../image/MainMenu/selecting_frame_red.png";
+import selectingFrame1 from "../image/MainMenu/select1.png";
+import selectingFrame2 from "../image/MainMenu/select2.png";
+import selectingFrame3 from "../image/MainMenu/select3.png";
+import selectingFrame4 from "../image/MainMenu/select4.png";
+import selectingFrame5 from "../image/MainMenu/select5.png";
+import selectingFrame6 from "../image/MainMenu/select6.png";
+import selectingFrame7 from "../image/MainMenu/select7.png";
+import selectingFrame8 from "../image/MainMenu/select8.png";
 
 import "./MainMenuSelectingFrame.css";
 

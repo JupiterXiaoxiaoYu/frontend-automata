@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import creatureUnlockButtonImage from "../../images/Buttons/CreatureUnlock/creature_unlock.png";
-import creatureUnlockButtonHoverImage from "../../images/Buttons/CreatureUnlock/creature_unlock_hover.png";
-import creatureUnlockButtonClickImage from "../../images/Buttons/CreatureUnlock/creature_unlock_click.png";
+import creatureUnlockButtonImage from "../../image/Buttons/CreatureUnlock/creature_unlock.png";
+import creatureUnlockButtonHoverImage from "../../image/Buttons/CreatureUnlock/creature_unlock_hover.png";
+import creatureUnlockButtonClickImage from "../../image/Buttons/CreatureUnlock/creature_unlock_click.png";
 import "./CreatureUnlockButton.css";
 
 interface Props {

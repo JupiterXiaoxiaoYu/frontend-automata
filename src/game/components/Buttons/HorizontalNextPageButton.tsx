@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import nextButtonImage from "../../images/Buttons/HorizontalNextPage/next.png";
-import nextButtonHoverImage from "../../images/Buttons/HorizontalNextPage/next_hover.png";
-import nextButtonClickImage from "../../images/Buttons/HorizontalNextPage/next_click.png";
+import nextButtonImage from "../../image/Buttons/HorizontalNextPage/next.png";
+import nextButtonHoverImage from "../../image/Buttons/HorizontalNextPage/next_hover.png";
+import nextButtonClickImage from "../../image/Buttons/HorizontalNextPage/next_click.png";
 import "./HorizontalNextPageButton.css";
 
 interface Props {

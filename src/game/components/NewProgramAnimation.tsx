@@ -7,8 +7,8 @@ import {
   UIStateType,
 } from "../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import image_00 from "../images/Animations/NewProgram.png";
-import bg_spin from "../images/backgrounds/bg_spin.png";
+import image_00 from "../image/Animations/NewProgram.png";
+import bg_spin from "../image/backgrounds/bg_spin.png";
 import "./NewProgramAnimation.css";
 import { selectAllPrograms } from "../../data/programs";
 

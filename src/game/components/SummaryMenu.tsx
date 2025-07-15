@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import background from "../images/backgrounds/guide_frame.png";
+import background from "../image/backgrounds/guide_frame.png";
 import GuideButton from "./Buttons/GuideButton";
 import Grid from "./Grid";
 import SummaryResourceDisplay from "./SummaryResourceDisplay";

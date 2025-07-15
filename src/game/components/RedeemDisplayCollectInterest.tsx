@@ -1,6 +1,6 @@
 import React from "react";
 import "./RedeemDisplayCollectInterest.css";
-import background from "../images/backgrounds/redeem_frame.png";
+import background from "../image/backgrounds/redeem_frame.png";
 import CollectInterestButton from "./Buttons/CollectInterestButton";
 
 interface Props {

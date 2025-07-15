@@ -2,9 +2,9 @@ import React from "react";
 import "./PlayerInfo.css";
 import { useAppSelector } from "../../app/hooks";
 import { addressAbbreviation } from "../../utils/address";
-import level_icon from "../images/backgrounds/player_lv.png";
-import energy_icon from "../images/backgrounds/player_energy.png";
-import xp_icon from "../images/backgrounds/player_xp.png";
+import level_icon from "../image/backgrounds/player_lv.png";
+import energy_icon from "../image/backgrounds/player_energy.png";
+import xp_icon from "../image/backgrounds/player_xp.png";
 import {
   selectEnergy,
   selectExp,

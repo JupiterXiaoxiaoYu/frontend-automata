@@ -1,7 +1,7 @@
 import React from "react";
-import upgradSpeedButtonImage from "../../images/Buttons/UpgradeSpeed/speed_normal.png";
-import upgradSpeedButtonHoverImage from "../../images/Buttons/UpgradeSpeed/speed_hover.png";
-import upgradSpeedButtonClickImage from "../../images/Buttons/UpgradeSpeed/speed_select.png";
+import upgradSpeedButtonImage from "../../image/Buttons/UpgradeSpeed/speed_normal.png";
+import upgradSpeedButtonHoverImage from "../../image/Buttons/UpgradeSpeed/speed_hover.png";
+import upgradSpeedButtonClickImage from "../../image/Buttons/UpgradeSpeed/speed_select.png";
 import "./UpgradeSpeedButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 

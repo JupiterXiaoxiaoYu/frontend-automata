@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import depositButtonImage from "../../images/Buttons/Deposit/deposit_normal.png";
-import depositButtonHoverImage from "../../images/Buttons/Deposit/deposit_hover.png";
-import depositButtonClickImage from "../../images/Buttons/Deposit/deposit_click.png";
+import depositButtonImage from "../../image/Buttons/Deposit/deposit_normal.png";
+import depositButtonHoverImage from "../../image/Buttons/Deposit/deposit_hover.png";
+import depositButtonClickImage from "../../image/Buttons/Deposit/deposit_click.png";
 import "./DepositButton.css";
 
 interface Props {

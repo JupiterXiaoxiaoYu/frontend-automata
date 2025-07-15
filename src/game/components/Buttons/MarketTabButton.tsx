@@ -1,6 +1,6 @@
-import normalImage from "../../images/Buttons/MarketTab/tab.png";
-import hoverImage from "../../images/Buttons/MarketTab/tab_hv.png";
-import clickImage from "../../images/Buttons/MarketTab/tab_click.png";
+import normalImage from "../../image/Buttons/MarketTab/tab.png";
+import hoverImage from "../../image/Buttons/MarketTab/tab_hv.png";
+import clickImage from "../../image/Buttons/MarketTab/tab_click.png";
 import ImageTextButton from "./ImageTextButton";
 
 interface Props {

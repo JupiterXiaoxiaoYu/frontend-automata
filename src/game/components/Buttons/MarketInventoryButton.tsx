@@ -1,8 +1,8 @@
 import React from "react";
 import GeneralImageButton from "./GeneralImageButton";
-import marketInventoryButtonImage from "../../images/Buttons/MarketInventory/inventory.png";
-import marketInventoryButtonHoverImage from "../../images/Buttons/MarketInventory/inventory_hv.png";
-import marketInventoryButtonClickImage from "../../images/Buttons/MarketInventory/inventory_idle.png";
+import marketInventoryButtonImage from "../../image/Buttons/MarketInventory/inventory.png";
+import marketInventoryButtonHoverImage from "../../image/Buttons/MarketInventory/inventory_hv.png";
+import marketInventoryButtonClickImage from "../../image/Buttons/MarketInventory/inventory_idle.png";
 
 interface Props {
   onClick: () => void;

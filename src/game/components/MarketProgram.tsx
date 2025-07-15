@@ -8,7 +8,7 @@ import {
   ProgramModel,
 } from "../../data/models";
 import { formatTime } from "../../data/creatures";
-import background from "../images/backgrounds/market_card_frame.png";
+import background from "../image/backgrounds/market_card_frame.png";
 import SellButton from "./Buttons/SellButton";
 import BidButton from "./Buttons/BidButton";
 import ListButton from "./Buttons/ListButton";

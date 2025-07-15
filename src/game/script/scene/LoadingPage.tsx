@@ -1,8 +1,8 @@
 import "./LoadingPage.css";
-import background_back from "../../images/backgrounds/background_back.png";
-import background_front from "../../images/backgrounds/background_front.png";
-import sponsor_frame from "../../images/backgrounds/sponsor_frame.png";
-import logo from "../../images/backgrounds/sponsor logo.png";
+import background_back from "../../image/backgrounds/background_back.png";
+import background_front from "../../image/backgrounds/background_front.png";
+import sponsor_frame from "../../image/backgrounds/sponsor_frame.png";
+import logo from "../../image/backgrounds/sponsor logo.png";
 import WelcomePageProgressBar from "../../components/WelcomePageProgressBar";
 
 interface Props {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../images/backgrounds/bottom_bar.png";
+import background from "../image/backgrounds/bottom_bar.png";
 import { getNumberAbbr } from "../../data/models";
 import "./ResourceDisplay.css";
 import ResourceHover from "./ResourceHover";

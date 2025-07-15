@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import leftMiddleBar from "../images/backgrounds/left_middle_bar.png";
-import leftCornerBar from "../images/backgrounds/left_corner_bar.png";
+import leftMiddleBar from "../image/backgrounds/left_middle_bar.png";
+import leftCornerBar from "../image/backgrounds/left_corner_bar.png";
 import "./LeftMenu.css";
 import PageSelector from "./PageSelector";
 import Grid from "./Grid";

@@ -1,5 +1,5 @@
 import React from "react";
-import background from "../images/backgrounds/right_bar_deco.png";
+import background from "../image/backgrounds/right_bar_deco.png";
 import "./ProgramFilterBar.css";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import ProgramFilterButton from "./ProgramFilterButton";

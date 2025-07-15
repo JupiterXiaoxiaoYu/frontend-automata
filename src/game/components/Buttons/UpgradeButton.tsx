@@ -1,9 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import upgradeButtonImage from "../../images/Buttons/Upgrade/upgrade.png";
-import upgradeButtonHoverImage from "../../images/Buttons/Upgrade/upgrade_hv.png";
-import upgradeButtonClickImage from "../../images/Buttons/Upgrade/upgrade_click.png";
-import upgradeButtonDisabledImage from "../../images/Buttons/Upgrade/upgrade_idle.png";
+import upgradeButtonImage from "../../image/Buttons/Upgrade/upgrade.png";
+import upgradeButtonHoverImage from "../../image/Buttons/Upgrade/upgrade_hv.png";
+import upgradeButtonClickImage from "../../image/Buttons/Upgrade/upgrade_click.png";
+import upgradeButtonDisabledImage from "../../image/Buttons/Upgrade/upgrade_idle.png";
 import "./UpgradeButton.css";
 
 interface Props {

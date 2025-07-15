@@ -1,7 +1,7 @@
 import React from "react";
-import upgradProductivityButtonImage from "../../images/Buttons/UpgradeProductivity/productivity_normal.png";
-import upgradProductivityButtonHoverImage from "../../images/Buttons/UpgradeProductivity/productivity_hover.png";
-import upgradProductivityButtonClickImage from "../../images/Buttons/UpgradeProductivity/productivity_select.png";
+import upgradProductivityButtonImage from "../../image/Buttons/UpgradeProductivity/productivity_normal.png";
+import upgradProductivityButtonHoverImage from "../../image/Buttons/UpgradeProductivity/productivity_hover.png";
+import upgradProductivityButtonClickImage from "../../image/Buttons/UpgradeProductivity/productivity_select.png";
 import "./UpgradeProductivityButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 

@@ -19,21 +19,21 @@
 .top-left {
   width: 480px;
   height: 110px;
-  background-image: url("../images/backgrounds/top_left.png");
+  background-image: url("../image/backgrounds/top_left.png");
   background-repeat: no-repeat;
 }
 
 .top-right {
   width: 480px;
   height: 110px;
-  background-image: url("../images/backgrounds/top_right.png");
+  background-image: url("../image/backgrounds/top_right.png");
   background-repeat: no-repeat;
 }
 
 .top-middle {
   flex-grow: 1;
   height: 110px;
-  background-image: url("../images/backgrounds/top_mid.png");
+  background-image: url("../image/backgrounds/top_mid.png");
   background-repeat: repeat-x;
 }
 

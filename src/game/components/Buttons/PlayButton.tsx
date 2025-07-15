@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import playButtonImage from "../../images/Buttons/Play/play.png";
-import playButtonHoverImage from "../../images/Buttons/Play/play_hover.png";
-import playButtonClickImage from "../../images/Buttons/Play/play_click.png";
+import playButtonImage from "../../image/Buttons/Play/play.png";
+import playButtonHoverImage from "../../image/Buttons/Play/play_hover.png";
+import playButtonClickImage from "../../image/Buttons/Play/play_click.png";
 
 interface Props {
   onClick: () => void;

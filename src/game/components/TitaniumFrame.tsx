@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./TitaniumFrame.css";
-import background from "../images/backgrounds/titan_frame.png";
+import background from "../image/backgrounds/titan_frame.png";
 import { selectResource } from "../../data/resources";
 import {
   getResourceIconPath,

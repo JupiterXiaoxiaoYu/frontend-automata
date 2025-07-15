@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import number_display from "../images/backgrounds/number_display.png";
+import number_display from "../image/backgrounds/number_display.png";
 import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import "./PageSelector.css";

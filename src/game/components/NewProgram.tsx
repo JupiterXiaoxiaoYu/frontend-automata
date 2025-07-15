@@ -1,6 +1,6 @@
 import React from "react";
 import "./NewProgram.css";
-import background from "../images/backgrounds/new_program_normal.png";
+import background from "../image/backgrounds/new_program_normal.png";
 import EmptyButton from "./Buttons/EmptyButton";
 import { getResourceIconPath, ResourceType } from "../../data/models";
 import { useAppSelector } from "../../app/hooks";

@@ -1,9 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import redeemButtonImage from "../../images/Buttons/RedeemDisplay/redeem_display_normal.png";
-import redeemButtonHoverImage from "../../images/Buttons/RedeemDisplay/redeem_display_hover.png";
-import redeemButtonClickImage from "../../images/Buttons/RedeemDisplay/redeem_display_click.png";
-import redeemButtonDisabledImage from "../../images/Buttons/RedeemDisplay/redeem_display_idle.png";
+import redeemButtonImage from "../../image/Buttons/RedeemDisplay/redeem_display_normal.png";
+import redeemButtonHoverImage from "../../image/Buttons/RedeemDisplay/redeem_display_hover.png";
+import redeemButtonClickImage from "../../image/Buttons/RedeemDisplay/redeem_display_click.png";
+import redeemButtonDisabledImage from "../../image/Buttons/RedeemDisplay/redeem_display_idle.png";
 import "./RedeemDisplayButton.css";
 
 interface Props {

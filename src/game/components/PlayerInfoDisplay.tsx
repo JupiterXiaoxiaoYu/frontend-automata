@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../images/backgrounds/player_info_background.png";
+import background from "../image/backgrounds/player_info_background.png";
 import "./PlayerInfoDisplay.css";
 import PlayerInfoHover from "./PlayerInfoHover";
 

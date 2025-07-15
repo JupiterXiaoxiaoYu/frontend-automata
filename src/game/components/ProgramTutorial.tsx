@@ -7,7 +7,7 @@ import {
   UIState,
   UIStateType,
 } from "../../data/properties";
-import background from "../images/backgrounds/tutorial_frame.png";
+import background from "../image/backgrounds/tutorial_frame.png";
 import "./ProgramTutorial.css";
 
 const ProgramTutorial = () => {

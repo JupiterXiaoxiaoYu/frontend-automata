@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import circleBackground from "../images/backgrounds/circle.png";
+import circleBackground from "../image/backgrounds/circle.png";
 import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
 import CreatureConfirmButton from "./Buttons/CreatureConfirmButton";

@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import confirmButtonImage from "../../images/Buttons/Confirm/confirm_normal.png";
-import confirmButtonHoverImage from "../../images/Buttons/Confirm/confirm_hover.png";
-import confirmButtonClickImage from "../../images/Buttons/Confirm/confirm_click.png";
+import confirmButtonImage from "../../image/Buttons/Confirm/confirm_normal.png";
+import confirmButtonHoverImage from "../../image/Buttons/Confirm/confirm_hover.png";
+import confirmButtonClickImage from "../../image/Buttons/Confirm/confirm_click.png";
 import "./ConfirmButton.css";
 
 interface Props {

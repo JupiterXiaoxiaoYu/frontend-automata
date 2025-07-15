@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import endGuideButtonImage from "../../images/Buttons/Guide/guide.png";
-import endGuideButtonHoverImage from "../../images/Buttons/Guide/guide_hover.png";
-import endGuideButtonClickImage from "../../images/Buttons/Guide/guide_click.png";
+import endGuideButtonImage from "../../image/Buttons/Guide/guide.png";
+import endGuideButtonHoverImage from "../../image/Buttons/Guide/guide_hover.png";
+import endGuideButtonClickImage from "../../image/Buttons/Guide/guide_click.png";
 import "./GuideButton.css";
 
 interface Props {

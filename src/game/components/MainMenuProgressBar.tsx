@@ -1,5 +1,5 @@
 import React from "react";
-import progressBarBackground from "../images/MainMenu/circle_bg.png";
+import progressBarBackground from "../image/MainMenu/circle_bg.png";
 import "./MainMenuProgressBar.css";
 import { formatTime } from "../../data/creatures";
 

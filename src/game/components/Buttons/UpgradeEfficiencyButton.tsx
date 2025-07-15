@@ -1,7 +1,7 @@
 import React from "react";
-import upgradEfficiencyButtonImage from "../../images/Buttons/UpgradeEfficiency/efficiency_normal.png";
-import upgradEfficiencyButtonHoverImage from "../../images/Buttons/UpgradeEfficiency/efficiency_hover.png";
-import upgradEfficiencyButtonClickImage from "../../images/Buttons/UpgradeEfficiency/efficiency_select.png";
+import upgradEfficiencyButtonImage from "../../image/Buttons/UpgradeEfficiency/efficiency_normal.png";
+import upgradEfficiencyButtonHoverImage from "../../image/Buttons/UpgradeEfficiency/efficiency_hover.png";
+import upgradEfficiencyButtonClickImage from "../../image/Buttons/UpgradeEfficiency/efficiency_select.png";
 import "./UpgradeEfficiencyButton.css";
 import ParellogramToggleImageButton from "./ParellogramToggleImageButton";
 

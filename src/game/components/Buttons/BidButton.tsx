@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import bidButtonImage from "../../images/Buttons/Bid/bid.png";
-import bidButtonHoverImage from "../../images/Buttons/Bid/bid_hv.png";
-import bidButtonClickImage from "../../images/Buttons/Bid/bid_click.png";
+import bidButtonImage from "../../image/Buttons/Bid/bid.png";
+import bidButtonHoverImage from "../../image/Buttons/Bid/bid_hv.png";
+import bidButtonClickImage from "../../image/Buttons/Bid/bid_click.png";
 import "./BidButton.css";
 
 interface Props {

@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import emptyButtonImage from "../../images/Buttons/Empty/empty_normal.png";
-import emptyButtonHoverImage from "../../images/Buttons/Empty/empty_hover.png";
-import emptyButtonClickImage from "../../images/Buttons/Empty/empty_click.png";
+import emptyButtonImage from "../../image/Buttons/Empty/empty_normal.png";
+import emptyButtonHoverImage from "../../image/Buttons/Empty/empty_hover.png";
+import emptyButtonClickImage from "../../image/Buttons/Empty/empty_click.png";
 import "./EmptyButton.css";
 
 interface Props {

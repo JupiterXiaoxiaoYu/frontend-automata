@@ -1,6 +1,6 @@
 import React from "react";
 import "./DiffResourcesInfo.css";
-import infoBackground from "../images/backgrounds/info_frame.png";
+import infoBackground from "../image/backgrounds/info_frame.png";
 import Grid from "./Grid";
 import DiffResourceDisplay from "./DiffResourceDisplay";
 

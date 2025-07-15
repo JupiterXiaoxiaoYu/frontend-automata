@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import rightCornerBar from "../images/backgrounds/right_corner_bar.png";
+import rightCornerBar from "../image/backgrounds/right_corner_bar.png";
 import "./RightMenu.css";
 import PageSelector from "./PageSelector";
 import Grid from "./Grid";

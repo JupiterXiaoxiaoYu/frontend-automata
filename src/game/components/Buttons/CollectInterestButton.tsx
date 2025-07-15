@@ -1,9 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import collectButtonImage from "../../images/Buttons/CollectInterest/collect_normal.png";
-import collectButtonHoverImage from "../../images/Buttons/CollectInterest/collect_hv.png";
-import collectButtonClickImage from "../../images/Buttons/CollectInterest/collect_click.png";
-import collectButtonDisableImage from "../../images/Buttons/CollectInterest/collect_idle.png";
+import collectButtonImage from "../../image/Buttons/CollectInterest/collect_normal.png";
+import collectButtonHoverImage from "../../image/Buttons/CollectInterest/collect_hv.png";
+import collectButtonClickImage from "../../image/Buttons/CollectInterest/collect_click.png";
+import collectButtonDisableImage from "../../image/Buttons/CollectInterest/collect_idle.png";
 import "./CollectInterestButton.css";
 
 interface Props {

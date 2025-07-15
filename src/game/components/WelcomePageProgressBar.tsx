@@ -1,6 +1,6 @@
 import React from "react";
-import background from "../images/backgrounds/bg_1.png";
-import frame from "../images/backgrounds/frame.png";
+import background from "../image/backgrounds/bg_1.png";
+import frame from "../image/backgrounds/frame.png";
 import "./WelcomePageProgressBar.css";
 
 interface Props {

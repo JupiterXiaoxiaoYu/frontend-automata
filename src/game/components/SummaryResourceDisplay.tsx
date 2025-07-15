@@ -1,5 +1,5 @@
 import React from "react";
-import background from "../images/backgrounds/summary_resource_frame.png";
+import background from "../image/backgrounds/summary_resource_frame.png";
 import { getNumberAbbr } from "../../data/models";
 import "./SummaryResourceDisplay.css";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../images/Guides/resource.png";
+import image from "../../image/Guides/resource.png";
 import "./GuideResource.css";
 
 const GuideResource = () => {

@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import listButtonImage from "../../images/Buttons/List/list.png";
-import listButtonHoverImage from "../../images/Buttons/List/list_hv.png";
-import listButtonClickImage from "../../images/Buttons/List/list_click.png";
+import listButtonImage from "../../image/Buttons/List/list.png";
+import listButtonHoverImage from "../../image/Buttons/List/list_hv.png";
+import listButtonClickImage from "../../image/Buttons/List/list_click.png";
 import "./ListButton.css";
 
 interface Props {

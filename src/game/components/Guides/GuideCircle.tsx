@@ -1,6 +1,6 @@
 import React from "react";
-import image from "../../images/Guides/circle.png";
-import arrowImage from "../../images/Guides/circle_arrow.png";
+import image from "../../image/Guides/circle.png";
+import arrowImage from "../../image/Guides/circle_arrow.png";
 import "./GuideCircle.css";
 
 const GuideCircle = () => {

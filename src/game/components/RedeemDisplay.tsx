@@ -1,6 +1,6 @@
 import React from "react";
 import "./RedeemDisplay.css";
-import background from "../images/backgrounds/redeem_frame.png";
+import background from "../image/backgrounds/redeem_frame.png";
 import RedeemButton from "./Buttons/RedeemDisplayButton";
 
 interface Props {

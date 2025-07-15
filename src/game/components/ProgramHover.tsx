@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProgramHover.css";
-import background from "../images/backgrounds/hover_frame.png";
+import background from "../image/backgrounds/hover_frame.png";
 import Grid from "./Grid";
 import {
   getResourceIconPath,

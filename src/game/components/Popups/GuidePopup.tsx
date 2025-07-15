@@ -1,5 +1,5 @@
 import React from "react";
-import background from "../../images/backgrounds/guide_frame.png";
+import background from "../../image/backgrounds/guide_frame.png";
 import EndGuideButton from "../Buttons/EndGuideButton";
 import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
 import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";

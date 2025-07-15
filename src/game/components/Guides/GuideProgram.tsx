@@ -1,6 +1,6 @@
 import React from "react";
-import image from "../../images/Guides/program.png";
-import arrowImage from "../../images/Guides/program_arrow.png";
+import image from "../../image/Guides/program.png";
+import arrowImage from "../../image/Guides/program_arrow.png";
 import "./GuideProgram.css";
 
 const GuideProgram = () => {

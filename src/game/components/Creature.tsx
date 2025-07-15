@@ -1,10 +1,10 @@
 import React from "react";
 import "./Creature.css";
-import creatureBackground from "../images/backgrounds/creature_frame.png";
-import creatureStopMask from "../images/backgrounds/creature_frame_stop_mask.png";
-import creatureProgressMask from "../images/backgrounds/creature_frame_progress_mask.png";
-import creatureSelectingFrame from "../images/backgrounds/robot_select.png";
-import creatureLock from "../images/backgrounds/robot_lock.png";
+import creatureBackground from "../image/backgrounds/creature_frame.png";
+import creatureStopMask from "../image/backgrounds/creature_frame_stop_mask.png";
+import creatureProgressMask from "../image/backgrounds/creature_frame_progress_mask.png";
+import creatureSelectingFrame from "../image/backgrounds/robot_select.png";
+import creatureLock from "../image/backgrounds/robot_lock.png";
 import {
   TutorialType,
   UIState,

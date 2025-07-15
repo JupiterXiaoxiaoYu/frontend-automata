@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import creatureConfirmButtonImage from "../../images/Buttons/CreatureConfirm/creature_confirm.png";
-import creatureConfirmButtonHoverImage from "../../images/Buttons/CreatureConfirm/creature_confirm_hv.png";
-import creatureConfirmButtonClickImage from "../../images/Buttons/CreatureConfirm/creature_confirm_click.png";
+import creatureConfirmButtonImage from "../../image/Buttons/CreatureConfirm/creature_confirm.png";
+import creatureConfirmButtonHoverImage from "../../image/Buttons/CreatureConfirm/creature_confirm_hv.png";
+import creatureConfirmButtonClickImage from "../../image/Buttons/CreatureConfirm/creature_confirm_click.png";
 import "./CreatureConfirmButton.css";
 
 interface Props {

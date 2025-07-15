@@ -1,8 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import upButtonImage from "../../images/Buttons/PrevPage/up.png";
-import upButtonHoverImage from "../../images/Buttons/PrevPage/up_hover.png";
-import upButtonClickImage from "../../images/Buttons/PrevPage/up_click.png";
+import upButtonImage from "../../image/Buttons/PrevPage/up.png";
+import upButtonHoverImage from "../../image/Buttons/PrevPage/up_hover.png";
+import upButtonClickImage from "../../image/Buttons/PrevPage/up_click.png";
 import "./PrevPageButton.css";
 
 interface Props {

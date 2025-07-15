@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import background from "../../images/backgrounds/withdraw_frame.png";
-import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
+import background from "../../image/backgrounds/withdraw_frame.png";
+import amountBackground from "../../image/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,

@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProgramFilterButton.css";
-import selectingBackground from "../images/backgrounds/tab_select.png";
-import background from "../images/backgrounds/tab.png";
+import selectingBackground from "../image/backgrounds/tab_select.png";
+import background from "../image/backgrounds/tab.png";
 
 interface Props {
   isSelected: boolean;

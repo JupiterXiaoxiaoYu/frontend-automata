@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../images/backgrounds/player_info_level_frame.png";
+import background from "../image/backgrounds/player_info_level_frame.png";
 import "./PlayerInfoLevelDisplay.css";
 import PlayerInfoHover from "./PlayerInfoHover";
 

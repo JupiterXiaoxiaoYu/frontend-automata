@@ -1,9 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import programButtonImage from "../../images/Buttons/Program/program_button.png";
-import programButtonHoverImage from "../../images/Buttons/Program/program_hover.png";
-import programButtonClickImage from "../../images/Buttons/Program/program_click.png";
-// import programButtonDisabledImage from "../../images/Buttons/Program/program_disabled.png";
+import programButtonImage from "../../image/Buttons/Program/program_button.png";
+import programButtonHoverImage from "../../image/Buttons/Program/program_hover.png";
+import programButtonClickImage from "../../image/Buttons/Program/program_click.png";
+// import programButtonDisabledImage from "../../image/Buttons/Program/program_disabled.png";
 import "./ProgramButton.css";
 
 interface Props {
