@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { ResourceType, getResourceIconPath } from "../../data/automata/models";
+import { ResourceType, getResourceIconPath } from "../../data/models";
 import "./GainResource.css";
 import ResourceChangeAmountAnimation from "./ResourceChangeAmountAnimation";
 

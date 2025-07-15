@@ -5,7 +5,7 @@ import {
   setUIState,
   UIState,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 
 import "./Rocket.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";

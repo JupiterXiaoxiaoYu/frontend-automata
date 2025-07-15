@@ -6,7 +6,7 @@ import {
   getResourceIconPath,
   ProgramModel,
   ResourceType,
-} from "../../../data/automata/models";
+} from "../../../data/models";
 import "./BidAmountPopup.css";
 
 interface Props {

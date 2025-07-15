@@ -8,13 +8,13 @@ import {
   toggleFilter,
   selectIsAllResourcesToggled,
   selectIsResourceTypeToggled,
-} from "../../data/automata/programs";
+} from "../../data/programs";
 
 import {
   resourceTypes,
   getResourceIconPath,
   ResourceType,
-} from "../../data/automata/models";
+} from "../../data/models";
 
 const ProgramFilterBar = () => {
   const dispatch = useAppDispatch();

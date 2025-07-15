@@ -1,5 +1,5 @@
 import React from "react";
-import { getNumberAbbr } from "../../../data/automata/models";
+import { getNumberAbbr } from "../../../data/models";
 import "./UpgradePopupResourceDisplay.css";
 
 interface Props {

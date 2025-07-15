@@ -12,14 +12,14 @@ import {
   setUIState,
   UIState,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import "./RedeemMenu.css";
 import {
   getResourceDisabledIconPath,
   getResourceIconPath,
   ResourceType,
   resourceTypes,
-} from "../../data/automata/models";
+} from "../../data/models";
 import RedeemDisplay from "./RedeemDisplay";
 import RedeemDisplayCollectInterest from "./RedeemDisplayCollectInterest";
 import { getRedeemTransactionCommandArray } from "../rpc";
@@ -29,7 +29,7 @@ import {
   sendTransaction,
 } from "zkwasm-minirollup-browser";
 
-import { selectResources } from "../../data/automata/resources";
+import { selectResources } from "../../data/resources";
 import { LoadingType, setLoadingType } from "../../data/errors";
 
 const RedeemMenu = () => {

@@ -19,7 +19,7 @@ import {
   setUIState,
   TutorialType,
   UIStateType,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 
 const CREATE_PLAYER = 1n;
 

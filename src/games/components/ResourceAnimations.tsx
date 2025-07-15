@@ -8,15 +8,15 @@ import {
   ProgramInfo,
   ResourceType,
   AttributeType,
-} from "../../data/automata/models";
-import { selectIsSelectingUIState } from "../../data/automata/properties";
+} from "../../data/models";
+import { selectIsSelectingUIState } from "../../data/properties";
 import {
   selectSelectedCreatureIndex,
   selectSelectedCreatureCurrentProgram,
   adjustResourceByProductivity,
   selectSelectedCreature,
   adjustProcessingTimeBySpeed,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import { useAppSelector } from "../../app/hooks";
 import "./ResourceAnimations.css";
 import GainTitaniumResource from "./GainTitaniumResource";
@@ -164,15 +164,21 @@ const ResourceAnimations = ({ localTimer }: Props) => {
   // 获取选中生物的Productivity、Efficiency和Speed属性值
   // Get the Productivity, Efficiency and Speed attribute values of the selected creature
   const selectedCreature = useAppSelector(selectSelectedCreature);
-  const productivityValue = selectedCreature.attributes.find(
-    (attr: { type: AttributeType, amount: number }) => attr.type === AttributeType.Productivity
-  )?.amount ?? 0;
-  const efficiencyValue = selectedCreature.attributes.find(
-    (attr: { type: AttributeType, amount: number }) => attr.type === AttributeType.Efficiency
-  )?.amount ?? 0;
-  const speedValue = selectedCreature.attributes.find(
-    (attr: { type: AttributeType, amount: number }) => attr.type === AttributeType.Speed
-  )?.amount ?? 0;
+  const productivityValue =
+    selectedCreature.attributes.find(
+      (attr: { type: AttributeType; amount: number }) =>
+        attr.type === AttributeType.Productivity
+    )?.amount ?? 0;
+  const efficiencyValue =
+    selectedCreature.attributes.find(
+      (attr: { type: AttributeType; amount: number }) =>
+        attr.type === AttributeType.Efficiency
+    )?.amount ?? 0;
+  const speedValue =
+    selectedCreature.attributes.find(
+      (attr: { type: AttributeType; amount: number }) =>
+        attr.type === AttributeType.Speed
+    )?.amount ?? 0;
 
   if (
     !isSelectingUIState &&
@@ -183,8 +189,13 @@ const ResourceAnimations = ({ localTimer }: Props) => {
 
     // 根据Productivity和Efficiency属性值调整资源数量
     // Adjust resource amounts based on Productivity and Efficiency attribute values
-    const adjustedResources = (lastProgramInfo.program?.resources ?? []).map(resource =>
-      adjustResourceByProductivity(resource, productivityValue, efficiencyValue)
+    const adjustedResources = (lastProgramInfo.program?.resources ?? []).map(
+      (resource) =>
+        adjustResourceByProductivity(
+          resource,
+          productivityValue,
+          efficiencyValue
+        )
     );
 
     triggerAnimation(adjustedResources);

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "../app/store";
 import {
   emptyMarketTabData,
   emptyProgramModel,
@@ -83,32 +83,32 @@ const marketSlice = createSlice({
 });
 
 export const selectTabState = (state: RootState): MarketTabState =>
-  state.automata.market.tabState;
+  state.market.tabState;
 export const selectMarketProgram =
   (tabState: MarketTabState, programIndex: number) => (state: RootState) => {
     if (tabState == MarketTabState.Inventory) {
-      return state.automata.market.inventoryTab.programs[programIndex];
+      return state.market.inventoryTab.programs[programIndex];
     } else if (tabState == MarketTabState.Selling) {
-      return state.automata.market.sellingTab.programs[programIndex];
+      return state.market.sellingTab.programs[programIndex];
     } else if (tabState == MarketTabState.Auction) {
-      return state.automata.market.auctionTab.programs[programIndex];
+      return state.market.auctionTab.programs[programIndex];
     } else if (tabState == MarketTabState.Lot) {
-      return state.automata.market.lotTab.programs[programIndex];
+      return state.market.lotTab.programs[programIndex];
     }
     return emptyProgramModel;
   };
 export const selectIsInventoryChanged = (state: RootState): boolean =>
-  state.automata.market.isInventoryChanged;
+  state.market.isInventoryChanged;
 export const selectInventoryTab = (state: RootState): MarketTabData =>
-  state.automata.market.inventoryTab;
+  state.market.inventoryTab;
 export const selectSellingTab = (state: RootState): MarketTabData =>
-  state.automata.market.sellingTab;
+  state.market.sellingTab;
 export const selectAuctionTab = (state: RootState): MarketTabData =>
-  state.automata.market.auctionTab;
+  state.market.auctionTab;
 export const selectLotTab = (state: RootState): MarketTabData =>
-  state.automata.market.lotTab;
+  state.market.lotTab;
 export const selectMarketForceUpdate = (state: RootState): boolean =>
-  state.automata.market.forceUpdate;
+  state.market.forceUpdate;
 
 export const {
   setTabState,

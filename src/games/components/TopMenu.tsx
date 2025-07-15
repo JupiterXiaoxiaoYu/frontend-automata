@@ -2,20 +2,16 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
-import {
-  setUIState,
-  UIState,
-  UIStateType,
-} from "../../data/automata/properties";
+import { setUIState, UIState, UIStateType } from "../../data/properties";
 import { selectIsLoading } from "../../data/errors";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
 import MarketButton from "./Buttons/MarketButton";
-import { startGuide } from "../../data/automata/guides";
-import { GuideType } from "../../data/automata/models";
+import { startGuide } from "../../data/guides";
+import { GuideType } from "../../data/models";
 import PlayerInfo from "./PlayerInfo";
-import { setSelectingMarket } from "../../data/automata/creatures";
-import { MarketTabState, setTabState } from "../../data/automata/market";
+import { setSelectingMarket } from "../../data/creatures";
+import { MarketTabState, setTabState } from "../../data/market";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();

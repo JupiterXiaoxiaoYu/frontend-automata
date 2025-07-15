@@ -5,15 +5,15 @@ import {
   setUIState,
   UIState,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import image_00 from "../images/Animations/NewProgram.png";
 import bg_spin from "../images/backgrounds/bg_spin.png";
 import "./NewProgramAnimation.css";
-import { selectAllPrograms } from "../../data/automata/programs";
+import { selectAllPrograms } from "../../data/programs";
 
 import Program from "./Program";
-import { selectIsSelectingCreatingCreature } from "../../data/automata/creatures";
+import { selectIsSelectingCreatingCreature } from "../../data/creatures";
 
 const NewProgramAnimation = () => {
   const dispatch = useAppDispatch();

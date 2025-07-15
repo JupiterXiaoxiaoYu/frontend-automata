@@ -3,7 +3,7 @@ import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
 import "./ListAmountPopup.css";
-import { ProgramModel } from "../../../data/automata/models";
+import { ProgramModel } from "../../../data/models";
 
 interface Props {
   program: ProgramModel;

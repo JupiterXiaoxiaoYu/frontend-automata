@@ -9,14 +9,11 @@ import {
   selectNonce,
   selectUIState,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./RebootPopup.css";
-import {
-  getResourceIconPath,
-  ResourceType,
-} from "../../../data/automata/models";
-import { selectResource } from "../../../data/automata/resources";
+import { getResourceIconPath, ResourceType } from "../../../data/models";
+import { selectResource } from "../../../data/resources";
 import { getInstallProgramTransactionCommandArray } from "../../rpc";
 import {
   useWalletContext,
@@ -27,7 +24,7 @@ import {
   clearRebootCreature,
   selectSelectedCreature,
   selectSelectedCreatureListIndex,
-} from "../../../data/automata/creatures";
+} from "../../../data/creatures";
 import { setLoadingType, LoadingType } from "../../../data/errors";
 
 const RebootPopup = () => {

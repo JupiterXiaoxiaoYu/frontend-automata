@@ -7,14 +7,11 @@ import {
   UIStateType,
   selectCurrentCost,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UnlockPopup.css";
-import {
-  getResourceIconPath,
-  ResourceType,
-} from "../../../data/automata/models";
-import { selectResource } from "../../../data/automata/resources";
+import { getResourceIconPath, ResourceType } from "../../../data/models";
+import { selectResource } from "../../../data/resources";
 
 const UnlockPopup = () => {
   const dispatch = useAppDispatch();

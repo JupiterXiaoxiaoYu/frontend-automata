@@ -2,14 +2,14 @@ import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./Resources.css";
 
-import { selectResource } from "../../data/automata/resources";
+import { selectResource } from "../../data/resources";
 import {
   getResourceDescriptionText,
   getResourceIconPath,
   getResourceNameText,
   ResourceType,
   resourceTypes,
-} from "../../data/automata/models";
+} from "../../data/models";
 import ResourceDisplay from "./ResourceDisplay";
 
 const Resources = () => {

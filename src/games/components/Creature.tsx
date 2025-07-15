@@ -13,20 +13,20 @@ import {
   selectTutorialType,
   setTutorialType,
   setUIState,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import {
   setSelectedCreatureIndex,
   selectSelectedCreatureListIndex,
   selectCreaturesCount,
   startCreatingCreature,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import { selectIsLoading } from "../../data/errors";
 import {
   AttributeType,
   CreatureModel,
   getAttributeIconPath,
   getCreatureIconPath,
-} from "../../data/automata/models";
+} from "../../data/models";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreatureTutorial from "./CreatureTutorial";
 import UpgradeButton from "./Buttons/UpgradeButton";

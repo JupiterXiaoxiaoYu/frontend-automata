@@ -7,7 +7,7 @@ import {
   selectCurrentCost,
   selectNonce,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./UpgradePopup.css";
 import UpgradeConfirmButton from "../Buttons/UpgradeConfirmButton";
@@ -21,7 +21,7 @@ import {
   getResourceIconPath,
   ResourceType,
   resourceTypes,
-} from "../../../data/automata/models";
+} from "../../../data/models";
 import UpgradePopupResourceDisplay from "./UpgradePopupResourceDisplay";
 import Grid from "../Grid";
 import {
@@ -29,10 +29,10 @@ import {
   selectSelectedCreature,
   selectSelectedCreatureDiffResources,
   selectSelectedCreatureListIndex,
-} from "../../../data/automata/creatures";
+} from "../../../data/creatures";
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
-import { selectResource } from "../../../data/automata/resources";
+import { selectResource } from "../../../data/resources";
 import { setLoadingType, LoadingType } from "../../../data/errors";
 
 enum UpgradeState {

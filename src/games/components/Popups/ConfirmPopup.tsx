@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import background from "../../images/backgrounds/withdraw_frame.png";
 import OkButton from "../Buttons/OkButton";
-import {
-  UIState,
-  UIStateType,
-  setUIState,
-} from "../../../data/automata/properties";
+import { UIState, UIStateType, setUIState } from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./ConfirmPopup.css";
-import { ConfirmPopupInfo } from "../../../data/automata/models";
+import { ConfirmPopupInfo } from "../../../data/models";
 
 interface Props {
   confirmPopupInfo: ConfirmPopupInfo;

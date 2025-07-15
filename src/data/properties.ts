@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "../app/store";
 import {
   getConfig,
   sendTransaction,
   queryState,
   SERVER_TICK_TO_SECOND,
-} from "../../games/request";
+} from "../games/request";
 import { ConfirmPopupInfo, redeemEnergyCooldownBase } from "./models";
 
 export enum UIStateType {
@@ -157,43 +157,37 @@ export const propertiesSlice = createSlice({
 });
 
 export const selectIsSelectingUIState = (state: RootState) =>
-  state.automata.properties.uIState.type == UIStateType.Creating ||
-  state.automata.properties.uIState.type == UIStateType.Reboot;
-export const selectUIState = (state: RootState) =>
-  state.automata.properties.uIState;
+  state.properties.uIState.type == UIStateType.Creating ||
+  state.properties.uIState.type == UIStateType.Reboot;
+export const selectUIState = (state: RootState) => state.properties.uIState;
 export const selectTutorialType = (state: RootState) =>
-  state.automata.properties.tutorialType;
+  state.properties.tutorialType;
 export const selectGlobalTimer = (state: RootState) =>
-  state.automata.properties.globalTimer;
-export const selectNonce = (state: RootState) =>
-  BigInt(state.automata.properties.nonce);
-export const selectHasRocket = (state: RootState) =>
-  state.automata.properties.hasRocket;
+  state.properties.globalTimer;
+export const selectNonce = (state: RootState) => BigInt(state.properties.nonce);
+export const selectHasRocket = (state: RootState) => state.properties.hasRocket;
 export const selectCreatureUnlockCost = (state: RootState) =>
-  BigInt(state.automata.properties.nonce);
+  BigInt(state.properties.nonce);
 export const selectCurrentCost = (state: RootState) =>
-  state.automata.properties.currentCost;
+  state.properties.currentCost;
 export const selectRedeemCostBase = (state: RootState) =>
-  state.automata.properties.redeemCostBase;
+  state.properties.redeemCostBase;
 export const selectRedeemRewardBase = (state: RootState) =>
-  state.automata.properties.redeemRewardBase;
+  state.properties.redeemRewardBase;
 export const selectRedeemInfo = (state: RootState) =>
-  state.automata.properties.redeemInfo;
-export const selectLevel = (state: RootState) =>
-  state.automata.properties.level;
-export const selectExp = (state: RootState) => state.automata.properties.exp;
-export const selectEnergy = (state: RootState) =>
-  state.automata.properties.energy;
+  state.properties.redeemInfo;
+export const selectLevel = (state: RootState) => state.properties.level;
+export const selectExp = (state: RootState) => state.properties.exp;
+export const selectEnergy = (state: RootState) => state.properties.energy;
 export const selectRedeemEnergy = (state: RootState) =>
-  state.automata.properties.redeemEnergy;
+  state.properties.redeemEnergy;
 export const selectRedeemEnergyCooldown = (state: RootState) =>
   redeemEnergyCooldownBase;
 export const selectLastRedeemEnergy = (state: RootState) =>
-  state.automata.properties.lastRedeemEnergy;
-export const selectInterest = (state: RootState) =>
-  state.automata.properties.interest;
+  state.properties.lastRedeemEnergy;
+export const selectInterest = (state: RootState) => state.properties.interest;
 export const selectBountyPool = (state: RootState) =>
-  state.automata.properties.bountyPool;
+  state.properties.bountyPool;
 
 export const { setUIState, setTutorialType, setHasRocket } =
   propertiesSlice.actions;

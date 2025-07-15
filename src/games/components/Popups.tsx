@@ -3,7 +3,7 @@ import { useAppSelector } from "../../app/hooks";
 import GuidePopup from "./Popups/GuidePopup";
 import WithdrawPopup from "./Popups/WithdrawPopup";
 import UpgradePopup from "./Popups/UpgradePopup";
-import { UIStateType, selectUIState } from "../../data/automata/properties";
+import { UIStateType, selectUIState } from "../../data/properties";
 import "./Popups.css";
 import UnlockPopup from "./Popups/UnlockPopup";
 import NewProgramPopup from "./Popups/NewProgramPopup";

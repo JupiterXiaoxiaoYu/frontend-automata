@@ -7,17 +7,17 @@ import {
   selectNonce,
   selectUIState,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import {
   getResourceIconPath,
   ResourceType,
   getNumberAbbr,
-} from "../../../data/automata/models";
+} from "../../../data/models";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./WithdrawPopup.css";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
 import { sendTransaction, useWalletContext } from "zkwasm-minirollup-browser";
-import { selectResource } from "../../../data/automata/resources";
+import { selectResource } from "../../../data/resources";
 import {
   LoadingType,
   selectIsLoading,

@@ -11,7 +11,7 @@ import Rocket from "./Rocket";
 import { getInstallProgramTransactionCommandArray } from "../rpc";
 import { useWalletContext } from "zkwasm-minirollup-browser";
 import { sendTransaction, queryState } from "../request";
-import { getCreatureIconPath } from "../../data/automata/models";
+import { getCreatureIconPath } from "../../data/models";
 import {
   UIState,
   selectIsSelectingUIState,
@@ -19,7 +19,7 @@ import {
   selectNonce,
   setUIState,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import {
   LoadingType,
   selectIsLoading,
@@ -37,7 +37,7 @@ import {
   selectSelectedCreatureSelectingProgram,
   setNotSelectingCreature,
   selectIsSelectingMarket,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
 import MainMenuProgressBar from "./MainMenuProgressBar";

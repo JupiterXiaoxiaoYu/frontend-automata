@@ -6,8 +6,8 @@ import {
   getResourceIconPath,
   ResourceType,
   ProgramModel,
-} from "../../data/automata/models";
-import { formatTime } from "../../data/automata/creatures";
+} from "../../data/models";
+import { formatTime } from "../../data/creatures";
 import background from "../images/backgrounds/market_card_frame.png";
 import SellButton from "./Buttons/SellButton";
 import BidButton from "./Buttons/BidButton";

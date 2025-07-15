@@ -3,18 +3,14 @@ import background from "../../images/backgrounds/guide_frame.png";
 import EndGuideButton from "../Buttons/EndGuideButton";
 import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
 import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";
-import {
-  UIState,
-  UIStateType,
-  setUIState,
-} from "../../../data/automata/properties";
+import { UIState, UIStateType, setUIState } from "../../../data/properties";
 import {
   nextPage,
   prevPage,
   selectCurrentPage,
   selectTotalPage,
   selectGuideOnCurrentPage,
-} from "../../../data/automata/guides";
+} from "../../../data/guides";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./GuidePopup.css";
 

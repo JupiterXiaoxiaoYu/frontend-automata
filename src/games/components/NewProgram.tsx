@@ -2,11 +2,11 @@ import React from "react";
 import "./NewProgram.css";
 import background from "../images/backgrounds/new_program_normal.png";
 import EmptyButton from "./Buttons/EmptyButton";
-import { getResourceIconPath, ResourceType } from "../../data/automata/models";
+import { getResourceIconPath, ResourceType } from "../../data/models";
 import { useAppSelector } from "../../app/hooks";
-import { selectCurrentCost, selectLevel } from "../../data/automata/properties";
-import { selectResource } from "../../data/automata/resources";
-import { selectProgramCount } from "../../data/automata/programs";
+import { selectCurrentCost, selectLevel } from "../../data/properties";
+import { selectResource } from "../../data/resources";
+import { selectProgramCount } from "../../data/programs";
 
 interface Props {
   onSelect: () => void;

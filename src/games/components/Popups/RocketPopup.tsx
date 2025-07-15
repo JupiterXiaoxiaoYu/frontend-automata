@@ -8,16 +8,16 @@ import {
   selectNonce,
   selectUIState,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./RocketPopup.css";
 import {
   getResourceIconPath,
   redeemEnergyTitaniumCost,
   ResourceType,
-} from "../../../data/automata/models";
-import { selectResource } from "../../../data/automata/resources";
-import { selectRedeemEnergy } from "../../../data/automata/properties";
+} from "../../../data/models";
+import { selectResource } from "../../../data/resources";
+import { selectRedeemEnergy } from "../../../data/properties";
 import {
   useWalletContext,
   queryState,

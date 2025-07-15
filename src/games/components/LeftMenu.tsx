@@ -13,7 +13,7 @@ import {
   selectCreaturesCurrentProgressOnCurrentPage,
   nextPage,
   prevPage,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 interface Props {

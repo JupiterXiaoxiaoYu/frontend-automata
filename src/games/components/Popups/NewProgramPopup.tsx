@@ -8,14 +8,11 @@ import {
   selectCurrentCost,
   selectNonce,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./NewProgramPopup.css";
-import {
-  getResourceIconPath,
-  ResourceType,
-} from "../../../data/automata/models";
-import { selectResource } from "../../../data/automata/resources";
+import { getResourceIconPath, ResourceType } from "../../../data/models";
+import { selectResource } from "../../../data/resources";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { setLoadingType, LoadingType } from "../../../data/errors";

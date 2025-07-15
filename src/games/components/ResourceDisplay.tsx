@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import background from "../images/backgrounds/bottom_bar.png";
-import { getNumberAbbr } from "../../data/automata/models";
+import { getNumberAbbr } from "../../data/models";
 import "./ResourceDisplay.css";
 import ResourceHover from "./ResourceHover";
 
@@ -24,7 +24,9 @@ const ResourceDisplay = ({
     <div className="resource-display-container">
       <img src={background} className="resource-display-background" />
       <img src={iconImagePath} className="resource-display-image" />
-      <p className="resource-display-text" title={amount.toLocaleString()}>{getNumberAbbr(amount)}</p>
+      <p className="resource-display-text" title={amount.toLocaleString()}>
+        {getNumberAbbr(amount)}
+      </p>
       <div
         className="resource-display-hover-range"
         onMouseEnter={handleMouseEnter}

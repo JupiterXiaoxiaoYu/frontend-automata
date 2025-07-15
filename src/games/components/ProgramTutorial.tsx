@@ -6,7 +6,7 @@ import {
   TutorialType,
   UIState,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import background from "../images/backgrounds/tutorial_frame.png";
 import "./ProgramTutorial.css";
 

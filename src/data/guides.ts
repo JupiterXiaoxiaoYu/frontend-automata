@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "../app/store";
 import { GuideType } from "./models";
-import { getGuidePages, guidePageMap } from "../../games/components/Guides/Guide";
+import { getGuidePages, guidePageMap } from "../games/components/Guides/Guide";
 
 interface GuidesState {
   guideType: GuideType;
@@ -26,21 +26,23 @@ export const guidesSlice = createSlice({
       state.currentPage = 0;
     },
     nextPage: (state, action) => {
-        state.currentPage = Math.min(state.pages.length - 1, state.currentPage + 1);
+      state.currentPage = Math.min(
+        state.pages.length - 1,
+        state.currentPage + 1
+      );
     },
     prevPage: (state, action) => {
-        state.currentPage = Math.max(0, state.currentPage - 1);
+      state.currentPage = Math.max(0, state.currentPage - 1);
     },
   },
 });
 
 export const selectGuideOnCurrentPage = (state: RootState) => {
-  const guidePage = state.automata.guides.pages[state.automata.guides.currentPage];
+  const guidePage = state.guides.pages[state.guides.currentPage];
   return guidePageMap[guidePage];
-}
-export const selectCurrentPage = (state: RootState) => state.automata.guides.currentPage;
-export const selectTotalPage = (state: RootState) => state.automata.guides.pages.length;
-
+};
+export const selectCurrentPage = (state: RootState) => state.guides.currentPage;
+export const selectTotalPage = (state: RootState) => state.guides.pages.length;
 
 export const { startGuide, nextPage, prevPage } = guidesSlice.actions;
 export default guidesSlice.reducer;

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { queryState } from "../../games/request";
+import { RootState } from "../app/store";
+import { queryState } from "../games/request";
 import {
   ResourceAmountPair,
   ResourceType,
@@ -29,10 +29,9 @@ export const resourcesSlice = createSlice({
   },
 });
 
-export const selectResources = (state: RootState) =>
-  state.automata.resources.resources;
+export const selectResources = (state: RootState) => state.resources.resources;
 export const selectResource = (type: ResourceType) => (state: RootState) =>
-  state.automata.resources.resources.find(
+  state.resources.resources.find(
     (resource: { type: ResourceType }) => resource.type == type
   )?.amount ?? 0;
 

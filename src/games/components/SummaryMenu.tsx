@@ -4,17 +4,13 @@ import background from "../images/backgrounds/guide_frame.png";
 import GuideButton from "./Buttons/GuideButton";
 import Grid from "./Grid";
 import SummaryResourceDisplay from "./SummaryResourceDisplay";
-import {
-  setUIState,
-  UIState,
-  UIStateType,
-} from "../../data/automata/properties";
+import { setUIState, UIState, UIStateType } from "../../data/properties";
 import "./SummaryMenu.css";
 import {
   getResourceIconPath,
   getResourceNameText,
   resourceTypes,
-} from "../../data/automata/models";
+} from "../../data/models";
 
 const SummaryMenu = () => {
   const dispatch = useAppDispatch();

@@ -8,7 +8,7 @@ import {
   selectNonce,
   selectUIState,
   setUIState,
-} from "../../../data/automata/properties";
+} from "../../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./CollectInterestPopup.css";
 import {

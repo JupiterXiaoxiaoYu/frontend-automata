@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { selectNonce } from "../../../data/automata/properties";
+import { selectNonce } from "../../../data/properties";
 import {
   LoadingType,
   selectIsLoading,
@@ -10,12 +10,12 @@ import "./MarketPopup.css";
 import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
-import { selectAllPrograms } from "../../../data/automata/programs";
+import { selectAllPrograms } from "../../../data/programs";
 import { getSellingAsync, getAuctionAsync, getLotAsync } from "../../express";
 import { useWalletContext } from "zkwasm-minirollup-browser";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
-import { selectInstalledProgramIds } from "../../../data/automata/creatures";
+import { selectInstalledProgramIds } from "../../../data/creatures";
 import MarketInventoryButton from "../Buttons/MarketInventoryButton";
 import MarketAuctionButton from "../Buttons/MarketAuctionButton";
 import MarketLotButton from "../Buttons/MarketLotButton";
@@ -39,17 +39,17 @@ import {
   setTabState,
   MarketTabState,
   setInventoryChanged,
-} from "../../../data/automata/market";
+} from "../../../data/market";
 import BidAmountPopup from "./BidAmountPopup";
 import ListAmountPopup from "./ListAmountPopup";
-import { ProgramModel, ResourceType } from "../../../data/automata/models";
+import { ProgramModel, ResourceType } from "../../../data/models";
 import { queryState, sendTransaction } from "zkwasm-minirollup-browser";
 import {
   getBidCardTransactionCommandArray,
   getListCardTransactionCommandArray,
   getSellCardTransactionCommandArray,
 } from "../../rpc";
-import { selectResource } from "../../../data/automata/resources";
+import { selectResource } from "../../../data/resources";
 
 const ELEMENT_PER_REQUEST = 30;
 

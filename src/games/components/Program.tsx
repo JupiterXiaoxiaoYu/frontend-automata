@@ -7,17 +7,17 @@ import {
   getResourceIconPath,
   getProgramIconPath,
   AttributeType,
-} from "../../data/automata/models";
+} from "../../data/models";
 import ProgramButton from "./Buttons/ProgramButton";
 
 import {
   formatTime,
   adjustResourceByProductivity,
   adjustProcessingTimeBySpeed,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import ProgramTutorial from "./ProgramTutorial";
 import { useAppSelector } from "../../app/hooks";
-import { selectSelectedCreature } from "../../data/automata/creatures";
+import { selectSelectedCreature } from "../../data/creatures";
 
 interface Props {
   index: number;

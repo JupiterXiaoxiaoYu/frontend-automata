@@ -4,12 +4,12 @@ import {
   ProgramModel,
   getProgramIconPath,
   getProgramSpriteSheetPath,
-} from "../../data/automata/models";
+} from "../../data/models";
 
-import { selectIsSelectingUIState } from "../../data/automata/properties";
+import { selectIsSelectingUIState } from "../../data/properties";
 import { selectIsLoading } from "../../data/errors";
 
-import { setSelectingProgramIndex } from "../../data/automata/creatures";
+import { setSelectingProgramIndex } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ProgramHover from "./ProgramHover";
 

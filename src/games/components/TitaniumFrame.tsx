@@ -2,12 +2,12 @@ import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./TitaniumFrame.css";
 import background from "../images/backgrounds/titan_frame.png";
-import { selectResource } from "../../data/automata/resources";
+import { selectResource } from "../../data/resources";
 import {
   getResourceIconPath,
   ResourceType,
   getNumberAbbr,
-} from "../../data/automata/models";
+} from "../../data/models";
 import DepositButton from "./Buttons/DepositButton";
 import WithdrawButton from "./Buttons/WithdrawButton";
 

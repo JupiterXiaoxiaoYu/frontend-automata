@@ -1,7 +1,7 @@
 import React from "react";
 import progressBarBackground from "../images/MainMenu/circle_bg.png";
 import "./MainMenuProgressBar.css";
-import { formatTime } from "../../data/automata/creatures";
+import { formatTime } from "../../data/creatures";
 
 interface Props {
   programName: string;

@@ -3,7 +3,7 @@ import GuideResource from "./GuideResource";
 import GuideProgram from "./GuideProgram";
 import GuideCircle from "./GuideCircle";
 import GuideFinal from "./GuideFinal";
-import { GuideType } from "../../../data/automata/models";
+import { GuideType } from "../../../data/models";
 
 const guideMission = "guideMission";
 const guideResource = "guideResource";

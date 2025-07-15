@@ -13,8 +13,8 @@ import {
   selectRedeemEnergyCooldown,
   selectUIState,
   setHasRocket,
-} from "../../data/automata/properties";
-import { selectGlobalTimer } from "../../data/automata/properties";
+} from "../../data/properties";
+import { selectGlobalTimer } from "../../data/properties";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ResourceAnimations from "./ResourceAnimations";
 import Popups from "./Popups";

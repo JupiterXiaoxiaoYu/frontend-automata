@@ -4,7 +4,7 @@ import infoBackground from "../images/backgrounds/info_frame.png";
 import Grid from "./Grid";
 import DiffResourceDisplay from "./DiffResourceDisplay";
 
-import { getResourceIconPath, resourceTypes } from "../../data/automata/models";
+import { getResourceIconPath, resourceTypes } from "../../data/models";
 
 interface Props {
   diffResources: {

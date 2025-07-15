@@ -13,7 +13,7 @@ import {
   setTutorialType,
   selectTutorialType,
   UIStateType,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import { selectIsLoading } from "../../data/errors";
 import {
   selectFilteredPrograms,
@@ -21,8 +21,8 @@ import {
   selectCurrentPage,
   prevPage,
   nextPage,
-} from "../../data/automata/programs";
-import { setProgramIndex } from "../../data/automata/creatures";
+} from "../../data/programs";
+import { setProgramIndex } from "../../data/creatures";
 import NewProgram from "./NewProgram";
 
 const RightMenu = () => {

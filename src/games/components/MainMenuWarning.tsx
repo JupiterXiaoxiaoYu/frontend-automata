@@ -1,15 +1,11 @@
 import React from "react";
 import "./MainMenuWarning.css";
-import {
-  UIState,
-  UIStateType,
-  selectUIState,
-} from "../../data/automata/properties";
+import { UIState, UIStateType, selectUIState } from "../../data/properties";
 import {
   selectIsNotSelectingCreature,
   selectSelectedCreatureListIndex,
   selectSelectedCreaturePrograms,
-} from "../../data/automata/creatures";
+} from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectIsLoading } from "../../data/errors";
 

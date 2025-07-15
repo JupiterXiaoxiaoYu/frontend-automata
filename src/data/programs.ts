@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { queryState } from "../../games/request";
+import { RootState } from "../app/store";
+import { queryState } from "../games/request";
 import {
   ProgramModel,
   FilterModel,
@@ -58,16 +58,15 @@ export const selectProgramsOnCurrentPage =
   (programs: ProgramModel[]) =>
   (amountPerPage: number) =>
   (state: RootState) => {
-    const startIndex = state.automata.programs.currentPage * amountPerPage - 1;
+    const startIndex = state.programs.currentPage * amountPerPage - 1;
     const endIndex = startIndex + amountPerPage;
     return programs.slice(Math.max(startIndex, 0), endIndex);
   };
 
-export const selectAllPrograms = (state: RootState) =>
-  state.automata.programs.programs;
+export const selectAllPrograms = (state: RootState) => state.programs.programs;
 
 export const selectFilteredPrograms = (state: RootState) =>
-  state.automata.programs.programs.filter(
+  state.programs.programs.filter(
     (program: { resources: { type: ResourceType }[] }) =>
       selectIsAllResourcesToggled(state) ||
       resourceTypes.every(
@@ -82,29 +81,25 @@ export const selectFilteredPrograms = (state: RootState) =>
 export const selectProgramsByIndexes =
   (indexes: (number | null)[]) => (state: RootState) =>
     indexes.map((index) =>
-      index != null &&
-      0 <= index &&
-      index < state.automata.programs.programs.length
-        ? state.automata.programs.programs[index]
+      index != null && 0 <= index && index < state.programs.programs.length
+        ? state.programs.programs[index]
         : null
     );
 export const selectProgramByIndex =
   (index: number | null) => (state: RootState) =>
-    index != null &&
-    0 <= index &&
-    index < state.automata.programs.programs.length
-      ? state.automata.programs.programs[index]
+    index != null && 0 <= index && index < state.programs.programs.length
+      ? state.programs.programs[index]
       : null;
 export const selectIsAllResourcesToggled = (state: RootState) =>
-  Object.values(state.automata.programs.filter.dict).every((toggle) => !toggle);
+  Object.values(state.programs.filter.dict).every((toggle) => !toggle);
 export const selectIsResourceTypeToggled =
   (type: ResourceType) => (state: RootState) =>
-    state.automata.programs.filter.dict[type] ?? false;
+    state.programs.filter.dict[type] ?? false;
 
 export const selectCurrentPage = (state: RootState) =>
-  state.automata.programs.currentPage;
+  state.programs.currentPage;
 export const selectProgramCount = (state: RootState) =>
-  state.automata.programs.programs.length;
+  state.programs.programs.length;
 
 export const { resetFilter, toggleFilter, nextPage, prevPage } =
   programsSlice.actions;

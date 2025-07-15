@@ -4,7 +4,7 @@ import {
   decodeProgram,
   MarketTabData,
   ProgramModel,
-} from "../data/automata/models";
+} from "../data/models";
 import { fullUrl } from "./request";
 
 const instance = axios.create({

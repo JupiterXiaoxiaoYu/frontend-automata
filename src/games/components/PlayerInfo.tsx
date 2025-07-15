@@ -10,9 +10,9 @@ import {
   selectExp,
   selectLevel,
   selectRedeemEnergy,
-} from "../../data/automata/properties";
+} from "../../data/properties";
 import PlayerInfoDisplay from "./PlayerInfoDisplay";
-import { expToLevelUp } from "../../data/automata/models";
+import { expToLevelUp } from "../../data/models";
 import PlayerInfoLevelDisplay from "./PlayerInfoLevelDisplay";
 
 const PlayerInfo = () => {
@@ -39,7 +39,9 @@ const PlayerInfo = () => {
           icon={xp_icon}
           title={"xp"}
           amount={exp}
-          description={`${expToLevelUp + level * 10 - exp} Exp Before Leveling Up`}
+          description={`${
+            expToLevelUp + level * 10 - exp
+          } Exp Before Leveling Up`}
         />
       </div>
       <div className="player-info-energy-container">
