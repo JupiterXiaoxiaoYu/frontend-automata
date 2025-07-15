@@ -4,6 +4,7 @@ import amountBackground from "../../images/backgrounds/withdraw_amount_backgroun
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,
+  UIStateType,
   selectCurrentCost,
   selectNonce,
   setUIState,
@@ -17,6 +18,7 @@ import {
 import { selectResource } from "../../../data/automata/resources";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
+import { setLoadingType, LoadingType } from "../../../data/errors";
 
 const NewProgramPopup = () => {
   const dispatch = useAppDispatch();
@@ -30,12 +32,12 @@ const NewProgramPopup = () => {
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
   function newProgram() {
     try {
-      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getNewProgramTransactionCommandArray(nonce),
@@ -43,7 +45,12 @@ const NewProgramPopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(setUIState({ uIState: UIState.PlayNewProgramAnimation }));
+          dispatch(
+            setUIState({
+              uIState: { type: UIStateType.PlayNewProgramAnimation },
+            })
+          );
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     } catch (e) {

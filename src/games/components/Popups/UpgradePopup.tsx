@@ -3,6 +3,7 @@ import background from "../../images/backgrounds/upgrade_frame.png";
 // import amountBackground from "../../images/backgrounds/upgrade_amount_background.png";
 import {
   UIState,
+  UIStateType,
   selectCurrentCost,
   selectNonce,
   setUIState,
@@ -32,6 +33,7 @@ import {
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/automata/resources";
+import { setLoadingType, LoadingType } from "../../../data/errors";
 
 enum UpgradeState {
   None,
@@ -81,7 +83,7 @@ const UpgradePopup = () => {
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Idle }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
   function upgradeBot() {
@@ -94,7 +96,7 @@ const UpgradePopup = () => {
       attrIndex = 3n;
     }
     try {
-      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getUpgradeBotTransactionCommandArray(
@@ -106,7 +108,10 @@ const UpgradePopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(setUIState({ uIState: UIState.PlayUpgradeAnimation }));
+          dispatch(
+            setUIState({ uIState: { type: UIStateType.PlayUpgradeAnimation } })
+          );
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     } catch (e) {

@@ -4,6 +4,7 @@ import amountBackground from "../../images/backgrounds/withdraw_amount_backgroun
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,
+  UIStateType,
   selectCurrentCost,
   setUIState,
 } from "../../../data/automata/properties";
@@ -21,11 +22,13 @@ const UnlockPopup = () => {
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const onClickConfirm = () => {
-    dispatch(setUIState({ uIState: UIState.PlayUnlockAnimation }));
+    dispatch(
+      setUIState({ uIState: { type: UIStateType.PlayUnlockAnimation } })
+    );
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Creating }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
   };
 
   return (

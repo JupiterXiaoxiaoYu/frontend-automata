@@ -6,43 +6,48 @@ import {
   queryState,
   SERVER_TICK_TO_SECOND,
 } from "../../games/request";
-import {
-  ConfirmPopupInfo,
-  ResourceAmountPair,
-  emptyConfirmPopupInfo,
-  redeemEnergyCooldownBase,
-} from "./models";
+import { ConfirmPopupInfo, redeemEnergyCooldownBase } from "./models";
 
-export enum UIState {
-  Init,
-  QueryConfig,
-  QueryState,
-  CreatePlayer,
+export enum UIStateType {
   Idle,
-  Loading,
-  Guide,
+  WelcomePage,
+  GuidePopup,
   Creating,
   Reboot,
   WithdrawPopup,
-  WithdrawPopupLoading,
   DepositPopup,
-  DepositPopupLoading,
   UpgradePopup,
   PlayUpgradeAnimation,
   UnlockPopup,
   RebootPopup,
-  RebootPopupLoading,
   PlayUnlockAnimation,
   NewProgramPopup,
   PlayNewProgramAnimation,
   ConfirmPopup,
   CollectInterestPopup,
-  CollectInterestPopupLoading,
   RocketPopup,
-  RocketPopupLoading,
   BidAmountPopup,
-  BidAmountPopupLoading,
 }
+
+export type UIState =
+  | { type: UIStateType.Idle }
+  | { type: UIStateType.WelcomePage }
+  | { type: UIStateType.GuidePopup }
+  | { type: UIStateType.Creating }
+  | { type: UIStateType.Reboot }
+  | { type: UIStateType.WithdrawPopup }
+  | { type: UIStateType.DepositPopup }
+  | { type: UIStateType.UpgradePopup }
+  | { type: UIStateType.PlayUpgradeAnimation }
+  | { type: UIStateType.UnlockPopup }
+  | { type: UIStateType.RebootPopup }
+  | { type: UIStateType.PlayUnlockAnimation }
+  | { type: UIStateType.NewProgramPopup }
+  | { type: UIStateType.PlayNewProgramAnimation }
+  | { type: UIStateType.ConfirmPopup; confirmPopupInfo: ConfirmPopupInfo }
+  | { type: UIStateType.CollectInterestPopup }
+  | { type: UIStateType.RocketPopup }
+  | { type: UIStateType.BidAmountPopup };
 
 export enum TutorialType {
   None,
@@ -55,14 +60,11 @@ interface PropertiesState {
   tutorialType: TutorialType;
   globalTimer: number;
   nonce: string;
-  showGuide: boolean;
   hasRocket: boolean;
-  selectedCreatureDiffResources: ResourceAmountPair[];
   currentCost: number;
   redeemCostBase: number;
   redeemRewardBase: number;
   redeemInfo: number[];
-  confirmPopupInfo: ConfirmPopupInfo;
   level: number;
   exp: number;
   energy: number;
@@ -73,18 +75,15 @@ interface PropertiesState {
 }
 
 const initialState: PropertiesState = {
-  uIState: UIState.Init,
   tutorialType: TutorialType.None,
+  uIState: { type: UIStateType.WelcomePage },
   globalTimer: 0,
   nonce: "0",
-  showGuide: false,
   hasRocket: false,
-  selectedCreatureDiffResources: [],
   currentCost: 0,
   redeemCostBase: 0,
   redeemRewardBase: 0,
   redeemInfo: [],
-  confirmPopupInfo: emptyConfirmPopupInfo,
   level: 1,
   exp: 0,
   energy: 0,
@@ -107,15 +106,11 @@ export const propertiesSlice = createSlice({
     setHasRocket: (state, action) => {
       state.hasRocket = action.payload.hasRocket;
     },
-    setConfirmPopupInfo: (state, action) => {
-      state.confirmPopupInfo = action.payload.confirmPopupInfo;
-    },
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(getConfig.fulfilled, (state, action) => {
-        state.uIState = UIState.QueryState;
         state.redeemCostBase = action.payload.bounty_cost_base;
         state.redeemRewardBase = action.payload.bounty_reward_base;
         console.log("query config fulfilled");
@@ -124,24 +119,12 @@ export const propertiesSlice = createSlice({
         console.log(`query config rejected: ${action.payload}`);
       })
       .addCase(sendTransaction.fulfilled, (state, action) => {
-        if (state.uIState == UIState.CreatePlayer) {
-          state.uIState = UIState.QueryState;
-        }
         console.log("send transaction fulfilled");
       })
       .addCase(sendTransaction.rejected, (state, action) => {
         console.log(`send transaction rejected: ${action.payload}`);
       })
       .addCase(queryState.fulfilled, (state, action) => {
-        if (state.uIState == UIState.QueryState) {
-          if (state.showGuide) {
-            state.uIState = UIState.Guide;
-            state.tutorialType = TutorialType.Creature;
-          } else {
-            state.uIState = UIState.Idle;
-          }
-        }
-
         if (action.payload.player) {
           state.globalTimer =
             action.payload.state.counter * SERVER_TICK_TO_SECOND;
@@ -168,20 +151,14 @@ export const propertiesSlice = createSlice({
         }
       })
       .addCase(queryState.rejected, (state, action) => {
-        if (state.uIState == UIState.QueryState) {
-          state.uIState = UIState.CreatePlayer;
-          state.showGuide = true;
-        }
         console.log(`query state rejected: ${action.payload}`);
       });
   },
 });
 
-export const selectIsLoading = (state: RootState) =>
-  state.automata.properties.uIState == UIState.Loading;
 export const selectIsSelectingUIState = (state: RootState) =>
-  state.automata.properties.uIState == UIState.Creating ||
-  state.automata.properties.uIState == UIState.Reboot;
+  state.automata.properties.uIState.type == UIStateType.Creating ||
+  state.automata.properties.uIState.type == UIStateType.Reboot;
 export const selectUIState = (state: RootState) =>
   state.automata.properties.uIState;
 export const selectTutorialType = (state: RootState) =>
@@ -217,13 +194,7 @@ export const selectInterest = (state: RootState) =>
   state.automata.properties.interest;
 export const selectBountyPool = (state: RootState) =>
   state.automata.properties.bountyPool;
-export const selectConfirmPopupInfo = (state: RootState) =>
-  state.automata.properties.confirmPopupInfo;
 
-export const {
-  setUIState,
-  setTutorialType,
-  setHasRocket,
-  setConfirmPopupInfo,
-} = propertiesSlice.actions;
+export const { setUIState, setTutorialType, setHasRocket } =
+  propertiesSlice.actions;
 export default propertiesSlice.reducer;

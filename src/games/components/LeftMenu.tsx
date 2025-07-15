@@ -5,7 +5,7 @@ import "./LeftMenu.css";
 import PageSelector from "./PageSelector";
 import Grid from "./Grid";
 import Creature from "./Creature";
-import { selectIsLoading } from "../../data/automata/properties";
+import { selectIsLoading } from "../../data/errors";
 import {
   selectCreatures,
   selectCurrentPage,

@@ -4,6 +4,7 @@ import {
   setHasRocket,
   setUIState,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
 
 import "./Rocket.css";
@@ -29,7 +30,7 @@ const Rocket = () => {
 
   const onClickRocket = () => {
     dispatch(setHasRocket({ hasRocket: false }));
-    dispatch(setUIState({ uIState: UIState.RocketPopup }));
+    dispatch(setUIState({ uIState: { type: UIStateType.RocketPopup } }));
   };
 
   const onAnimationEnd = () => {

@@ -3,6 +3,7 @@ import background from "../../images/backgrounds/withdraw_frame.png";
 import OkButton from "../Buttons/OkButton";
 import {
   UIState,
+  UIStateType,
   selectInterest,
   selectNonce,
   selectUIState,
@@ -16,6 +17,7 @@ import {
   queryState,
 } from "zkwasm-minirollup-browser";
 import { getRedeemTransactionCommandArray } from "../../rpc";
+import { setLoadingType, LoadingType } from "../../../data/errors";
 
 const COLLECT_INTEREST_BOUNTY_PARAM = 7;
 
@@ -27,8 +29,8 @@ const CollectInterestPopup = () => {
   const interest = useAppSelector(selectInterest);
 
   const onClickConfirm = () => {
-    if (uIState == UIState.CollectInterestPopup) {
-      dispatch(setUIState({ uIState: UIState.CollectInterestPopupLoading }));
+    if (uIState.type == UIStateType.CollectInterestPopup) {
+      dispatch(setLoadingType(LoadingType.None));
       dispatch(
         sendTransaction({
           cmd: getRedeemTransactionCommandArray(
@@ -44,7 +46,8 @@ const CollectInterestPopup = () => {
         ) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
-              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+              dispatch(setLoadingType(LoadingType.None));
             }
           });
         }
@@ -53,8 +56,8 @@ const CollectInterestPopup = () => {
   };
 
   const onClickCancel = () => {
-    if (uIState == UIState.CollectInterestPopup) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
+    if (uIState.type == UIStateType.CollectInterestPopup) {
+      dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
     }
   };
 

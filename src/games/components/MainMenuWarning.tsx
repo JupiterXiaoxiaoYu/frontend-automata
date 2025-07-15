@@ -1,12 +1,17 @@
 import React from "react";
 import "./MainMenuWarning.css";
-import { UIState, selectUIState } from "../../data/automata/properties";
+import {
+  UIState,
+  UIStateType,
+  selectUIState,
+} from "../../data/automata/properties";
 import {
   selectIsNotSelectingCreature,
   selectSelectedCreatureListIndex,
   selectSelectedCreaturePrograms,
 } from "../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectIsLoading } from "../../data/errors";
 
 const MainMenuWarning = () => {
   const uIState = useAppSelector(selectUIState);
@@ -21,10 +26,11 @@ const MainMenuWarning = () => {
     (program) => program === null
   ).length;
   const notFillInAllSlots =
-    (uIState == UIState.Creating || uIState == UIState.Reboot) &&
+    (uIState.type == UIStateType.Creating ||
+      uIState.type == UIStateType.Reboot) &&
     emptySlotCount > 0;
 
-  const isLoading = uIState == UIState.Loading;
+  const isLoading = useAppSelector(selectIsLoading);
   return (
     <div className="main-menu-warning-container">
       <p className="main-menu-energy-text">

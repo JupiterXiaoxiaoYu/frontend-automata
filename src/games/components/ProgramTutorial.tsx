@@ -5,6 +5,7 @@ import {
   selectUIState,
   TutorialType,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
 import background from "../images/backgrounds/tutorial_frame.png";
 import "./ProgramTutorial.css";
@@ -13,7 +14,8 @@ const ProgramTutorial = () => {
   const tutorialType = useAppSelector(selectTutorialType);
   const uIState = useAppSelector(selectUIState);
   const showProgramTutorial =
-    tutorialType == TutorialType.Program && uIState == UIState.Creating;
+    tutorialType == TutorialType.Program &&
+    uIState.type == UIStateType.Creating;
 
   return (
     <>

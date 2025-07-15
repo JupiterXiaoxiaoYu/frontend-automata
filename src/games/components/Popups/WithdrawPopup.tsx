@@ -3,10 +3,9 @@ import background from "../../images/backgrounds/withdraw_frame.png";
 import amountBackground from "../../images/backgrounds/withdraw_amount_background.png";
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
-  UIState,
+  UIStateType,
   selectNonce,
   selectUIState,
-  setConfirmPopupInfo,
   setUIState,
 } from "../../../data/automata/properties";
 import {
@@ -19,6 +18,11 @@ import "./WithdrawPopup.css";
 import { getWithdrawTransactionCommandArray } from "../../rpc";
 import { sendTransaction, useWalletContext } from "zkwasm-minirollup-browser";
 import { selectResource } from "../../../data/automata/resources";
+import {
+  LoadingType,
+  selectIsLoading,
+  setLoadingType,
+} from "../../../data/errors";
 
 interface Props {
   isWithdraw: boolean;
@@ -26,16 +30,17 @@ interface Props {
 
 const WithdrawPopup = ({ isWithdraw }: Props) => {
   const dispatch = useAppDispatch();
-  const uiState = useAppSelector(selectUIState);
+  const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const { l1Account, l2Account, deposit } = useWalletContext();
   const [amountString, setAmountString] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const isLoading = useAppSelector(selectIsLoading);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const withdraw = (amount: number) => {
     try {
-      dispatch(setUIState({ uIState: UIState.WithdrawPopupLoading }));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getWithdrawTransactionCommandArray(
@@ -48,15 +53,18 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(
-            setConfirmPopupInfo({
-              confirmPopupInfo: {
-                title: "Withdraw Success",
-                description: "Hash Number : (TBD)",
-                isError: false,
+            setUIState({
+              uIState: {
+                type: UIStateType.ConfirmPopup,
+                confirmPopupInfo: {
+                  title: "Withdraw Success",
+                  description: "Hash Number : (TBD)",
+                  isError: false,
+                },
               },
             })
           );
-          dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     } catch (e) {
@@ -65,35 +73,42 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   };
 
   const onDeposit = (amount: string) => {
-    dispatch(setUIState({ uIState: UIState.DepositPopupLoading }));
+    dispatch(setLoadingType(LoadingType.Default));
     deposit({
       tokenIndex: 0,
       amount: Number(BigInt(amount)),
     })
       .then((result) => {
         dispatch(
-          setConfirmPopupInfo({
-            confirmPopupInfo: {
-              title: "Deposit Success",
-              description: `Hash Number : (TBD)${result.hash}`,
-              isError: false,
+          setUIState({
+            uIState: {
+              type: UIStateType.ConfirmPopup,
+              confirmPopupInfo: {
+                title: "Deposit Success",
+                description: `Hash Number : (TBD)${result.hash}`,
+                isError: false,
+              },
             },
           })
         );
-        dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
+        dispatch(setLoadingType(LoadingType.None));
+
         setErrorMessage("");
       })
       .catch((error) => {
         dispatch(
-          setConfirmPopupInfo({
-            confirmPopupInfo: {
-              title: "Deposit Fail",
-              description: error.message,
-              isError: true,
+          setUIState({
+            uIState: {
+              type: UIStateType.ConfirmPopup,
+              confirmPopupInfo: {
+                title: "Deposit Fail",
+                description: error.message,
+                isError: true,
+              },
             },
           })
         );
-        dispatch(setUIState({ uIState: UIState.ConfirmPopup }));
+        dispatch(setLoadingType(LoadingType.None));
       });
   };
 
@@ -113,11 +128,8 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   };
 
   const onClickCancel = () => {
-    if (
-      uiState != UIState.WithdrawPopupLoading &&
-      uiState != UIState.DepositPopupLoading
-    ) {
-      dispatch(setUIState({ uIState: UIState.Idle }));
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
     }
   };
 

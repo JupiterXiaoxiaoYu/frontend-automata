@@ -14,12 +14,17 @@ import { sendTransaction, queryState } from "../request";
 import { getCreatureIconPath } from "../../data/automata/models";
 import {
   UIState,
-  selectIsLoading,
   selectIsSelectingUIState,
   selectUIState,
   selectNonce,
   setUIState,
+  UIStateType,
 } from "../../data/automata/properties";
+import {
+  LoadingType,
+  selectIsLoading,
+  setLoadingType,
+} from "../../data/errors";
 import {
   startRebootCreature,
   clearRebootCreature,
@@ -61,28 +66,29 @@ const MainMenu = ({ localTimer }: Props) => {
     selectSelectedCreatureDiffResources
   );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
-  const isCreatingUIState = uIState == UIState.Creating;
-  const showConfirmButton = uIState == UIState.Reboot;
+  const isCreatingUIState = uIState.type == UIStateType.Creating;
+  const showConfirmButton = uIState.type == UIStateType.Reboot;
   const enableConfirmButton = selectedCreaturePrograms.every(
     (program) => program !== null
   );
-  const showUnlockButton = uIState == UIState.Creating;
+  const showUnlockButton = uIState.type == UIStateType.Creating;
   const enableUnlockButton = selectedCreaturePrograms.every(
     (program) => program !== null
   );
   const isLoading = useAppSelector(selectIsLoading);
-  const showRebootButton = uIState == UIState.Idle;
+  const showRebootButton = uIState.type == UIStateType.Idle;
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
-  const showTaskMenu = isNotSelectingCreature && uIState != UIState.Guide;
+  const showTaskMenu =
+    isNotSelectingCreature && uIState.type != UIStateType.GuidePopup;
   const showMarketPopup = isSelectingMarket;
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
 
   function onClickUnlock() {
-    if (uIState == UIState.Creating) {
-      dispatch(setUIState({ uIState: UIState.UnlockPopup }));
+    if (uIState.type == UIStateType.Creating) {
+      dispatch(setUIState({ uIState: { type: UIStateType.UnlockPopup } }));
     }
   }
 
@@ -106,7 +112,7 @@ const MainMenu = ({ localTimer }: Props) => {
     if (!isLoading) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
-      dispatch(setUIState({ uIState: UIState.Loading }));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getInstallProgramTransactionCommandArray(
@@ -121,15 +127,18 @@ const MainMenu = ({ localTimer }: Props) => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
-              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+              dispatch(setLoadingType(LoadingType.None));
               dispatch(clearRebootCreature({}));
             } else {
-              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+              dispatch(setLoadingType(LoadingType.None));
               dispatch(clearRebootCreature({}));
             }
           });
         } else if (sendTransaction.rejected.match(action)) {
-          dispatch(setUIState({ uIState: UIState.Idle }));
+          dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }
@@ -137,14 +146,14 @@ const MainMenu = ({ localTimer }: Props) => {
 
   function onClickReboot() {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.Reboot }));
+      dispatch(setUIState({ uIState: { type: UIStateType.Reboot } }));
       dispatch(startRebootCreature({}));
     }
   }
 
   function onClickConfirmReboot() {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.RebootPopup }));
+      dispatch(setUIState({ uIState: { type: UIStateType.RebootPopup } }));
     }
   }
 
@@ -161,9 +170,9 @@ const MainMenu = ({ localTimer }: Props) => {
   );
 
   useEffect(() => {
-    if (uIState == UIState.PlayUnlockAnimation) {
+    if (uIState.type == UIStateType.PlayUnlockAnimation) {
       playUnlockAnimation(() => sendUpdateProgram());
-    } else if (uIState == UIState.PlayUpgradeAnimation) {
+    } else if (uIState.type == UIStateType.PlayUpgradeAnimation) {
       playUpgradeAnimation(() => sendUpdateProgram());
     }
   }, [uIState]);
@@ -215,9 +224,9 @@ const MainMenu = ({ localTimer }: Props) => {
                   showProgramAnimation={
                     !selectedCreature.isStarting &&
                     !isSelectingUIState &&
-                    uIState != UIState.Loading &&
-                    uIState != UIState.UnlockPopup &&
-                    uIState != UIState.PlayUnlockAnimation &&
+                    !isLoading &&
+                    uIState.type != UIStateType.UnlockPopup &&
+                    uIState.type != UIStateType.PlayUnlockAnimation &&
                     currentProgramInfo.index == index &&
                     !selectedCreature.isProgramStop
                   }

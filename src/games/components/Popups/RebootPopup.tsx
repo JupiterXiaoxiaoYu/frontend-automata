@@ -4,6 +4,7 @@ import amountBackground from "../../images/backgrounds/withdraw_amount_backgroun
 import ConfirmButton from "../Buttons/ConfirmButton";
 import {
   UIState,
+  UIStateType,
   selectCurrentCost,
   selectNonce,
   selectUIState,
@@ -27,6 +28,7 @@ import {
   selectSelectedCreature,
   selectSelectedCreatureListIndex,
 } from "../../../data/automata/creatures";
+import { setLoadingType, LoadingType } from "../../../data/errors";
 
 const RebootPopup = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +43,10 @@ const RebootPopup = () => {
   );
 
   const onClickConfirm = () => {
-    if (uIState == UIState.RebootPopup) {
+    if (uIState.type == UIStateType.RebootPopup) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
-      dispatch(setUIState({ uIState: UIState.RebootPopupLoading }));
+      dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
           cmd: getInstallProgramTransactionCommandArray(
@@ -59,22 +61,26 @@ const RebootPopup = () => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
-              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+              dispatch(setLoadingType(LoadingType.None));
+
               dispatch(clearRebootCreature({}));
             } else {
-              dispatch(setUIState({ uIState: UIState.Idle }));
+              dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
               dispatch(clearRebootCreature({}));
+              dispatch(setLoadingType(LoadingType.None));
             }
           });
         } else if (sendTransaction.rejected.match(action)) {
-          dispatch(setUIState({ uIState: UIState.Idle }));
+          dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }
   };
 
   const onClickCancel = () => {
-    dispatch(setUIState({ uIState: UIState.Reboot }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Reboot } }));
   };
 
   return (

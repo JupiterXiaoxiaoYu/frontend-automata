@@ -6,10 +6,9 @@ import {
   getProgramSpriteSheetPath,
 } from "../../data/automata/models";
 
-import {
-  selectIsSelectingUIState,
-  selectIsLoading,
-} from "../../data/automata/properties";
+import { selectIsSelectingUIState } from "../../data/automata/properties";
+import { selectIsLoading } from "../../data/errors";
+
 import { setSelectingProgramIndex } from "../../data/automata/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ProgramHover from "./ProgramHover";

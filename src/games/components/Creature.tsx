@@ -8,6 +8,7 @@ import creatureLock from "../images/backgrounds/robot_lock.png";
 import {
   TutorialType,
   UIState,
+  UIStateType,
   selectLevel,
   selectTutorialType,
   setTutorialType,
@@ -19,7 +20,7 @@ import {
   selectCreaturesCount,
   startCreatingCreature,
 } from "../../data/automata/creatures";
-import { selectIsLoading } from "../../data/automata/properties";
+import { selectIsLoading } from "../../data/errors";
 import {
   AttributeType,
   CreatureModel,
@@ -61,13 +62,13 @@ const Creature = ({ index, creature, progress }: Props) => {
         dispatch(
           startCreatingCreature({ creatureType: creature.creatureType })
         );
-        dispatch(setUIState({ uIState: UIState.Creating }));
+        dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
         if (tutorialType == TutorialType.Creature) {
           dispatch(setTutorialType({ tutorialType: TutorialType.Program }));
         }
       } else if (index < creaturesCount) {
         dispatch(setSelectedCreatureIndex({ index }));
-        dispatch(setUIState({ uIState: UIState.Idle }));
+        dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
       }
     }
   };
@@ -75,7 +76,7 @@ const Creature = ({ index, creature, progress }: Props) => {
   function onClickUpgrade() {
     onSelect();
     if (!isLoading) {
-      dispatch(setUIState({ uIState: UIState.UpgradePopup }));
+      dispatch(setUIState({ uIState: { type: UIStateType.UpgradePopup } }));
     }
   }
 

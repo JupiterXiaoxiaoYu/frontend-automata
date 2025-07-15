@@ -11,6 +11,7 @@ import {
   selectRedeemRewardBase,
   setUIState,
   UIState,
+  UIStateType,
 } from "../../data/automata/properties";
 import "./RedeemMenu.css";
 import {
@@ -29,6 +30,7 @@ import {
 } from "zkwasm-minirollup-browser";
 
 import { selectResources } from "../../data/automata/resources";
+import { LoadingType, setLoadingType } from "../../data/errors";
 
 const RedeemMenu = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +47,7 @@ const RedeemMenu = () => {
   );
 
   const onClickRedeem = (index: number) => {
-    dispatch(setUIState({ uIState: UIState.Loading }));
+    dispatch(setLoadingType(LoadingType.Default));
     dispatch(
       sendTransaction({
         cmd: getRedeemTransactionCommandArray(nonce, index),
@@ -55,7 +57,8 @@ const RedeemMenu = () => {
       if (sendTransaction.fulfilled.match(action)) {
         dispatch(queryState(l2Account.getPrivateKey())).then((action: any) => {
           if (queryState.fulfilled.match(action)) {
-            dispatch(setUIState({ uIState: UIState.Idle }));
+            dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+            dispatch(setLoadingType(LoadingType.None));
           }
         });
       }
@@ -71,7 +74,9 @@ const RedeemMenu = () => {
   };
 
   const onClickCollectInterest = () => {
-    dispatch(setUIState({ uIState: UIState.CollectInterestPopup }));
+    dispatch(
+      setUIState({ uIState: { type: UIStateType.CollectInterestPopup } })
+    );
   };
 
   return (
