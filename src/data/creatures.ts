@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
-import { queryState, SERVER_TICK_TO_SECOND } from "../games/request";
+import { queryState, SERVER_TICK_TO_SECOND } from "../game/request";
 import {
   CreatureModel,
   getAttributes,

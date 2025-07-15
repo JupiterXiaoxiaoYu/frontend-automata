@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
-import { queryState } from "../games/request";
+import { queryState } from "../game/request";
 import {
   ResourceAmountPair,
   ResourceType,

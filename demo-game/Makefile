@@ -1,4 +1,4 @@
-JSFOLDER:=../src/games/demogame/js
+JSFOLDER:=../src/game/demogame/js
 build:
 	wasm-pack build --release --out-name gameplay --out-dir pkg
 	cp pkg/gameplay.d.ts $(JSFOLDER)/gameplay.d.ts

@@ -5,7 +5,7 @@ import {
   sendTransaction,
   queryState,
   SERVER_TICK_TO_SECOND,
-} from "../games/request";
+} from "../game/request";
 import { ConfirmPopupInfo, redeemEnergyCooldownBase } from "./models";
 
 export enum UIStateType {

@@ -1,5 +1,5 @@
 import "./App.css";
-import { LoadingController } from "./games/script/scene/LoadingController";
+import { LoadingController } from "./game/script/scene/LoadingController";
 
 function App() {
   return <LoadingController />;

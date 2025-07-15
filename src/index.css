@@ -30,18 +30,18 @@ html {
 
 @font-face {
   font-family: "Averia Serif Libre";
-  src: url("./assets/fonts/AveriaSerifLibre-Regular.ttf");
+  src: url("./font/AveriaSerifLibre-Regular.ttf");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Averia Serif Libre";
-  src: url("./assets/fonts/AveriaSerifLibre-Bold.ttf");
+  src: url("./font/AveriaSerifLibre-Bold.ttf");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "mishmash";
-  src: url("./assets/fonts/mishmash.ttf");
+  src: url("./font/mishmash.ttf");
   font-weight: 700;
 }

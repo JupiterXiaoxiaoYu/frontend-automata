@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import { GuideType } from "./models";
-import { getGuidePages, guidePageMap } from "../games/components/Guides/Guide";
+import { getGuidePages, guidePageMap } from "../game/components/Guides/Guide";
 
 interface GuidesState {
   guideType: GuideType;
