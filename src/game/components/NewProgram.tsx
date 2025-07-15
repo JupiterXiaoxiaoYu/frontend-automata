@@ -1,12 +1,12 @@
 import React from "react";
 import "./NewProgram.css";
 import background from "../image/backgrounds/new_program_normal.png";
-import EmptyButton from "./Buttons/EmptyButton";
 import { getResourceIconPath, ResourceType } from "../../data/models";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentCost, selectLevel } from "../../data/properties";
 import { selectResource } from "../../data/resources";
 import { selectProgramCount } from "../../data/programs";
+import OrangeButton from "../script/button/OrangeButton";
 
 interface Props {
   onSelect: () => void;
@@ -24,11 +24,12 @@ const NewProgram = ({ onSelect }: Props) => {
       <p className="new-program-title-text">Buy New</p>
       <p className="new-program-title-2-text">Program</p>
       <div className="new-program-button">
-        <EmptyButton
+        <OrangeButton
+          text={""}
+          onClick={onSelect}
           isDisabled={
             titaniumCount < currentCost || programCount >= level * 4 + 4
           }
-          onClick={onSelect}
         />
       </div>
       <img

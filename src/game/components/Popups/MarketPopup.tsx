@@ -16,10 +16,6 @@ import { useWalletContext } from "zkwasm-minirollup-browser";
 import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 import { LeHexBN } from "zkwasm-minirollup-rpc";
 import { selectInstalledProgramIds } from "../../../data/creatures";
-import MarketInventoryButton from "../Buttons/MarketInventoryButton";
-import MarketAuctionButton from "../Buttons/MarketAuctionButton";
-import MarketLotButton from "../Buttons/MarketLotButton";
-import MarketSellingButton from "../Buttons/MarketSellingButton";
 import {
   addAuctionTab,
   addLotTab,
@@ -50,6 +46,7 @@ import {
   getSellCardTransactionCommandArray,
 } from "../../rpc";
 import { selectResource } from "../../../data/resources";
+import OrangeTabButton from "../../script/button/OrangeTabButton";
 
 const ELEMENT_PER_REQUEST = 30;
 
@@ -459,27 +456,32 @@ const MarketPopup = () => {
       <div className="market-popup-main-container">
         <div className="market-popup-main-tab-container">
           <div className="market-popup-tab-button">
-            <MarketInventoryButton
+            <OrangeTabButton
+              text={"Inventory"}
               onClick={onClickInventoryTab}
-              isSelect={tabState == MarketTabState.Inventory}
+              isDisabled={tabState == MarketTabState.Inventory}
+              fontSizeRatio={0.75}
             />
           </div>
           <div className="market-popup-tab-button">
-            <MarketSellingButton
+            <OrangeTabButton
+              text={"Selling"}
               onClick={onClickSellingTab}
-              isSelect={tabState == MarketTabState.Selling}
+              isDisabled={tabState == MarketTabState.Selling}
             />
           </div>
           <div className="market-popup-tab-button">
-            <MarketAuctionButton
+            <OrangeTabButton
+              text={"Auction"}
               onClick={onClickAuctionTab}
-              isSelect={tabState == MarketTabState.Auction}
+              isDisabled={tabState == MarketTabState.Auction}
             />
           </div>
           <div className="market-popup-tab-button">
-            <MarketLotButton
+            <OrangeTabButton
+              text={"Lot"}
               onClick={onClickLotTab}
-              isSelect={tabState == MarketTabState.Lot}
+              isDisabled={tabState == MarketTabState.Lot}
             />
           </div>
         </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import background from "../../image/backgrounds/guide_frame.png";
-import EndGuideButton from "../Buttons/EndGuideButton";
 import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
 import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";
 import { UIState, UIStateType, setUIState } from "../../../data/properties";
@@ -13,6 +12,7 @@ import {
 } from "../../../data/guides";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import "./GuidePopup.css";
+import BlueButton from "../../script/button/BlueButton";
 
 const GuidePopup = () => {
   const dispatch = useAppDispatch();
@@ -62,7 +62,11 @@ const GuidePopup = () => {
         )}
         {enableSkipButton && (
           <div className="guide-popup-end-guide-button">
-            <EndGuideButton onClick={onClickEndGuide} />
+            <BlueButton
+              text={"Play"}
+              onClick={onClickEndGuide}
+              isDisabled={false}
+            />
           </div>
         )}
       </div>
