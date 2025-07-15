@@ -61,7 +61,7 @@ export function LoadingController() {
   }, [l2Account]);
 
   const requireContext = require.context(
-    "../../images",
+    "../../image",
     true,
     /\.(png|jpg|jpeg|gif)$/
   );

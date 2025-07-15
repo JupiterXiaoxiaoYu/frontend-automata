@@ -5,7 +5,7 @@ import background_back from "../../image/backgrounds/background_back.png";
 import background_front from "../../image/backgrounds/background_front.png";
 import sponsor_frame from "../../image/backgrounds/sponsor_frame.png";
 import logo from "../../image/backgrounds/sponsor logo.png";
-import PlayButton from "../../components/Buttons/PlayButton";
+import OrangeButton from "../button/OrangeButton";
 // import TemplateAdjustableImageTextButton from "../template/TemplateAdjustableImageTextButton";
 
 interface Props {
@@ -51,11 +51,21 @@ const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
       <img src={logo} className="welcome-page-logo-image" />
       {isLogin ? (
         <div className="welcome-page-play-button">
-          <PlayButton onClick={onClickPlay} />
+          <OrangeButton
+            id={1}
+            text={"Play"}
+            onClick={onClickPlay}
+            isDisabled={false}
+          />
         </div>
       ) : (
         <div className="welcome-page-connect-wallet-button">
-          <PlayButton onClick={onClickConnectWallet} />
+          <OrangeButton
+            id={2}
+            text={"Connect Wallet"}
+            onClick={onClickConnectWallet}
+            isDisabled={false}
+          />
         </div>
       )}
     </div>
