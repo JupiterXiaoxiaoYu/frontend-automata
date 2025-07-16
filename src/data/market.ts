@@ -1,0 +1,126 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
+import {
+  emptyMarketTabData,
+  emptyProgramModel,
+  MarketTabData,
+  ProgramModel,
+} from "./models";
+
+export enum MarketTabState {
+  Inventory,
+  Selling,
+  Auction,
+  Lot,
+}
+export interface MarketState {
+  tabState: MarketTabState;
+  inventoryTab: MarketTabData;
+  sellingTab: MarketTabData;
+  auctionTab: MarketTabData;
+  lotTab: MarketTabData;
+  forceUpdate: boolean;
+  isInventoryChanged: boolean;
+}
+
+const initialState: MarketState = {
+  tabState: MarketTabState.Inventory,
+  inventoryTab: emptyMarketTabData,
+  sellingTab: emptyMarketTabData,
+  auctionTab: emptyMarketTabData,
+  lotTab: emptyMarketTabData,
+  forceUpdate: false,
+  isInventoryChanged: true,
+};
+
+const marketSlice = createSlice({
+  name: "market",
+  initialState,
+  reducers: {
+    setTabState: (state, d: PayloadAction<MarketTabState>) => {
+      state.tabState = d.payload;
+    },
+    setProgram: (state, d: PayloadAction<ProgramModel>) => {
+      const index = state.inventoryTab.programs.findIndex(
+        (program) => program.index === d.payload.index
+      );
+      if (index !== -1) {
+        state.inventoryTab.programs[index] = d.payload;
+      }
+    },
+    setInventoryTab: (state, d: PayloadAction<MarketTabData>) => {
+      state.inventoryTab = d.payload;
+      state.isInventoryChanged = false;
+    },
+    resetSellingTab: (state) => {
+      state.sellingTab = emptyMarketTabData;
+    },
+    addSellingTab: (state, d: PayloadAction<MarketTabData>) => {
+      state.sellingTab.programs.push(...d.payload.programs);
+      state.sellingTab.programCount = d.payload.programCount;
+    },
+    resetAuctionTab: (state) => {
+      state.auctionTab = emptyMarketTabData;
+    },
+    addAuctionTab: (state, d: PayloadAction<MarketTabData>) => {
+      state.auctionTab.programs.push(...d.payload.programs);
+      state.auctionTab.programCount = d.payload.programCount;
+    },
+    resetLotTab: (state) => {
+      state.lotTab = emptyMarketTabData;
+    },
+    addLotTab: (state, d: PayloadAction<MarketTabData>) => {
+      state.lotTab.programs.push(...d.payload.programs);
+      state.lotTab.programCount = d.payload.programCount;
+    },
+    setMarketForceUpdate: (state, d: PayloadAction<boolean>) => {
+      state.forceUpdate = d.payload;
+    },
+    setInventoryChanged: (state) => {
+      state.isInventoryChanged = true;
+    },
+  },
+});
+
+export const selectTabState = (state: RootState): MarketTabState =>
+  state.market.tabState;
+export const selectMarketProgram =
+  (tabState: MarketTabState, programIndex: number) => (state: RootState) => {
+    if (tabState == MarketTabState.Inventory) {
+      return state.market.inventoryTab.programs[programIndex];
+    } else if (tabState == MarketTabState.Selling) {
+      return state.market.sellingTab.programs[programIndex];
+    } else if (tabState == MarketTabState.Auction) {
+      return state.market.auctionTab.programs[programIndex];
+    } else if (tabState == MarketTabState.Lot) {
+      return state.market.lotTab.programs[programIndex];
+    }
+    return emptyProgramModel;
+  };
+export const selectIsInventoryChanged = (state: RootState): boolean =>
+  state.market.isInventoryChanged;
+export const selectInventoryTab = (state: RootState): MarketTabData =>
+  state.market.inventoryTab;
+export const selectSellingTab = (state: RootState): MarketTabData =>
+  state.market.sellingTab;
+export const selectAuctionTab = (state: RootState): MarketTabData =>
+  state.market.auctionTab;
+export const selectLotTab = (state: RootState): MarketTabData =>
+  state.market.lotTab;
+export const selectMarketForceUpdate = (state: RootState): boolean =>
+  state.market.forceUpdate;
+
+export const {
+  setTabState,
+  setProgram,
+  setInventoryTab,
+  resetSellingTab,
+  addSellingTab,
+  resetAuctionTab,
+  addAuctionTab,
+  resetLotTab,
+  addLotTab,
+  setMarketForceUpdate,
+  setInventoryChanged,
+} = marketSlice.actions;
+export default marketSlice.reducer;

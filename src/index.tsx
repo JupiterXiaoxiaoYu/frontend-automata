@@ -1,20 +1,26 @@
-import React from 'react';
-import {createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { store } from './app/store';
-import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { store } from "./app/store";
+import * as serviceWorker from "./serviceWorker";
+import {
+  DelphinusReactProvider,
+  setProviderConfig,
+} from "zkwasm-minirollup-browser";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container!);
+
+// Configure RainbowKit provider type before rendering
+setProviderConfig({ type: "rainbow" });
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <DelphinusReactProvider appName="0xAUTOMATA" store={store}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </DelphinusReactProvider>
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

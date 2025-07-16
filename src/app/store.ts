@@ -1,41 +1,26 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { AccountSliceReducer } from 'zkwasm-minirollup-browser';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import endpointReducer from "../data/endpoint";
-import automataReducer from "../data/automata/automata";
+import { createDelphinusStore } from "zkwasm-minirollup-browser";
+import stateReducer from "../data/state";
+import errorsReducer from "../data/errors";
+import resourcesReducer from "../data/resources";
+import propertiesReducer from "../data/properties";
+import creaturesReducer from "../data/creatures";
+import programsReducer from "../data/programs";
+import guidesReducer from "../data/guides";
+import marketReducer from "../data/market";
 
-export const store = configureStore({
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [
-          'acccount/deriveL2Account/fulfilled',
-          'client/sendTransaction/pending',
-          'client/sendTransaction/rejected',
-          'client/sendTransaction/fulfilled'
-        ],
-        ignoredActionPaths: ['payload.web3','payload.seed', 'payload.injector'],
-        ignoredPaths: [
-          "acccount/fetchAccount/fulfilled",
-          "account.l1Account.web3",
-          "endpoint.zkWasmServiceHelper",
-          "status.config.latest_server_checksum",
-          "game.preMerkleRoot",
-          "game.postMerkleRoot",
-          "account.l2account",
-          "client.external"
-        ],
-      },
-    }),
-  reducer: {
-    account: AccountSliceReducer,
-    endpoint: endpointReducer,
-    automata: automataReducer,
-  },
-  devTools: {
-    serialize: {
-      replacer: (_key, value) => (typeof value === "bigint" ? value.toString() : value),
-    },
-  },
+export const store = createDelphinusStore({
+  state: stateReducer,
+  errors: errorsReducer,
+  endpoint: endpointReducer,
+  resources: resourcesReducer,
+  properties: propertiesReducer,
+  creatures: creaturesReducer,
+  programs: programsReducer,
+  guides: guidesReducer,
+  market: marketReducer,
+  additionalIgnoredPaths: ["endpoint.zkWasmServiceHelper"],
 });
 
 export type AppDispatch = typeof store.dispatch;

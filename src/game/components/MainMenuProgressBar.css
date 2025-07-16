@@ -1,0 +1,126 @@
+.main-progress-bar-container {
+  position: absolute;
+  width: 174px;
+  height: 174px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-progress-bar-background {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.main-progress-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-progress-bot-image,
+.main-progress-bot-creating-image,
+.main-progress-bot-creating-animation-image {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.main-progress-bot-creating-image {
+  filter: brightness(0) contrast(0.7);
+}
+
+@keyframes unlockImageFrames {
+  0% {
+    filter: brightness(0) contrast(0.7);
+  }
+  30% {
+    filter: brightness(0) contrast(0.7);
+  }
+  80% {
+    filter: brightness(1) contrast(1);
+  }
+  100% {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.main-progress-bot-creating-animation-image {
+  animation: unlockImageFrames 1s linear;
+}
+
+.main-progress-bar-program-name-text {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  text-align: center;
+  line-height: 100%;
+  margin: 0px;
+  color: black;
+  width: 70%;
+  height: 15px;
+  font-family: "mishmash";
+  pointer-events: none;
+  user-select: none;
+}
+
+.main-progress-bar-program-processing-time-text {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: center;
+  line-height: 100%;
+  margin: 0px;
+  color: black;
+  width: 55%;
+  height: 10px;
+  font-family: "mishmash";
+  pointer-events: none;
+  user-select: none;
+}
+
+.main-progress-sector {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+@keyframes progressFrames {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -2784px;
+  }
+}
+
+.main-progress-sector-top {
+  left: 50%;
+  height: 28px;
+  width: 348px;
+  transform: scale(50%, 50%) translate(-50%, -50%);
+  animation: progressFrames 0.7s steps(8) infinite;
+  background-image: url("../image/Animations/Wave.png");
+}
+
+.main-progress-sector-repeat {
+  position: absolute;
+  top: 14px;
+  width: 100%;
+  height: round(down, calc(100% - 14px), 1px);
+  background-image: url("../image/MainMenu/progress.png");
+  background-repeat: repeat-Y;
+  background-size: contain;
+}

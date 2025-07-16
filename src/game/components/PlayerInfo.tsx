@@ -1,0 +1,59 @@
+import React from "react";
+import "./PlayerInfo.css";
+import { useAppSelector } from "../../app/hooks";
+import { addressAbbreviation } from "../../utils/address";
+import level_icon from "../image/backgrounds/player_lv.png";
+import energy_icon from "../image/backgrounds/player_energy.png";
+import xp_icon from "../image/backgrounds/player_xp.png";
+import {
+  selectEnergy,
+  selectExp,
+  selectLevel,
+  selectRedeemEnergy,
+} from "../../data/properties";
+import PlayerInfoDisplay from "./PlayerInfoDisplay";
+import { expToLevelUp } from "../../data/models";
+import PlayerInfoLevelDisplay from "./PlayerInfoLevelDisplay";
+
+const PlayerInfo = () => {
+  const level = useAppSelector(selectLevel);
+  const exp = useAppSelector(selectExp);
+  const energy = useAppSelector(selectEnergy);
+  const redeemEnergy = useAppSelector(selectRedeemEnergy);
+
+  return (
+    <div className="player-info-container">
+      <div className="player-info-level-container">
+        <PlayerInfoLevelDisplay
+          icon={level_icon}
+          title={"level"}
+          amount={level}
+          interestRate={0.01 * level}
+          description={
+            "Increasing Rockets Spawn and Interest Rate When Leveling Up"
+          }
+        />
+      </div>
+      <div className="player-info-xp-container">
+        <PlayerInfoDisplay
+          icon={xp_icon}
+          title={"xp"}
+          amount={exp}
+          description={`${
+            expToLevelUp + level * 10 - exp
+          } Exp Before Leveling Up`}
+        />
+      </div>
+      <div className="player-info-energy-container">
+        <PlayerInfoDisplay
+          icon={energy_icon}
+          title={"energy"}
+          amount={energy}
+          description={`Automatas Use Energy To Operate, you can collect ${redeemEnergy} in rocket`}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default PlayerInfo;
