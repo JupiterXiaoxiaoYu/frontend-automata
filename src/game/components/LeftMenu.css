@@ -42,6 +42,13 @@
   left: 45%;
 }
 
+.left-program-filter-bar-position {
+  position: absolute;
+  top: 50%;
+  right: -65px;
+  transform: translate(-50%, -50%);
+}
+
 .left-creature-page-selector {
   position: absolute;
   width: 170px;
@@ -56,15 +63,5 @@
   height: 60px;
   bottom: 0px;
   right: -2px;
-  user-select: none;
-}
-
-.left-middle-bar {
-  position: absolute;
-  width: 32px;
-  height: 125px;
-  top: 50%;
-  right: -20px;
-  transform: translate(-50%, -50%);
   user-select: none;
 }

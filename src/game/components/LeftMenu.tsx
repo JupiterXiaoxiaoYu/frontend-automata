@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import leftMiddleBar from "../image/backgrounds/left_middle_bar.png";
 import leftCornerBar from "../image/backgrounds/left_corner_bar.png";
 import "./LeftMenu.css";
 import PageSelector from "./PageSelector";
@@ -15,6 +14,7 @@ import {
   prevPage,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import ProgramFilterBar from "./ProgramFilterBar";
 
 interface Props {
   localTimer: number;
@@ -96,8 +96,10 @@ const LeftMenu = ({ localTimer }: Props) => {
         />
       </div>
 
-      <img src={leftMiddleBar} className="left-middle-bar" />
       <img src={leftCornerBar} className="left-corner-bar" />
+      <div className="left-program-filter-bar-position">
+        <ProgramFilterBar />
+      </div>
       <div className="left-creature-page-selector">
         <PageSelector
           currentPage={currentPage}

@@ -125,9 +125,6 @@ const RightMenu = () => {
           elements={programElements}
         />
       </div>
-      <div className="right-program-filter-bar-position">
-        <ProgramFilterBar />
-      </div>
       <div className="right-program-page-selector">
         <PageSelector
           currentPage={currentPage}
