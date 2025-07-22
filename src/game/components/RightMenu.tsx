@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import rightCornerBar from "../image/backgrounds/right_corner_bar.png";
 import "./RightMenu.css";
 import PageSelector from "./PageSelector";
 import Grid from "./Grid";
@@ -112,10 +111,6 @@ const RightMenu = () => {
 
   return (
     <div className="right">
-      <div className="right-top"></div>
-      <div className="right-middle"></div>
-      <div className="right-bottom"></div>
-      <img src={rightCornerBar} className="right-corner-bar" />
       <div ref={programGridRef} className="right-program-grid">
         <Grid
           elementWidth={programGridElementWidth}
@@ -125,7 +120,7 @@ const RightMenu = () => {
           elements={programElements}
         />
       </div>
-      <div className="right-program-page-selector">
+      {/* <div className="right-program-page-selector">
         <PageSelector
           currentPage={currentPage}
           pageCount={pageCount}
@@ -133,7 +128,7 @@ const RightMenu = () => {
           onClickPrevPageButton={onClickPrevPageButton}
           onClickNextPageButton={onClickNextPageButton}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
