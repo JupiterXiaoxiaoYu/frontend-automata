@@ -181,80 +181,99 @@ const MainMenu = ({ localTimer }: Props) => {
     <div className="main">
       <Rocket />
       {!isNotSelectingCreature && !isSelectingMarket && (
-        <div className="main-content">
-          <div className="main-info-container">
-            <DiffResourcesInfo diffResources={selectedCreatureDiffResources} />
-          </div>
-          <div className="main-circle-container">
-            <MainMenuProgressBar
-              programName={currentProgramInfo.program?.name ?? ""}
-              remainTime={currentProgramInfo.remainTime}
-              progress={currentProgramInfo.progress}
-              iconPath={getCreatureIconPath(selectedCreature.creatureType)}
-              isStarting={selectedCreature.isStarting}
-              isCreating={isCreatingUIState}
-              showAnimation={showUnlockAnimation}
-            />
-            <img src={circleBackground} className="main-circle-background" />
+        // <div className="main-content">
+        //   <div className="main-info-container">
+        //     <DiffResourcesInfo diffResources={selectedCreatureDiffResources} />
+        //   </div>
+        //   <div className="main-circle-container">
+        //     <MainMenuProgressBar
+        //       programName={currentProgramInfo.program?.name ?? ""}
+        //       remainTime={currentProgramInfo.remainTime}
+        //       progress={currentProgramInfo.progress}
+        //       iconPath={getCreatureIconPath(selectedCreature.creatureType)}
+        //       isStarting={selectedCreature.isStarting}
+        //       isCreating={isCreatingUIState}
+        //       showAnimation={showUnlockAnimation}
+        //     />
+        //     <img src={circleBackground} className="main-circle-background" />
 
-            <MainMenuSelectingFrame
-              order={currentProgramInfo.index}
-              isReady={!isLoading && !selectedCreature.isStarting}
-              isCurrentProgram={!isSelectingUIState}
-              isStop={selectedCreature.isProgramStop}
-            />
-            {selectedCreaturePrograms.map((program, index) =>
-              program == null ? (
-                <MainMenuEmptyHint key={index} order={index} />
-              ) : null
-            )}
-            {showUnlockAnimation && (
-              <div className="main-bot-unlock-animation" />
-            )}
-            {showUpgradeAnimation && (
-              <div className="main-bot-upgrade-animation" />
-            )}
-            <div className="main-menu-program-container">
-              {selectedCreaturePrograms.map((program, index) => (
-                <MainMenuProgram
-                  key={index}
-                  order={index}
-                  program={program}
-                  showContainerAnimation={isSelectingUIState}
-                  showProgramAnimation={
-                    !selectedCreature.isStarting &&
-                    !isSelectingUIState &&
-                    !isLoading &&
-                    uIState.type != UIStateType.UnlockPopup &&
-                    uIState.type != UIStateType.PlayUnlockAnimation &&
-                    currentProgramInfo.index == index &&
-                    !selectedCreature.isProgramStop
-                  }
-                />
-              ))}
-            </div>
-            <MainMenuWarning />
-            {showConfirmButton && (
-              <CreatureConfirmButton
-                isDisabled={!enableConfirmButton}
-                onClick={onClickConfirmReboot}
-              />
-            )}
-            {showUnlockButton && (
-              <CreatureUnlockButton
-                isDisabled={!enableUnlockButton}
-                onClick={() => onClickUnlock()}
-              />
-            )}
-            {showRebootButton && (
-              <CreatureRebootButton onClick={() => onClickReboot()} />
-            )}
-            {!isNotSelectingCreature && !isSelectingMarket && (
-              <div className="main-redeem">
-                <RedeemButton onClick={onClickRedeem} />
-              </div>
-            )}
-          </div>
+        //     <MainMenuSelectingFrame
+        //       order={currentProgramInfo.index}
+        //       isReady={!isLoading && !selectedCreature.isStarting}
+        //       isCurrentProgram={!isSelectingUIState}
+        //       isStop={selectedCreature.isProgramStop}
+        //     />
+        //     {selectedCreaturePrograms.map((program, index) =>
+        //       program == null ? (
+        //         <MainMenuEmptyHint key={index} order={index} />
+        //       ) : null
+        //     )}
+        //     {showUnlockAnimation && (
+        //       <div className="main-bot-unlock-animation" />
+        //     )}
+        //     {showUpgradeAnimation && (
+        //       <div className="main-bot-upgrade-animation" />
+        //     )}
+        //     <div className="main-menu-program-container">
+        //       {selectedCreaturePrograms.map((program, index) => (
+        //         <MainMenuProgram
+        //           key={index}
+        //           order={index}
+        //           program={program}
+        //           showContainerAnimation={isSelectingUIState}
+        //           showProgramAnimation={
+        //             !selectedCreature.isStarting &&
+        //             !isSelectingUIState &&
+        //             !isLoading &&
+        //             uIState.type != UIStateType.UnlockPopup &&
+        //             uIState.type != UIStateType.PlayUnlockAnimation &&
+        //             currentProgramInfo.index == index &&
+        //             !selectedCreature.isProgramStop
+        //           }
+        //         />
+        //       ))}
+        //     </div>
+        //     <MainMenuWarning />
+        //     {showConfirmButton && (
+        //       <CreatureConfirmButton
+        //         isDisabled={!enableConfirmButton}
+        //         onClick={onClickConfirmReboot}
+        //       />
+        //     )}
+        //     {showUnlockButton && (
+        //       <CreatureUnlockButton
+        //         isDisabled={!enableUnlockButton}
+        //         onClick={() => onClickUnlock()}
+        //       />
+        //     )}
+        //     {showRebootButton && (
+        //       <CreatureRebootButton onClick={() => onClickReboot()} />
+        //     )}
+        //     {!isNotSelectingCreature && !isSelectingMarket && (
+        //       <div className="main-redeem">
+        //         <RedeemButton onClick={onClickRedeem} />
+        //       </div>
+        //     )}
+        //   </div>
+        // </div>
+        <div className="main-program-container">
+          {/* //       {selectedCreaturePrograms.map((program, index) => (
+        //         <MainMenuProgram
+        //           key={index}
+        //           order={index}
+        //           program={program}
+        //           showContainerAnimation={isSelectingUIState}
+        //           showProgramAnimation={
+        //             !selectedCreature.isStarting &&
+        //             !isSelectingUIState &&
+        //             !isLoading &&
+        //             uIState.type != UIStateType.UnlockPopup &&
+        //             uIState.type != UIStateType.PlayUnlockAnimation &&
+        //             currentProgramInfo.index == index &&
+        //             !selectedCreature.isProgramStop
+        //           }
+        //         />
+        //       ))} */}
         </div>
       )}
       {showTaskMenu && <RedeemMenu />}

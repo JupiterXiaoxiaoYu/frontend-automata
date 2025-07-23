@@ -2,7 +2,6 @@
   height: 100%;
   width: calc(100% - 190px * 2);
   flex: 1;
-  background-color: lightgreen;
   background-image: url("../image/backgrounds/menu_bg.png");
   background-size: cover;
   background-position: center;
@@ -16,11 +15,17 @@
   /* z-index: 3; */
 }
 
-.main-content {
-  width: fit-content;
-  height: 512px;
-  width: 550px;
-  position: relative;
+.main-program-container {
+  position: absolute;
+  height: 70px;
+  width: 551px;
+  bottom: 0%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  background-image: url("../image/backgrounds/main_program_frame.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .main-info-container {
