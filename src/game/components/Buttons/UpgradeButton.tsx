@@ -1,10 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import upgradeButtonImage from "../../image/Buttons/Upgrade/upgrade.png";
-import upgradeButtonHoverImage from "../../image/Buttons/Upgrade/upgrade_hv.png";
-import upgradeButtonClickImage from "../../image/Buttons/Upgrade/upgrade_click.png";
-import upgradeButtonDisabledImage from "../../image/Buttons/Upgrade/upgrade_idle.png";
-import "./UpgradeButton.css";
+import image from "../../image/Buttons/Upgrade/upgrade.png";
+import hoverImage from "../../image/Buttons/Upgrade/upgrade_hv.png";
+import clickImage from "../../image/Buttons/Upgrade/upgrade_click.png";
+import disabledImage from "../../image/Buttons/Upgrade/upgrade_idle.png";
 
 interface Props {
   isDisabled: boolean;
@@ -13,14 +12,25 @@ interface Props {
 
 const UpgradeButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="upgrade-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "1 / 1",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={upgradeButtonImage}
-        hoverImagePath={upgradeButtonHoverImage}
-        clickedImagePath={upgradeButtonClickImage}
-        disabledImagePath={upgradeButtonDisabledImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={disabledImage}
       />
     </div>
   );

@@ -1,24 +1,35 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import creatureRebootButtonImage from "../../image/Buttons/CreatureReboot/creature_reboot.png";
-import creatureRebootButtonHoverImage from "../../image/Buttons/CreatureReboot/creature_reboot_hover.png";
-import creatureRebootButtonClickImage from "../../image/Buttons/CreatureReboot/creature_reboot_click.png";
-import "./CreatureRebootButton.css";
+import image from "../../image/Buttons/CreatureReboot/creature_reboot.png";
+import hoverImage from "../../image/Buttons/CreatureReboot/creature_reboot_hv.png";
+import clickImage from "../../image/Buttons/CreatureReboot/creature_reboot_click.png";
 
 interface Props {
+  isDisabled: boolean;
   onClick: () => void;
 }
 
-const CreatureRebootButton = ({ onClick }: Props) => {
+const CreatureRebootButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="creature-reboot-button">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "132 / 128",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={creatureRebootButtonImage}
-        hoverImagePath={creatureRebootButtonHoverImage}
-        clickedImagePath={creatureRebootButtonClickImage}
-        disabledImagePath={creatureRebootButtonClickImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

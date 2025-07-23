@@ -1,10 +1,9 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import collectButtonImage from "../../image/Buttons/CollectInterest/collect_normal.png";
-import collectButtonHoverImage from "../../image/Buttons/CollectInterest/collect_hv.png";
-import collectButtonClickImage from "../../image/Buttons/CollectInterest/collect_click.png";
-import collectButtonDisableImage from "../../image/Buttons/CollectInterest/collect_idle.png";
-import "./CollectInterestButton.css";
+import image from "../../image/Buttons/CollectInterest/collect.png";
+import hoverImage from "../../image/Buttons/CollectInterest/collect_hv.png";
+import clickImage from "../../image/Buttons/CollectInterest/collect_click.png";
+import disabledImage from "../../image/Buttons/CollectInterest/collect_idle.png";
 
 interface Props {
   isDisabled: boolean;
@@ -13,14 +12,25 @@ interface Props {
 
 const CollectInterestButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="collect-interest-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "97 / 50",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={collectButtonImage}
-        hoverImagePath={collectButtonHoverImage}
-        clickedImagePath={collectButtonClickImage}
-        disabledImagePath={collectButtonDisableImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={disabledImage}
       />
     </div>
   );

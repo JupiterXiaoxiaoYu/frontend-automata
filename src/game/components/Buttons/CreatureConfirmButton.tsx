@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import creatureConfirmButtonImage from "../../image/Buttons/CreatureConfirm/creature_confirm.png";
-import creatureConfirmButtonHoverImage from "../../image/Buttons/CreatureConfirm/creature_confirm_hv.png";
-import creatureConfirmButtonClickImage from "../../image/Buttons/CreatureConfirm/creature_confirm_click.png";
-import "./CreatureConfirmButton.css";
+import image from "../../image/Buttons/CreatureConfirm/creature_confirm.png";
+import hoverImage from "../../image/Buttons/CreatureConfirm/creature_confirm_hv.png";
+import clickImage from "../../image/Buttons/CreatureConfirm/creature_confirm_click.png";
 
 interface Props {
   isDisabled: boolean;
@@ -12,14 +11,25 @@ interface Props {
 
 const CreatureConfirmButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="creature-confirm-button">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "132 / 128",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={creatureConfirmButtonImage}
-        hoverImagePath={creatureConfirmButtonHoverImage}
-        clickedImagePath={creatureConfirmButtonClickImage}
-        disabledImagePath={creatureConfirmButtonClickImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

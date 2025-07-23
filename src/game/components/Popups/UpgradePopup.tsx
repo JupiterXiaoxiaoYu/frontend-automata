@@ -181,7 +181,7 @@ const UpgradePopup = () => {
         </div>
         <div className="upgrade-popup-confirm-button">
           <UpgradeConfirmButton
-            isDisable={
+            isDisabled={
               titaniumCount < currentCost || upgradeState == UpgradeState.None
             }
             onClick={onClickConfirm}

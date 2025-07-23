@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import redeemButtonImage from "../../image/Buttons/Redeem/redeem_normal.png";
-import redeemButtonHoverImage from "../../image/Buttons/Redeem/redeem_hover.png";
-import redeemButtonClickImage from "../../image/Buttons/Redeem/redeem_click.png";
-import "./RedeemButton.css";
+import image from "../../image/Buttons/Redeem/redeem.png";
+import hoverImage from "../../image/Buttons/Redeem/redeem_hv.png";
+import clickImage from "../../image/Buttons/Redeem/redeem_click.png";
 
 interface Props {
   onClick: () => void;
@@ -11,14 +10,25 @@ interface Props {
 
 const RedeemButton = ({ onClick }: Props) => {
   return (
-    <div className="redeem-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "74 / 62",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={redeemButtonImage}
-        hoverImagePath={redeemButtonHoverImage}
-        clickedImagePath={redeemButtonClickImage}
-        disabledImagePath={redeemButtonClickImage}
         onClick={onClick}
+        isDisabled={false}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

@@ -1,112 +1,114 @@
 .redeem-display-container {
-    position: relative;
-    width: 240px;
-    height: 70px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  width: 240px;
+  height: 70px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .redeem-display-background {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 227px;
-    height: 60px;
-    user-select: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 227px;
+  height: 60px;
+  user-select: none;
 }
 
 .redeem-display-button {
-    position: absolute;
-    left: 73%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  width: 97px;
+  height: 50px;
+  left: 73%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .redeem-display-reward-icon {
-    position: absolute;
-    left: 15%;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    transform: translate(-50%, -50%);
-    user-select: none;
+  position: absolute;
+  left: 15%;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  transform: translate(-50%, -50%);
+  user-select: none;
 }
 
-.redeem-display-reward-cross-text{
-    position: absolute;
-    top: 55%;
-    left: 27%;
-    transform: translate(-50%, -50%);
-    font-size: 15px;
-    text-align: center;
-    line-height: 15px;
-    margin: 0px;
-    width: 80%;
-    height: 15px;
-    font-family: "mishmash";
-    color: white;
-    user-select: none;
+.redeem-display-reward-cross-text {
+  position: absolute;
+  top: 55%;
+  left: 27%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  text-align: center;
+  line-height: 15px;
+  margin: 0px;
+  width: 80%;
+  height: 15px;
+  font-family: "mishmash";
+  color: white;
+  user-select: none;
 }
 
-.redeem-display-reward-amount-text{
-    position: absolute;
-    top: 55%;
-    left: 38%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    text-align: left;
-    line-height: 18px;
-    margin: 0px;
-    width: 10%;
-    height: 18px;
-    font-family: "mishmash";
-    color: white;
-    user-select: none;
+.redeem-display-reward-amount-text {
+  position: absolute;
+  top: 55%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  text-align: left;
+  line-height: 18px;
+  margin: 0px;
+  width: 10%;
+  height: 18px;
+  font-family: "mishmash";
+  color: white;
+  user-select: none;
 }
 
 .redeem-display-cost-icon {
-    position: absolute;
-    left: 63%;
-    top: 60%;
-    width: 15px;
-    height: 15px;
-    transform: translate(-50%, -50%);
-    user-select: none;
-    pointer-events: none;
+  position: absolute;
+  left: 63%;
+  top: 60%;
+  width: 15px;
+  height: 15px;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  pointer-events: none;
 }
 
-.redeem-display-cost-cross-text{
-    position: absolute;
-    top: 60%;
-    left: 73%;
-    transform: translate(-50%, -50%);
-    font-size: 10px;
-    text-align: center;
-    line-height: 10px;
-    margin: 0px;
-    width: 80%;
-    height: 10px;
-    font-family: "mishmash";
-    color: white;
-    user-select: none;
-    pointer-events: none;
+.redeem-display-cost-cross-text {
+  position: absolute;
+  top: 60%;
+  left: 73%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: center;
+  line-height: 10px;
+  margin: 0px;
+  width: 80%;
+  height: 10px;
+  font-family: "mishmash";
+  color: white;
+  user-select: none;
+  pointer-events: none;
 }
 
-.redeem-display-cost-amount-text{
-    position: absolute;
-    top: 60%;
-    left: 83%;
-    transform: translate(-50%, -50%);
-    font-size: 13px;
-    text-align: center;
-    line-height: 13px;
-    margin: 0px;
-    width: 15%;
-    height: 13px;
-    font-family: "mishmash";
-    color: white;
-    user-select: none;
-    pointer-events: none;
+.redeem-display-cost-amount-text {
+  position: absolute;
+  top: 60%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  text-align: center;
+  line-height: 13px;
+  margin: 0px;
+  width: 15%;
+  height: 13px;
+  font-family: "mishmash";
+  color: white;
+  user-select: none;
+  pointer-events: none;
 }

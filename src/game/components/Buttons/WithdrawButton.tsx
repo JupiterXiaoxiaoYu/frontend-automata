@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import withdrawButtonImage from "../../image/Buttons/Withdraw/withdraw_normal.png";
-import withdrawButtonHoverImage from "../../image/Buttons/Withdraw/withdraw_hover.png";
-import withdrawButtonClickImage from "../../image/Buttons/Withdraw/withdraw_click.png";
-import "./WithdrawButton.css";
+import image from "../../image/Buttons/Withdraw/withdraw.png";
+import hoverImage from "../../image/Buttons/Withdraw/withdraw_hv.png";
+import clickImage from "../../image/Buttons/Withdraw/withdraw_click.png";
 
 interface Props {
   onClick: () => void;
@@ -11,14 +10,25 @@ interface Props {
 
 const WithdrawButton = ({ onClick }: Props) => {
   return (
-    <div className="withdraw-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "106 / 70",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={withdrawButtonImage}
-        hoverImagePath={withdrawButtonHoverImage}
-        clickedImagePath={withdrawButtonClickImage}
-        disabledImagePath={withdrawButtonImage}
         onClick={onClick}
+        isDisabled={false}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

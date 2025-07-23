@@ -1,26 +1,35 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import programButtonImage from "../../image/Buttons/Program/program_button.png";
-import programButtonHoverImage from "../../image/Buttons/Program/program_hover.png";
-import programButtonClickImage from "../../image/Buttons/Program/program_click.png";
-// import programButtonDisabledImage from "../../image/Buttons/Program/program_disabled.png";
-import "./ProgramButton.css";
+import image from "../../image/Buttons/Program/program.png";
+import hoverImage from "../../image/Buttons/Program/program_hv.png";
+import clickImage from "../../image/Buttons/Program/program_click.png";
 
 interface Props {
-  isDisabled: boolean;
+  isDisabled: boolean; // Optional prop for future use
   onClick: () => void;
 }
 
 const ProgramButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="program-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "168 / 88",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={programButtonImage}
-        hoverImagePath={programButtonHoverImage}
-        clickedImagePath={programButtonClickImage}
-        disabledImagePath={programButtonClickImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import marketButtonImage from "../../image/Buttons/Market/market.png";
-import marketButtonHoverImage from "../../image/Buttons/Market/market_hv.png";
-import marketButtonClickImage from "../../image/Buttons/Market/market_click.png";
-import "./MarketButton.css";
+import image from "../../image/Buttons/Market/market.png";
+import hoverImage from "../../image/Buttons/Market/market_hv.png";
+import clickImage from "../../image/Buttons/Market/market_click.png";
 
 interface Props {
   onClick: () => void;
@@ -11,14 +10,25 @@ interface Props {
 
 const MarketButton = ({ onClick }: Props) => {
   return (
-    <div className="market-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "61 / 23",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={marketButtonImage}
-        hoverImagePath={marketButtonHoverImage}
-        clickedImagePath={marketButtonClickImage}
-        disabledImagePath={marketButtonClickImage}
         onClick={onClick}
+        isDisabled={false}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import okButtonImage from "../../image/Buttons/Ok/ok.png";
-import okButtonHoverImage from "../../image/Buttons/Ok/ok_hv.png";
-import okButtonClickImage from "../../image/Buttons/Ok/ok_click.png";
-import "./OkButton.css";
+import image from "../../image/Buttons/Ok/ok.png";
+import hoverImage from "../../image/Buttons/Ok/ok_hv.png";
+import clickImage from "../../image/Buttons/Ok/ok_click.png";
 
 interface Props {
   onClick: () => void;
@@ -11,14 +10,25 @@ interface Props {
 
 const OkButton = ({ onClick }: Props) => {
   return (
-    <div className="ok-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "55 / 23",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={okButtonImage}
-        hoverImagePath={okButtonHoverImage}
-        clickedImagePath={okButtonClickImage}
-        disabledImagePath={okButtonClickImage}
         onClick={onClick}
+        isDisabled={false}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

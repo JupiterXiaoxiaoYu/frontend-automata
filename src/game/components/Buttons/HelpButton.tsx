@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import helpButtonImage from "../../image/Buttons/Help/help.png";
-import helpButtonHoverImage from "../../image/Buttons/Help/help_hover.png";
-import helpButtonClickImage from "../../image/Buttons/Help/help_click.png";
-import "./HelpButton.css";
+import image from "../../image/Buttons/Help/help.png";
+import hoverImage from "../../image/Buttons/Help/help_hv.png";
+import clickImage from "../../image/Buttons/Help/help_click.png";
 
 interface Props {
   onClick: () => void;
@@ -11,14 +10,25 @@ interface Props {
 
 const HelpButton = ({ onClick }: Props) => {
   return (
-    <div className="help-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "55 / 23",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={false}
-        defaultImagePath={helpButtonImage}
-        hoverImagePath={helpButtonHoverImage}
-        clickedImagePath={helpButtonClickImage}
-        disabledImagePath={helpButtonClickImage}
         onClick={onClick}
+        isDisabled={false}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

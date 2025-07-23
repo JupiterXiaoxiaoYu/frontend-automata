@@ -1,26 +1,36 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import upgradeConfirmButtonImage from "../../image/Buttons/UpgradeConfirm/upgrade_normal.png";
-import upgradeConfirmButtonHoverImage from "../../image/Buttons/UpgradeConfirm/upgrade_hover.png";
-import upgradeConfirmButtonClickImage from "../../image/Buttons/UpgradeConfirm/upgrade_click.png";
-import upgradeConfirmButtonDisableImage from "../../image/Buttons/UpgradeConfirm/upgrade_disable.png";
-import "./UpgradeConfirmButton.css";
+import image from "../../image/Buttons/UpgradeConfirm/upgrade_confirm.png";
+import hoverImage from "../../image/Buttons/UpgradeConfirm/upgrade_confirm_hv.png";
+import clickImage from "../../image/Buttons/UpgradeConfirm/upgrade_confirm_click.png";
+import disabledImage from "../../image/Buttons/UpgradeConfirm/upgrade_confirm_idle.png";
 
 interface Props {
-  isDisable: boolean;
+  isDisabled: boolean;
   onClick: () => void;
 }
 
-const UpgradeConfirmButton = ({ isDisable, onClick }: Props) => {
+const UpgradeConfirmButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="upgrade-confirm-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "78 / 22",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisable}
-        defaultImagePath={upgradeConfirmButtonImage}
-        hoverImagePath={upgradeConfirmButtonHoverImage}
-        clickedImagePath={upgradeConfirmButtonClickImage}
-        disabledImagePath={upgradeConfirmButtonDisableImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={disabledImage}
       />
     </div>
   );
