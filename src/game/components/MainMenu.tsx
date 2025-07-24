@@ -40,7 +40,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
 import MainMenuProgressBar from "./MainMenuProgressBar";
 import RedeemMenu from "./RedeemMenu";
-import RedeemButton from "./Buttons/RedeemButton";
 import MainMenuEmptyHint from "./MainMenuEmptyHint";
 import MarketPopup from "./Popups/MarketPopup";
 
@@ -255,23 +254,29 @@ const MainMenu = ({ localTimer }: Props) => {
         //   </div>
         // </div>
         <div className="main-program-container">
-          {/* //       {selectedCreaturePrograms.map((program, index) => (
-        //         <MainMenuProgram
-        //           key={index}
-        //           order={index}
-        //           program={program}
-        //           showContainerAnimation={isSelectingUIState}
-        //           showProgramAnimation={
-        //             !selectedCreature.isStarting &&
-        //             !isSelectingUIState &&
-        //             !isLoading &&
-        //             uIState.type != UIStateType.UnlockPopup &&
-        //             uIState.type != UIStateType.PlayUnlockAnimation &&
-        //             currentProgramInfo.index == index &&
-        //             !selectedCreature.isProgramStop
-        //           }
-        //         />
-        //       ))} */}
+          {selectedCreaturePrograms.map((program, index) => (
+            <MainMenuProgram
+              key={index}
+              order={index}
+              program={program}
+              showContainerAnimation={isSelectingUIState}
+              showProgramAnimation={
+                !selectedCreature.isStarting &&
+                !isSelectingUIState &&
+                !isLoading &&
+                uIState.type != UIStateType.UnlockPopup &&
+                uIState.type != UIStateType.PlayUnlockAnimation &&
+                currentProgramInfo.index == index &&
+                !selectedCreature.isProgramStop
+              }
+            />
+          ))}
+          <div className="main-program-action-button">
+            <CreatureConfirmButton
+              isDisabled={!enableConfirmButton}
+              onClick={onClickConfirmReboot}
+            />
+          </div>
         </div>
       )}
       {showTaskMenu && <RedeemMenu />}

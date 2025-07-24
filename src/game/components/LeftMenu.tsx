@@ -5,16 +5,26 @@ import PageSelector from "./PageSelector";
 import Grid from "./Grid";
 import Creature from "./Creature";
 import { selectIsLoading } from "../../data/errors";
-import {
-  selectCreatures,
-  selectCurrentPage,
-  selectCreaturesOnCurrentPage,
-  selectCreaturesCurrentProgressOnCurrentPage,
-  nextPage,
-  prevPage,
-} from "../../data/creatures";
+import { setProgramIndex } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ProgramFilterBar from "./ProgramFilterBar";
+import {
+  selectFilteredPrograms,
+  selectProgramsOnCurrentPage,
+  selectCurrentPage,
+  nextPage,
+  prevPage,
+} from "../../data/programs";
+import NewProgram from "./NewProgram";
+import Program from "./Program";
+import {
+  TutorialType,
+  setTutorialType,
+  setUIState,
+  UIStateType,
+  selectIsSelectingUIState,
+  selectTutorialType,
+} from "../../data/properties";
 
 interface Props {
   localTimer: number;
@@ -22,36 +32,72 @@ interface Props {
 
 const LeftMenu = ({ localTimer }: Props) => {
   const dispatch = useAppDispatch();
-  const [creatureGridHeight, setCreatureGridHeight] = useState(0);
-  const creatureGridRef = useRef<HTMLInputElement>(null);
-  const updateCreatureGridHeight = () => {
-    if (creatureGridRef.current) {
-      setCreatureGridHeight(creatureGridRef.current.offsetHeight);
+  const [programGridHeight, setProgramGridHeight] = useState(0);
+  const programGridRef = useRef<HTMLInputElement>(null);
+  const updateProgramGridHeight = () => {
+    if (programGridRef.current) {
+      setProgramGridHeight(programGridRef.current.offsetHeight);
     }
   };
-  const creatureGridElementWidth = 152;
-  const creatureGridElementHeight = 90;
-  const creatureGridColumnCount = 1;
-  const creatureGridRowCount = Math.floor(
-    creatureGridHeight / creatureGridElementHeight
+  const programGridElementWidth = 170;
+  const programGridElementHeight = 95;
+  const programGridColumnCount = 1;
+  const programGridRowCount = Math.floor(
+    programGridHeight / programGridElementHeight
   );
-  const amountPerPage = creatureGridColumnCount * creatureGridRowCount;
-
+  const amountPerPage = programGridColumnCount * programGridRowCount;
   const currentPage = useAppSelector(selectCurrentPage);
-  const creaturesBeforePaging = useAppSelector(selectCreatures);
-  const creatures = useAppSelector(
-    selectCreaturesOnCurrentPage(creaturesBeforePaging)(amountPerPage)
-  );
-  const progress = useAppSelector(
-    selectCreaturesCurrentProgressOnCurrentPage(creaturesBeforePaging)(
-      amountPerPage
-    )(localTimer)
+  const programsBeforePaging = useAppSelector(selectFilteredPrograms);
+  const programs = useAppSelector(
+    selectProgramsOnCurrentPage(programsBeforePaging)(amountPerPage)
   );
   const pageCount = Math.max(
-    Math.ceil(creaturesBeforePaging.length / amountPerPage),
+    Math.ceil((programsBeforePaging.length + 1) / amountPerPage),
     1
   );
+  const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isLoading = useAppSelector(selectIsLoading);
+  const tutorialType = useAppSelector(selectTutorialType);
+
+  const onSelectProgram = (programIndex: number) => {
+    if (isSelectingUIState && !isLoading) {
+      dispatch(setProgramIndex({ programIndex }));
+
+      if (tutorialType == TutorialType.Program) {
+        dispatch(setTutorialType({ tutorialType: TutorialType.None }));
+      }
+    }
+  };
+
+  const onClickNewProgram = () => {
+    if (!isLoading) {
+      dispatch(setUIState({ uIState: { type: UIStateType.NewProgramPopup } }));
+    }
+  };
+
+  const programElements =
+    currentPage == 0
+      ? [
+          <NewProgram key={-1} onSelect={onClickNewProgram} />,
+          ...programs.map((program, index) => (
+            <Program
+              key={index}
+              index={index}
+              program={program}
+              isDisabled={program.marketId > 0}
+              onSelect={() => onSelectProgram(program.index)}
+            />
+          )),
+        ]
+      : programs.map((program, index) => (
+          <Program
+            key={index}
+            index={index}
+            program={program}
+            isDisabled={program.marketId > 0}
+            onSelect={() => onSelectProgram(program.index)}
+          />
+        ));
 
   const onClickPrevPageButton = () => {
     if (!isLoading) {
@@ -66,10 +112,10 @@ const LeftMenu = ({ localTimer }: Props) => {
   };
 
   useEffect(() => {
-    updateCreatureGridHeight();
-    window.addEventListener("resize", updateCreatureGridHeight);
+    updateProgramGridHeight();
+    window.addEventListener("resize", updateProgramGridHeight);
     return () => {
-      window.removeEventListener("resize", updateCreatureGridHeight);
+      window.removeEventListener("resize", updateProgramGridHeight);
     };
   }, []);
 
@@ -79,20 +125,13 @@ const LeftMenu = ({ localTimer }: Props) => {
       <div className="left-middle"></div>
       <div className="left-bottom"></div>
 
-      <div ref={creatureGridRef} className="left-creature-grid">
+      <div ref={programGridRef} className="left-creature-grid">
         <Grid
-          elementWidth={creatureGridElementWidth}
-          elementHeight={creatureGridElementHeight}
-          columnCount={creatureGridColumnCount}
-          rowCount={creatureGridRowCount}
-          elements={creatures.map((creature, index) => (
-            <Creature
-              key={index}
-              index={currentPage * amountPerPage + index}
-              creature={creature}
-              progress={progress[index]}
-            />
-          ))}
+          elementWidth={programGridElementWidth}
+          elementHeight={programGridElementHeight}
+          columnCount={programGridColumnCount}
+          rowCount={programGridRowCount}
+          elements={programElements}
         />
       </div>
 
