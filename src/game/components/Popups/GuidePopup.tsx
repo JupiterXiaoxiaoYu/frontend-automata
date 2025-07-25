@@ -2,7 +2,13 @@ import React from "react";
 import background from "../../image/backgrounds/guide_frame.png";
 import HorizontalPrevPageButton from "../Buttons/HorizontalPrevPageButton";
 import HorizontalNextPageButton from "../Buttons/HorizontalNextPageButton";
-import { UIState, UIStateType, setUIState } from "../../../data/properties";
+import {
+  SceneType,
+  UIState,
+  UIStateType,
+  setSceneType,
+  setUIState,
+} from "../../../data/properties";
 import {
   nextPage,
   prevPage,
@@ -27,6 +33,7 @@ const GuidePopup = () => {
   const onClickEndGuide = () => {
     if (enableSkipButton) {
       dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+      dispatch(setSceneType({ sceneType: SceneType.Planet }));
     }
   };
 

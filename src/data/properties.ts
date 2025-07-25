@@ -55,8 +55,16 @@ export enum TutorialType {
   Program,
 }
 
+export enum SceneType {
+  None,
+  Planet,
+  Redeem,
+  Market,
+}
+
 interface PropertiesState {
   uIState: UIState;
+  sceneType: SceneType;
   tutorialType: TutorialType;
   globalTimer: number;
   nonce: string;
@@ -77,6 +85,7 @@ interface PropertiesState {
 const initialState: PropertiesState = {
   tutorialType: TutorialType.None,
   uIState: { type: UIStateType.WelcomePage },
+  sceneType: SceneType.Redeem,
   globalTimer: 0,
   nonce: "0",
   hasRocket: false,
@@ -99,6 +108,9 @@ export const propertiesSlice = createSlice({
   reducers: {
     setUIState: (state, action) => {
       state.uIState = action.payload.uIState;
+    },
+    setSceneType: (state, action) => {
+      state.sceneType = action.payload.sceneType;
     },
     setTutorialType: (state, action) => {
       state.tutorialType = action.payload.tutorialType;
@@ -160,6 +172,7 @@ export const selectIsSelectingUIState = (state: RootState) =>
   state.properties.uIState.type == UIStateType.Creating ||
   state.properties.uIState.type == UIStateType.Reboot;
 export const selectUIState = (state: RootState) => state.properties.uIState;
+export const selectSceneType = (state: RootState) => state.properties.sceneType;
 export const selectTutorialType = (state: RootState) =>
   state.properties.tutorialType;
 export const selectGlobalTimer = (state: RootState) =>
@@ -189,6 +202,6 @@ export const selectInterest = (state: RootState) => state.properties.interest;
 export const selectBountyPool = (state: RootState) =>
   state.properties.bountyPool;
 
-export const { setUIState, setTutorialType, setHasRocket } =
+export const { setUIState, setSceneType, setTutorialType, setHasRocket } =
   propertiesSlice.actions;
 export default propertiesSlice.reducer;

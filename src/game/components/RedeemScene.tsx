@@ -13,7 +13,7 @@ import {
   UIState,
   UIStateType,
 } from "../../data/properties";
-import "./RedeemMenu.css";
+import "./RedeemScene.css";
 import {
   getResourceDisabledIconPath,
   getResourceIconPath,
@@ -32,7 +32,7 @@ import {
 import { selectResources } from "../../data/resources";
 import { LoadingType, setLoadingType } from "../../data/errors";
 
-const RedeemMenu = () => {
+const RedeemScene = () => {
   const dispatch = useAppDispatch();
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
@@ -80,12 +80,12 @@ const RedeemMenu = () => {
   };
 
   return (
-    <div className="redeem-menu-container">
-      <img src={background} className="redeem-menu-background" />
-      <p className="redeem-resource-title-text">
+    <div className="redeem-scene-container">
+      <img src={background} className="redeem-scene-background" />
+      <p className="redeem-scene-resource-title-text">
         Redeem [available: {bountyPool}]{" "}
       </p>
-      <div className="redeem-menu-grid">
+      <div className="redeem-scene-grid">
         <Grid
           columnCount={2}
           rowCount={4}
@@ -122,4 +122,4 @@ const RedeemMenu = () => {
   );
 };
 
-export default RedeemMenu;
+export default RedeemScene;

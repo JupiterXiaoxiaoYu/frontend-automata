@@ -2,7 +2,13 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import "./TopMenu.css";
 import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
-import { setUIState, UIState, UIStateType } from "../../data/properties";
+import {
+  SceneType,
+  setSceneType,
+  setUIState,
+  UIState,
+  UIStateType,
+} from "../../data/properties";
 import { selectIsLoading } from "../../data/errors";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
@@ -10,8 +16,9 @@ import MarketButton from "./Buttons/MarketButton";
 import { startGuide } from "../../data/guides";
 import { GuideType } from "../../data/models";
 import PlayerInfo from "./PlayerInfo";
-import { setSelectingMarket } from "../../data/creatures";
 import { MarketTabState, setTabState } from "../../data/market";
+import PlanetButton from "./Buttons/PlanetButton";
+import RedeemButton from "./Buttons/RedeemButton";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -34,9 +41,17 @@ const TopMenu = () => {
     dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
   }
 
+  function onClickPlanet() {
+    dispatch(setSceneType({ sceneType: SceneType.Planet }));
+  }
+
   function onClickMarket() {
     dispatch(setTabState(MarketTabState.Inventory));
-    dispatch(setSelectingMarket({}));
+    dispatch(setSceneType({ sceneType: SceneType.Market }));
+  }
+
+  function onClickRedeem() {
+    dispatch(setSceneType({ sceneType: SceneType.Redeem }));
   }
 
   return (
@@ -53,8 +68,14 @@ const TopMenu = () => {
         <Resources />
         <PlayerInfo />
       </div>
+      <div className="top-planet">
+        <PlanetButton onClick={onClickPlanet} />
+      </div>
       <div className="top-market">
         <MarketButton onClick={onClickMarket} />
+      </div>
+      <div className="top-redeem">
+        <RedeemButton onClick={onClickRedeem} />
       </div>
       <div className="top-help">
         <HelpButton onClick={onClickHelp} />

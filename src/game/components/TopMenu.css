@@ -49,6 +49,15 @@
   width: 58px;
   height: 20px;
   top: 60px;
+  right: 362px;
+  z-index: 7;
+}
+
+.top-planet {
+  position: absolute;
+  width: 58px;
+  height: 20px;
+  top: 60px;
   right: 240px;
   z-index: 7;
 }
@@ -59,5 +68,14 @@
   height: 20px;
   top: 60px;
   right: 302px;
+  z-index: 7;
+}
+
+.top-redeem {
+  position: absolute;
+  width: 58px;
+  height: 20px;
+  top: 60px;
+  right: 422px;
   z-index: 7;
 }

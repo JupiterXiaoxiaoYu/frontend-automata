@@ -8,7 +8,7 @@ interface Props {
   onClick: () => void;
 }
 
-const RedeemButton = ({ onClick }: Props) => {
+const PlanetButton = ({ onClick }: Props) => {
   return (
     <div
       style={{
@@ -34,4 +34,4 @@ const RedeemButton = ({ onClick }: Props) => {
   );
 };
 
-export default RedeemButton;
+export default PlanetButton;

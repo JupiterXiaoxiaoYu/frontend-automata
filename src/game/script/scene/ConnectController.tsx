@@ -15,6 +15,8 @@ import { selectConnectState, setConnectState } from "../../../data/state";
 import LoadingPage from "./LoadingPage";
 import WelcomePage from "./WelcomePage";
 import {
+  SceneType,
+  setSceneType,
   setTutorialType,
   setUIState,
   TutorialType,
@@ -152,6 +154,7 @@ export function ConnectController({
             dispatch(queryState(l2Account.getPrivateKey()));
             dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
             dispatch(setTutorialType({ tutorialType: TutorialType.Creature }));
+            dispatch(setSceneType({ sceneType: SceneType.None }));
             onStartGameplay();
           }
         });

@@ -6,7 +6,7 @@ import {
   setLoadingType,
 } from "../../../data/errors";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import "./MarketPopup.css";
+import "./MarketScene.css";
 import PageSelector from "../PageSelector";
 import Grid from "../Grid";
 import MarketProgram from "../MarketProgram";
@@ -50,7 +50,7 @@ import OrangeTabButton from "../../script/button/OrangeTabButton";
 
 const ELEMENT_PER_REQUEST = 30;
 
-const MarketPopup = () => {
+const MarketScene = () => {
   const dispatch = useAppDispatch();
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
@@ -452,10 +452,10 @@ const MarketPopup = () => {
   };
 
   return (
-    <div className="market-popup-container">
-      <div className="market-popup-main-container">
-        <div className="market-popup-main-tab-container">
-          <div className="market-popup-tab-button">
+    <div className="market-scene-container">
+      <div className="market-scene-main-container">
+        <div className="market-scene-main-tab-container">
+          <div className="market-scene-tab-button">
             <OrangeTabButton
               text={"Inventory"}
               onClick={onClickInventoryTab}
@@ -463,21 +463,21 @@ const MarketPopup = () => {
               fontSizeRatio={0.75}
             />
           </div>
-          <div className="market-popup-tab-button">
+          <div className="market-scene-tab-button">
             <OrangeTabButton
               text={"Selling"}
               onClick={onClickSellingTab}
               isDisabled={tabState == MarketTabState.Selling}
             />
           </div>
-          <div className="market-popup-tab-button">
+          <div className="market-scene-tab-button">
             <OrangeTabButton
               text={"Auction"}
               onClick={onClickAuctionTab}
               isDisabled={tabState == MarketTabState.Auction}
             />
           </div>
-          <div className="market-popup-tab-button">
+          <div className="market-scene-tab-button">
             <OrangeTabButton
               text={"Lot"}
               onClick={onClickLotTab}
@@ -485,7 +485,7 @@ const MarketPopup = () => {
             />
           </div>
         </div>
-        <div ref={containerRef} className="market-popup-main-grid-container">
+        <div ref={containerRef} className="market-scene-main-grid-container">
           <Grid
             elementWidth={elementWidth}
             elementHeight={elementHeight}
@@ -511,7 +511,7 @@ const MarketPopup = () => {
           onCancelBid={onCancelBid}
         />
       )}
-      <div className="market-popup-page-selector-container">
+      <div className="market-scene-page-selector-container">
         <PageSelector
           currentPage={page}
           pageCount={totalPage}
@@ -524,4 +524,4 @@ const MarketPopup = () => {
   );
 };
 
-export default MarketPopup;
+export default MarketScene;
