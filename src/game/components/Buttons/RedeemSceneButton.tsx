@@ -1,8 +1,9 @@
 import React from "react";
-import ImageButton from "./ImageButton";
+
 import image from "../../image/Buttons/RedeemScene/redeem_scene.png";
 import hoverImage from "../../image/Buttons/RedeemScene/redeem_scene_hv.png";
 import clickImage from "../../image/Buttons/RedeemScene/redeem_scene_click.png";
+import ImageButton from "../../script/common/ImageButton";
 
 interface Props {
   isDisabled: boolean;

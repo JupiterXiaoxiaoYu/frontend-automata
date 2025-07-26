@@ -1,5 +1,5 @@
 import React from "react";
-import ImageButton from "./ImageButton";
+import ImageButton from "../../script/common/ImageButton";
 import backButtonImage from "../../image/Buttons/HorizontalPrevPage/back.png";
 import backButtonHoverImage from "../../image/Buttons/HorizontalPrevPage/back_hover.png";
 import backButtonClickImage from "../../image/Buttons/HorizontalPrevPage/back_click.png";

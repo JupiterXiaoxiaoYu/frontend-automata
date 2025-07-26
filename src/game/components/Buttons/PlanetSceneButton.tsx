@@ -1,5 +1,5 @@
 import React from "react";
-import ImageButton from "./ImageButton";
+import ImageButton from "../../script/common/ImageButton";
 import image from "../../image/Buttons/PlanetScene/planet_scene.png";
 import hoverImage from "../../image/Buttons/PlanetScene/planet_scene_hv.png";
 import clickImage from "../../image/Buttons/PlanetScene/planet_scene_click.png";
