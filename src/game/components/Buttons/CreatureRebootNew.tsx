@@ -1,14 +1,15 @@
 import React from "react";
 import ImageButton from "./ImageButton";
-import image from "../../image/Buttons/Market/market.png";
-import hoverImage from "../../image/Buttons/Market/market_hv.png";
-import clickImage from "../../image/Buttons/Market/market_click.png";
+import image from "../../image/Buttons/CreatureNew/creature_new.png";
+import hoverImage from "../../image/Buttons/CreatureNew/creature_new_hv.png";
+import clickImage from "../../image/Buttons/CreatureNew/creature_new_click.png";
 
 interface Props {
+  isDisabled: boolean;
   onClick: () => void;
 }
 
-const RedeemButton = ({ onClick }: Props) => {
+const CreatureNewButton = ({ isDisabled, onClick }: Props) => {
   return (
     <div
       style={{
@@ -17,14 +18,14 @@ const RedeemButton = ({ onClick }: Props) => {
         top: "50%",
         width: "auto",
         height: "100%",
-        aspectRatio: "61 / 23",
+        aspectRatio: "131 / 128",
         transform: "translate(-50%, -50%)",
         margin: "0px",
       }}
     >
       <ImageButton
         onClick={onClick}
-        isDisabled={false}
+        isDisabled={isDisabled}
         defaultImagePath={image}
         hoverImagePath={hoverImage}
         clickedImagePath={clickImage}
@@ -34,4 +35,4 @@ const RedeemButton = ({ onClick }: Props) => {
   );
 };
 
-export default RedeemButton;
+export default CreatureNewButton;

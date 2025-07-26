@@ -4,6 +4,7 @@ import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
   SceneType,
+  selectSceneType,
   setSceneType,
   setUIState,
   UIState,
@@ -12,17 +13,18 @@ import {
 import { selectIsLoading } from "../../data/errors";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
-import MarketButton from "./Buttons/MarketButton";
 import { startGuide } from "../../data/guides";
 import { GuideType } from "../../data/models";
 import PlayerInfo from "./PlayerInfo";
 import { MarketTabState, setTabState } from "../../data/market";
-import PlanetButton from "./Buttons/PlanetButton";
-import RedeemButton from "./Buttons/RedeemButton";
+import PlanetSceneButton from "./Buttons/PlanetSceneButton";
+import MarketSceneButton from "./Buttons/MarketSceneButton";
+import RedeemSceneButton from "./Buttons/RedeemSceneButton";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(selectIsLoading);
+  const sceneType = useAppSelector(selectSceneType);
 
   const onClickWithdraw = () => {
     if (!isLoading) {
@@ -59,23 +61,38 @@ const TopMenu = () => {
       <div className="top-left"></div>
       <div className="top-middle"></div>
       <div className="top-right"></div>
-      <div className="top-info">
+      <div className="top-titanium-frame">
         <TitaniumFrame
           onClickWithdraw={onClickWithdraw}
           onClickDeposit={onClickDeposit}
         />
+      </div>
+      <div className="top-account-info">
         <AccountInfo />
+      </div>
+      <div className="top-resources">
         <Resources />
+      </div>
+      <div className="top-player-info">
         <PlayerInfo />
       </div>
       <div className="top-planet">
-        <PlanetButton onClick={onClickPlanet} />
+        <PlanetSceneButton
+          isDisabled={sceneType == SceneType.Planet}
+          onClick={onClickPlanet}
+        />
       </div>
       <div className="top-market">
-        <MarketButton onClick={onClickMarket} />
+        <MarketSceneButton
+          isDisabled={sceneType == SceneType.Market}
+          onClick={onClickMarket}
+        />
       </div>
       <div className="top-redeem">
-        <RedeemButton onClick={onClickRedeem} />
+        <RedeemSceneButton
+          isDisabled={sceneType == SceneType.Redeem}
+          onClick={onClickRedeem}
+        />
       </div>
       <div className="top-help">
         <HelpButton onClick={onClickHelp} />
