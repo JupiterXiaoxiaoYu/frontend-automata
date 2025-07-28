@@ -1,26 +1,21 @@
-.planet-scene {
-  height: 100%;
-  width: calc(100% - 190px * 2);
+.planet-scene-container {
+  position: absolute;
+  height: 512px;
+  width: 800px;
   flex: 1;
-  background-image: url("../image/backgrounds/menu_bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  position: relative;
-  /* z-index: 3; */
+  background-color: green;
 }
 
 .planet-scene-program-container {
   position: absolute;
   height: 70px;
   width: 551px;
-  bottom: 0%;
-  left: 40%;
+  bottom: -2%;
+  left: 38%;
   transform: translate(-50%, -50%);
   background-image: url("../image/backgrounds/main_program_frame.png");
   background-size: cover;
@@ -32,7 +27,7 @@
   position: absolute;
   width: 152px;
   height: 90px;
-  top: 90.2%;
+  top: 88.2%;
   left: 85%;
   transform: translate(-50%, -50%);
 }
@@ -41,7 +36,7 @@
   position: absolute;
   width: 26px;
   height: 23px;
-  top: 86.5%;
+  top: 84.5%;
   left: 97%;
   transform: translate(-50%, -50%);
 }
@@ -50,7 +45,7 @@
   position: absolute;
   width: 26px;
   height: 23px;
-  top: 93.5%;
+  top: 91.5%;
   left: 97%;
   transform: translate(-50%, -50%);
 }

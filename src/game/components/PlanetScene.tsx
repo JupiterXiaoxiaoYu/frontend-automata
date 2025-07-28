@@ -260,71 +260,73 @@ const PlanetScene = ({ localTimer }: Props) => {
     // </div>
     <>
       <Rocket />
-      <div className="planet-scene-program-container">
-        {selectedCreaturePrograms.map((program, index) => (
-          <MainMenuProgram
-            key={index}
-            order={index}
-            program={program}
-            showContainerAnimation={isSelectingUIState}
-            showProgramAnimation={
-              !selectedCreature.isStarting &&
-              !isSelectingUIState &&
-              !isLoading &&
-              uIState.type != UIStateType.UnlockPopup &&
-              uIState.type != UIStateType.PlayUnlockAnimation &&
-              currentProgramInfo.index == index &&
-              !selectedCreature.isProgramStop
-            }
+      <div className="planet-scene-container">
+        <div className="planet-scene-program-container">
+          {selectedCreaturePrograms.map((program, index) => (
+            <MainMenuProgram
+              key={index}
+              order={index}
+              program={program}
+              showContainerAnimation={isSelectingUIState}
+              showProgramAnimation={
+                !selectedCreature.isStarting &&
+                !isSelectingUIState &&
+                !isLoading &&
+                uIState.type != UIStateType.UnlockPopup &&
+                uIState.type != UIStateType.PlayUnlockAnimation &&
+                currentProgramInfo.index == index &&
+                !selectedCreature.isProgramStop
+              }
+            />
+          ))}
+          {showConfirmButton && (
+            <div className="planet-scene-program-action-button">
+              <CreatureConfirmButton
+                isDisabled={!enableConfirmButton}
+                onClick={onClickConfirmReboot}
+              />
+            </div>
+          )}
+          {showRebootButton && (
+            <div className="planet-scene-program-action-button">
+              <CreatureRebootButton
+                isDisabled={isLoading}
+                onClick={onClickReboot}
+              />
+            </div>
+          )}
+          {showNewCreatureButton && (
+            <div className="planet-scene-program-action-button">
+              <CreatureNewButton
+                isDisabled={isLoading}
+                onClick={onClickNewCreature}
+              />
+            </div>
+          )}
+        </div>
+        <div className="planet-scene-creature-info">
+          <Creature
+            isLocked={false}
+            creature={selectedCreature}
+            progress={currentProgramInfo.progress}
           />
-        ))}
-        {showConfirmButton && (
-          <div className="planet-scene-program-action-button">
-            <CreatureConfirmButton
-              isDisabled={!enableConfirmButton}
-              onClick={onClickConfirmReboot}
-            />
-          </div>
-        )}
-        {showRebootButton && (
-          <div className="planet-scene-program-action-button">
-            <CreatureRebootButton
-              isDisabled={isLoading}
-              onClick={onClickReboot}
-            />
-          </div>
-        )}
-        {showNewCreatureButton && (
-          <div className="planet-scene-program-action-button">
-            <CreatureNewButton
-              isDisabled={isLoading}
-              onClick={onClickNewCreature}
-            />
-          </div>
-        )}
-      </div>
-      <div className="planet-scene-creature-info">
-        <Creature
-          isLocked={false}
-          creature={selectedCreature}
-          progress={currentProgramInfo.progress}
-        />
-      </div>
-      <div className="planet-scene-prev-creature-button">
-        <PrevPageButton
-          isDisabled={false}
-          onClick={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
-      </div>
-      <div className="planet-scene-next-creature-button">
-        <NextPageButton
-          isDisabled={false}
-          onClick={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+        </div>
+        <div className="planet-scene-prev-creature-button">
+          <PrevPageButton
+            isDisabled={false}
+            onClick={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        </div>
+        <div className="planet-scene-next-creature-button">
+          <NextPageButton
+            isDisabled={false}
+            onClick={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        </div>
       </div>
     </>
   );
