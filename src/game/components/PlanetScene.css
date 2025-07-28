@@ -28,6 +28,33 @@
   background-repeat: no-repeat;
 }
 
+.planet-scene-creature-info {
+  position: absolute;
+  width: 152px;
+  height: 90px;
+  top: 90.2%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.planet-scene-prev-creature-button {
+  position: absolute;
+  width: 26px;
+  height: 23px;
+  top: 86.5%;
+  left: 97%;
+  transform: translate(-50%, -50%);
+}
+
+.planet-scene-next-creature-button {
+  position: absolute;
+  width: 26px;
+  height: 23px;
+  top: 93.5%;
+  left: 97%;
+  transform: translate(-50%, -50%);
+}
+
 .planet-scene-program-action-button {
   position: absolute;
   height: 80%;

@@ -142,6 +142,7 @@ export function ConnectController({
     dispatch(queryState(l2Account!.getPrivateKey())).then(async (action) => {
       if (queryState.fulfilled.match(action)) {
         onStartGameplay();
+        dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
       } else if (queryState.rejected.match(action)) {
         const command = createCommand(0n, CREATE_PLAYER, []);
         dispatch(

@@ -70,33 +70,6 @@
   font-size: 8px;
 }
 
-.creature-lock-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 152px;
-  height: 86px;
-  user-select: none;
-}
-
-.creature-lock-text {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  line-height: 100%;
-  margin: 0px;
-  width: 90%;
-  font-size: 8px;
-  height: 8px;
-  font-family: "mishmash";
-  color: #ffd95f;
-  pointer-events: none;
-  user-select: none;
-}
-
 .creature-upgrade-button {
   position: absolute;
   width: 20px;

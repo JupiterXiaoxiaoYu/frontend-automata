@@ -188,6 +188,7 @@ export const creaturesSlice = createSlice({
     },
     setProgramIndex: (state, action) => {
       if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE) {
+        console.log("setProgramIndex", action.payload.programIndex);
         const selectedCreature =
           state.selectedCreatureIndex === state.creatures.length
             ? state.creatingCreature

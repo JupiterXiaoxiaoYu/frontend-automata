@@ -36,6 +36,7 @@ import {
   selectSelectedCreatureCurrentProgram,
   selectSelectedCreatureSelectingProgram,
   setNotSelectingCreature,
+  startCreatingCreature,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -43,6 +44,11 @@ import MainMenuProgressBar from "./MainMenuProgressBar";
 import RedeemMenu from "./RedeemScene";
 import MainMenuEmptyHint from "./MainMenuEmptyHint";
 import MarketPopup from "./Popups/MarketScene";
+import Creature from "./Creature";
+import PrevPageButton from "./Buttons/PrevPageButton";
+import NextPageButton from "./Buttons/NextPageButton";
+import CreatureRebootButton from "./Buttons/CreatureRebootButton";
+import CreatureNewButton from "./Buttons/CreatureRebootNew";
 
 interface Props {
   localTimer: number;
@@ -60,27 +66,27 @@ const PlanetScene = ({ localTimer }: Props) => {
   const selectedCreaturePrograms = useAppSelector(
     selectSelectedCreaturePrograms
   );
+
+  console.log("selectedCreaturePrograms", selectedCreaturePrograms);
   const selectedCreatureDiffResources = useAppSelector(
     selectSelectedCreatureDiffResources
   );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isCreatingUIState = uIState.type == UIStateType.Creating;
-  const showConfirmButton = uIState.type == UIStateType.Reboot;
+  const showConfirmButton =
+    uIState.type == UIStateType.Reboot || uIState.type == UIStateType.Creating;
   const enableConfirmButton = selectedCreaturePrograms.every(
     (program) => program !== null
   );
-  const showUnlockButton = uIState.type == UIStateType.Creating;
-  const enableUnlockButton = selectedCreaturePrograms.every(
-    (program) => program !== null
-  );
-  const isLoading = useAppSelector(selectIsLoading);
-  const showRebootButton = uIState.type == UIStateType.Idle;
+  const showRebootButton =
+    uIState.type == UIStateType.Idle && !isNotSelectingCreature;
+  const showNewCreatureButton =
+    uIState.type == UIStateType.Idle && isNotSelectingCreature;
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
-  const showTaskMenu =
-    isNotSelectingCreature && uIState.type != UIStateType.GuidePopup;
-  const showMarketPopup = sceneType == SceneType.Market;
+  const isLoading = useAppSelector(selectIsLoading);
+
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
 
@@ -155,9 +161,10 @@ const PlanetScene = ({ localTimer }: Props) => {
     }
   }
 
-  function onClickRedeem() {
+  function onClickNewCreature() {
     if (!isLoading) {
-      dispatch(setNotSelectingCreature({}));
+      dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
+      dispatch(startCreatingCreature({}));
     }
   }
 
@@ -271,12 +278,53 @@ const PlanetScene = ({ localTimer }: Props) => {
             }
           />
         ))}
-        <div className="planet-scene-program-action-button">
-          <CreatureConfirmButton
-            isDisabled={!enableConfirmButton}
-            onClick={onClickConfirmReboot}
-          />
-        </div>
+        {showConfirmButton && (
+          <div className="planet-scene-program-action-button">
+            <CreatureConfirmButton
+              isDisabled={!enableConfirmButton}
+              onClick={onClickConfirmReboot}
+            />
+          </div>
+        )}
+        {showRebootButton && (
+          <div className="planet-scene-program-action-button">
+            <CreatureRebootButton
+              isDisabled={isLoading}
+              onClick={onClickReboot}
+            />
+          </div>
+        )}
+        {showNewCreatureButton && (
+          <div className="planet-scene-program-action-button">
+            <CreatureNewButton
+              isDisabled={isLoading}
+              onClick={onClickNewCreature}
+            />
+          </div>
+        )}
+      </div>
+      <div className="planet-scene-creature-info">
+        <Creature
+          isLocked={false}
+          creature={selectedCreature}
+          progress={currentProgramInfo.progress}
+        />
+      </div>
+      <div className="planet-scene-prev-creature-button">
+        <PrevPageButton
+          isDisabled={false}
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      </div>
+      <div className="planet-scene-next-creature-button">
+        <NextPageButton
+          isDisabled={false}
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </div>
     </>
   );

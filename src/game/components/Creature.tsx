@@ -1,25 +1,9 @@
-import React from "react";
 import "./Creature.css";
 import creatureBackground from "../image/backgrounds/creature_frame.png";
 import creatureStopMask from "../image/backgrounds/creature_frame_stop_mask.png";
 import creatureProgressMask from "../image/backgrounds/creature_frame_progress_mask.png";
-import creatureSelectingFrame from "../image/backgrounds/robot_select.png";
-import creatureLock from "../image/backgrounds/robot_lock.png";
-import {
-  TutorialType,
-  UIState,
-  UIStateType,
-  selectLevel,
-  selectTutorialType,
-  setTutorialType,
-  setUIState,
-} from "../../data/properties";
-import {
-  setSelectedCreatureIndex,
-  selectSelectedCreatureListIndex,
-  selectCreaturesCount,
-  startCreatingCreature,
-} from "../../data/creatures";
+import { UIStateType, setUIState } from "../../data/properties";
+import { selectCreaturesCount } from "../../data/creatures";
 import { selectIsLoading } from "../../data/errors";
 import {
   AttributeType,
@@ -28,53 +12,25 @@ import {
   getCreatureIconPath,
 } from "../../data/models";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import CreatureTutorial from "./CreatureTutorial";
 import UpgradeButton from "./Buttons/UpgradeButton";
 
 interface Props {
-  index: number;
+  isLocked: boolean;
   creature: CreatureModel;
   progress: number;
 }
 
-const Creature = ({ index, creature, progress }: Props) => {
+const Creature = ({ isLocked, creature, progress }: Props) => {
   const dispatch = useAppDispatch();
-  const selectedCreatureListIndex = useAppSelector(
-    selectSelectedCreatureListIndex
-  );
-  const isSelected = selectedCreatureListIndex == index;
   const isLoading = useAppSelector(selectIsLoading);
   const creaturesCount = useAppSelector(selectCreaturesCount);
-  const level = useAppSelector(selectLevel);
-  const isLocked = index >= creaturesCount;
-  const unlockLevel = Math.max(index * 2 - 1, 1);
-  const showLocked = index > creaturesCount || unlockLevel > level;
   const creatureIconPath = getCreatureIconPath(creature.creatureType);
-  const tutorialType = useAppSelector(selectTutorialType);
   const levelIcon = getAttributeIconPath(AttributeType.Level);
   const speedIcon = getAttributeIconPath(AttributeType.Speed);
   const efficiencyIcon = getAttributeIconPath(AttributeType.Efficiency);
   const productivityIcon = getAttributeIconPath(AttributeType.Productivity);
 
-  const onSelect = () => {
-    if (!isSelected && !isLoading) {
-      if (index == creaturesCount) {
-        dispatch(
-          startCreatingCreature({ creatureType: creature.creatureType })
-        );
-        dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
-        if (tutorialType == TutorialType.Creature) {
-          dispatch(setTutorialType({ tutorialType: TutorialType.Program }));
-        }
-      } else if (index < creaturesCount) {
-        dispatch(setSelectedCreatureIndex({ index }));
-        dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
-      }
-    }
-  };
-
   function onClickUpgrade() {
-    onSelect();
     if (!isLoading) {
       dispatch(setUIState({ uIState: { type: UIStateType.UpgradePopup } }));
     }
@@ -84,12 +40,7 @@ const Creature = ({ index, creature, progress }: Props) => {
 
   return (
     <div className="creature-container">
-      {index == 0 && <CreatureTutorial />}
-      <img
-        src={isSelected ? creatureSelectingFrame : creatureBackground}
-        className="creature-background"
-        onClick={() => onSelect()}
-      />
+      <img src={creatureBackground} className="creature-background" />
       {creatureIconPath && (
         <>
           <img src={creatureIconPath} className="creature-image-background" />
@@ -149,16 +100,6 @@ const Creature = ({ index, creature, progress }: Props) => {
         <p className="creature-creating-text">Creating</p>
       ) : (
         <p className="creature-text">{creature.name}</p>
-      )}
-      {showLocked && (
-        <>
-          <img src={creatureLock} className="creature-lock-image" />
-          <p className="creature-lock-text">
-            {unlockLevel > level
-              ? `Level ${unlockLevel}`
-              : "Unlock Previous Robot First"}
-          </p>
-        </>
       )}
     </div>
   );
