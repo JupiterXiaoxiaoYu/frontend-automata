@@ -1,79 +1,81 @@
 .main-bot-program-bot-container {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  background-color: red;
 }
 
 .main-bot-program-button {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    clip-path: polygon(50% 50%, 100% 50%, 100% 0%, 50% 50%);
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  clip-path: polygon(50% 50%, 100% 50%, 100% 0%, 50% 50%);
 }
-
 
 @keyframes programImageFrames {
-    0% { width: 200%; height: 200%; }
-    100% { width: 100%; height: 100%; }
-}
-
-.main-bot-program-normal-container{
-    position: absolute;
+  0% {
+    width: 200%;
+    height: 200%;
+  }
+  100% {
     width: 100%;
     height: 100%;
+  }
+}
+
+.main-bot-program-normal-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .main-bot-program-animation-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: programImageFrames 0.5s linear;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: programImageFrames 0.5s linear;
 }
 
 .main-bot-program-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-size: cover;
-    user-select: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  user-select: none;
 }
 
 @keyframes MainBotProgramAnimation {
-    from { background-position: 0px; }
-    to { background-position: -3840px; }
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -3840px;
+  }
 }
 
 .main-bot-program-animation {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(37.75%, 37.75%);
-    animation: MainBotProgramAnimation 2s steps(24) infinite;
-    background-size: cover;
-    user-select: none;
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(37.75%, 37.75%);
+  animation: MainBotProgramAnimation 2s steps(24) infinite;
+  background-size: cover;
+  user-select: none;
 }
 
-.main-bot-program-left-hover-container{
-    position: absolute;
-    top: 50%;
-    right: 250%;
-    transform: translate(0%, -50%);
-    user-select: none;
-}
-
-.main-bot-program-right-hover-container{
-    position: absolute;
-    top: 50%;
-    left: 250%;
-    transform: translate(0%, -50%);
-    user-select: none;
+.main-bot-program-hover-container {
+  position: absolute;
+  top: 200%;
+  left: 50%;
+  transform: translate(0%, -50%);
+  user-select: none;
 }

@@ -33,12 +33,8 @@ const MainMenuProgram = ({
   const handleMouseEnter = () => setIsHovering(true);
   const handleMouseLeave = () => setIsHovering(false);
 
-  const rotation = order * 45 + 22.5;
-  const angle = 90 - rotation;
-
-  const radius = 36;
-  const yPosition = 50 - Math.sin((angle * Math.PI) / 180) * radius;
-  const xPosition = 50 + Math.cos((angle * Math.PI) / 180) * radius;
+  const yPosition = 40.8;
+  const xPosition = 5.5 + 10.85 * order;
   const onClick = () => {
     if (isSelectingUIState && !isLoading) {
       dispatch(setSelectingProgramIndex({ selectingIndex: order }));
@@ -49,6 +45,9 @@ const MainMenuProgram = ({
     <>
       <div
         className="main-bot-program-bot-container"
+        onClick={onClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{
           top: `${yPosition}%`,
           left: `${xPosition}%`,
@@ -82,26 +81,11 @@ const MainMenuProgram = ({
             ))}
         </div>
         {isHovering && (
-          <div
-            className={
-              order < 4
-                ? "main-bot-program-right-hover-container"
-                : "main-bot-program-left-hover-container"
-            }
-          >
+          <div className="main-bot-program-hover-container">
             <ProgramHover program={program} />
           </div>
         )}
       </div>
-      <div
-        className="main-bot-program-button"
-        onClick={onClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform: `translate(-50%, -50%) rotate(${order * 45 - 45}deg)`,
-        }}
-      />
     </>
   );
 };
