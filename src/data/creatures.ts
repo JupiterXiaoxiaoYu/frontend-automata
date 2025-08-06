@@ -165,13 +165,15 @@ export const creaturesSlice = createSlice({
   initialState,
   reducers: {
     changeSelectedCreature: (state, action) => {
-      if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE) {
-        state.selectedCreatureIndex =
-          state.creatures.length == 0
-            ? NOT_SELECTING_CREATURE
-            : (state.selectedCreatureIndex + action.payload.diff) %
-              state.creatures.length;
-      }
+      const newIndex =
+        ((state.selectedCreatureIndex == NOT_SELECTING_CREATURE
+          ? 0
+          : state.selectedCreatureIndex + 1) +
+          action.payload.diff) %
+        (state.creatures.length + 1);
+      state.selectedCreatureIndex =
+        newIndex == 0 ? NOT_SELECTING_CREATURE : newIndex - 1;
+      console.log("changeSelectedCreature", state.selectedCreatureIndex);
     },
     setNotSelectingCreature: (state, action) => {
       state.selectedCreatureIndex = NOT_SELECTING_CREATURE;

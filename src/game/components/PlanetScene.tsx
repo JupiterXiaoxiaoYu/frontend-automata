@@ -265,23 +265,6 @@ const PlanetScene = ({ localTimer }: Props) => {
       <Rocket />
       <div className="planet-scene-container">
         <div className="planet-scene-program-container">
-          {selectedCreaturePrograms.map((program, index) => (
-            <MainMenuProgram
-              key={index}
-              order={index}
-              program={program}
-              showContainerAnimation={isSelectingUIState}
-              showProgramAnimation={
-                !selectedCreature.isStarting &&
-                !isSelectingUIState &&
-                !isLoading &&
-                uIState.type != UIStateType.UnlockPopup &&
-                uIState.type != UIStateType.PlayUnlockAnimation &&
-                currentProgramInfo.index == index &&
-                !selectedCreature.isProgramStop
-              }
-            />
-          ))}
           {showConfirmCreateButton && (
             <div className="planet-scene-program-action-button">
               <CreatureConfirmButton
@@ -314,6 +297,23 @@ const PlanetScene = ({ localTimer }: Props) => {
               />
             </div>
           )}
+          {selectedCreaturePrograms.map((program, index) => (
+            <MainMenuProgram
+              key={index}
+              order={index}
+              program={program}
+              showContainerAnimation={isSelectingUIState}
+              showProgramAnimation={
+                !selectedCreature.isStarting &&
+                !isSelectingUIState &&
+                !isLoading &&
+                uIState.type != UIStateType.UnlockPopup &&
+                uIState.type != UIStateType.PlayUnlockAnimation &&
+                currentProgramInfo.index == index &&
+                !selectedCreature.isProgramStop
+              }
+            />
+          ))}
         </div>
         <div className="planet-scene-creature-info">
           <Creature
