@@ -183,6 +183,7 @@ const PlanetScene = ({ localTimer }: Props) => {
 
   const onChangeSelectedCreature = (diff: number) => {
     dispatch(changeSelectedCreature({ diff }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
   return (

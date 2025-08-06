@@ -169,7 +169,8 @@ export const creaturesSlice = createSlice({
         ((state.selectedCreatureIndex == NOT_SELECTING_CREATURE
           ? 0
           : state.selectedCreatureIndex + 1) +
-          action.payload.diff) %
+          action.payload.diff +
+          (state.creatures.length + 1)) %
         (state.creatures.length + 1);
       state.selectedCreatureIndex =
         newIndex == 0 ? NOT_SELECTING_CREATURE : newIndex - 1;
