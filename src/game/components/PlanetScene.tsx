@@ -37,6 +37,7 @@ import {
   selectSelectedCreatureSelectingProgram,
   setNotSelectingCreature,
   startCreatingCreature,
+  changeSelectedCreature,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -61,20 +62,18 @@ const PlanetScene = ({ localTimer }: Props) => {
   const uIState = useAppSelector(selectUIState);
   const nonce = useAppSelector(selectNonce);
   const isNotSelectingCreature = useAppSelector(selectIsNotSelectingCreature);
-  const sceneType = useAppSelector(selectSceneType);
   const selectedCreature = useAppSelector(selectSelectedCreature);
   const selectedCreaturePrograms = useAppSelector(
     selectSelectedCreaturePrograms
   );
 
-  console.log("selectedCreaturePrograms", selectedCreaturePrograms);
   const selectedCreatureDiffResources = useAppSelector(
     selectSelectedCreatureDiffResources
   );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isCreatingUIState = uIState.type == UIStateType.Creating;
-  const showConfirmButton =
-    uIState.type == UIStateType.Reboot || uIState.type == UIStateType.Creating;
+  const showConfirmRebootButton = uIState.type == UIStateType.Reboot;
+  const showConfirmCreateButton = uIState.type == UIStateType.Creating;
   const enableConfirmButton = selectedCreaturePrograms.every(
     (program) => program !== null
   );
@@ -182,6 +181,10 @@ const PlanetScene = ({ localTimer }: Props) => {
     }
   }, [uIState]);
 
+  const onChangeSelectedCreature = (diff: number) => {
+    dispatch(changeSelectedCreature({ diff }));
+  };
+
   return (
     // <div className="planet-scene-content">
     //   <div className="planet-scene-info-container">
@@ -279,7 +282,15 @@ const PlanetScene = ({ localTimer }: Props) => {
               }
             />
           ))}
-          {showConfirmButton && (
+          {showConfirmCreateButton && (
+            <div className="planet-scene-program-action-button">
+              <CreatureConfirmButton
+                isDisabled={!enableConfirmButton}
+                onClick={onClickUnlock}
+              />
+            </div>
+          )}
+          {showConfirmRebootButton && (
             <div className="planet-scene-program-action-button">
               <CreatureConfirmButton
                 isDisabled={!enableConfirmButton}
@@ -314,17 +325,13 @@ const PlanetScene = ({ localTimer }: Props) => {
         <div className="planet-scene-prev-creature-button">
           <PrevPageButton
             isDisabled={false}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            onClick={() => onChangeSelectedCreature(-1)}
           />
         </div>
         <div className="planet-scene-next-creature-button">
           <NextPageButton
             isDisabled={false}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            onClick={() => onChangeSelectedCreature(1)}
           />
         </div>
       </div>

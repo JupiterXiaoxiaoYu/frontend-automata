@@ -164,9 +164,13 @@ export const creaturesSlice = createSlice({
   name: "creatures",
   initialState,
   reducers: {
-    setSelectedCreatureIndex: (state, action) => {
-      if (action.payload.index < state.creatures.length) {
-        state.selectedCreatureIndex = action.payload.index;
+    changeSelectedCreature: (state, action) => {
+      if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE) {
+        state.selectedCreatureIndex =
+          state.creatures.length == 0
+            ? NOT_SELECTING_CREATURE
+            : (state.selectedCreatureIndex + action.payload.diff) %
+              state.creatures.length;
       }
     },
     setNotSelectingCreature: (state, action) => {
@@ -245,16 +249,6 @@ export const selectSelectedCreatureListIndex = (state: RootState) =>
     : state.creatures.selectedCreatureIndex;
 export const selectCreaturesCount = (state: RootState) =>
   state.creatures.creatures.length;
-export const selectCreatures = (state: RootState) =>
-  state.creatures.selectedCreatureIndex === state.creatures.creatures.length
-    ? fillCreaturesWithLocked([
-        ...state.creatures.creatures,
-        state.creatures.creatingCreature,
-      ])
-    : fillCreaturesWithLocked([
-        ...state.creatures.creatures,
-        getUnlockableCreature(state.creatures.creatures.length),
-      ]);
 export const selectSelectedCreature = (state: RootState) =>
   state.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE
     ? emptyCreature
@@ -491,8 +485,9 @@ export const selectInstalledProgramIds = (state: RootState): number[] => {
     );
   return Array.from(new Set(allProgramIndexes));
 };
+
 export const {
-  setSelectedCreatureIndex,
+  changeSelectedCreature,
   setNotSelectingCreature,
   startCreatingCreature,
   startRebootCreature,
