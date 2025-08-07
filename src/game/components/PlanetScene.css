@@ -9,6 +9,16 @@
   font-size: 24px;
 }
 
+.planet-scene-canvas-container {
+  position: absolute;
+  width: auto;
+  height: 540px;
+  aspect-ratio: 1671 / 903;
+  top: 45%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
 .planet-scene-program-container {
   position: absolute;
   height: 70px;
