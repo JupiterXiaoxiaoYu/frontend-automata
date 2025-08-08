@@ -1,5 +1,7 @@
 import {
+  getProgramCreatureLeft,
   getProgramCreatureSpriteSheetPath,
+  getProgramCreatureTop,
   ProgramType,
 } from "../../../../../data/models";
 import { HEIGHT, WIDTH } from "./draw";
@@ -21,6 +23,7 @@ export class ClipRect {
 export class Clip {
   index: number;
   name: string;
+  programType: ProgramType;
   src: HTMLImageElement;
   left: number;
   top: number;
@@ -36,26 +39,24 @@ export class Clip {
   target: Array<[number, number]>;
   constructor(
     index: number,
+    programType: ProgramType,
     boundry: ClipRect,
-    ratio: number,
-    left: number,
-    top: number
+    ratio: number
   ) {
     this.index = index;
     this.name = `Robot ${index}`;
+    this.programType = programType;
 
     const spriteSheetImage = new Image();
     spriteSheetImage.setAttribute("crossOrigin", "");
-    spriteSheetImage.src = getProgramCreatureSpriteSheetPath(
-      index as ProgramType
-    );
+    spriteSheetImage.src = getProgramCreatureSpriteSheetPath(programType);
 
     this.src = spriteSheetImage;
     this.boundry = boundry;
     this.vx = 0;
     this.vy = 0;
-    this.left = left;
-    this.top = top;
+    this.left = getProgramCreatureLeft(programType);
+    this.top = getProgramCreatureTop(programType);
     this.currentFrame = 0;
     this.currentClip = null;
     this.clips = new Map<string, Array<ClipRect>>();
@@ -79,6 +80,14 @@ export class Clip {
     }
     this.clips.set("normal", clips);
     this.currentClip = "normal";
+  }
+
+  updateProgramType(programType: ProgramType) {
+    this.programType = programType;
+    this.src.src = getProgramCreatureSpriteSheetPath(programType);
+    this.left = getProgramCreatureLeft(programType);
+    this.top = getProgramCreatureTop(programType);
+    this.currentFrame = 0;
   }
 
   inRect(cursorLeft: number, cursorTop: number): boolean {
@@ -174,17 +183,16 @@ export class Clip {
       }
 
       const rank = 1;
-      const fullname = `${this.name}:${rank}`;
       {
         ctx.fillRect(
           this.left + 30,
           this.top - 13,
-          fullname.length * 7 + 5,
+          this.name.length * 7 + 5,
           15
         );
         ctx.fillStyle = "white"; // Red color
         ctx.font = "12px Arial";
-        ctx.fillText(fullname, this.left + 35, this.top); // text, x, y
+        ctx.fillText(this.name, this.left + 35, this.top); // text, x, y
       }
       if (this.hover == true) {
         //ctx.fillStyle = 'hsl(20%, 100%, 15%)'; // Use 50% gray to desaturate
@@ -212,7 +220,7 @@ export class Clip {
   }
 }
 
-export function createAnimationClip(index: number, left: number, top: number) {
+export function createAnimationClip(index: number, programType: ProgramType) {
   const boundry = new ClipRect(HEIGHT / 2 - 40, 50, WIDTH - 100, HEIGHT - 200);
-  return new Clip(index, boundry, 0.5, left, top);
+  return new Clip(index, programType, boundry, 0.5);
 }

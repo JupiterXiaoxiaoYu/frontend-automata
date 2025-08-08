@@ -16,37 +16,42 @@ function getRandomNumber(range: number): number {
 export class Scenario {
   status: string;
   clips: Array<Clip>;
-  actor: Clip;
-  actorState: "focus" | "restore";
+  focusingIndex?: number | null;
   background: BackgroundBase;
   context?: CanvasRenderingContext2D;
 
-  constructor(programTypes: ProgramType[]) {
+  constructor() {
     this.status = "play";
     this.clips = [];
-    for (let i = 0; i < programTypes.length; i++) {
-      const clip = createAnimationClip(
-        i,
-        getProgramCreatureLeft(programTypes[i]),
-        getProgramCreatureTop(programTypes[i])
-      );
-      this.clips.push(clip);
-      clip.name = i.toString();
-    }
-    this.clips[0].focus = true;
-    this.actor = this.clips[0];
-    this.actorState = "restore";
-
     this.background = new BackgroundDisco(this.clips);
   }
 
+  updateClips(programTypes: ProgramType[]) {
+    for (let i = 0; i < this.clips.length; i++) {
+      if (this.clips[i].programType != programTypes[i]) {
+        this.clips[i].updateProgramType(programTypes[i]);
+      }
+    }
+
+    for (let i = this.clips.length; i < programTypes.length; i++) {
+      const clip = createAnimationClip(i, programTypes[i]);
+      this.clips.push(clip);
+    }
+  }
+
+  setFocus(index: number) {
+    if (this.focusingIndex) {
+      this.clips[this.focusingIndex].focus = false;
+    }
+    this.clips[index].focus = true;
+    this.focusingIndex = index;
+  }
+
   selectMeme(cursorLeft: number, cursorTop: number) {
-    const clips = this.clips.sort((a, b) => b.getBottom() - a.getBottom()); // front first
-    for (const clip of clips) {
+    for (let i = 0; i < this.clips.length; i++) {
+      const clip = this.clips[i];
       if (clip.inRect(cursorLeft, cursorTop)) {
-        this.actor.focus = false;
-        clip.focus = true;
-        this.actor = clip;
+        this.setFocus(i);
         return clip.index;
       }
     }
@@ -54,9 +59,8 @@ export class Scenario {
   }
 
   hoverMeme(cursorLeft: number, cursorTop: number) {
-    const clips = this.clips.sort((a, b) => b.getBottom() - a.getBottom()); // front first
     let picked = false;
-    for (const clip of clips) {
+    for (const clip of this.clips) {
       if (picked) {
         clip.hover = false;
         picked = true;
@@ -72,7 +76,7 @@ export class Scenario {
     let j = 0;
     const factor = (Math.PI * 2) / (this.clips.length - 1);
     for (let i = 0; i < this.clips.length; i++) {
-      if (this.clips[i] != this.actor) {
+      if (this.focusingIndex !== i) {
         const x = 300 * Math.sin(j * factor);
         const y = 50 * Math.cos(j * factor);
         this.clips[i].target = [[450 + x, 300 + y]];
@@ -83,7 +87,7 @@ export class Scenario {
 
   waveClips() {
     for (let i = 0; i < this.clips.length; i++) {
-      if (this.clips[i] != this.actor) {
+      if (this.focusingIndex !== i) {
         this.clips[i].target = [
           [150 + 60 * i, 300 + 30 * Math.cos(((i + 1) * Math.PI) / 3)],
         ];
@@ -94,12 +98,12 @@ export class Scenario {
   lineClips() {
     const mid = this.clips.length / 2;
     for (let i = 0; i < mid; i++) {
-      if (this.clips[i] != this.actor) {
+      if (this.focusingIndex !== i) {
         this.clips[i].target = [[370 - 40 * i, 300 + 20 * (i - 3)]];
       }
     }
     for (let i = mid; i < this.clips.length; i++) {
-      if (this.clips[i] != this.actor) {
+      if (this.focusingIndex !== i) {
         this.clips[i].target = [[370 + 40 * i, 300 + 20 * (i - 3 - mid)]];
       }
     }
@@ -113,8 +117,9 @@ export class Scenario {
     } else if (move == 4) {
       this.lineClips();
     }
-    this.actorState = "focus";
-    this.actor.target = [[left, top]];
+    if (this.focusingIndex) {
+      this.clips[this.focusingIndex].target = [[left, top]];
+    }
   }
 
   clearTargets() {
@@ -124,7 +129,6 @@ export class Scenario {
   }
 
   restoreActor() {
-    this.actorState = "restore";
     for (let i = 0; i < this.clips.length; i++) {
       const top = 240 + getRandomNumber(80);
       const left = 50 + getRandomNumber(800);

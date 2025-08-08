@@ -15,10 +15,7 @@ export class BackgroundDisco extends BackgroundBase {
 
     drawBackground(this.context);
 
-    const sortedClips = this.clips.sort(
-      (a, b) => a.getBottom() - b.getBottom()
-    );
-    for (const obj of sortedClips) {
+    for (const obj of this.clips) {
       obj.draw(this.context);
     }
   }

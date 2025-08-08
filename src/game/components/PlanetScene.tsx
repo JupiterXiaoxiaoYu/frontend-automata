@@ -90,12 +90,9 @@ const PlanetScene = ({ localTimer }: Props) => {
   const creaturesCurrentPrograms = useAppSelector(
     selectCreaturesCurrentPrograms
   );
-  console.log("creaturesCurrentPrograms", creaturesCurrentPrograms);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
-  const [scenario, setScenario] = useState(
-    new Scenario(creaturesCurrentPrograms)
-  );
+  const [scenario, setScenario] = useState(new Scenario());
 
   function onClickUnlock() {
     if (uIState.type == UIStateType.Creating) {
@@ -200,6 +197,11 @@ const PlanetScene = ({ localTimer }: Props) => {
       clearInterval(intervalId);
     };
   }, []);
+
+  useEffect(() => {
+    console.log("creaturesCurrentPrograms changed", creaturesCurrentPrograms);
+    scenario.updateClips(creaturesCurrentPrograms);
+  }, [creaturesCurrentPrograms]);
 
   useEffect(() => {
     if (uIState.type == UIStateType.PlayUnlockAnimation) {

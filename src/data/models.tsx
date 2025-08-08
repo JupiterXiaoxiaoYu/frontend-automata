@@ -443,8 +443,8 @@ const programDatas: Record<ProgramType, ProgramData> = {
     iconPath: CrysTaraIcon,
     spriteSheetPath: CrysTaraSpriteSheet,
     creatureSpriteSheet: CrysTaraCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
+    creatureLeft: 440,
+    creatureTop: 140,
   },
   [ProgramType.PlasmaShift]: {
     iconPath: PlasmaShiftIcon,
@@ -471,8 +471,8 @@ const programDatas: Record<ProgramType, ProgramData> = {
     iconPath: BioGenIcon,
     spriteSheetPath: BioGenSpriteSheet,
     creatureSpriteSheet: BioGenCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
+    creatureLeft: 105,
+    creatureTop: 250,
   },
   [ProgramType.BioFusion]: {
     iconPath: BioFusionIcon,
@@ -485,8 +485,8 @@ const programDatas: Record<ProgramType, ProgramData> = {
     iconPath: AstroMineIcon,
     spriteSheetPath: AstroMineSpriteSheet,
     creatureSpriteSheet: AstroMineCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
+    creatureLeft: 660,
+    creatureTop: 180,
   },
   [ProgramType.TitaniumBoost]: {
     iconPath: TitaniumBoostIcon,
@@ -723,7 +723,7 @@ const programDatas: Record<ProgramType, ProgramData> = {
     iconPath: CrystaBloomIcon,
     spriteSheetPath: CrystaBloomSpriteSheet,
     creatureSpriteSheet: CrystaBloomCreatureSpriteSheet,
-    creatureLeft: 260,
+    creatureLeft: 550,
     creatureTop: 240,
   },
   [ProgramType.EtherPulse]: {
