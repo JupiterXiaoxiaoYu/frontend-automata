@@ -1,5 +1,43 @@
 import { HEIGHT, WIDTH } from "./draw";
 
+import weedSpritesheet from "../../../../image/spritesheet/weed.png";
+import testSpritesheet from "../../../../image/spritesheet/test.png";
+import hammarSpritesheet from "../../../../image/spritesheet/hammar.png";
+import pushSpritesheet from "../../../../image/spritesheet/push.png";
+import digSpritesheet from "../../../../image/spritesheet/dig.png";
+import screenSpritesheet from "../../../../image/spritesheet/screen.png";
+import drugSpritesheet from "../../../../image/spritesheet/drug.png";
+import computerSpritesheet from "../../../../image/spritesheet/computer.png";
+
+function getSpriteSheet(index: number): string {
+  switch (index) {
+    case 0:
+      return weedSpritesheet;
+    case 1:
+      return testSpritesheet;
+    case 2:
+      return hammarSpritesheet;
+    case 3:
+      return pushSpritesheet;
+    case 4:
+      return digSpritesheet;
+    case 5:
+      return screenSpritesheet;
+    case 6:
+      return drugSpritesheet;
+    case 7:
+      return computerSpritesheet;
+    default:
+      return weedSpritesheet;
+  }
+}
+
+export interface CreatureData {
+  index: number;
+  avatar: string;
+  spriteSheet: string;
+}
+
 export class ClipRect {
   top: number;
   left: number;
@@ -30,15 +68,15 @@ export class Clip {
   focus: boolean;
   hover: boolean;
   target: Array<[number, number]>;
-  constructor(
-    index: number,
-    src: HTMLImageElement,
-    boundry: ClipRect,
-    ratio: number
-  ) {
+  constructor(index: number, boundry: ClipRect, ratio: number) {
     this.index = index;
     this.name = "NPC";
-    this.src = src;
+
+    const spriteSheetImage = new Image();
+    spriteSheetImage.setAttribute("crossOrigin", "");
+    spriteSheetImage.src = getSpriteSheet(index);
+
+    this.src = spriteSheetImage;
     this.boundry = boundry;
     this.vx = 0;
     this.vy = 0;
@@ -125,7 +163,6 @@ export class Clip {
     if (this.currentClip != null && this.currentFrame != null) {
       //Set the fill color
       const rect = this.clips.get(this.currentClip)![this.currentFrame];
-      console.log("rect", this.left);
       const w = rect.right - rect.left;
       const h = rect.bottom - rect.top;
       ctx.drawImage(
@@ -208,16 +245,12 @@ export class Clip {
 
 export function createAnimationClip(
   index: number,
-  spriteSheet: string,
   top: number,
   left: number,
   start: number
 ) {
   const boundry = new ClipRect(HEIGHT / 2 - 40, 50, WIDTH - 100, HEIGHT - 200);
-  const spriteSheetImage = new Image();
-  spriteSheetImage.setAttribute("crossOrigin", "");
-  spriteSheetImage.src = spriteSheet;
-  const clip = new Clip(index, spriteSheetImage, boundry, 0.5);
+  const clip = new Clip(index, boundry, 0.5);
   clip.setAnimationClip(top, left, start);
   return clip;
 }

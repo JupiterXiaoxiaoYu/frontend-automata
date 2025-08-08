@@ -8,12 +8,6 @@ function getRandomNumber(range: number): number {
   return Math.floor(Math.random() * range);
 }
 
-export interface CreatureData {
-  index: number;
-  avatar: string;
-  spriteSheet: string;
-}
-
 export class Scenario {
   status: string;
   clips: Array<Clip>;
@@ -22,19 +16,18 @@ export class Scenario {
   background: BackgroundBase;
   context?: CanvasRenderingContext2D;
 
-  constructor(currentCreatures: CreatureData[]) {
+  constructor(creatureCount: number) {
     this.status = "play";
     this.clips = [];
-    for (let i = 0; i < currentCreatures.length; i++) {
+    for (let i = 0; i < creatureCount; i++) {
       const clip = createAnimationClip(
         i,
-        currentCreatures[i].spriteSheet,
         220 + getRandomNumber(80),
         50 + getRandomNumber(800),
         (i * 2) % 24
       );
       this.clips.push(clip);
-      clip.name = currentCreatures[i].index.toString();
+      clip.name = i.toString();
     }
     this.clips[0].focus = true;
     this.actor = this.clips[0];

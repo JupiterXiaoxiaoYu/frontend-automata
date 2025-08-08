@@ -1,5 +1,6 @@
 import re
 import os, shutil
+import subprocess
 from PIL import Image
 
 def merge_images_to_sprite(folder_path, output_path):
@@ -49,5 +50,28 @@ def merge_images_to_sprite(folder_path, output_path):
 #     merge_images_to_sprite(folder_path, sprite_sheet_output_path, 1, 24)
 #     shutil.copy(icon_input_path, icon_output_path)
 
-merge_images_to_sprite("./hammar", "./hammar.png")
+def merge_all_in_folder(folder_path):
+    importStr = ""
+    switchStr = ""
+    index = 0
+    for folder_name in os.listdir(folder_path):
+        image_name = f"{folder_name}.png"
+        if not os.path.exists(image_name):
+            merge_images_to_sprite(os.path.join(folder_path, folder_name), image_name)
+        importStr += f"import {folder_name}Spritesheet from \"../image/spritesheet/{image_name}\";\n"
+        switchStr += f"    case {index}:\n      return {folder_name}Spritesheet;\n"
+        index += 1
+    switchStr += f"    default:\n      return weedSpritesheet;\n"
+    
+    typescript_code = importStr + "\nfunction getSpriteSheet(index: number): string {\n  switch (index) {\n" + switchStr + "  }\n}"
+    # Copy to clipboard (macOS)
+    try:
+        process = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
+        process.communicate(typescript_code.encode('utf-8'))
+        print("\n✅ TypeScript code copied to clipboard!")
+    except Exception as e:
+        print(f"\n❌ Failed to copy to clipboard: {e}")
+        print("You can manually copy the code above.")
+
+merge_all_in_folder("raw")
 

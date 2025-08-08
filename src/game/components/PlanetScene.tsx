@@ -51,7 +51,6 @@ import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import CreatureNewButton from "./Buttons/CreatureRebootNew";
 import { Scenario } from "../script/scene/planet/scenario/scenario";
-import hammarSpritesheet from "../image/spritesheet/hammar.png";
 
 interface Props {
   localTimer: number;
@@ -90,15 +89,7 @@ const PlanetScene = ({ localTimer }: Props) => {
 
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
-  const [scenario, setScenario] = useState(
-    new Scenario([
-      {
-        index: 0,
-        avatar: hammarSpritesheet,
-        spriteSheet: hammarSpritesheet,
-      },
-    ])
-  );
+  const [scenario, setScenario] = useState(new Scenario(1));
 
   function onClickUnlock() {
     if (uIState.type == UIStateType.Creating) {
@@ -196,7 +187,7 @@ const PlanetScene = ({ localTimer }: Props) => {
 
     scenario.init();
     // Set the interval
-    const intervalId = setInterval(draw, 100); // 1000ms = 1 second
+    const intervalId = setInterval(draw, 30); // 1000ms = 1 second
 
     // Cleanup function to clear the interval when the component unmounts
     return () => {
