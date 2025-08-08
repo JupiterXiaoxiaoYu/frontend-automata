@@ -38,6 +38,7 @@ import {
   setNotSelectingCreature,
   startCreatingCreature,
   changeSelectedCreature,
+  selectCreaturesCurrentPrograms,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -86,10 +87,15 @@ const PlanetScene = ({ localTimer }: Props) => {
     selectSelectedCreatureListIndex
   );
   const isLoading = useAppSelector(selectIsLoading);
-
+  const creaturesCurrentPrograms = useAppSelector(
+    selectCreaturesCurrentPrograms
+  );
+  console.log("creaturesCurrentPrograms", creaturesCurrentPrograms);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
-  const [scenario, setScenario] = useState(new Scenario(1));
+  const [scenario, setScenario] = useState(
+    new Scenario(creaturesCurrentPrograms)
+  );
 
   function onClickUnlock() {
     if (uIState.type == UIStateType.Creating) {

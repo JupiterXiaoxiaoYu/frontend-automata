@@ -3,6 +3,11 @@ import { HEIGHT, WIDTH, Beat } from "./draw";
 import { ShapeBuilder } from "./ShapeBuilder";
 import { BackgroundDisco } from "./BackgroundDisco";
 import { BackgroundBase, ShapeProps } from "./BackgroundBase";
+import {
+  getProgramCreatureLeft,
+  getProgramCreatureTop,
+  ProgramType,
+} from "../../../../../data/models";
 
 function getRandomNumber(range: number): number {
   return Math.floor(Math.random() * range);
@@ -16,15 +21,14 @@ export class Scenario {
   background: BackgroundBase;
   context?: CanvasRenderingContext2D;
 
-  constructor(creatureCount: number) {
+  constructor(programTypes: ProgramType[]) {
     this.status = "play";
     this.clips = [];
-    for (let i = 0; i < creatureCount; i++) {
+    for (let i = 0; i < programTypes.length; i++) {
       const clip = createAnimationClip(
         i,
-        220 + getRandomNumber(80),
-        50 + getRandomNumber(800),
-        (i * 2) % 24
+        getProgramCreatureLeft(programTypes[i]),
+        getProgramCreatureTop(programTypes[i])
       );
       this.clips.push(clip);
       clip.name = i.toString();

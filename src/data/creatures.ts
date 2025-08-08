@@ -11,6 +11,7 @@ import {
   AttributeType,
   resourceTypes,
   ResourceAmountPair,
+  ProgramType,
 } from "./models";
 import { selectProgramByIndex, selectProgramsByIndexes } from "./programs";
 
@@ -269,6 +270,11 @@ export const selectSelectedAttributes =
 
 export const selectSelectedCreaturePrograms = (state: RootState) =>
   selectProgramsByIndexes(selectSelectedCreature(state).programIndexes)(state);
+
+export const selectCreaturesCurrentPrograms = (state: RootState) =>
+  state.creatures.creatures.map(
+    (creature: CreatureModel) => creature.programIndexes[0] as ProgramType
+  );
 
 /**
  * 根据生物的Productivity和Efficiency属性调整资源数量

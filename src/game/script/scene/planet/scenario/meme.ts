@@ -1,42 +1,8 @@
+import {
+  getProgramCreatureSpriteSheetPath,
+  ProgramType,
+} from "../../../../../data/models";
 import { HEIGHT, WIDTH } from "./draw";
-
-import weedSpritesheet from "../../../../image/spritesheet/weed.png";
-import testSpritesheet from "../../../../image/spritesheet/test.png";
-import hammarSpritesheet from "../../../../image/spritesheet/hammar.png";
-import pushSpritesheet from "../../../../image/spritesheet/push.png";
-import digSpritesheet from "../../../../image/spritesheet/dig.png";
-import screenSpritesheet from "../../../../image/spritesheet/screen.png";
-import drugSpritesheet from "../../../../image/spritesheet/drug.png";
-import computerSpritesheet from "../../../../image/spritesheet/computer.png";
-
-function getSpriteSheet(index: number): string {
-  switch (index) {
-    case 0:
-      return weedSpritesheet;
-    case 1:
-      return testSpritesheet;
-    case 2:
-      return hammarSpritesheet;
-    case 3:
-      return pushSpritesheet;
-    case 4:
-      return digSpritesheet;
-    case 5:
-      return screenSpritesheet;
-    case 6:
-      return drugSpritesheet;
-    case 7:
-      return computerSpritesheet;
-    default:
-      return weedSpritesheet;
-  }
-}
-
-export interface CreatureData {
-  index: number;
-  avatar: string;
-  spriteSheet: string;
-}
 
 export class ClipRect {
   top: number;
@@ -56,8 +22,8 @@ export class Clip {
   index: number;
   name: string;
   src: HTMLImageElement;
-  top: number;
   left: number;
+  top: number;
   vx: number;
   vy: number;
   boundry: ClipRect;
@@ -68,27 +34,51 @@ export class Clip {
   focus: boolean;
   hover: boolean;
   target: Array<[number, number]>;
-  constructor(index: number, boundry: ClipRect, ratio: number) {
+  constructor(
+    index: number,
+    boundry: ClipRect,
+    ratio: number,
+    left: number,
+    top: number
+  ) {
     this.index = index;
-    this.name = "NPC";
+    this.name = `Robot ${index}`;
 
     const spriteSheetImage = new Image();
     spriteSheetImage.setAttribute("crossOrigin", "");
-    spriteSheetImage.src = getSpriteSheet(index);
+    spriteSheetImage.src = getProgramCreatureSpriteSheetPath(
+      index as ProgramType
+    );
 
     this.src = spriteSheetImage;
     this.boundry = boundry;
     this.vx = 0;
     this.vy = 0;
-    this.top = 0;
-    this.left = 0;
-    this.currentFrame = null;
+    this.left = left;
+    this.top = top;
+    this.currentFrame = 0;
     this.currentClip = null;
     this.clips = new Map<string, Array<ClipRect>>();
     this.ratio = ratio;
     this.focus = false;
     this.hover = false;
     this.target = [];
+
+    const spiriteHeight = 300;
+    const spiriteWeight = 300;
+    const clips = [];
+    for (let i = 0; i < 24; i++) {
+      clips.push(
+        new ClipRect(
+          0,
+          spiriteWeight * i,
+          spiriteWeight * (i + 1),
+          spiriteHeight
+        )
+      );
+    }
+    this.clips.set("normal", clips);
+    this.currentClip = "normal";
   }
 
   inRect(cursorLeft: number, cursorTop: number): boolean {
@@ -220,37 +210,9 @@ export class Clip {
       this.currentFrame = (this.currentFrame + 1) % len;
     }
   }
-
-  setAnimationClip(top: number, left: number, start: number) {
-    const spiriteHeight = 300;
-    const spiriteWeight = 300;
-    const clips = [];
-    for (let i = 0; i < 24; i++) {
-      clips.push(
-        new ClipRect(
-          0,
-          spiriteWeight * i,
-          spiriteWeight * (i + 1),
-          spiriteHeight
-        )
-      );
-    }
-    this.clips.set("normal", clips);
-    this.top = top;
-    this.left = left;
-    this.currentClip = "normal";
-    this.currentFrame = start;
-  }
 }
 
-export function createAnimationClip(
-  index: number,
-  top: number,
-  left: number,
-  start: number
-) {
+export function createAnimationClip(index: number, left: number, top: number) {
   const boundry = new ClipRect(HEIGHT / 2 - 40, 50, WIDTH - 100, HEIGHT - 200);
-  const clip = new Clip(index, boundry, 0.5);
-  clip.setAnimationClip(top, left, start);
-  return clip;
+  return new Clip(index, boundry, 0.5, left, top);
 }
