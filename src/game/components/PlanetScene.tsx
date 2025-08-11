@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, MouseEvent } from "react";
 import circleBackground from "../image/backgrounds/circle.png";
 import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
@@ -216,6 +216,25 @@ const PlanetScene = ({ localTimer }: Props) => {
     dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
+  function onHoverCanvas(e: MouseEvent<HTMLCanvasElement>) {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const ratio = rect.width / 960;
+    //const left = (e.clientX - rect.left) * rect.width / 960;
+    //const top = (e.clientY - rect.top) * rect.width / 960;
+    const left = ((e.clientX - rect.left) * 960) / rect.width;
+    const top = ((e.clientY - rect.top) * 960) / rect.width;
+    scenario.hoverMeme(left, top);
+  }
+
+  function onClickCanvas(e: MouseEvent<HTMLCanvasElement>) {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const left = ((e.clientX - rect.left) * 960) / rect.width;
+    const top = ((e.clientY - rect.top) * 960) / rect.width;
+    const memeIndex = scenario.selectMeme(left, top);
+  }
+
   return (
     // <div className="planet-scene-content">
     //   <div className="planet-scene-info-container">
@@ -296,7 +315,11 @@ const PlanetScene = ({ localTimer }: Props) => {
       <Rocket />
       <div className="planet-scene-container">
         <div className="planet-scene-canvas-container">
-          <canvas id="canvas"></canvas>
+          <canvas
+            id="canvas"
+            onMouseMove={onHoverCanvas}
+            onClick={onClickCanvas}
+          ></canvas>
         </div>
         <div className="planet-scene-program-container">
           {showConfirmCreateButton && (

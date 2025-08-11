@@ -5,6 +5,13 @@ import {
   ProgramType,
 } from "../../../../../data/models";
 import { HEIGHT, WIDTH } from "./draw";
+import select_background from "../../../../image/backgrounds/robot_select.png";
+
+const BACKGROUND_HEIGHT = 214;
+const BACKGROUND_WIDTH = 143;
+const CLIP_HEIGHT = 300;
+const CLIP_WIDTH = 300;
+const CLIP_FRAME_COUNT = 24;
 
 export class ClipRect {
   top: number;
@@ -25,24 +32,15 @@ export class Clip {
   name: string;
   programType: ProgramType;
   src: HTMLImageElement;
+  selectBackground: HTMLImageElement;
   left: number;
   top: number;
-  vx: number;
-  vy: number;
-  boundry: ClipRect;
-  clips: Map<string, Array<ClipRect>>;
-  currentFrame: number | null;
-  currentClip: string | null;
+  currentFrame: number;
   ratio: number;
   focus: boolean;
   hover: boolean;
   target: Array<[number, number]>;
-  constructor(
-    index: number,
-    programType: ProgramType,
-    boundry: ClipRect,
-    ratio: number
-  ) {
+  constructor(index: number, programType: ProgramType, ratio: number) {
     this.index = index;
     this.name = `Robot ${index}`;
     this.programType = programType;
@@ -51,35 +49,19 @@ export class Clip {
     spriteSheetImage.setAttribute("crossOrigin", "");
     spriteSheetImage.src = getProgramCreatureSpriteSheetPath(programType);
 
+    const selectBackgroundImage = new Image();
+    selectBackgroundImage.setAttribute("crossOrigin", "");
+    selectBackgroundImage.src = select_background;
+
     this.src = spriteSheetImage;
-    this.boundry = boundry;
-    this.vx = 0;
-    this.vy = 0;
+    this.selectBackground = selectBackgroundImage;
     this.left = getProgramCreatureLeft(programType);
     this.top = getProgramCreatureTop(programType);
     this.currentFrame = 0;
-    this.currentClip = null;
-    this.clips = new Map<string, Array<ClipRect>>();
     this.ratio = ratio;
     this.focus = false;
     this.hover = false;
     this.target = [];
-
-    const spiriteHeight = 300;
-    const spiriteWeight = 300;
-    const clips = [];
-    for (let i = 0; i < 24; i++) {
-      clips.push(
-        new ClipRect(
-          0,
-          spiriteWeight * i,
-          spiriteWeight * (i + 1),
-          spiriteHeight
-        )
-      );
-    }
-    this.clips.set("normal", clips);
-    this.currentClip = "normal";
   }
 
   updateProgramType(programType: ProgramType) {
@@ -91,15 +73,14 @@ export class Clip {
   }
 
   inRect(cursorLeft: number, cursorTop: number): boolean {
-    const rect = this.clips.get(this.currentClip!)![this.currentFrame!];
-    const w = rect.right - rect.left;
-    const bottom = this.top + w * this.ratio;
-    const right = this.left + w * this.ratio;
-    const margin = (w * this.ratio) / 4;
+    const bottom = this.top + CLIP_HEIGHT * this.ratio;
+    const right = this.left + CLIP_WIDTH * this.ratio;
+    const w_margin = (CLIP_WIDTH * this.ratio) / 4;
+    const h_margin = (CLIP_HEIGHT * this.ratio) / 4;
     if (
-      cursorLeft > this.left + margin &&
-      cursorLeft < right - margin &&
-      cursorTop > this.top + margin &&
+      cursorLeft > this.left + w_margin &&
+      cursorLeft < right - w_margin &&
+      cursorTop > this.top + h_margin &&
       cursorTop < bottom
     ) {
       return true;
@@ -107,120 +88,76 @@ export class Clip {
     return false;
   }
 
-  select() {
-    this.focus = true;
-  }
-
-  disSelect() {
-    this.focus = false;
-  }
-
   getBottom() {
-    if (this.currentClip != null && this.currentFrame != null) {
-      const rect = this.clips.get(this.currentClip)![this.currentFrame];
-      return this.top + (rect.bottom - rect.top);
-    } else {
-      return 0;
-    }
+    return this.top + CLIP_HEIGHT * this.ratio;
   }
 
   getZCenter() {
-    if (this.currentClip != null && this.currentFrame != null) {
-      const rect = this.clips.get(this.currentClip)![this.currentFrame];
-      const w = rect.right - rect.left;
-      return [this.left + (this.ratio * w) / 2, this.top + this.ratio * w];
-    } else {
-      return null;
-    }
-  }
-
-  setSpeed(ratio: number) {
-    const rx = 2 * Math.random() - 1;
-    const ry = Math.sign(rx) * Math.sqrt(1 - rx * rx);
-    if (this.target.length == 0) {
-      this.vx = rx * ratio;
-      this.vy = ry * ratio;
-    } else {
-      const len = this.target.length - 1;
-      let rx = this.target[len][0] - this.left;
-      let ry = this.target[len][1] - this.top;
-      if (Math.abs(rx) > 10) {
-        rx = Math.sign(rx) * 10;
-      }
-      if (Math.abs(ry) > 10) {
-        ry = Math.sign(ry) * 10;
-      }
-      this.vx = rx;
-      this.vy = ry;
-      if (rx * rx + ry * ry < 5) {
-        //this.target.pop();
-      }
-    }
+    return [
+      this.left + (this.ratio * CLIP_WIDTH) / 2,
+      this.top + (this.ratio * CLIP_HEIGHT) / 2,
+    ];
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    if (this.currentClip != null && this.currentFrame != null) {
-      //Set the fill color
-      const rect = this.clips.get(this.currentClip)![this.currentFrame];
-      const w = rect.right - rect.left;
-      const h = rect.bottom - rect.top;
+    ctx.drawImage(
+      this.src,
+      this.currentFrame * CLIP_WIDTH,
+      0,
+      CLIP_WIDTH,
+      CLIP_HEIGHT,
+      this.left,
+      this.top,
+      CLIP_WIDTH * this.ratio,
+      CLIP_HEIGHT * this.ratio
+    );
+
+    if (this.focus == true) {
+      ctx.fillStyle = "orange"; // Red color
       ctx.drawImage(
-        this.src,
-        rect.left,
-        rect.top,
-        w,
-        h,
-        this.left,
-        this.top,
-        w * this.ratio,
-        h * this.ratio
+        this.selectBackground,
+        0,
+        0,
+        BACKGROUND_WIDTH,
+        BACKGROUND_HEIGHT,
+        ((CLIP_WIDTH - BACKGROUND_WIDTH) / 2) * this.ratio + this.left,
+        ((CLIP_HEIGHT - BACKGROUND_HEIGHT) / 2) * this.ratio + this.top,
+        BACKGROUND_WIDTH * this.ratio,
+        BACKGROUND_HEIGHT * this.ratio
       );
+    } else {
+      ctx.fillStyle = "black"; // Red color
+    }
 
-      if (this.focus == true) {
-        ctx.fillStyle = "orange"; // Red color
-      } else {
-        ctx.fillStyle = "black"; // Red color
-      }
-
-      const rank = 1;
-      {
-        ctx.fillRect(
-          this.left + 30,
-          this.top - 13,
-          this.name.length * 7 + 5,
-          15
-        );
-        ctx.fillStyle = "white"; // Red color
-        ctx.font = "12px Arial";
-        ctx.fillText(this.name, this.left + 35, this.top); // text, x, y
-      }
-      if (this.hover == true) {
-        //ctx.fillStyle = 'hsl(20%, 100%, 15%)'; // Use 50% gray to desaturate
-        //ctx.globalCompositeOperation = "saturation";
-        ctx.beginPath();
-        ctx.arc(this.left + 50, this.top + 50, 50, 0, 2 * Math.PI);
-        ctx.closePath();
-        ctx.setLineDash([10, 5]); // Dash of 10px and gap of 5px
-        ctx.strokeStyle = "purple"; // Color of the dashed circle
-        ctx.lineWidth = 2; // Thickness of the dashed line
-        ctx.stroke();
-      }
-      /*
+    const rank = 1;
+    {
+      ctx.fillRect(this.left + 30, this.top - 13, this.name.length * 7 + 5, 15);
+      ctx.fillStyle = "white"; // Red color
+      ctx.font = "12px Arial";
+      ctx.fillText(this.name, this.left + 35, this.top); // text, x, y
+    }
+    if (this.hover == true) {
+      //ctx.fillStyle = 'hsl(20%, 100%, 15%)'; // Use 50% gray to desaturate
+      //ctx.globalCompositeOperation = "saturation";
+      ctx.beginPath();
+      ctx.arc(this.left, this.top + 50, 50, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.setLineDash([10, 5]); // Dash of 10px and gap of 5px
+      ctx.strokeStyle = "purple"; // Color of the dashed circle
+      ctx.lineWidth = 2; // Thickness of the dashed line
+      ctx.stroke();
+    }
+    /*
       ctx.fillText(this.currentClip, this.left+10, this.top); // text, x, y
       ctx.fillText(this.currentFrame.toString(), this.left + 10, this.top+30); // text, x, y
       */
-    }
   }
 
   incFrame() {
-    if (this.currentFrame != null && this.currentClip != null) {
-      const len = this.clips.get(this.currentClip)!.length;
-      this.currentFrame = (this.currentFrame + 1) % len;
-    }
+    this.currentFrame = (this.currentFrame + 1) % CLIP_FRAME_COUNT;
   }
 }
 
 export function createAnimationClip(index: number, programType: ProgramType) {
-  const boundry = new ClipRect(HEIGHT / 2 - 40, 50, WIDTH - 100, HEIGHT - 200);
-  return new Clip(index, programType, boundry, 0.5);
+  return new Clip(index, programType, 0.5);
 }

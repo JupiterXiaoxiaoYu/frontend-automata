@@ -1,6 +1,5 @@
 import { Clip, createAnimationClip } from "./meme";
 import { HEIGHT, WIDTH, Beat } from "./draw";
-import { ShapeBuilder } from "./ShapeBuilder";
 import { BackgroundDisco } from "./BackgroundDisco";
 import { BackgroundBase, ShapeProps } from "./BackgroundBase";
 import {
@@ -40,7 +39,7 @@ export class Scenario {
   }
 
   setFocus(index: number) {
-    if (this.focusingIndex) {
+    if (this.focusingIndex != null) {
       this.clips[this.focusingIndex].focus = false;
     }
     this.clips[index].focus = true;
@@ -158,7 +157,6 @@ export class Scenario {
     for (let i = 0; i < this.clips.length; i++) {
       const obj = this.clips[i];
       obj.incFrame();
-      obj.setSpeed(1);
     }
   }
 }
