@@ -100,18 +100,6 @@ export class Clip {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.drawImage(
-      this.src,
-      this.currentFrame * CLIP_WIDTH,
-      0,
-      CLIP_WIDTH,
-      CLIP_HEIGHT,
-      this.left,
-      this.top,
-      CLIP_WIDTH * this.ratio,
-      CLIP_HEIGHT * this.ratio
-    );
-
     if (this.focus == true) {
       ctx.fillStyle = "orange"; // Red color
       ctx.drawImage(
@@ -129,18 +117,45 @@ export class Clip {
       ctx.fillStyle = "black"; // Red color
     }
 
+    ctx.drawImage(
+      this.src,
+      this.currentFrame * CLIP_WIDTH,
+      0,
+      CLIP_WIDTH,
+      CLIP_HEIGHT,
+      this.left,
+      this.top,
+      CLIP_WIDTH * this.ratio,
+      CLIP_HEIGHT * this.ratio
+    );
+
     const rank = 1;
-    {
-      ctx.fillRect(this.left + 30, this.top - 13, this.name.length * 7 + 5, 15);
-      ctx.fillStyle = "white"; // Red color
-      ctx.font = "12px Arial";
-      ctx.fillText(this.name, this.left + 35, this.top); // text, x, y
-    }
+    const nameWidth = this.name.length * 7 + 5;
+    ctx.fillRect(
+      this.left + (CLIP_WIDTH * this.ratio - nameWidth) / 2,
+      this.top - 13,
+      nameWidth,
+      15
+    );
+    ctx.fillStyle = "white";
+    ctx.font = "12px Arial";
+    ctx.fillText(
+      this.name,
+      this.left + (CLIP_WIDTH * this.ratio - nameWidth) / 2 + 5,
+      this.top
+    );
+
     if (this.hover == true) {
       //ctx.fillStyle = 'hsl(20%, 100%, 15%)'; // Use 50% gray to desaturate
       //ctx.globalCompositeOperation = "saturation";
       ctx.beginPath();
-      ctx.arc(this.left, this.top + 50, 50, 0, 2 * Math.PI);
+      ctx.arc(
+        this.left + (CLIP_WIDTH * this.ratio) / 2,
+        this.top + (CLIP_HEIGHT * this.ratio) / 2,
+        (CLIP_HEIGHT * this.ratio) / 3,
+        0,
+        2 * Math.PI
+      );
       ctx.closePath();
       ctx.setLineDash([10, 5]); // Dash of 10px and gap of 5px
       ctx.strokeStyle = "purple"; // Color of the dashed circle
