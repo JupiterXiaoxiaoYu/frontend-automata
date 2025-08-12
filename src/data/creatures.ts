@@ -182,7 +182,7 @@ export const creaturesSlice = createSlice({
     },
     startCreatingCreature: (state, action) => {
       state.selectedCreatureIndex = state.creatures.length;
-      state.creatingCreature = getCreatingCreature(action.payload.creatureType);
+      state.creatingCreature = getCreatingCreature(state.creatures.length);
       state.selectingProgramIndex = 0;
     },
     startRebootCreature: (state, action) => {
@@ -271,9 +271,9 @@ export const selectSelectedAttributes =
 export const selectSelectedCreaturePrograms = (state: RootState) =>
   selectProgramsByIndexes(selectSelectedCreature(state).programIndexes)(state);
 
-export const selectCreaturesCurrentPrograms = (state: RootState) =>
+export const selectCurrentCreatureTypes = (state: RootState) =>
   state.creatures.creatures.map(
-    (creature: CreatureModel) => creature.programIndexes[0] as ProgramType
+    (creature: CreatureModel) => creature.creatureType
   );
 
 /**

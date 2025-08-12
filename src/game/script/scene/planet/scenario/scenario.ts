@@ -2,11 +2,7 @@ import { Clip, createAnimationClip } from "./meme";
 import { HEIGHT, WIDTH, Beat } from "./draw";
 import { BackgroundDisco } from "./BackgroundDisco";
 import { BackgroundBase, ShapeProps } from "./BackgroundBase";
-import {
-  getProgramCreatureLeft,
-  getProgramCreatureTop,
-  ProgramType,
-} from "../../../../../data/models";
+import { ProgramType } from "../../../../../data/models";
 
 function getRandomNumber(range: number): number {
   return Math.floor(Math.random() * range);
@@ -25,15 +21,15 @@ export class Scenario {
     this.background = new BackgroundDisco(this.clips);
   }
 
-  updateClips(programTypes: ProgramType[]) {
+  updateClips(creatureTypes: number[]) {
     for (let i = 0; i < this.clips.length; i++) {
-      if (this.clips[i].programType != programTypes[i]) {
-        this.clips[i].updateProgramType(programTypes[i]);
+      if (this.clips[i].creatureType != creatureTypes[i]) {
+        this.clips[i].updateCreatureType(creatureTypes[i]);
       }
     }
 
-    for (let i = this.clips.length; i < programTypes.length; i++) {
-      const clip = createAnimationClip(i, programTypes[i]);
+    for (let i = this.clips.length; i < creatureTypes.length; i++) {
+      const clip = createAnimationClip(i, creatureTypes[i]);
       this.clips.push(clip);
     }
   }

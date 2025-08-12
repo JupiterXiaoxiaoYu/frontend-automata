@@ -1,7 +1,7 @@
 import {
-  getProgramCreatureLeft,
-  getProgramCreatureSpriteSheetPath,
-  getProgramCreatureTop,
+  getCreatureLeft,
+  getCreatureSpriteSheetPath,
+  getCreatureTop,
   ProgramType,
 } from "../../../../../data/models";
 import { HEIGHT, WIDTH } from "./draw";
@@ -30,7 +30,7 @@ export class ClipRect {
 export class Clip {
   index: number;
   name: string;
-  programType: ProgramType;
+  creatureType: number;
   src: HTMLImageElement;
   selectBackground: HTMLImageElement;
   left: number;
@@ -40,14 +40,14 @@ export class Clip {
   focus: boolean;
   hover: boolean;
   target: Array<[number, number]>;
-  constructor(index: number, programType: ProgramType, ratio: number) {
+  constructor(index: number, creatureType: number, ratio: number) {
     this.index = index;
     this.name = `Robot ${index}`;
-    this.programType = programType;
+    this.creatureType = creatureType;
 
     const spriteSheetImage = new Image();
     spriteSheetImage.setAttribute("crossOrigin", "");
-    spriteSheetImage.src = getProgramCreatureSpriteSheetPath(programType);
+    spriteSheetImage.src = getCreatureSpriteSheetPath(creatureType);
 
     const selectBackgroundImage = new Image();
     selectBackgroundImage.setAttribute("crossOrigin", "");
@@ -55,8 +55,8 @@ export class Clip {
 
     this.src = spriteSheetImage;
     this.selectBackground = selectBackgroundImage;
-    this.left = getProgramCreatureLeft(programType);
-    this.top = getProgramCreatureTop(programType);
+    this.left = getCreatureLeft(creatureType);
+    this.top = getCreatureTop(creatureType);
     this.currentFrame = 0;
     this.ratio = ratio;
     this.focus = false;
@@ -64,11 +64,11 @@ export class Clip {
     this.target = [];
   }
 
-  updateProgramType(programType: ProgramType) {
-    this.programType = programType;
-    this.src.src = getProgramCreatureSpriteSheetPath(programType);
-    this.left = getProgramCreatureLeft(programType);
-    this.top = getProgramCreatureTop(programType);
+  updateCreatureType(creatureType: number) {
+    this.creatureType = creatureType;
+    this.src.src = getCreatureSpriteSheetPath(creatureType);
+    this.left = getCreatureLeft(creatureType);
+    this.top = getCreatureTop(creatureType);
     this.currentFrame = 0;
   }
 
@@ -129,7 +129,6 @@ export class Clip {
       CLIP_HEIGHT * this.ratio
     );
 
-    const rank = 1;
     const nameWidth = this.name.length * 7 + 5;
     ctx.fillRect(
       this.left + (CLIP_WIDTH * this.ratio - nameWidth) / 2,

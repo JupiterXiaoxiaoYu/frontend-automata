@@ -370,454 +370,327 @@ export interface ProgramInfo {
 interface ProgramData {
   iconPath: string;
   spriteSheetPath: string;
-  creatureSpriteSheet: string;
-  creatureLeft: number;
-  creatureTop: number;
 }
 
 const programDatas: Record<ProgramType, ProgramData> = {
   [ProgramType.IlluGen]: {
     iconPath: IlluGenIcon,
     spriteSheetPath: IlluGenSpriteSheet,
-    creatureSpriteSheet: IlluGenCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EtherForge]: {
     iconPath: EtherForgeIcon,
     spriteSheetPath: EtherForgeSpriteSheet,
-    creatureSpriteSheet: EtherForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantumScribe]: {
     iconPath: QuantumScribeIcon,
     spriteSheetPath: QuantumScribeSpriteSheet,
-    creatureSpriteSheet: QuantumScribeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EvolviFy]: {
     iconPath: EvolviFyIcon,
     spriteSheetPath: EvolviFySpriteSheet,
-    creatureSpriteSheet: EvolviFyCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantumFrost]: {
     iconPath: QuantumFrostIcon,
     spriteSheetPath: QuantumFrostSpriteSheet,
-    creatureSpriteSheet: QuantumFrostCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantumSurge]: {
     iconPath: QuantumSurgeIcon,
     spriteSheetPath: QuantumSurgeSpriteSheet,
-    creatureSpriteSheet: QuantumSurgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CyberPulse]: {
     iconPath: CyberPulseIcon,
     spriteSheetPath: CyberPulseSpriteSheet,
-    creatureSpriteSheet: CyberPulseCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NexuMax]: {
     iconPath: NexuMaxIcon,
     spriteSheetPath: NexuMaxSpriteSheet,
-    creatureSpriteSheet: NexuMaxCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantaForge]: {
     iconPath: QuantaForgeIcon,
     spriteSheetPath: QuantaForgeSpriteSheet,
-    creatureSpriteSheet: QuantaForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CrysTara]: {
     iconPath: CrysTaraIcon,
     spriteSheetPath: CrysTaraSpriteSheet,
-    creatureSpriteSheet: CrysTaraCreatureSpriteSheet,
-    creatureLeft: 440,
-    creatureTop: 140,
   },
   [ProgramType.PlasmaShift]: {
     iconPath: PlasmaShiftIcon,
     spriteSheetPath: PlasmaShiftSpriteSheet,
-    creatureSpriteSheet: PlasmaShiftCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.Aespa]: {
     iconPath: AespaIcon,
     spriteSheetPath: AespaSpriteSheet,
-    creatureSpriteSheet: AespaCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.SwiftForge]: {
     iconPath: SwiftForgeIcon,
     spriteSheetPath: SwiftForgeSpriteSheet,
-    creatureSpriteSheet: SwiftForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.BioGen]: {
     iconPath: BioGenIcon,
     spriteSheetPath: BioGenSpriteSheet,
-    creatureSpriteSheet: BioGenCreatureSpriteSheet,
-    creatureLeft: 105,
-    creatureTop: 250,
   },
   [ProgramType.BioFusion]: {
     iconPath: BioFusionIcon,
     spriteSheetPath: BioFusionSpriteSheet,
-    creatureSpriteSheet: BioFusionCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.AstroMine]: {
     iconPath: AstroMineIcon,
     spriteSheetPath: AstroMineSpriteSheet,
-    creatureSpriteSheet: AstroMineCreatureSpriteSheet,
-    creatureLeft: 660,
-    creatureTop: 180,
   },
   [ProgramType.TitaniumBoost]: {
     iconPath: TitaniumBoostIcon,
     spriteSheetPath: TitaniumBoostSpriteSheet,
-    creatureSpriteSheet: TitaniumBoostCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.TTgenesis]: {
     iconPath: TTgenesisIcon,
     spriteSheetPath: TTgenesisSpriteSheet,
-    creatureSpriteSheet: TTgenesisCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantumLeap]: {
     iconPath: QuantumLeapIcon,
     spriteSheetPath: QuantumLeapSpriteSheet,
-    creatureSpriteSheet: QuantumLeapCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.SpicenRich]: {
     iconPath: SpicenRichIcon,
     spriteSheetPath: SpicenRichSpriteSheet,
-    creatureSpriteSheet: SpicenRichCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.BioSurge]: {
     iconPath: BioSurgeIcon,
     spriteSheetPath: BioSurgeSpriteSheet,
-    creatureSpriteSheet: BioSurgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NeuroForge]: {
     iconPath: NeuroForgeIcon,
     spriteSheetPath: NeuroForgeSpriteSheet,
-    creatureSpriteSheet: NeuroForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.SuperNova]: {
     iconPath: SuperNovaIcon,
     spriteSheetPath: SuperNovaSpriteSheet,
-    creatureSpriteSheet: SuperNovaCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.ResoNex]: {
     iconPath: ResoNexIcon,
     spriteSheetPath: ResoNexSpriteSheet,
-    creatureSpriteSheet: ResoNexCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuiFoam]: {
     iconPath: QuiFoamIcon,
     spriteSheetPath: QuiFoamSpriteSheet,
-    creatureSpriteSheet: QuiFoamCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NovaBurst]: {
     iconPath: NovaBurstIcon,
     spriteSheetPath: NovaBurstSpriteSheet,
-    creatureSpriteSheet: NovaBurstCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.StellarCharge]: {
     iconPath: StellarChargeIcon,
     spriteSheetPath: StellarChargeSpriteSheet,
-    creatureSpriteSheet: StellarChargeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NexroVest]: {
     iconPath: NexroVestIcon,
     spriteSheetPath: NexroVestSpriteSheet,
-    creatureSpriteSheet: NexroVestCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.PlasmaCharge]: {
     iconPath: PlasmaChargeIcon,
     spriteSheetPath: PlasmaChargeSpriteSheet,
-    creatureSpriteSheet: PlasmaChargeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CogniFy]: {
     iconPath: CogniFyIcon,
     spriteSheetPath: CogniFySpriteSheet,
-    creatureSpriteSheet: CogniFyCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.BioHarvest]: {
     iconPath: BioHarvestIcon,
     spriteSheetPath: BioHarvestSpriteSheet,
-    creatureSpriteSheet: BioHarvestCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.Abracadabra]: {
     iconPath: AbracadabraIcon,
     spriteSheetPath: AbracadabraSpriteSheet,
-    creatureSpriteSheet: AbracadabraCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CerebraSpark]: {
     iconPath: CerebraSparkIcon,
     spriteSheetPath: CerebraSparkSpriteSheet,
-    creatureSpriteSheet: CerebraSparkCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EnerGex]: {
     iconPath: EnerGexIcon,
     spriteSheetPath: EnerGexSpriteSheet,
-    creatureSpriteSheet: EnerGexCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.MegaBoost]: {
     iconPath: MegaBoostIcon,
     spriteSheetPath: MegaBoostSpriteSheet,
-    creatureSpriteSheet: MegaBoostCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NeuroCharge]: {
     iconPath: NeuroChargeIcon,
     spriteSheetPath: NeuroChargeSpriteSheet,
-    creatureSpriteSheet: NeuroChargeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.StarForge]: {
     iconPath: StarForgeIcon,
     spriteSheetPath: StarForgeSpriteSheet,
-    creatureSpriteSheet: StarForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EtherWeave]: {
     iconPath: EtherWeaveIcon,
     spriteSheetPath: EtherWeaveSpriteSheet,
-    creatureSpriteSheet: EtherWeaveCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.FortiGen]: {
     iconPath: FortiGenIcon,
     spriteSheetPath: FortiGenSpriteSheet,
-    creatureSpriteSheet: FortiGenCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.BioCast]: {
     iconPath: BioCastIcon,
     spriteSheetPath: BioCastSpriteSheet,
-    creatureSpriteSheet: BioCastCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.FortiFyx]: {
     iconPath: FortiFyxIcon,
     spriteSheetPath: FortiFyxSpriteSheet,
-    creatureSpriteSheet: FortiFyxCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.Fortivest]: {
     iconPath: FortivestIcon,
     spriteSheetPath: FortivestSpriteSheet,
-    creatureSpriteSheet: FortivestCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.AstroCharge]: {
     iconPath: AstroChargeIcon,
     spriteSheetPath: AstroChargeSpriteSheet,
-    creatureSpriteSheet: AstroChargeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.BioSynthesis]: {
     iconPath: BioSynthesisIcon,
     spriteSheetPath: BioSynthesisSpriteSheet,
-    creatureSpriteSheet: BioSynthesisCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NovaFlux]: {
     iconPath: NovaFluxIcon,
     spriteSheetPath: NovaFluxSpriteSheet,
-    creatureSpriteSheet: NovaFluxCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.XenoFloral]: {
     iconPath: XenoFloralIcon,
     spriteSheetPath: XenoFloralSpriteSheet,
-    creatureSpriteSheet: XenoFloralCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.SynTitan]: {
     iconPath: SynTitanIcon,
     spriteSheetPath: SynTitanSpriteSheet,
-    creatureSpriteSheet: SynTitanCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.FoamTap]: {
     iconPath: FoamTapIcon,
     spriteSheetPath: FoamTapSpriteSheet,
-    creatureSpriteSheet: FoamTapCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NanoWeave]: {
     iconPath: NanoWeaveIcon,
     spriteSheetPath: NanoWeaveSpriteSheet,
-    creatureSpriteSheet: NanoWeaveCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CrystaBloom]: {
     iconPath: CrystaBloomIcon,
     spriteSheetPath: CrystaBloomSpriteSheet,
-    creatureSpriteSheet: CrystaBloomCreatureSpriteSheet,
-    creatureLeft: 550,
-    creatureTop: 240,
   },
   [ProgramType.EtherPulse]: {
     iconPath: EtherPulseIcon,
     spriteSheetPath: EtherPulseSpriteSheet,
-    creatureSpriteSheet: EtherPulseCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EnerPlex]: {
     iconPath: EnerPlexIcon,
     spriteSheetPath: EnerPlexSpriteSheet,
-    creatureSpriteSheet: EnerPlexCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EnerGate]: {
     iconPath: EnerGateIcon,
     spriteSheetPath: EnerGateSpriteSheet,
-    creatureSpriteSheet: EnerGateCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.PlasmaForge]: {
     iconPath: PlasmaForgeIcon,
     spriteSheetPath: PlasmaForgeSpriteSheet,
-    creatureSpriteSheet: PlasmaForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NexusField]: {
     iconPath: NexusFieldIcon,
     spriteSheetPath: NexusFieldSpriteSheet,
-    creatureSpriteSheet: NexusFieldCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.StarlightForge]: {
     iconPath: StarlightForgeIcon,
     spriteSheetPath: StarlightForgeSpriteSheet,
-    creatureSpriteSheet: StarlightForgeCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.EnerFusion]: {
     iconPath: EnerFusionIcon,
     spriteSheetPath: EnerFusionSpriteSheet,
-    creatureSpriteSheet: EnerFusionCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.CogniMelt]: {
     iconPath: CogniMeltIcon,
     spriteSheetPath: CogniMeltSpriteSheet,
-    creatureSpriteSheet: CogniMeltCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.NexiMine]: {
     iconPath: NexiMineIcon,
     spriteSheetPath: NexiMineSpriteSheet,
-    creatureSpriteSheet: NexiMineCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.TitanBloom]: {
     iconPath: TitanBloomIcon,
     spriteSheetPath: TitanBloomSpriteSheet,
-    creatureSpriteSheet: TitanBloomCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.QuantumCore]: {
     iconPath: QuantumCoreIcon,
     spriteSheetPath: QuantumCoreSpriteSheet,
-    creatureSpriteSheet: QuantumCoreCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.XenoBloom]: {
     iconPath: XenoBloomIcon,
     spriteSheetPath: XenoBloomSpriteSheet,
-    creatureSpriteSheet: XenoBloomCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
   [ProgramType.StarLight]: {
     iconPath: StarLightIcon,
     spriteSheetPath: StarLightSpriteSheet,
-    creatureSpriteSheet: StarLightCreatureSpriteSheet,
-    creatureLeft: 260,
-    creatureTop: 240,
   },
 };
+
+interface CreatureData {
+  iconPath: string;
+  spriteSheetPath: string;
+  left: number;
+  top: number;
+}
+
+const emptyCreatureData: CreatureData = {
+  iconPath: "",
+  spriteSheetPath: "",
+  left: 0,
+  top: 0,
+};
+
+const creatureDatas: CreatureData[] = [
+  {
+    iconPath: Bot1,
+    spriteSheetPath: BioGenCreatureSpriteSheet,
+    left: 105,
+    top: 250,
+  },
+  {
+    iconPath: Bot2,
+    spriteSheetPath: CrysTaraCreatureSpriteSheet,
+    left: 440,
+    top: 140,
+  },
+  {
+    iconPath: Bot3,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 660,
+    top: 180,
+  },
+  {
+    iconPath: Bot4,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 550,
+    top: 240,
+  },
+  {
+    iconPath: Bot1,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 260,
+    top: 240,
+  },
+  {
+    iconPath: Bot2,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 260,
+    top: 240,
+  },
+  {
+    iconPath: Bot3,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 260,
+    top: 240,
+  },
+  {
+    iconPath: Bot4,
+    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    left: 260,
+    top: 240,
+  },
+];
 
 export enum ResourceType {
   Crystal,
@@ -1081,12 +954,10 @@ export function getNumberAbbr(num: number): string {
   return sign + num.toString();
 }
 
-const botIconPaths = [Bot1, Bot2, Bot3, Bot4];
-
 export function getCreatureIconPath(creatureType: number): string {
   return creatureType == -1
-    ? ""
-    : botIconPaths[creatureType % botIconPaths.length];
+    ? emptyCreatureData.iconPath
+    : creatureDatas[creatureType % creatureDatas.length].iconPath;
 }
 
 export function getProgramName(type: ProgramType): string {
@@ -1101,16 +972,22 @@ export function getProgramSpriteSheetPath(type: ProgramType): string {
   return programDatas[type].spriteSheetPath;
 }
 
-export function getProgramCreatureSpriteSheetPath(type: ProgramType): string {
-  return programDatas[type].creatureSpriteSheet;
+export function getCreatureSpriteSheetPath(creatureType: number): string {
+  return creatureType == -1
+    ? emptyCreatureData.spriteSheetPath
+    : creatureDatas[creatureType % creatureDatas.length].spriteSheetPath;
 }
 
-export function getProgramCreatureLeft(type: ProgramType): number {
-  return programDatas[type].creatureLeft;
+export function getCreatureLeft(creatureType: number): number {
+  return creatureType == -1
+    ? emptyCreatureData.left
+    : creatureDatas[creatureType % creatureDatas.length].left;
 }
 
-export function getProgramCreatureTop(type: ProgramType): number {
-  return programDatas[type].creatureTop;
+export function getCreatureTop(creatureType: number): number {
+  return creatureType == -1
+    ? emptyCreatureData.top
+    : creatureDatas[creatureType % creatureDatas.length].top;
 }
 
 export interface ConfirmPopupInfo {

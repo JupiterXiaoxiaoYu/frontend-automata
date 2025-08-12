@@ -38,7 +38,7 @@ import {
   setNotSelectingCreature,
   startCreatingCreature,
   changeSelectedCreature,
-  selectCreaturesCurrentPrograms,
+  selectCurrentCreatureTypes,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -69,11 +69,7 @@ const PlanetScene = ({ localTimer }: Props) => {
     selectSelectedCreaturePrograms
   );
 
-  const selectedCreatureDiffResources = useAppSelector(
-    selectSelectedCreatureDiffResources
-  );
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
-  const isCreatingUIState = uIState.type == UIStateType.Creating;
   const showConfirmRebootButton = uIState.type == UIStateType.Reboot;
   const showConfirmCreateButton = uIState.type == UIStateType.Creating;
   const enableConfirmButton = selectedCreaturePrograms.every(
@@ -87,9 +83,7 @@ const PlanetScene = ({ localTimer }: Props) => {
     selectSelectedCreatureListIndex
   );
   const isLoading = useAppSelector(selectIsLoading);
-  const creaturesCurrentPrograms = useAppSelector(
-    selectCreaturesCurrentPrograms
-  );
+  const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
   const [scenario, setScenario] = useState(new Scenario());
@@ -199,9 +193,9 @@ const PlanetScene = ({ localTimer }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("creaturesCurrentPrograms changed", creaturesCurrentPrograms);
-    scenario.updateClips(creaturesCurrentPrograms);
-  }, [creaturesCurrentPrograms]);
+    console.log("creaturesCurrentPrograms changed", currentCreatureTypes);
+    scenario.updateClips(currentCreatureTypes);
+  }, [currentCreatureTypes]);
 
   useEffect(() => {
     if (uIState.type == UIStateType.PlayUnlockAnimation) {
