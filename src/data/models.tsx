@@ -148,70 +148,14 @@ import TitanBloomIcon from "../game/image/Animations/Programs/Icons/TitanBloom.p
 import QuantumCoreIcon from "../game/image/Animations/Programs/Icons/QuantumCore.png";
 import XenoBloomIcon from "../game/image/Animations/Programs/Icons/XenoBloom.png";
 import StarLightIcon from "../game/image/Animations/Programs/Icons/StarLight.png";
-
-import IlluGenCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/IlluGen.png";
-import EtherForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EtherForge.png";
-import QuantumScribeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantumScribe.png";
-import EvolviFyCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EvolviFy.png";
-import QuantumFrostCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantumFrost.png";
-import QuantumSurgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantumSurge.png";
-import CyberPulseCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CyberPulse.png";
-import NexuMaxCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NexuMax.png";
-import QuantaForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantaForge.png";
-import CrysTaraCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CrysTara.png";
-import PlasmaShiftCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/PlasmaShift.png";
-import AespaCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/Aespa.png";
-import SwiftForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/SwiftForge.png";
-import BioGenCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioGen.png";
-import BioFusionCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioFusion.png";
-import AstroMineCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/AstroMine.png";
-import TitaniumBoostCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/TitaniumBoost.png";
-import TTgenesisCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/TTgenesis.png";
-import QuantumLeapCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantumLeap.png";
-import SpicenRichCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/SpicenRich.png";
-import BioSurgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioSurge.png";
-import NeuroForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NeuroForge.png";
-import SuperNovaCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/SuperNova.png";
-import ResoNexCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/ResoNex.png";
-import QuiFoamCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuiFoam.png";
-import NovaBurstCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NovaBurst.png";
-import StellarChargeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/StellarCharge.png";
-import NexroVestCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NexroVest.png";
-import PlasmaChargeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/PlasmaCharge.png";
-import CogniFyCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CogniFy.png";
-import BioHarvestCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioHarvest.png";
-import AbracadabraCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/Abracadabra.png";
-import CerebraSparkCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CerebraSpark.png";
-import EnerGexCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EnerGex.png";
-import MegaBoostCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/MegaBoost.png";
-import NeuroChargeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NeuroCharge.png";
-import StarForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/StarForge.png";
-import EtherWeaveCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EtherWeave.png";
-import FortiGenCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/FortiGen.png";
-import BioCastCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioCast.png";
-import FortiFyxCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/FortiFyx.png";
-import FortivestCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/Fortivest.png";
-import AstroChargeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/AstroCharge.png";
-import BioSynthesisCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/BioSynthesis.png";
-import NovaFluxCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NovaFlux.png";
-import XenoFloralCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/XenoFloral.png";
-import SynTitanCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/SynTitan.png";
-import FoamTapCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/FoamTap.png";
-import NanoWeaveCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NanoWeave.png";
-import CrystaBloomCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CrystaBloom.png";
-import EtherPulseCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EtherPulse.png";
-import EnerPlexCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EnerPlex.png";
-import EnerGateCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EnerGate.png";
-import PlasmaForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/PlasmaForge.png";
-import NexusFieldCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NexusField.png";
-import StarlightForgeCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/StarlightForge.png";
-import EnerFusionCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/EnerFusion.png";
-import CogniMeltCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/CogniMelt.png";
-import NexiMineCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/NexiMine.png";
-import TitanBloomCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/TitanBloom.png";
-import QuantumCoreCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/QuantumCore.png";
-import XenoBloomCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/XenoBloom.png";
-import StarLightCreatureSpriteSheet from "../game/image/Animations/Programs/CreatureSpriteSheets/StarLight.png";
+import bot8Spritesheet from "../game/image/Animations/Creatures/bot8.png";
+import bot6Spritesheet from "../game/image/Animations/Creatures/bot6.png";
+import bot1Spritesheet from "../game/image/Animations/Creatures/bot1.png";
+import bot7Spritesheet from "../game/image/Animations/Creatures/bot7.png";
+import bot2Spritesheet from "../game/image/Animations/Creatures/bot2.png";
+import bot5Spritesheet from "../game/image/Animations/Creatures/bot5.png";
+import bot4Spritesheet from "../game/image/Animations/Creatures/bot4.png";
+import bot3Spritesheet from "../game/image/Animations/Creatures/bot3.png";
 import { SERVER_TICK_TO_SECOND } from "../game/request";
 
 export interface CreatureModel {
@@ -644,50 +588,50 @@ const emptyCreatureData: CreatureData = {
 const creatureDatas: CreatureData[] = [
   {
     iconPath: Bot1,
-    spriteSheetPath: BioGenCreatureSpriteSheet,
+    spriteSheetPath: bot1Spritesheet,
     left: 105,
     top: 250,
   },
   {
     iconPath: Bot2,
-    spriteSheetPath: CrysTaraCreatureSpriteSheet,
+    spriteSheetPath: bot2Spritesheet,
     left: 440,
     top: 140,
   },
   {
     iconPath: Bot3,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    spriteSheetPath: bot3Spritesheet,
     left: 660,
     top: 180,
   },
   {
     iconPath: Bot4,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
+    spriteSheetPath: bot4Spritesheet,
     left: 550,
     top: 240,
   },
   {
     iconPath: Bot1,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
-    left: 260,
-    top: 240,
+    spriteSheetPath: bot5Spritesheet,
+    left: 580,
+    top: 50,
   },
   {
     iconPath: Bot2,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
-    left: 260,
-    top: 240,
+    spriteSheetPath: bot6Spritesheet,
+    left: 150,
+    top: 115,
   },
   {
     iconPath: Bot3,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
-    left: 260,
-    top: 240,
+    spriteSheetPath: bot7Spritesheet,
+    left: 295,
+    top: 190,
   },
   {
     iconPath: Bot4,
-    spriteSheetPath: AstroMineCreatureSpriteSheet,
-    left: 260,
+    spriteSheetPath: bot8Spritesheet,
+    left: 340,
     top: 240,
   },
 ];

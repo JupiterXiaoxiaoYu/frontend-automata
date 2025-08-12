@@ -54,10 +54,12 @@ def merge_all_in_folder(folder_path):
     importStr = ""
     switchStr = ""
     for folder_name in os.listdir(folder_path):
+        if folder_name == ".DS_Store":
+            continue
         image_name = f"{folder_name}.png"
         if not os.path.exists(image_name):
             merge_images_to_sprite(os.path.join(folder_path, folder_name), image_name)
-        importStr += f"import {folder_name}Spritesheet from \"../image/spritesheet/{image_name}\";\n"
+        importStr += f"import {folder_name}Spritesheet from \"../image/Animations/Creatures/{image_name}\";\n"
     
     # Copy to clipboard (macOS)
     try:

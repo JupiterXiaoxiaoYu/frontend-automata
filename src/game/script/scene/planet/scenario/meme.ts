@@ -42,7 +42,7 @@ export class Clip {
   target: Array<[number, number]>;
   constructor(index: number, creatureType: number, ratio: number) {
     this.index = index;
-    this.name = `Robot ${index}`;
+    this.name = `Robot ${index + 1}`;
     this.creatureType = creatureType;
 
     const spriteSheetImage = new Image();

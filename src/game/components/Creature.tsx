@@ -21,7 +21,6 @@ interface Props {
 }
 
 const Creature = ({ isLocked, creature, progress }: Props) => {
-  console.log("Creature", creature);
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(selectIsLoading);
   const creaturesCount = useAppSelector(selectCreaturesCount);
