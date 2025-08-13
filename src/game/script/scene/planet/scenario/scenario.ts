@@ -14,11 +14,13 @@ export class Scenario {
   focusingIndex?: number | null;
   background: BackgroundBase;
   context?: CanvasRenderingContext2D;
+  onSelectCreature: (index: number) => void;
 
-  constructor() {
+  constructor(onSelectCreature: (index: number) => void) {
     this.status = "play";
     this.clips = [];
     this.background = new BackgroundDisco(this.clips);
+    this.onSelectCreature = onSelectCreature;
   }
 
   updateClips(creatureTypes: number[]) {
@@ -46,11 +48,9 @@ export class Scenario {
     for (let i = 0; i < this.clips.length; i++) {
       const clip = this.clips[i];
       if (clip.inRect(cursorLeft, cursorTop)) {
-        this.setFocus(i);
-        return clip.index;
+        this.onSelectCreature(i);
       }
     }
-    return null;
   }
 
   hoverMeme(cursorLeft: number, cursorTop: number) {

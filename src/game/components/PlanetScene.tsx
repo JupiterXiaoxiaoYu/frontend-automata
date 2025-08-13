@@ -38,6 +38,8 @@ import {
   startCreatingCreature,
   changeSelectedCreature,
   selectCurrentCreatureTypes,
+  setSelectedCreature,
+  selectSelectedCreatureIndex,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -85,7 +87,7 @@ const PlanetScene = ({ localTimer }: Props) => {
   const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
-  const [scenario, setScenario] = useState(new Scenario());
+  const [scenario, setScenario] = useState(new Scenario(onSelectCreature));
 
   function onClickUnlock() {
     if (uIState.type == UIStateType.Creating) {
@@ -227,6 +229,16 @@ const PlanetScene = ({ localTimer }: Props) => {
     const top = ((e.clientY - rect.top) * 960) / rect.width;
     scenario.selectMeme(left, top);
   }
+
+  function onSelectCreature(index: number) {
+    dispatch(setSelectedCreature({ index }));
+  }
+
+  useEffect(() => {
+    if (selectedCreatureIndexForRequestEncode != -1) {
+      scenario.setFocus(selectedCreatureIndexForRequestEncode);
+    }
+  }, [selectedCreatureIndexForRequestEncode]);
 
   return (
     // <div className="planet-scene-content">

@@ -180,6 +180,9 @@ export const creaturesSlice = createSlice({
       state.selectedCreatureIndex =
         state.creatures.length == 0 ? NOT_SELECTING_CREATURE : 0;
     },
+    setSelectedCreature: (state, action) => {
+      state.selectedCreatureIndex = action.payload.index;
+    },
     startCreatingCreature: (state, action) => {
       state.selectedCreatureIndex = state.creatures.length;
       state.creatingCreature = getCreatingCreature(state.creatures.length);
@@ -498,6 +501,7 @@ export const selectInstalledProgramIds = (state: RootState): number[] => {
 export const {
   changeSelectedCreature,
   initSelectingCreatureIndex,
+  setSelectedCreature,
   startCreatingCreature,
   startRebootCreature,
   clearRebootCreature,
