@@ -166,19 +166,19 @@ export const creaturesSlice = createSlice({
   initialState,
   reducers: {
     changeSelectedCreature: (state, action) => {
-      const newIndex =
-        ((state.selectedCreatureIndex == NOT_SELECTING_CREATURE
-          ? 0
-          : state.selectedCreatureIndex + 1) +
-          action.payload.diff +
-          (state.creatures.length + 1)) %
-        (state.creatures.length + 1);
+      if (state.selectedCreatureIndex == NOT_SELECTING_CREATURE) {
+        return;
+      }
+
       state.selectedCreatureIndex =
-        newIndex == 0 ? NOT_SELECTING_CREATURE : newIndex - 1;
-      console.log("changeSelectedCreature", state.selectedCreatureIndex);
+        (state.selectedCreatureIndex +
+          action.payload.diff +
+          state.creatures.length) %
+        state.creatures.length;
     },
-    setNotSelectingCreature: (state, action) => {
-      state.selectedCreatureIndex = NOT_SELECTING_CREATURE;
+    initSelectingCreatureIndex: (state, action) => {
+      state.selectedCreatureIndex =
+        state.creatures.length == 0 ? NOT_SELECTING_CREATURE : 0;
     },
     startCreatingCreature: (state, action) => {
       state.selectedCreatureIndex = state.creatures.length;
@@ -497,7 +497,7 @@ export const selectInstalledProgramIds = (state: RootState): number[] => {
 
 export const {
   changeSelectedCreature,
-  setNotSelectingCreature,
+  initSelectingCreatureIndex,
   startCreatingCreature,
   startRebootCreature,
   clearRebootCreature,

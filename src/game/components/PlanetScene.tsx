@@ -35,7 +35,6 @@ import {
   selectSelectedCreatureListIndex,
   selectSelectedCreatureCurrentProgram,
   selectSelectedCreatureSelectingProgram,
-  setNotSelectingCreature,
   startCreatingCreature,
   changeSelectedCreature,
   selectCurrentCreatureTypes,
@@ -226,7 +225,7 @@ const PlanetScene = ({ localTimer }: Props) => {
     const rect = target.getBoundingClientRect();
     const left = ((e.clientX - rect.left) * 960) / rect.width;
     const top = ((e.clientY - rect.top) * 960) / rect.width;
-    const memeIndex = scenario.selectMeme(left, top);
+    scenario.selectMeme(left, top);
   }
 
   return (
@@ -340,14 +339,12 @@ const PlanetScene = ({ localTimer }: Props) => {
               />
             </div>
           )}
-          {showNewCreatureButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureNewButton
-                isDisabled={isLoading}
-                onClick={onClickNewCreature}
-              />
-            </div>
-          )}
+          <div className="planet-scene-program-new-creature-button">
+            <CreatureNewButton
+              isDisabled={isLoading}
+              onClick={onClickNewCreature}
+            />
+          </div>
           {selectedCreaturePrograms.map((program, index) => (
             <MainMenuProgram
               key={index}
@@ -366,25 +363,29 @@ const PlanetScene = ({ localTimer }: Props) => {
             />
           ))}
         </div>
-        <div className="planet-scene-creature-info">
-          <Creature
-            isLocked={false}
-            creature={selectedCreature}
-            progress={currentProgramInfo.progress}
-          />
-        </div>
-        <div className="planet-scene-prev-creature-button">
-          <PrevPageButton
-            isDisabled={false}
-            onClick={() => onChangeSelectedCreature(-1)}
-          />
-        </div>
-        <div className="planet-scene-next-creature-button">
-          <NextPageButton
-            isDisabled={false}
-            onClick={() => onChangeSelectedCreature(1)}
-          />
-        </div>
+        {!isNotSelectingCreature && (
+          <>
+            <div className="planet-scene-creature-info">
+              <Creature
+                isLocked={false}
+                creature={selectedCreature}
+                progress={currentProgramInfo.progress}
+              />
+            </div>
+            <div className="planet-scene-prev-creature-button">
+              <PrevPageButton
+                isDisabled={false}
+                onClick={() => onChangeSelectedCreature(-1)}
+              />
+            </div>
+            <div className="planet-scene-next-creature-button">
+              <NextPageButton
+                isDisabled={false}
+                onClick={() => onChangeSelectedCreature(1)}
+              />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

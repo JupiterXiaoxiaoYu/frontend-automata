@@ -69,6 +69,16 @@
   transform: translate(-50%, -50%);
 }
 
+.planet-scene-program-new-creature-button {
+  position: absolute;
+  height: 80%;
+  width: auto;
+  aspect-ratio: 132 / 128;
+  top: -50%;
+  left: 93.5%;
+  transform: translate(-50%, -50%);
+}
+
 .planet-scene-info-container {
   position: absolute;
   height: 125px;
