@@ -109,7 +109,9 @@ const Gameplay = () => {
     <>
       <ResourceAnimations localTimer={localTimer} />
       <NewProgramAnimation />
-      <TopMenu />
+      <div className="top-container">
+        <TopMenu />
+      </div>
       <div className="middle-container">
         <LeftMenu localTimer={localTimer} />
         <MainMenu localTimer={localTimer} />

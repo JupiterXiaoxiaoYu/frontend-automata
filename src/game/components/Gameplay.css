@@ -1,20 +1,32 @@
-body, html, #root {
-    width: max(100%, 960px);
-    height: max(100%, 400px);
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+body,
+html,
+#root {
+  width: max(100%, 960px);
+  height: max(100%, 400px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
-    -webkit-user-drag: none;
-    user-drag: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+.top-container {
+  position: relative;
+  height: 110px;
+  width: 100%;
+  min-width: 960px;
+  display: flex;
+  font-size: 24px;
+  z-index: 10;
 }
 
 .middle-container {
-    position: absolute;
-    display: flex;
-    top: 60px;
-    width: max(100%, 960px);
-    height: calc(max(100%, 400px) - 60px);
+  position: absolute;
+  display: flex;
+  top: 60px;
+  width: max(100%, 960px);
+  height: calc(max(100%, 400px) - 60px);
 }

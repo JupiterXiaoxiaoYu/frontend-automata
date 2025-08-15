@@ -4,6 +4,10 @@ import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
   SceneType,
+  selectEnergy,
+  selectExp,
+  selectLevel,
+  selectRedeemEnergy,
   selectSceneType,
   setSceneType,
   setUIState,
@@ -14,17 +18,25 @@ import { selectIsLoading } from "../../data/errors";
 import TitaniumFrame from "./TitaniumFrame";
 import HelpButton from "./Buttons/HelpButton";
 import { startGuide } from "../../data/guides";
-import { GuideType } from "../../data/models";
-import PlayerInfo from "./PlayerInfo";
+import { expToLevelUp, GuideType } from "../../data/models";
+import level_icon from "../image/backgrounds/player_lv.png";
+import energy_icon from "../image/backgrounds/player_energy.png";
+import xp_icon from "../image/backgrounds/player_xp.png";
 import { MarketTabState, setTabState } from "../../data/market";
 import PlanetSceneButton from "./Buttons/PlanetSceneButton";
 import MarketSceneButton from "./Buttons/MarketSceneButton";
 import RedeemSceneButton from "./Buttons/RedeemSceneButton";
+import PlayerInfoLevelDisplay from "./PlayerInfoLevelDisplay";
+import PlayerInfoDisplay from "./PlayerInfoDisplay";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(selectIsLoading);
   const sceneType = useAppSelector(selectSceneType);
+  const level = useAppSelector(selectLevel);
+  const exp = useAppSelector(selectExp);
+  const energy = useAppSelector(selectEnergy);
+  const redeemEnergy = useAppSelector(selectRedeemEnergy);
 
   const onClickWithdraw = () => {
     if (!isLoading) {
@@ -57,24 +69,55 @@ const TopMenu = () => {
   }
 
   return (
-    <div className="top">
+    <>
       <div className="top-left"></div>
       <div className="top-middle"></div>
       <div className="top-right"></div>
-      <div className="top-titanium-frame">
-        <TitaniumFrame
-          onClickWithdraw={onClickWithdraw}
-          onClickDeposit={onClickDeposit}
-        />
+
+      <div className="top-left-info-container">
+        <div className="player-info-level-container">
+          <PlayerInfoLevelDisplay
+            icon={level_icon}
+            title={"level"}
+            amount={level}
+            interestRate={0.01 * level}
+            description={
+              "Increasing Rockets Spawn and Interest Rate When Leveling Up"
+            }
+          />
+        </div>
+        <div className="player-info-xp-container">
+          <PlayerInfoDisplay
+            icon={xp_icon}
+            title={"xp"}
+            amount={exp}
+            description={`${
+              expToLevelUp + level * 10 - exp
+            } Exp Before Leveling Up`}
+          />
+        </div>
+        <div className="player-info-energy-container">
+          <PlayerInfoDisplay
+            icon={energy_icon}
+            title={"energy"}
+            amount={energy}
+            description={`Automatas Use Energy To Operate, you can collect ${redeemEnergy} in rocket`}
+          />
+        </div>
       </div>
-      <div className="top-account-info">
-        <AccountInfo />
+      <div className="top-right-info-container">
+        <div className="top-titanium-frame">
+          <TitaniumFrame
+            onClickWithdraw={onClickWithdraw}
+            onClickDeposit={onClickDeposit}
+          />
+        </div>
+        <div className="top-account-info">
+          <AccountInfo />
+        </div>
       </div>
       <div className="top-resources">
         <Resources />
-      </div>
-      <div className="top-player-info">
-        <PlayerInfo />
       </div>
       <div className="top-planet">
         <PlanetSceneButton
@@ -97,7 +140,7 @@ const TopMenu = () => {
       <div className="top-help">
         <HelpButton onClick={onClickHelp} />
       </div>
-    </div>
+    </>
   );
 };
 
