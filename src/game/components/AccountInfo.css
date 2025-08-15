@@ -18,8 +18,7 @@
 }
 
 .account-info-account-text,
-.account-info-key-text,
-.account-info-player-id-text {
+.account-info-key-text {
   position: absolute;
   font-size: 8px;
   margin: 0;
@@ -40,8 +39,4 @@
 
 .account-info-key-text {
   top: 50%;
-}
-
-.account-info-player-id-text {
-  top: 75%;
 }

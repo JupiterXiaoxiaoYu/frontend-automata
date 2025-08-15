@@ -41,11 +41,13 @@ const TopMenu = () => {
 
   const textRef = useRef<HTMLParagraphElement>(null);
   const [titaniumFontSize, setTitaniumFontSize] = useState<number>(0);
+  const [accountFontSize, setAccountFontSize] = useState<number>(0);
 
   const adjustSize = () => {
     if (textRef.current) {
       const parentHeight = textRef.current.offsetHeight;
       setTitaniumFontSize(parentHeight / 10);
+      setAccountFontSize(parentHeight / 14);
     }
   };
 
@@ -133,7 +135,7 @@ const TopMenu = () => {
           />
         </div>
         <div className="top-account-info">
-          <AccountInfo />
+          <AccountInfo fontSize={accountFontSize} />
         </div>
       </div>
       <div className="top-resources">
