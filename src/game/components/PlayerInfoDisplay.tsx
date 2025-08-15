@@ -8,9 +8,16 @@ interface Props {
   title: string;
   amount: number;
   description: string;
+  fontSize: number;
 }
 
-const PlayerInfoDisplay = ({ icon, title, amount, description }: Props) => {
+const PlayerInfoDisplay = ({
+  icon,
+  title,
+  amount,
+  description,
+  fontSize,
+}: Props) => {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => setIsHovering(true);
   const handleMouseLeave = () => setIsHovering(false);
@@ -18,8 +25,22 @@ const PlayerInfoDisplay = ({ icon, title, amount, description }: Props) => {
     <div className="player-info-display-container">
       <img src={background} className="player-info-display-background" />
       <img src={icon} className="player-info-display-icon" />
-      <p className="player-info-display-title-text">{title}</p>
-      <p className="player-info-display-amount-text">{amount}</p>
+      <p
+        className="player-info-display-title-text"
+        style={{
+          fontSize: fontSize,
+        }}
+      >
+        {title}
+      </p>
+      <p
+        className="player-info-display-amount-text"
+        style={{
+          fontSize: fontSize,
+        }}
+      >
+        {amount}
+      </p>
       <div
         className="player-info-display-hover-range"
         onMouseEnter={handleMouseEnter}
@@ -27,7 +48,10 @@ const PlayerInfoDisplay = ({ icon, title, amount, description }: Props) => {
       />
       {isHovering && (
         <div className="player-info-display-hover-container">
-          <PlayerInfoHover description={description} />
+          <PlayerInfoHover
+            description={description}
+            fontSize={fontSize * 1.2}
+          />
         </div>
       )}
     </div>

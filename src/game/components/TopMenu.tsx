@@ -42,12 +42,14 @@ const TopMenu = () => {
   const textRef = useRef<HTMLParagraphElement>(null);
   const [titaniumFontSize, setTitaniumFontSize] = useState<number>(0);
   const [accountFontSize, setAccountFontSize] = useState<number>(0);
+  const [contentFontSize, setContentFontSize] = useState<number>(0);
 
   const adjustSize = () => {
     if (textRef.current) {
       const parentHeight = textRef.current.offsetHeight;
       setTitaniumFontSize(parentHeight / 10);
       setAccountFontSize(parentHeight / 14);
+      setContentFontSize(parentHeight / 16);
     }
   };
 
@@ -105,6 +107,7 @@ const TopMenu = () => {
             description={
               "Increasing Rockets Spawn and Interest Rate When Leveling Up"
             }
+            fontSize={contentFontSize}
           />
         </div>
         <div className="player-info-xp-container">
@@ -115,6 +118,7 @@ const TopMenu = () => {
             description={`${
               expToLevelUp + level * 10 - exp
             } Exp Before Leveling Up`}
+            fontSize={contentFontSize}
           />
         </div>
         <div className="player-info-energy-container">
@@ -123,6 +127,7 @@ const TopMenu = () => {
             title={"energy"}
             amount={energy}
             description={`Automatas Use Energy To Operate, you can collect ${redeemEnergy} in rocket`}
+            fontSize={contentFontSize}
           />
         </div>
       </div>

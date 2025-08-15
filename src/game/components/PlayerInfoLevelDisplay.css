@@ -27,14 +27,13 @@
 
 .player-info-level-display-title-text {
   position: absolute;
-  font-size: 8px;
   margin: 0;
   color: white;
   text-align: left;
-  top: 20%;
-  left: -3%;
+  top: 23%;
+  left: 17%;
   width: 36%;
-  height: 8px;
+  height: 23%;
   font-family: "mishmash";
   white-space: break-spaces;
   pointer-events: none;
@@ -43,14 +42,13 @@
 
 .player-info-level-display-amount-text {
   position: absolute;
-  font-size: 8px;
   margin: 0;
   color: white;
   text-align: center;
-  top: 59%;
-  left: -3%;
+  top: 64%;
+  left: 17%;
   width: 23%;
-  height: 8px;
+  height: 23%;
   font-family: "mishmash";
   white-space: break-spaces;
   pointer-events: none;
@@ -59,14 +57,13 @@
 
 .player-info-level-display-interest-rate-text {
   position: absolute;
-  font-size: 7px;
-  line-height: 10px;
+  line-height: 140%;
   margin: 0;
   color: #5cffff;
   top: 55%;
-  left: 85%;
+  left: 75%;
   width: 45%;
-  height: 30px;
+  height: 79%;
   font-family: "mishmash";
   white-space: break-spaces;
   pointer-events: none;

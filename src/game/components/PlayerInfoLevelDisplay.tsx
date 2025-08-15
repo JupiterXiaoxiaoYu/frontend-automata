@@ -9,6 +9,7 @@ interface Props {
   amount: number;
   interestRate: number;
   description: string;
+  fontSize: number;
 }
 
 const PlayerInfoLevelDisplay = ({
@@ -17,6 +18,7 @@ const PlayerInfoLevelDisplay = ({
   amount,
   interestRate,
   description,
+  fontSize,
 }: Props) => {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => setIsHovering(true);
@@ -25,9 +27,28 @@ const PlayerInfoLevelDisplay = ({
     <div className="player-info-level-display-container">
       <img src={background} className="player-info-level-display-background" />
       <img src={icon} className="player-info-level-display-icon" />
-      <p className="player-info-level-display-title-text">{title}</p>
-      <p className="player-info-level-display-amount-text">{amount}</p>
-      <p className="player-info-level-display-interest-rate-text">
+      <p
+        className="player-info-level-display-title-text"
+        style={{
+          fontSize: fontSize,
+        }}
+      >
+        {title}
+      </p>
+      <p
+        className="player-info-level-display-amount-text"
+        style={{
+          fontSize: fontSize,
+        }}
+      >
+        {amount}
+      </p>
+      <p
+        className="player-info-level-display-interest-rate-text"
+        style={{
+          fontSize: fontSize,
+        }}
+      >
         Current Interest Rate: {interestRate}%
       </p>
       <div
@@ -37,7 +58,10 @@ const PlayerInfoLevelDisplay = ({
       />
       {isHovering && (
         <div className="player-info-level-display-hover-container">
-          <PlayerInfoHover description={description} />
+          <PlayerInfoHover
+            description={description}
+            fontSize={fontSize * 1.2}
+          />
         </div>
       )}
     </div>
