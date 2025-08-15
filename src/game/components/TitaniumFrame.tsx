@@ -14,9 +14,14 @@ import WithdrawButton from "./Buttons/WithdrawButton";
 interface Props {
   onClickWithdraw: () => void;
   onClickDeposit: () => void;
+  fontSize: number;
 }
 
-const TitaniumFrame = ({ onClickWithdraw, onClickDeposit }: Props) => {
+const TitaniumFrame = ({
+  onClickWithdraw,
+  onClickDeposit,
+  fontSize,
+}: Props) => {
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   return (
@@ -27,7 +32,14 @@ const TitaniumFrame = ({ onClickWithdraw, onClickDeposit }: Props) => {
           src={getResourceIconPath(ResourceType.Titanium)}
           className="titanium-frame-resource-display-image"
         />
-        <p className="titanium-frame-resource-display-text">{titaniumCount}</p>
+        <p
+          className="titanium-frame-resource-display-text"
+          style={{
+            fontSize: fontSize,
+          }}
+        >
+          {titaniumCount}
+        </p>
       </div>
       <div className="titanium-frame-withdraw">
         <WithdrawButton onClick={onClickWithdraw} />
