@@ -1,5 +1,5 @@
 .player-info-hover-container {
-  position: relative;
+  position: absolute;
   width: auto;
   height: 120%;
   aspect-ratio: 5 / 2;
@@ -14,6 +14,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
+  z-index: 15;
 }
 
 .player-info-hover-context-text {
@@ -29,4 +30,5 @@
   font-family: "mishmash";
   pointer-events: none;
   user-select: none;
+  z-index: 15;
 }

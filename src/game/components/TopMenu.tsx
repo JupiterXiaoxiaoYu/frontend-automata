@@ -94,6 +94,9 @@ const TopMenu = () => {
   return (
     <div className="top-menu-container" ref={textRef}>
       <div className="top-background" />
+      <div className="top-resources">
+        <Resources fontSize={contentFontSize} />
+      </div>
       <div className="top-left-info-container">
         <div className="player-info-level-container">
           <PlayerInfoLevelDisplay
@@ -139,9 +142,6 @@ const TopMenu = () => {
         <div className="top-account-info">
           <AccountInfo fontSize={accountFontSize} />
         </div>
-      </div>
-      <div className="top-resources">
-        <Resources fontSize={contentFontSize} />
       </div>
       <div className="top-planet">
         <PlanetSceneButton
