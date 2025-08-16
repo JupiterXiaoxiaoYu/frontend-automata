@@ -1,5 +1,5 @@
 .left {
-  width: 190px;
+  width: 20%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -11,12 +11,12 @@
 .left-top,
 .left-middle,
 .left-bottom {
-  width: 190px;
+  width: 100%;
   background-size: contain;
 }
 
 .left-top {
-  height: 190px;
+  aspect-ratio: 1 / 1;
   background-image: url("../image/backgrounds/left_top.png");
   background-repeat: no-repeat;
 }
@@ -28,40 +28,43 @@
 }
 
 .left-bottom {
-  height: 190px;
+  aspect-ratio: 1 / 1;
   background-image: url("../image/backgrounds/left_bottom.png");
   background-repeat: no-repeat;
 }
 
 .left-creature-grid {
   position: absolute;
-  transform: translate(-50%, -50%);
-  width: 152px;
-  height: calc(100% - 110px);
-  top: 50%;
+  width: 80%;
+  height: calc(93% - 5.6vw);
+  top: calc(5.6vw);
   left: 45%;
+  transform: translate(-50%, 0%);
 }
 
 .left-program-filter-bar-position {
   position: absolute;
   top: 50%;
-  right: -65px;
+  right: -34.2%;
   transform: translate(-50%, -50%);
 }
 
 .left-creature-page-selector {
   position: absolute;
-  width: 170px;
-  height: 40px;
-  bottom: 0px;
-  left: 0px;
+  width: auto;
+  height: 5%;
+  aspect-ratio: 17 / 4;
+  bottom: 2%;
+  left: 45%;
+  transform: translate(-50%, 0%);
 }
 
 .left-corner-bar {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 31.5%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   bottom: 0px;
-  right: -2px;
+  right: -1%;
   user-select: none;
 }
