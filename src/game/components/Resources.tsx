@@ -12,7 +12,11 @@ import {
 } from "../../data/models";
 import ResourceDisplay from "./ResourceDisplay";
 
-const Resources = () => {
+interface Props {
+  fontSize: number;
+}
+
+const Resources = ({ fontSize }: Props) => {
   return (
     <div className="top-resources-container">
       {resourceTypes
@@ -24,6 +28,7 @@ const Resources = () => {
             title={getResourceNameText(type)}
             description={getResourceDescriptionText(type)}
             amount={useAppSelector(selectResource(type))}
+            fontSize={fontSize}
           />
         ))}
     </div>

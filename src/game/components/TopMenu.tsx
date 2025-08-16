@@ -141,7 +141,7 @@ const TopMenu = () => {
         </div>
       </div>
       <div className="top-resources">
-        <Resources />
+        <Resources fontSize={contentFontSize} />
       </div>
       <div className="top-planet">
         <PlanetSceneButton

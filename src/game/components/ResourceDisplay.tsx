@@ -9,6 +9,7 @@ interface Props {
   amount: number;
   title: string;
   description: string;
+  fontSize: number;
 }
 
 const ResourceDisplay = ({
@@ -16,6 +17,7 @@ const ResourceDisplay = ({
   amount,
   title,
   description,
+  fontSize,
 }: Props) => {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => setIsHovering(true);
@@ -24,7 +26,11 @@ const ResourceDisplay = ({
     <div className="resource-display-container">
       <img src={background} className="resource-display-background" />
       <img src={iconImagePath} className="resource-display-image" />
-      <p className="resource-display-text" title={amount.toLocaleString()}>
+      <p
+        className="resource-display-text"
+        title={amount.toLocaleString()}
+        style={{ fontSize: fontSize }}
+      >
         {getNumberAbbr(amount)}
       </p>
       <div
@@ -33,9 +39,11 @@ const ResourceDisplay = ({
         onMouseLeave={handleMouseLeave}
       />
       {isHovering && (
-        <div className="resource-display-hover-container">
-          <ResourceHover title={title} description={description} />
-        </div>
+        <ResourceHover
+          title={title}
+          description={description}
+          fontSize={fontSize * 1.2}
+        />
       )}
     </div>
   );
