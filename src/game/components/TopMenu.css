@@ -88,45 +88,56 @@
 
 .top-resources {
   position: absolute;
-  top: 50px;
-  left: 260px;
-  width: 480px;
-  height: 40px;
+  width: 45%;
+  height: auto;
+  aspect-ratio: 432 / 25;
+  top: 63%;
+  left: 47.5%;
+  transform: translate(-50%, -50%);
   z-index: 7;
+  background-color: red;
 }
 
 .top-help {
   position: absolute;
-  width: 58px;
-  height: 20px;
-  top: 60px;
-  right: 240px;
+  width: auto;
+  height: 15%;
+  aspect-ratio: 58 / 20;
+  top: 63%;
+  left: 73%;
+  transform: translate(-50%, -50%);
   z-index: 7;
 }
 
 .top-planet {
   position: absolute;
-  width: 62px;
-  height: 37px;
-  top: 60px;
-  right: 109px;
+  width: auto;
+  height: 33%;
+  aspect-ratio: 62 / 37;
+  top: 65%;
+  left: 85.3%;
+  transform: translate(-50%, -50%);
   z-index: 6;
 }
 
 .top-market {
   position: absolute;
-  width: 57px;
-  height: 37px;
-  top: 60px;
-  right: 55px;
+  width: auto;
+  height: 33%;
+  aspect-ratio: 57 / 37;
+  top: 65%;
+  left: 91.3%;
+  transform: translate(-50%, -50%);
   z-index: 6;
 }
 
 .top-redeem {
   position: absolute;
-  width: 62px;
-  height: 37px;
-  top: 60px;
-  right: -3px;
+  width: auto;
+  height: 33%;
+  aspect-ratio: 62 / 37;
+  top: 65%;
+  left: 97.3%;
+  transform: translate(-50%, -50%);
   z-index: 6;
 }
