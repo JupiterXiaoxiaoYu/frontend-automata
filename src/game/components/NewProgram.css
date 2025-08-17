@@ -1,7 +1,7 @@
 .new-program-container {
   position: relative;
-  width: 168px;
-  height: 89px;
+  width: 95%;
+  height: 95%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -32,12 +32,11 @@
   top: 25%;
   left: 67%;
   transform: translate(-50%, -50%);
-  font-size: 13px;
   text-align: center;
   line-height: 100%;
-  margin: 0px;
+  margin: 0;
   width: 60%;
-  height: 13px;
+  height: 10%;
   font-family: "mishmash";
   color: white;
   pointer-events: none;
@@ -49,12 +48,11 @@
   top: 45%;
   left: 67%;
   transform: translate(-50%, -50%);
-  font-size: 13px;
   text-align: center;
   line-height: 100%;
-  margin: 0px;
+  margin: 0;
   width: 60%;
-  height: 13px;
+  height: 10%;
   font-family: "mishmash";
   color: white;
   pointer-events: none;
@@ -63,8 +61,9 @@
 
 .new-program-icon-image {
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: auto;
+  height: 17%;
+  aspect-ratio: 1 / 1;
   top: 73%;
   left: 57%;
   transform: translate(-50%, -50%);
@@ -74,15 +73,14 @@
 
 .new-program-button-text {
   position: absolute;
-  top: 73%;
+  top: 85%;
   left: 72%;
   transform: translate(-50%, -50%);
-  font-size: 13px;
   text-align: center;
   line-height: 100%;
-  margin: 0px;
+  margin: 0;
   width: 20%;
-  height: 13px;
+  height: 40%;
   font-family: "mishmash";
   color: white;
   pointer-events: none;

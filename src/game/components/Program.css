@@ -1,63 +1,64 @@
 .program-container {
-    position: relative;
-    width: 168px;
-    height: 89px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  /* width: 168px;
+    height: 89px; */
+  width: 95%;
+  height: 95%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .program-name-text {
-    position: absolute;
-    top: 9%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-    font-size: 10px;
-    text-align: left;
-    line-height: 100%;
-    margin: 0px;
-    width: 60%;
-    height: 10px;
-    font-family: "mishmash";
-    color: white;
-    pointer-events: none;
-    user-select: none;
+  position: absolute;
+  top: 9%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  line-height: 100%;
+  margin: 0px;
+  width: 60%;
+  height: 10%;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
 }
 
 .program-time-text {
-    position: absolute;
-    top: 9%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-    font-size: 8px;
-    text-align: right;
-    line-height: 100%;
-    margin: 0px;
-    width: 25%;
-    height: 8px;
-    font-family: "mishmash";
-    color: white;
-    pointer-events: none;
-    user-select: none;
+  position: absolute;
+  top: 9%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  text-align: right;
+  line-height: 100%;
+  margin: 0px;
+  width: 25%;
+  height: 10%;
+  font-family: "mishmash";
+  color: white;
+  pointer-events: none;
+  user-select: none;
 }
 
-.program-icon-image{
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    top: 50%;
-    left: 21%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    user-select: none;
+.program-icon-image {
+  position: absolute;
+  width: auto;
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  top: 50%;
+  left: 21%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
 }
 
-.program-resource-grid{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 88px;
-    height: 64px;
-    top: 55%;
-    left: 67%;
-    pointer-events: none;
+.program-resource-grid {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 52.4%;
+  height: 72%;
+  top: 55%;
+  left: 67%;
+  pointer-events: none;
 }

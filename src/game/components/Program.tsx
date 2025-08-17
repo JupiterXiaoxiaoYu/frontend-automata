@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Program.css";
 import Grid from "./Grid";
 import ProgramResourceDisplay from "./ProgramResourceDisplay";
@@ -45,13 +45,43 @@ const Program = ({ index, program, isDisabled, onSelect }: Props) => {
       (attr: { type: AttributeType; amount: number }) =>
         attr.type === AttributeType.Speed
     )?.amount ?? 0;
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const [nameFontSize, setNameFontSize] = useState<number>(0);
+  const [timeFontSize, setTimeFontSize] = useState<number>(0);
+  const gridContainerRef = useRef<HTMLParagraphElement>(null);
+  const [elementWidth, setElementWidth] = useState<number>(0);
+  const [elementHeight, setElementHeight] = useState<number>(0);
+  const columnCount = 2;
+  const rowCount = 4;
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      setNameFontSize(containerRef.current.offsetHeight / 8);
+      setTimeFontSize(containerRef.current.offsetHeight / 10);
+    }
+    if (gridContainerRef.current) {
+      setElementWidth(gridContainerRef.current.offsetWidth / columnCount);
+      setElementHeight(gridContainerRef.current.offsetHeight / rowCount);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current]);
 
   return (
-    <div className="program-container">
+    <div className="program-container" ref={containerRef}>
       {index == 0 && <ProgramTutorial />}
       <ProgramButton isDisabled={isDisabled} onClick={onSelect} />
-      <p className="program-name-text">{program.name}</p>
-      <p className="program-time-text">
+      <p className="program-name-text" style={{ fontSize: nameFontSize }}>
+        {program.name}
+      </p>
+      <p className="program-time-text" style={{ fontSize: timeFontSize }}>
         {formatTime(
           adjustProcessingTimeBySpeed(program.processingTime, speedValue)
         )}
@@ -60,12 +90,12 @@ const Program = ({ index, program, isDisabled, onSelect }: Props) => {
         src={getProgramIconPath(program.type)}
         className="program-icon-image"
       />
-      <div className="program-resource-grid">
+      <div className="program-resource-grid" ref={gridContainerRef}>
         <Grid
-          elementWidth={44}
-          elementHeight={16}
-          columnCount={2}
-          rowCount={4}
+          elementWidth={elementWidth}
+          elementHeight={elementHeight}
+          columnCount={columnCount}
+          rowCount={rowCount}
           elements={program.resources.map((resource, index) => {
             // 调整资源数量，同时考虑Productivity和Efficiency属性
             // Adjust resource amount considering both Productivity and Efficiency attributes

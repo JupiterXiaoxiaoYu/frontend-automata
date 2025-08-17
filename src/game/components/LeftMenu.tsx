@@ -28,19 +28,15 @@ import {
 
 const LeftMenu = () => {
   const dispatch = useAppDispatch();
-  const [programGridHeight, setProgramGridHeight] = useState(0);
   const programGridRef = useRef<HTMLInputElement>(null);
-  const updateProgramGridHeight = () => {
-    if (programGridRef.current) {
-      setProgramGridHeight(programGridRef.current.offsetHeight);
-    }
-  };
-  const programGridElementWidth = 170;
-  const programGridElementHeight = 95;
+  const programGridElementRatio = 168 / 89;
+  const [programGridElementWidth, setProgramGridElementWidth] =
+    useState<number>(0);
+  const [programGridElementHeight, setProgramGridElementHeight] =
+    useState<number>(0);
+  const [programGridRowCount, setProgramGridRowCount] = useState<number>(0);
   const programGridColumnCount = 1;
-  const programGridRowCount = Math.floor(
-    programGridHeight / programGridElementHeight
-  );
+
   const amountPerPage = programGridColumnCount * programGridRowCount;
   const currentPage = useAppSelector(selectCurrentPage);
   const programsBeforePaging = useAppSelector(selectFilteredPrograms);
@@ -107,11 +103,24 @@ const LeftMenu = () => {
     }
   };
 
+  const updateProgramGridSize = () => {
+    if (programGridRef.current) {
+      const programGridElementWidth = programGridRef.current.offsetWidth;
+      const programElementHeight =
+        programGridRef.current.offsetWidth / programGridElementRatio;
+      setProgramGridElementWidth(programGridElementWidth);
+      setProgramGridElementHeight(programElementHeight);
+      setProgramGridRowCount(
+        Math.floor(programGridRef.current.offsetHeight / programElementHeight)
+      );
+    }
+  };
+
   useEffect(() => {
-    updateProgramGridHeight();
-    window.addEventListener("resize", updateProgramGridHeight);
+    updateProgramGridSize();
+    window.addEventListener("resize", updateProgramGridSize);
     return () => {
-      window.removeEventListener("resize", updateProgramGridHeight);
+      window.removeEventListener("resize", updateProgramGridSize);
     };
   }, []);
 

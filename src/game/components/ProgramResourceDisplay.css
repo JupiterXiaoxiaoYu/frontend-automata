@@ -1,65 +1,68 @@
 .program-resource-display-container {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px; /* 增加宽度以容纳更多文本 */
-    height: 16px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+
+  /* width: 44px;
+  height: 16px; */
 }
 
 /* 图标样式 - 基础样式 */
 .program-resource-display-image {
-    position: absolute;
-    top: 50%;
-    left: 8px;
-    transform: translate(-50%, -50%);
-    width: 12px;
-    height: 12px;
-    user-select: none;
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 75%;
+  aspect-ratio: 1 / 1;
+  user-select: none;
 }
 
 /* 双值显示时图标位置向左移 */
-.program-resource-display-container.dual-values .program-resource-display-image {
-    left: 2px;
+.program-resource-display-container.dual-values
+  .program-resource-display-image {
+  left: 0.05%;
 }
 
 /* 文本样式 - 基础文本样式 */
 .program-resource-display-positive-text,
 .program-resource-display-zero-text,
 .program-resource-display-negative-text {
-    position: absolute;
-    top: 50%;
-    left: 28px;
-    transform: translate(-50%, -50%);
-    font-size: 10px;
-    text-align: center;
-    line-height: 10px;
-    margin: 0px;
-    width: 28px;
-    height: 10px;
-    font-family: "mishmash";
-    user-select: none;
-    white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin: 0;
+  width: 64%;
+  font-family: "mishmash";
+  user-select: none;
+  white-space: nowrap;
 }
 
 /* 双值显示时文本位置向右移 */
-.program-resource-display-container.dual-values .program-resource-display-positive-text,
-.program-resource-display-container.dual-values .program-resource-display-zero-text,
-.program-resource-display-container.dual-values .program-resource-display-negative-text {
-    left: 33px;
-    width: 50px;
-    font-size: 10px;
-    letter-spacing: -0.3px;
+.program-resource-display-container.dual-values
+  .program-resource-display-positive-text,
+.program-resource-display-container.dual-values
+  .program-resource-display-zero-text,
+.program-resource-display-container.dual-values
+  .program-resource-display-negative-text {
+  left: 60%;
+  width: 91%;
 }
 
 .program-resource-display-positive-text {
-    color: rgb(85, 221, 85);
+  color: rgb(85, 221, 85);
 }
 
-.program-resource-display-zero-text{
-    color: white;
+.program-resource-display-zero-text {
+  color: white;
 }
 
 .program-resource-display-negative-text {
-    color: rgb(220, 36, 36)
+  color: rgb(220, 36, 36);
 }

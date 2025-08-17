@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./NewProgram.css";
 import background from "../image/backgrounds/new_program_normal.png";
 import { getResourceIconPath, ResourceType } from "../../data/models";
@@ -17,12 +17,33 @@ const NewProgram = ({ onSelect }: Props) => {
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const programCount = useAppSelector(selectProgramCount);
   const level = useAppSelector(selectLevel);
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const [fontSize, setFontSize] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      setFontSize(containerRef.current.offsetHeight / 7);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current]);
 
   return (
-    <div className="new-program-container">
+    <div className="new-program-container" ref={containerRef}>
       <img src={background} className="new-program-background" />
-      <p className="new-program-title-text">Buy New</p>
-      <p className="new-program-title-2-text">Program</p>
+      <p className="new-program-title-text" style={{ fontSize }}>
+        Buy New
+      </p>
+      <p className="new-program-title-2-text" style={{ fontSize }}>
+        Program
+      </p>
       <div className="new-program-button">
         <OrangeButton
           text={""}
@@ -36,7 +57,9 @@ const NewProgram = ({ onSelect }: Props) => {
         src={getResourceIconPath(ResourceType.Titanium)}
         className="new-program-icon-image"
       />
-      <p className="new-program-button-text">{currentCost}</p>
+      <p className="new-program-button-text" style={{ fontSize }}>
+        {currentCost}
+      </p>
     </div>
   );
 };
