@@ -113,7 +113,7 @@ const Gameplay = () => {
         <TopMenu />
       </div>
       <div className="middle-container">
-        <LeftMenu localTimer={localTimer} />
+        <LeftMenu />
         <MainMenu localTimer={localTimer} />
         {/* <RightMenu /> */}
       </div>

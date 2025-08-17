@@ -16,7 +16,11 @@ import {
   ResourceType,
 } from "../../data/models";
 
-const ProgramFilterBar = () => {
+interface Props {
+  fontSize: number;
+}
+
+const ProgramFilterBar = ({ fontSize }: Props) => {
   const dispatch = useAppDispatch();
   const onClickAllResourcesToggle = () => dispatch(resetFilter({}));
   const onClickResourceTypeToggle = (type: ResourceType) => () =>
@@ -27,6 +31,7 @@ const ProgramFilterBar = () => {
       <div className="program-filter-bar-filters-container">
         <ProgramFilterButton
           isSelected={useAppSelector(selectIsAllResourcesToggled)}
+          fontSize={fontSize}
           text={"All"}
           onClick={onClickAllResourcesToggle}
         />
@@ -34,6 +39,7 @@ const ProgramFilterBar = () => {
         {resourceTypes.map((type, index) => (
           <ProgramFilterButton
             key={index}
+            fontSize={fontSize}
             isSelected={useAppSelector(selectIsResourceTypeToggled(type))}
             iconImagePath={getResourceIconPath(type)}
             onClick={onClickResourceTypeToggle(type)}

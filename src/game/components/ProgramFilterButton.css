@@ -1,21 +1,20 @@
 .program-filter-bar-filter-container {
   position: relative;
-  width: 54px;
-  height: 26px;
+  width: 98%;
+  height: calc(100% / 9);
+  user-select: none;
 }
 
 .program-filter-bar-filter-selecting-background {
   position: absolute;
-  width: 54px;
-  height: 26px;
-  user-select: none;
+  width: 100%;
+  height: 100%;
 }
 
 .program-filter-bar-filter-background {
   position: absolute;
-  width: 54px;
-  height: 26px;
-  user-select: none;
+  width: 100%;
+  height: 100%;
 }
 
 .program-filter-bar-filter-icon {
@@ -23,8 +22,9 @@
   top: 50%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
+  width: 36.4%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   user-select: none;
 }
 
@@ -34,12 +34,10 @@
   left: 65%;
   transform: translate(-50%, -50%);
   text-align: center;
-  font-size: 10px;
-  line-height: 10px;
   margin: 0px;
   color: white;
-  width: 20px;
-  height: 10px;
+  width: 36.4%;
+  height: 40%;
   font-family: "mishmash";
   color: black;
   pointer-events: none;

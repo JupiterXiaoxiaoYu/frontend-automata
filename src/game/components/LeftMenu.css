@@ -35,18 +35,23 @@
 
 .left-creature-grid {
   position: absolute;
-  width: 80%;
+  width: 90%;
   height: calc(93% - 5.6vw);
   top: calc(5.6vw);
-  left: 45%;
+  left: 46%;
   transform: translate(-50%, 0%);
+  background-color: red;
 }
 
 .left-program-filter-bar-position {
   position: absolute;
+  width: 29%;
+  height: auto;
+  aspect-ratio: 55 / 258;
   top: 50%;
   right: -34.2%;
   transform: translate(-50%, -50%);
+  background-color: green;
 }
 
 .left-creature-page-selector {

@@ -26,11 +26,7 @@ import {
   selectTutorialType,
 } from "../../data/properties";
 
-interface Props {
-  localTimer: number;
-}
-
-const LeftMenu = ({ localTimer }: Props) => {
+const LeftMenu = () => {
   const dispatch = useAppDispatch();
   const [programGridHeight, setProgramGridHeight] = useState(0);
   const programGridRef = useRef<HTMLInputElement>(null);
@@ -58,6 +54,24 @@ const LeftMenu = ({ localTimer }: Props) => {
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isLoading = useAppSelector(selectIsLoading);
   const tutorialType = useAppSelector(selectTutorialType);
+
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [filterFontSize, setFilterFontSize] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (textRef.current) {
+      const parentWidth = textRef.current.offsetWidth;
+      setFilterFontSize(parentWidth / 20);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [textRef.current]);
 
   const onSelectProgram = (programIndex: number) => {
     if (isSelectingUIState && !isLoading) {
@@ -120,7 +134,7 @@ const LeftMenu = ({ localTimer }: Props) => {
   }, []);
 
   return (
-    <div className="left">
+    <div className="left" ref={textRef}>
       <div className="left-top"></div>
       <div className="left-middle"></div>
       <div className="left-bottom"></div>
@@ -137,7 +151,7 @@ const LeftMenu = ({ localTimer }: Props) => {
 
       <img src={leftCornerBar} className="left-corner-bar" />
       <div className="left-program-filter-bar-position">
-        <ProgramFilterBar />
+        <ProgramFilterBar fontSize={filterFontSize} />
       </div>
       <div className="left-creature-page-selector">
         <PageSelector

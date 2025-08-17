@@ -5,6 +5,7 @@ import background from "../image/backgrounds/tab.png";
 
 interface Props {
   isSelected: boolean;
+  fontSize: number;
   text?: string | null;
   iconImagePath?: string | null;
   onClick: () => void;
@@ -12,6 +13,7 @@ interface Props {
 
 const ProgramFilterButton = ({
   isSelected,
+  fontSize,
   text = null,
   iconImagePath = null,
   onClick,
@@ -28,7 +30,11 @@ const ProgramFilterButton = ({
           className="program-filter-bar-filter-background"
         />
       )}
-      {text && <p className="program-filter-bar-filter-text">{text}</p>}
+      {text && (
+        <p className="program-filter-bar-filter-text" style={{ fontSize }}>
+          {text}
+        </p>
+      )}
       {iconImagePath && (
         <img src={iconImagePath} className="program-filter-bar-filter-icon" />
       )}
