@@ -40,7 +40,6 @@
   top: calc(5.6vw);
   left: 46%;
   transform: translate(-50%, 0%);
-  background-color: red;
 }
 
 .left-program-filter-bar-position {
@@ -51,7 +50,6 @@
   top: 50%;
   right: -34.2%;
   transform: translate(-50%, -50%);
-  background-color: green;
 }
 
 .left-creature-page-selector {

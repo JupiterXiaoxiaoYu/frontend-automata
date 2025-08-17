@@ -55,24 +55,6 @@ const LeftMenu = () => {
   const isLoading = useAppSelector(selectIsLoading);
   const tutorialType = useAppSelector(selectTutorialType);
 
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const [filterFontSize, setFilterFontSize] = useState<number>(0);
-
-  const adjustSize = () => {
-    if (textRef.current) {
-      const parentWidth = textRef.current.offsetWidth;
-      setFilterFontSize(parentWidth / 20);
-    }
-  };
-
-  useEffect(() => {
-    adjustSize();
-    window.addEventListener("resize", adjustSize);
-    return () => {
-      window.removeEventListener("resize", adjustSize);
-    };
-  }, [textRef.current]);
-
   const onSelectProgram = (programIndex: number) => {
     if (isSelectingUIState && !isLoading) {
       dispatch(setProgramIndex({ programIndex }));
@@ -134,7 +116,7 @@ const LeftMenu = () => {
   }, []);
 
   return (
-    <div className="left" ref={textRef}>
+    <div className="left">
       <div className="left-top"></div>
       <div className="left-middle"></div>
       <div className="left-bottom"></div>
@@ -151,7 +133,7 @@ const LeftMenu = () => {
 
       <img src={leftCornerBar} className="left-corner-bar" />
       <div className="left-program-filter-bar-position">
-        <ProgramFilterBar fontSize={filterFontSize} />
+        <ProgramFilterBar />
       </div>
       <div className="left-creature-page-selector">
         <PageSelector

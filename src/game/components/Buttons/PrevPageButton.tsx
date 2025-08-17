@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "../../script/common/ImageButton";
-import upButtonImage from "../../image/Buttons/PrevPage/up.png";
-import upButtonHoverImage from "../../image/Buttons/PrevPage/up_hover.png";
-import upButtonClickImage from "../../image/Buttons/PrevPage/up_click.png";
-import "./PrevPageButton.css";
+import image from "../../image/Buttons/PrevPage/up.png";
+import hoverImage from "../../image/Buttons/PrevPage/up_hv.png";
+import clickImage from "../../image/Buttons/PrevPage/up_click.png";
 
 interface Props {
   isDisabled: boolean;
@@ -12,14 +11,25 @@ interface Props {
 
 const PrevPageButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="prev-page-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "52 / 45",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={upButtonImage}
-        hoverImagePath={upButtonHoverImage}
-        clickedImagePath={upButtonClickImage}
-        disabledImagePath={upButtonClickImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

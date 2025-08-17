@@ -1,9 +1,8 @@
 import React from "react";
 import ImageButton from "../../script/common/ImageButton";
-import downButtonImage from "../../image/Buttons/NextPage/down.png";
-import downButtonHoverImage from "../../image/Buttons/NextPage/down_hover.png";
-import downButtonClickImage from "../../image/Buttons/NextPage/down_click.png";
-import "./NextPageButton.css";
+import image from "../../image/Buttons/NextPage/down.png";
+import hoverImage from "../../image/Buttons/NextPage/down_hv.png";
+import clickImage from "../../image/Buttons/NextPage/down_click.png";
 
 interface Props {
   isDisabled: boolean;
@@ -12,14 +11,25 @@ interface Props {
 
 const NextPageButton = ({ isDisabled, onClick }: Props) => {
   return (
-    <div className="next-page-button-scale">
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "52 / 45",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}
+    >
       <ImageButton
-        isDisabled={isDisabled}
-        defaultImagePath={downButtonImage}
-        hoverImagePath={downButtonHoverImage}
-        clickedImagePath={downButtonClickImage}
-        disabledImagePath={downButtonClickImage}
         onClick={onClick}
+        isDisabled={isDisabled}
+        defaultImagePath={image}
+        hoverImagePath={hoverImage}
+        clickedImagePath={clickImage}
+        disabledImagePath={clickImage}
       />
     </div>
   );

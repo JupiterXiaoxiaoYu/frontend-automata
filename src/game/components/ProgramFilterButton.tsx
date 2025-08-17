@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ProgramFilterButton.css";
 import selectingBackground from "../image/backgrounds/tab_select.png";
 import background from "../image/backgrounds/tab.png";
 
 interface Props {
   isSelected: boolean;
-  fontSize: number;
   text?: string | null;
   iconImagePath?: string | null;
   onClick: () => void;
@@ -13,13 +12,34 @@ interface Props {
 
 const ProgramFilterButton = ({
   isSelected,
-  fontSize,
   text = null,
   iconImagePath = null,
   onClick,
 }: Props) => {
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const [fontSize, setFontSize] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      setFontSize(containerRef.current.offsetHeight / 2.5);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current]);
+
   return (
-    <div className="program-filter-bar-filter-container" onClick={onClick}>
+    <div
+      className="program-filter-bar-filter-container"
+      onClick={onClick}
+      ref={containerRef}
+    >
       <img
         src={selectingBackground}
         className="program-filter-bar-filter-selecting-background"
