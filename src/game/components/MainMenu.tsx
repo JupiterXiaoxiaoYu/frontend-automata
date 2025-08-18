@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./MainMenu.css";
 import { selectSceneType, SceneType } from "../../data/properties";
 import { initSelectingCreatureIndex } from "../../data/creatures";
@@ -14,6 +14,7 @@ interface Props {
 const MainMenu = ({ localTimer }: Props) => {
   const dispatch = useAppDispatch();
   const sceneType = useAppSelector(selectSceneType);
+  const mainContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (sceneType == SceneType.Planet) {
@@ -23,10 +24,14 @@ const MainMenu = ({ localTimer }: Props) => {
   }, [sceneType]);
 
   return (
-    <div className="main">
-      {sceneType == SceneType.Planet && <PlanetScene localTimer={localTimer} />}
-      {sceneType == SceneType.Redeem && <RedeemScene />}
-      {sceneType == SceneType.Market && <MarketScene />}
+    <div className="main" ref={mainContainerRef}>
+      {mainContainerRef && sceneType == SceneType.Planet && (
+        <PlanetScene localTimer={localTimer} />
+      )}
+      {mainContainerRef && sceneType == SceneType.Redeem && (
+        <RedeemScene mainContainerRef={mainContainerRef} />
+      )}
+      {mainContainerRef && sceneType == SceneType.Market && <MarketScene />}
     </div>
   );
 };

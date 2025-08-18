@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import background from "../image/backgrounds/guide_frame.png";
 import Grid from "./Grid";
@@ -32,7 +32,11 @@ import {
 import { selectResources } from "../../data/resources";
 import { LoadingType, setLoadingType } from "../../data/errors";
 
-const RedeemScene = () => {
+interface Props {
+  mainContainerRef: React.RefObject<HTMLDivElement>;
+}
+
+const RedeemScene = ({ mainContainerRef }: Props) => {
   const dispatch = useAppDispatch();
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
@@ -45,6 +49,33 @@ const RedeemScene = () => {
   const resourcesMap = Object.fromEntries(
     resources.map((resource: any) => [resource.type, resource.amount])
   );
+
+  const containerRatio = 519 / 416;
+  const containerSize = 0.6;
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
+  const [fontSize, setFontSize] = useState<number>(15);
+
+  const adjustSize = () => {
+    if (mainContainerRef.current) {
+      const height = Math.min(
+        mainContainerRef.current.offsetHeight,
+        mainContainerRef.current.offsetWidth / containerRatio
+      );
+      setContainerHeight(height * containerSize);
+      setContainerWidth(height * containerRatio * containerSize);
+      setFontSize(height / 40);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [mainContainerRef.current]);
 
   const onClickRedeem = (index: number) => {
     dispatch(setLoadingType(LoadingType.Default));
@@ -80,10 +111,13 @@ const RedeemScene = () => {
   };
 
   return (
-    <div className="redeem-scene-container">
+    <div
+      className="redeem-scene-container"
+      style={{ width: containerWidth, height: containerHeight }}
+    >
       <img src={background} className="redeem-scene-background" />
-      <p className="redeem-scene-resource-title-text">
-        Redeem [available: {bountyPool}]{" "}
+      <p className="redeem-scene-resource-title-text" style={{ fontSize }}>
+        Redeem [available: {bountyPool ?? 0}]
       </p>
       <div className="redeem-scene-grid">
         <Grid

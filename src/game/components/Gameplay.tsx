@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { SERVER_TICK_TO_SECOND } from "../request";
 import TopMenu from "./TopMenu";
 import LeftMenu from "./LeftMenu";
-import RightMenu from "./RightMenu";
 import MainMenu from "./MainMenu";
 import {
   UIState,
@@ -115,7 +114,6 @@ const Gameplay = () => {
       <div className="middle-container">
         <LeftMenu />
         <MainMenu localTimer={localTimer} />
-        {/* <RightMenu /> */}
       </div>
       <Popups />
     </>

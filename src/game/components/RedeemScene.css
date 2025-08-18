@@ -3,8 +3,6 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 519px;
-  height: 416px;
 }
 
 .redeem-scene-background {
@@ -18,29 +16,21 @@
   top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 15px;
   text-align: center;
-  line-height: 15px;
-  margin: 0px;
+  margin: 0;
   width: 80%;
-  height: 15px;
+  height: 4%;
   font-family: "mishmash";
   color: white;
   user-select: none;
 }
 
 .redeem-scene-grid {
-  width: 480px;
-  height: 280px;
+  position: absolute;
+  width: 92.4%;
+  height: 67.3%;
   top: 52%;
   left: 50%;
-  position: absolute;
   transform: translate(-50%, -50%);
-}
-
-.redeem-scene-guide-button {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background-color: red;
 }
