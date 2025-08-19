@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./MainMenuProgram.css";
 import {
   ProgramModel,
@@ -33,7 +33,7 @@ const MainMenuProgram = ({
   const handleMouseEnter = () => setIsHovering(true);
   const handleMouseLeave = () => setIsHovering(false);
 
-  const yPosition = 40.8;
+  const yPosition = 43;
   const xPosition = 5.5 + 10.85 * order;
   const onClick = () => {
     if (isSelectingUIState && !isLoading) {
@@ -41,10 +41,32 @@ const MainMenuProgram = ({
     }
   };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [animationScale, setAnimationScale] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      const animationHeight = containerRef.current.offsetHeight * 0.6;
+      console.log("Container height:", containerRef.current.offsetHeight);
+      console.log("Animation height:", animationHeight);
+      setAnimationScale(animationHeight);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
+
   return (
     <>
       <div
         className="main-bot-program-bot-container"
+        ref={containerRef}
         onClick={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -69,6 +91,7 @@ const MainMenuProgram = ({
                   backgroundImage: `url('${getProgramSpriteSheetPath(
                     program.type
                   )}')`,
+                  transform: `translate(-50%, -50%) scale(${animationScale}%, ${animationScale}%)`,
                 }}
               />
             ) : (

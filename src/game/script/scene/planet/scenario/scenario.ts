@@ -50,6 +50,7 @@ export class Scenario {
   }
 
   setFocus(index: number | null) {
+    if (this.creatureAnimations.length == 0) return;
     if (this.focusingIndex != null) {
       this.creatureAnimations[this.focusingIndex].focus = false;
     }
@@ -60,6 +61,7 @@ export class Scenario {
   }
 
   setHover(index: number | null) {
+    if (this.creatureAnimations.length == 0) return;
     if (this.hoveringIndex != null) {
       this.creatureAnimations[this.hoveringIndex].hover = false;
     }

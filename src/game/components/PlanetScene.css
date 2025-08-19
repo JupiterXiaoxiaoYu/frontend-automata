@@ -16,10 +16,11 @@
 
 .planet-scene-program-container {
   position: absolute;
-  height: 70px;
-  width: 551px;
-  bottom: -2%;
-  left: 38%;
+  height: auto;
+  width: 65%;
+  aspect-ratio: 551 / 70;
+  bottom: -2.8%;
+  left: 40%;
   transform: translate(-50%, -50%);
   background-image: url("../image/backgrounds/main_program_frame.png");
   background-size: cover;
@@ -59,8 +60,9 @@
 
 .planet-scene-prev-creature-button {
   position: absolute;
-  width: 26px;
-  height: 23px;
+  width: 3%;
+  height: auto;
+  aspect-ratio: 26 / 23;
   top: 84.5%;
   left: 97%;
   transform: translate(-50%, -50%);
@@ -68,8 +70,9 @@
 
 .planet-scene-next-creature-button {
   position: absolute;
-  width: 26px;
-  height: 23px;
+  width: 3%;
+  height: auto;
+  aspect-ratio: 26 / 23;
   top: 91.5%;
   left: 97%;
   transform: translate(-50%, -50%);
