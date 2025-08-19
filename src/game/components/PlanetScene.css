@@ -1,8 +1,8 @@
 .planet-scene-container {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  transform: translate(-50%, 0);
 }
 
 .planet-scene-canvas-container {
@@ -27,10 +27,31 @@
   background-repeat: no-repeat;
 }
 
+.planet-scene-program-action-button {
+  position: absolute;
+  height: 80%;
+  width: auto;
+  aspect-ratio: 132 / 128;
+  top: 50%;
+  left: 93.5%;
+  transform: translate(-50%, -50%);
+}
+
+.planet-scene-program-new-creature-button {
+  position: absolute;
+  height: 80%;
+  width: auto;
+  aspect-ratio: 132 / 128;
+  top: -50%;
+  left: 93.5%;
+  transform: translate(-50%, -50%);
+}
+
 .planet-scene-creature-info {
   position: absolute;
-  width: 152px;
-  height: 90px;
+  height: auto;
+  width: 18%;
+  aspect-ratio: 304 / 173;
   top: 88.2%;
   left: 85%;
   transform: translate(-50%, -50%);
@@ -54,59 +75,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-scene-program-action-button {
-  position: absolute;
-  height: 80%;
-  width: auto;
-  aspect-ratio: 132 / 128;
-  top: 50%;
-  left: 93.5%;
-  transform: translate(-50%, -50%);
-}
-
-.planet-scene-program-new-creature-button {
-  position: absolute;
-  height: 80%;
-  width: auto;
-  aspect-ratio: 132 / 128;
-  top: -50%;
-  left: 93.5%;
-  transform: translate(-50%, -50%);
-}
-
-.planet-scene-info-container {
-  position: absolute;
-  height: 125px;
-  width: 203px;
-}
-
-.planet-scene-info-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  user-select: none;
-}
-
-.planet-scene-circle-container {
-  position: absolute;
-  height: 486px;
-  width: 488px;
-  left: 31px;
-}
-
-.planet-scene-circle-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  user-select: none;
-}
-
 @keyframes unlockFrames {
   from {
     background-position: 0px;
@@ -114,17 +82,6 @@
   to {
     background-position: -7800px;
   }
-}
-
-.planet-scene-menu-program-container {
-  position: absolute;
-  width: 406px;
-  height: 406px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  z-index: 10;
 }
 
 .planet-scene-bot-unlock-animation,
@@ -138,11 +95,4 @@
   background-size: cover;
   animation: unlockFrames 1s steps(10);
   background-image: url("../image/Animations/Unlock.png");
-}
-
-.planet-scene-redeem {
-  position: absolute;
-  top: 85%;
-  left: 85%;
-  transform: translate(-50%, -50%);
 }

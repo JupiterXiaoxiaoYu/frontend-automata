@@ -13,6 +13,7 @@ import {
 } from "../../data/models";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import UpgradeButton from "./Buttons/UpgradeButton";
+import { useRef, useState, useEffect } from "react";
 
 interface Props {
   isLocked: boolean;
@@ -29,6 +30,25 @@ const Creature = ({ isLocked, creature, progress }: Props) => {
   const speedIcon = getAttributeIconPath(AttributeType.Speed);
   const efficiencyIcon = getAttributeIconPath(AttributeType.Efficiency);
   const productivityIcon = getAttributeIconPath(AttributeType.Productivity);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [nameFontSize, setNameFontSize] = useState<number>(0);
+  const [valueFontSize, setValueFontSize] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      setNameFontSize(containerRef.current.offsetHeight / 8);
+      setValueFontSize(containerRef.current.offsetHeight / 10);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
 
   function onClickUpgrade() {
     if (!isLoading) {
@@ -39,7 +59,7 @@ const Creature = ({ isLocked, creature, progress }: Props) => {
   const filterPercentage = 100 - progress;
 
   return (
-    <div className="creature-container">
+    <div className="creature-container" ref={containerRef}>
       <img src={creatureBackground} className="creature-background" />
       {creatureIconPath && (
         <>
@@ -70,26 +90,32 @@ const Creature = ({ isLocked, creature, progress }: Props) => {
       <img src={speedIcon} className="creature-speed-icon" />
       <img src={efficiencyIcon} className="creature-efficiency-icon" />
       <img src={productivityIcon} className="creature-productivity-icon" />
-      <p className="creature-level-text">
+      <p className="creature-level-text" style={{ fontSize: valueFontSize }}>
         {
           creature.attributes.find((pair) => pair.type == AttributeType.Level)
             ?.amount
         }
       </p>
-      <p className="creature-speed-text">
+      <p className="creature-speed-text" style={{ fontSize: valueFontSize }}>
         {
           creature.attributes.find((pair) => pair.type == AttributeType.Speed)
             ?.amount
         }
       </p>
-      <p className="creature-efficiency-text">
+      <p
+        className="creature-efficiency-text"
+        style={{ fontSize: valueFontSize }}
+      >
         {
           creature.attributes.find(
             (pair) => pair.type == AttributeType.Efficiency
           )?.amount
         }
       </p>
-      <p className="creature-productivity-text">
+      <p
+        className="creature-productivity-text"
+        style={{ fontSize: valueFontSize }}
+      >
         {
           creature.attributes.find(
             (pair) => pair.type == AttributeType.Productivity
@@ -97,9 +123,16 @@ const Creature = ({ isLocked, creature, progress }: Props) => {
         }
       </p>
       {creature.name === "Creating" ? (
-        <p className="creature-creating-text">Creating</p>
+        <p
+          className="creature-creating-text"
+          style={{ fontSize: valueFontSize }}
+        >
+          Creating
+        </p>
       ) : (
-        <p className="creature-text">{creature.name}</p>
+        <p className="creature-text" style={{ fontSize: nameFontSize }}>
+          {creature.name}
+        </p>
       )}
     </div>
   );

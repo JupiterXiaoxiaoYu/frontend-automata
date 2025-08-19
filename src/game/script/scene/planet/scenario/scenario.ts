@@ -17,7 +17,6 @@ export class Scenario {
     const canvas = document.getElementById("canvas")! as HTMLCanvasElement;
     canvas.width = width;
     canvas.height = height;
-    console.log("test", width, height);
     const context = canvas.getContext("2d")!;
     this.context = context;
     this.ratio = width / 1920;

@@ -3,7 +3,6 @@ import leftCornerBar from "../image/backgrounds/left_corner_bar.png";
 import "./LeftMenu.css";
 import PageSelector from "./PageSelector";
 import Grid from "./Grid";
-import Creature from "./Creature";
 import { selectIsLoading } from "../../data/errors";
 import { setProgramIndex } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
