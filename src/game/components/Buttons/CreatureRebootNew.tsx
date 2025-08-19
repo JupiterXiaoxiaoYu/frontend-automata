@@ -3,6 +3,7 @@ import ImageButton from "../../script/common/ImageButton";
 import image from "../../image/Buttons/CreatureNew/creature_new.png";
 import hoverImage from "../../image/Buttons/CreatureNew/creature_new_hv.png";
 import clickImage from "../../image/Buttons/CreatureNew/creature_new_click.png";
+import disabledImage from "../../image/Buttons/CreatureNew/creature_new_idle.png";
 
 interface Props {
   isDisabled: boolean;
@@ -18,7 +19,7 @@ const CreatureNewButton = ({ isDisabled, onClick }: Props) => {
         top: "50%",
         width: "auto",
         height: "100%",
-        aspectRatio: "131 / 128",
+        aspectRatio: "187 / 80",
         transform: "translate(-50%, -50%)",
         margin: "0px",
       }}
@@ -29,7 +30,7 @@ const CreatureNewButton = ({ isDisabled, onClick }: Props) => {
         defaultImagePath={image}
         hoverImagePath={hoverImage}
         clickedImagePath={clickImage}
-        disabledImagePath={clickImage}
+        disabledImagePath={disabledImage}
       />
     </div>
   );

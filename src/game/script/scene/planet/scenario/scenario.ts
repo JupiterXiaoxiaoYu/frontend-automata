@@ -50,25 +50,15 @@ export class Scenario {
   }
 
   setFocus(index: number | null) {
-    if (this.creatureAnimations.length == 0) return;
+    if (index != null && this.creatureAnimations.length <= index) return;
+
     if (this.focusingIndex != null) {
-      this.creatureAnimations[this.focusingIndex].focus = false;
+      this.creatureAnimations[this.focusingIndex].updateFocus(false);
     }
     if (index != null) {
-      this.creatureAnimations[index].focus = true;
+      this.creatureAnimations[index].updateFocus(true);
     }
     this.focusingIndex = index;
-  }
-
-  setHover(index: number | null) {
-    if (this.creatureAnimations.length == 0) return;
-    if (this.hoveringIndex != null) {
-      this.creatureAnimations[this.hoveringIndex].hover = false;
-    }
-    if (index != null) {
-      this.creatureAnimations[index].hover = true;
-    }
-    this.hoveringIndex = index;
   }
 
   getFirstCreatureInRect(cursorLeft: number, cursorTop: number): number | null {

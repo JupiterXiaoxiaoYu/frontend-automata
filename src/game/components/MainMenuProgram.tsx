@@ -47,8 +47,6 @@ const MainMenuProgram = ({
   const adjustSize = () => {
     if (containerRef.current) {
       const animationHeight = containerRef.current.offsetHeight * 0.6;
-      console.log("Container height:", containerRef.current.offsetHeight);
-      console.log("Animation height:", animationHeight);
       setAnimationScale(animationHeight);
     }
   };

@@ -239,18 +239,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
   };
 
-  function onHoverCanvas(e: MouseEvent<HTMLCanvasElement>) {
-    if (!scenarioRef.current) return;
-
-    const target = e.currentTarget;
-    const rect = target.getBoundingClientRect();
-    const ratio = containerWidth / rect.width;
-    const left = (e.clientX - rect.left) * ratio;
-    const top = (e.clientY - rect.top) * ratio;
-    const index = scenarioRef.current.getFirstCreatureInRect(left, top);
-    scenarioRef.current.setHover(index);
-  }
-
   function onClickCanvas(e: MouseEvent<HTMLCanvasElement>) {
     if (!scenarioRef.current) return;
 
@@ -355,11 +343,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         style={{ width: containerWidth, height: containerHeight }}
       >
         <div className="planet-scene-canvas-container">
-          <canvas
-            id="canvas"
-            onMouseMove={onHoverCanvas}
-            onClick={onClickCanvas}
-          ></canvas>
+          <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
         <div className="planet-scene-program-container">
           {showConfirmCreateButton && (

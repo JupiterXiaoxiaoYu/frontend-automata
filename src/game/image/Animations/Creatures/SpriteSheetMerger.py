@@ -3,7 +3,7 @@ import os, shutil
 import subprocess
 from PIL import Image
 
-def merge_images_to_sprite(folder_path, output_path):
+def merge_images_to_sprite(parent_folder_path, folder_path, output_path):
     
     image_files = [f for f in os.listdir(folder_path) if f.endswith('.png')]
     if len(image_files) == 0:
@@ -35,7 +35,7 @@ def merge_images_to_sprite(folder_path, output_path):
         sprite_sheet.paste(img, (x, y))
 
     
-    sprite_sheet.save(output_path)
+    sprite_sheet.save(os.path.join(parent_folder_path, output_path))
     print(f"Sprite sheet saved to {output_path}")
 
 # directory_path = os.path.join(".", "Animations", "Programs")
@@ -50,16 +50,16 @@ def merge_images_to_sprite(folder_path, output_path):
 #     merge_images_to_sprite(folder_path, sprite_sheet_output_path, 1, 24)
 #     shutil.copy(icon_input_path, icon_output_path)
 
-def merge_all_in_folder(folder_path):
+def merge_all_in_folder(parent_folder_path, folder_path):
     importStr = ""
     switchStr = ""
     for folder_name in os.listdir(folder_path):
         if folder_name == ".DS_Store":
             continue
         image_name = f"{folder_name}.png"
-        if not os.path.exists(image_name):
-            merge_images_to_sprite(os.path.join(folder_path, folder_name), image_name)
-        importStr += f"import {folder_name}Spritesheet from \"../image/Animations/Creatures/{image_name}\";\n"
+        if not os.path.exists(os.path.join(parent_folder_path, image_name)):
+            merge_images_to_sprite(parent_folder_path, os.path.join(folder_path, folder_name), image_name)
+        importStr += f"import {folder_name}Spritesheet from \"../game/image/Animations/Creatures/{image_name}\";\n"
     
     # Copy to clipboard (macOS)
     try:
@@ -70,5 +70,5 @@ def merge_all_in_folder(folder_path):
         print(f"\n❌ Failed to copy to clipboard: {e}")
         print("You can manually copy the code above.")
 
-merge_all_in_folder("raw")
+merge_all_in_folder("./src/game/image/Animations/Creatures/", "./src/game/image/Animations/Creatures/raw")
 

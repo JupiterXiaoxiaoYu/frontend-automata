@@ -151,11 +151,20 @@ import StarLightIcon from "../game/image/Animations/Programs/Icons/StarLight.png
 import bot8Spritesheet from "../game/image/Animations/Creatures/bot8.png";
 import bot6Spritesheet from "../game/image/Animations/Creatures/bot6.png";
 import bot1Spritesheet from "../game/image/Animations/Creatures/bot1.png";
+import bot5_selectSpritesheet from "../game/image/Animations/Creatures/bot5_select.png";
 import bot7Spritesheet from "../game/image/Animations/Creatures/bot7.png";
+import bot7_selectSpritesheet from "../game/image/Animations/Creatures/bot7_select.png";
+import bot3_selectSpritesheet from "../game/image/Animations/Creatures/bot3_select.png";
+import bot1_selectSpritesheet from "../game/image/Animations/Creatures/bot1_select.png";
 import bot2Spritesheet from "../game/image/Animations/Creatures/bot2.png";
 import bot5Spritesheet from "../game/image/Animations/Creatures/bot5.png";
+import bot8_selectSpritesheet from "../game/image/Animations/Creatures/bot8_select.png";
+import bot4_selectSpritesheet from "../game/image/Animations/Creatures/bot4_select.png";
 import bot4Spritesheet from "../game/image/Animations/Creatures/bot4.png";
 import bot3Spritesheet from "../game/image/Animations/Creatures/bot3.png";
+import bot6_selectSpritesheet from "../game/image/Animations/Creatures/bot6_select.png";
+import bot2_selectSpritesheet from "../game/image/Animations/Creatures/bot2_select.png";
+
 import { SERVER_TICK_TO_SECOND } from "../game/request";
 
 export interface CreatureModel {
@@ -574,6 +583,7 @@ const programDatas: Record<ProgramType, ProgramData> = {
 interface CreatureData {
   iconPath: string;
   spriteSheetPath: string;
+  selectSpriteSheetPath: string;
   left: number;
   top: number;
 }
@@ -581,6 +591,7 @@ interface CreatureData {
 const emptyCreatureData: CreatureData = {
   iconPath: "",
   spriteSheetPath: "",
+  selectSpriteSheetPath: "",
   left: 0,
   top: 0,
 };
@@ -589,48 +600,56 @@ const creatureDatas: CreatureData[] = [
   {
     iconPath: Bot1,
     spriteSheetPath: bot1Spritesheet,
+    selectSpriteSheetPath: bot1_selectSpritesheet,
     left: 210,
     top: 500,
   },
   {
     iconPath: Bot2,
     spriteSheetPath: bot2Spritesheet,
+    selectSpriteSheetPath: bot2_selectSpritesheet,
     left: 880,
     top: 280,
   },
   {
     iconPath: Bot3,
     spriteSheetPath: bot3Spritesheet,
+    selectSpriteSheetPath: bot3_selectSpritesheet,
     left: 1320,
     top: 360,
   },
   {
     iconPath: Bot4,
     spriteSheetPath: bot4Spritesheet,
+    selectSpriteSheetPath: bot4_selectSpritesheet,
     left: 1100,
     top: 480,
   },
   {
     iconPath: Bot1,
     spriteSheetPath: bot5Spritesheet,
+    selectSpriteSheetPath: bot5_selectSpritesheet,
     left: 1160,
     top: 100,
   },
   {
     iconPath: Bot2,
     spriteSheetPath: bot6Spritesheet,
+    selectSpriteSheetPath: bot6_selectSpritesheet,
     left: 300,
     top: 230,
   },
   {
     iconPath: Bot3,
     spriteSheetPath: bot7Spritesheet,
+    selectSpriteSheetPath: bot7_selectSpritesheet,
     left: 590,
     top: 380,
   },
   {
     iconPath: Bot4,
     spriteSheetPath: bot8Spritesheet,
+    selectSpriteSheetPath: bot8_selectSpritesheet,
     left: 680,
     top: 480,
   },
@@ -916,9 +935,14 @@ export function getProgramSpriteSheetPath(type: ProgramType): string {
   return programDatas[type].spriteSheetPath;
 }
 
-export function getCreatureSpriteSheetPath(creatureType: number): string {
+export function getCreatureSpriteSheetPath(
+  creatureType: number,
+  isSelect: boolean
+): string {
   return creatureType == -1
     ? emptyCreatureData.spriteSheetPath
+    : isSelect
+    ? creatureDatas[creatureType % creatureDatas.length].selectSpriteSheetPath
     : creatureDatas[creatureType % creatureDatas.length].spriteSheetPath;
 }
 

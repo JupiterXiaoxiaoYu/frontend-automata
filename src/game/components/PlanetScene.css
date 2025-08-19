@@ -40,11 +40,11 @@
 
 .planet-scene-program-new-creature-button {
   position: absolute;
-  height: 80%;
+  height: 40%;
   width: auto;
   aspect-ratio: 132 / 128;
-  top: -50%;
-  left: 93.5%;
+  top: -45%;
+  left: 111.7%;
   transform: translate(-50%, -50%);
 }
 
