@@ -21,7 +21,7 @@ const RedeemDisplay = ({
   onClickRedeem,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState<number>(15);
+  const [fontSize, setFontSize] = useState<number>(0);
 
   const adjustSize = () => {
     if (containerRef.current) {
@@ -36,7 +36,7 @@ const RedeemDisplay = ({
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
   return (
     <div className="redeem-display-container" ref={containerRef}>
       <img className="redeem-display-background" src={background} />

@@ -32,7 +32,7 @@ const RedeemDisplayCollectInterest = ({
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
   return (
     <div
       className="redeem-display-collect-interest-container"

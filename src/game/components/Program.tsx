@@ -72,7 +72,7 @@ const Program = ({ index, program, isDisabled, onSelect }: Props) => {
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
 
   return (
     <div className="program-container" ref={containerRef}>

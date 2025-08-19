@@ -29,7 +29,7 @@ const ProgramResourceDisplay = ({
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
 
   // 如果提供了原始数量且与调整后数量不同，则显示两个数量
   const showBothAmounts =
