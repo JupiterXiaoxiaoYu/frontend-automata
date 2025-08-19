@@ -1,13 +1,12 @@
 import { CreatureAnimation } from "./CreatureAnimation";
-import { BackgroundDisco } from "./BackgroundDisco";
-import { BackgroundBase } from "./BackgroundBase";
+import { Background } from "./Background";
 
 export class Scenario {
   status: string;
   creatureAnimations: Array<CreatureAnimation>;
   focusingIndex?: number | null;
   hoveringIndex?: number | null;
-  background: BackgroundBase;
+  background: Background;
   context: CanvasRenderingContext2D;
   ratio: number;
 
@@ -20,12 +19,16 @@ export class Scenario {
     const context = canvas.getContext("2d")!;
     this.context = context;
     this.ratio = width / 1920;
-    this.background = new BackgroundDisco(
+    this.background = new Background(
       width,
       height,
       context,
       this.creatureAnimations
     );
+  }
+
+  nextBackground() {
+    this.background.nextBackground();
   }
 
   updateCreatureAnimations(creatureTypes: number[]) {

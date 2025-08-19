@@ -192,6 +192,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     }
   }
 
+  function onClickNextBackground() {
+    if (!isLoading && scenarioRef.current) {
+      scenarioRef.current.nextBackground();
+    }
+  }
+
   const currentProgramInfo = useAppSelector(
     isSelectingUIState || isLoading
       ? selectSelectedCreatureSelectingProgram
@@ -374,6 +380,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
             <CreatureNewButton
               isDisabled={isLoading}
               onClick={onClickNewCreature}
+            />
+          </div>
+          <div className="planet-scene-program-next-background-button">
+            <CreatureNewButton
+              isDisabled={isLoading}
+              onClick={onClickNextBackground}
             />
           </div>
           {selectedCreaturePrograms.map((program, index) => (
