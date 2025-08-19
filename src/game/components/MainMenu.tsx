@@ -26,7 +26,10 @@ const MainMenu = ({ localTimer }: Props) => {
   return (
     <div className="main" ref={mainContainerRef}>
       {mainContainerRef && sceneType == SceneType.Planet && (
-        <PlanetScene localTimer={localTimer} />
+        <PlanetScene
+          localTimer={localTimer}
+          mainContainerRef={mainContainerRef}
+        />
       )}
       {mainContainerRef && sceneType == SceneType.Redeem && (
         <RedeemScene mainContainerRef={mainContainerRef} />

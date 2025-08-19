@@ -1,5 +1,5 @@
 import { Clip } from "./meme";
-import { drawBackground, FixedLight, WIDTH, Beat, HEIGHT } from "./draw";
+import { WIDTH, HEIGHT } from "./draw";
 import { BackgroundBase } from "./BackgroundBase";
 
 export class BackgroundDisco extends BackgroundBase {
@@ -13,7 +13,7 @@ export class BackgroundDisco extends BackgroundBase {
     }
     this.context.clearRect(0, 0, WIDTH, HEIGHT);
 
-    drawBackground(this.context);
+    this.context.drawImage(this.backgroundImage, 0, 0, WIDTH, HEIGHT);
 
     for (const obj of this.clips) {
       obj.draw(this.context);

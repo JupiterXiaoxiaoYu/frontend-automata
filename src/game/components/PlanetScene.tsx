@@ -56,9 +56,10 @@ import { Scenario } from "../script/scene/planet/scenario/scenario";
 
 interface Props {
   localTimer: number;
+  mainContainerRef: React.RefObject<HTMLDivElement>;
 }
 
-const PlanetScene = ({ localTimer }: Props) => {
+const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const dispatch = useAppDispatch();
   const { l2Account } = useWalletContext();
 
@@ -88,6 +89,30 @@ const PlanetScene = ({ localTimer }: Props) => {
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
   const [scenario, setScenario] = useState(new Scenario(onSelectCreature));
+
+  const containerRatio = 1671 / 951;
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (mainContainerRef.current) {
+      const height = Math.min(
+        mainContainerRef.current.offsetHeight,
+        mainContainerRef.current.offsetWidth / containerRatio
+      );
+      setContainerHeight(height);
+      setContainerWidth(height * containerRatio);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [mainContainerRef.current]);
 
   function onClickUnlock() {
     if (uIState.type == UIStateType.Creating) {
@@ -214,9 +239,6 @@ const PlanetScene = ({ localTimer }: Props) => {
   function onHoverCanvas(e: MouseEvent<HTMLCanvasElement>) {
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
-    const ratio = rect.width / 960;
-    //const left = (e.clientX - rect.left) * rect.width / 960;
-    //const top = (e.clientY - rect.top) * rect.width / 960;
     const left = ((e.clientX - rect.left) * 960) / rect.width;
     const top = ((e.clientY - rect.top) * 960) / rect.width;
     scenario.hoverMeme(left, top);
@@ -318,7 +340,10 @@ const PlanetScene = ({ localTimer }: Props) => {
     // </div>
     <>
       <Rocket />
-      <div className="planet-scene-container">
+      <div
+        className="planet-scene-container"
+        style={{ width: containerWidth, height: containerHeight }}
+      >
         <div className="planet-scene-canvas-container">
           <canvas
             id="canvas"
