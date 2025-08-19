@@ -40,8 +40,8 @@ export class CreatureAnimation {
 
     this.src = spriteSheetImage;
     this.selectBackground = selectBackgroundImage;
-    this.left = getCreatureLeft(creatureType);
-    this.top = getCreatureTop(creatureType);
+    this.left = getCreatureLeft(creatureType) * ratio;
+    this.top = getCreatureTop(creatureType) * ratio;
     this.currentFrame = 0;
     this.ratio = ratio;
     this.focus = false;
@@ -52,8 +52,8 @@ export class CreatureAnimation {
   updateCreatureType(creatureType: number) {
     this.creatureType = creatureType;
     this.src.src = getCreatureSpriteSheetPath(creatureType);
-    this.left = getCreatureLeft(creatureType);
-    this.top = getCreatureTop(creatureType);
+    this.left = getCreatureLeft(creatureType) * this.ratio;
+    this.top = getCreatureTop(creatureType) * this.ratio;
     this.currentFrame = 0;
   }
 
