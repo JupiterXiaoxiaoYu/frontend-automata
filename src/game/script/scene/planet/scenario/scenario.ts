@@ -1,74 +1,83 @@
-import { Clip, createAnimationClip } from "./meme";
-import { HEIGHT, WIDTH } from "./draw";
+import { CreatureAnimation } from "./CreatureAnimation";
 import { BackgroundDisco } from "./BackgroundDisco";
 import { BackgroundBase } from "./BackgroundBase";
 
 export class Scenario {
   status: string;
-  clips: Array<Clip>;
+  creatureAnimations: Array<CreatureAnimation>;
   focusingIndex?: number | null;
+  hoveringIndex?: number | null;
   background: BackgroundBase;
-  context?: CanvasRenderingContext2D;
-  onSelectCreature: (index: number) => void;
+  context: CanvasRenderingContext2D;
+  ratio: number;
 
-  constructor(onSelectCreature: (index: number) => void) {
+  constructor(width: number, height: number) {
     this.status = "play";
-    this.clips = [];
-    this.background = new BackgroundDisco(this.clips);
-    this.onSelectCreature = onSelectCreature;
+    this.creatureAnimations = [];
+    const canvas = document.getElementById("canvas")! as HTMLCanvasElement;
+    canvas.width = width;
+    canvas.height = height;
+    console.log("test", width, height);
+    const context = canvas.getContext("2d")!;
+    this.context = context;
+    this.ratio = width / 1920;
+    this.background = new BackgroundDisco(
+      width,
+      height,
+      context,
+      this.creatureAnimations
+    );
   }
 
-  updateClips(creatureTypes: number[]) {
-    for (let i = 0; i < this.clips.length; i++) {
-      if (this.clips[i].creatureType != creatureTypes[i]) {
-        this.clips[i].updateCreatureType(creatureTypes[i]);
+  updateCreatureAnimations(creatureTypes: number[]) {
+    for (let i = 0; i < this.creatureAnimations.length; i++) {
+      if (this.creatureAnimations[i].creatureType != creatureTypes[i]) {
+        this.creatureAnimations[i].updateCreatureType(creatureTypes[i]);
       }
     }
 
-    for (let i = this.clips.length; i < creatureTypes.length; i++) {
-      const clip = createAnimationClip(i, creatureTypes[i]);
-      this.clips.push(clip);
+    for (
+      let i = this.creatureAnimations.length;
+      i < creatureTypes.length;
+      i++
+    ) {
+      const creatureAnimation = new CreatureAnimation(
+        i,
+        creatureTypes[i],
+        this.ratio
+      );
+      this.creatureAnimations.push(creatureAnimation);
     }
   }
 
-  setFocus(index: number) {
+  setFocus(index: number | null) {
     if (this.focusingIndex != null) {
-      this.clips[this.focusingIndex].focus = false;
+      this.creatureAnimations[this.focusingIndex].focus = false;
     }
-    this.clips[index].focus = true;
+    if (index != null) {
+      this.creatureAnimations[index].focus = true;
+    }
     this.focusingIndex = index;
   }
 
-  selectMeme(cursorLeft: number, cursorTop: number) {
-    for (let i = 0; i < this.clips.length; i++) {
-      const clip = this.clips[i];
-      if (clip.inRect(cursorLeft, cursorTop)) {
-        this.onSelectCreature(i);
-      }
+  setHover(index: number | null) {
+    if (this.hoveringIndex != null) {
+      this.creatureAnimations[this.hoveringIndex].hover = false;
     }
+    if (index != null) {
+      this.creatureAnimations[index].hover = true;
+    }
+    this.hoveringIndex = index;
   }
 
-  hoverMeme(cursorLeft: number, cursorTop: number) {
-    let picked = false;
-    for (const clip of this.clips) {
-      if (picked) {
-        clip.hover = false;
-        picked = true;
-      } else if (clip.inRect(cursorLeft, cursorTop)) {
-        clip.hover = true;
-      } else {
-        clip.hover = false;
+  getFirstCreatureInRect(cursorLeft: number, cursorTop: number): number | null {
+    for (let i = 0; i < this.creatureAnimations.length; i++) {
+      const creatureAnimation = this.creatureAnimations[i];
+      if (creatureAnimation.inRect(cursorLeft, cursorTop)) {
+        return i;
       }
     }
-  }
-
-  init() {
-    const canvas = document.getElementById("canvas")! as HTMLCanvasElement;
-    canvas.width = WIDTH;
-    canvas.height = HEIGHT;
-    const context = canvas.getContext("2d")!;
-    this.context = context;
-    this.background.init(context);
+    return null;
   }
 
   draw(state: any) {
@@ -78,8 +87,8 @@ export class Scenario {
   }
 
   step() {
-    for (let i = 0; i < this.clips.length; i++) {
-      const obj = this.clips[i];
+    for (let i = 0; i < this.creatureAnimations.length; i++) {
+      const obj = this.creatureAnimations[i];
       obj.incFrame();
     }
   }

@@ -52,7 +52,7 @@ import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import CreatureNewButton from "./Buttons/CreatureRebootNew";
-import { Scenario } from "../script/scene/planet/scenario/scenario";
+import { Scenario } from "../script/scene/planet/scenario/Scenario";
 
 interface Props {
   localTimer: number;
@@ -88,7 +88,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
-  const [scenario, setScenario] = useState(new Scenario(onSelectCreature));
+  const scenarioRef = useRef<Scenario | null>(null);
 
   const containerRatio = 1671 / 951;
   const [containerWidth, setContainerWidth] = useState<number>(0);
@@ -200,16 +200,14 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
 
   useEffect(() => {
     const draw = (): void => {
-      if (scenario.status === "play") {
-        scenario.draw({
+      if (scenarioRef.current && scenarioRef.current.status === "play") {
+        scenarioRef.current.draw({
           l2Account,
         });
-        scenario.step();
+        scenarioRef.current.step();
       }
     };
 
-    scenario.init();
-    // Set the interval
     const intervalId = setInterval(draw, 30); // 1000ms = 1 second
 
     // Cleanup function to clear the interval when the component unmounts
@@ -219,9 +217,14 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("creaturesCurrentPrograms changed", currentCreatureTypes);
-    scenario.updateClips(currentCreatureTypes);
-  }, [currentCreatureTypes]);
+    scenarioRef.current = new Scenario(containerWidth, containerHeight);
+  }, [containerWidth, containerHeight]);
+
+  useEffect(() => {
+    if (scenarioRef.current) {
+      scenarioRef.current.updateCreatureAnimations(currentCreatureTypes);
+    }
+  }, [scenarioRef.current, currentCreatureTypes]);
 
   useEffect(() => {
     if (uIState.type == UIStateType.PlayUnlockAnimation) {
@@ -237,28 +240,35 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   };
 
   function onHoverCanvas(e: MouseEvent<HTMLCanvasElement>) {
+    if (!scenarioRef.current) return;
+
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
-    const left = ((e.clientX - rect.left) * 960) / rect.width;
-    const top = ((e.clientY - rect.top) * 960) / rect.width;
-    scenario.hoverMeme(left, top);
+    const ratio = containerWidth / rect.width;
+    const left = (e.clientX - rect.left) * ratio;
+    const top = (e.clientY - rect.top) * ratio;
+    const index = scenarioRef.current.getFirstCreatureInRect(left, top);
+    scenarioRef.current.setHover(index);
   }
 
   function onClickCanvas(e: MouseEvent<HTMLCanvasElement>) {
+    if (!scenarioRef.current) return;
+
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
-    const left = ((e.clientX - rect.left) * 960) / rect.width;
-    const top = ((e.clientY - rect.top) * 960) / rect.width;
-    scenario.selectMeme(left, top);
-  }
-
-  function onSelectCreature(index: number) {
-    dispatch(setSelectedCreature({ index }));
+    const ratio = containerWidth / rect.width;
+    const left = (e.clientX - rect.left) * ratio;
+    const top = (e.clientY - rect.top) * ratio;
+    const index = scenarioRef.current.getFirstCreatureInRect(left, top);
+    if (index !== null) {
+      scenarioRef.current.setFocus(index);
+      dispatch(setSelectedCreature({ index }));
+    }
   }
 
   useEffect(() => {
-    if (selectedCreatureIndexForRequestEncode != -1) {
-      scenario.setFocus(selectedCreatureIndexForRequestEncode);
+    if (scenarioRef.current && selectedCreatureIndexForRequestEncode != -1) {
+      scenarioRef.current.setFocus(selectedCreatureIndexForRequestEncode);
     }
   }, [selectedCreatureIndexForRequestEncode]);
 

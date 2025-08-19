@@ -1,21 +1,25 @@
-import { Clip } from "./meme";
-import { WIDTH, HEIGHT } from "./draw";
+import { CreatureAnimation } from "./CreatureAnimation";
 import { BackgroundBase } from "./BackgroundBase";
 
 export class BackgroundDisco extends BackgroundBase {
-  constructor(clips: Array<Clip>) {
-    super(clips);
+  constructor(
+    width: number,
+    height: number,
+    context: CanvasRenderingContext2D,
+    creatureAnimations: Array<CreatureAnimation>
+  ) {
+    super(width, height, context, creatureAnimations);
   }
 
   draw(): void {
     if (!this.context) {
       return;
     }
-    this.context.clearRect(0, 0, WIDTH, HEIGHT);
+    this.context.clearRect(0, 0, this.width, this.height);
 
-    this.context.drawImage(this.backgroundImage, 0, 0, WIDTH, HEIGHT);
+    this.context.drawImage(this.backgroundImage, 0, 0, this.width, this.height);
 
-    for (const obj of this.clips) {
+    for (const obj of this.creatureAnimations) {
       obj.draw(this.context);
     }
   }

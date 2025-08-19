@@ -4,7 +4,6 @@ import {
   getCreatureTop,
   ProgramType,
 } from "../../../../../data/models";
-import { HEIGHT, WIDTH } from "./draw";
 import select_background from "../../../../image/backgrounds/robot_select.png";
 
 const BACKGROUND_HEIGHT = 214;
@@ -13,21 +12,7 @@ const CLIP_HEIGHT = 300;
 const CLIP_WIDTH = 300;
 const CLIP_FRAME_COUNT = 24;
 
-export class ClipRect {
-  top: number;
-  left: number;
-  right: number;
-  bottom: number;
-  constructor(top: number, left: number, right: number, bottom: number) {
-    this.top = top;
-    this.left = left;
-    this.right = right;
-    this.right = right;
-    this.bottom = bottom;
-  }
-}
-
-export class Clip {
+export class CreatureAnimation {
   index: number;
   name: string;
   creatureType: number;
@@ -81,7 +66,7 @@ export class Clip {
       cursorLeft > this.left + w_margin &&
       cursorLeft < right - w_margin &&
       cursorTop > this.top + h_margin &&
-      cursorTop < bottom
+      cursorTop < bottom - h_margin
     ) {
       return true;
     }
@@ -145,8 +130,6 @@ export class Clip {
     );
 
     if (this.hover == true) {
-      //ctx.fillStyle = 'hsl(20%, 100%, 15%)'; // Use 50% gray to desaturate
-      //ctx.globalCompositeOperation = "saturation";
       ctx.beginPath();
       ctx.arc(
         this.left + (CLIP_WIDTH * this.ratio) / 2,
@@ -161,17 +144,9 @@ export class Clip {
       ctx.lineWidth = 2; // Thickness of the dashed line
       ctx.stroke();
     }
-    /*
-      ctx.fillText(this.currentClip, this.left+10, this.top); // text, x, y
-      ctx.fillText(this.currentFrame.toString(), this.left + 10, this.top+30); // text, x, y
-      */
   }
 
   incFrame() {
     this.currentFrame = (this.currentFrame + 1) % CLIP_FRAME_COUNT;
   }
-}
-
-export function createAnimationClip(index: number, programType: ProgramType) {
-  return new Clip(index, programType, 0.5);
 }
