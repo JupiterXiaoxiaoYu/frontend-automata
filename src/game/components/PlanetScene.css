@@ -48,16 +48,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-scene-program-next-background-button {
-  position: absolute;
-  height: 40%;
-  width: auto;
-  aspect-ratio: 132 / 128;
-  top: -95%;
-  left: 111.7%;
-  transform: translate(-50%, -50%);
-}
-
 .planet-scene-creature-info {
   position: absolute;
   height: auto;
@@ -86,6 +76,42 @@
   top: 91.5%;
   left: 97%;
   transform: translate(-50%, -50%);
+}
+
+.planet-scene-planet-button-container {
+  position: absolute;
+  height: 20%;
+  width: auto;
+  aspect-ratio: 99 / 222;
+  top: 68%;
+  left: 97%;
+  transform: translate(-50%, -50%);
+  background-image: url("../image/backgrounds/planet_frame.png");
+  background-size: cover;
+  user-select: none;
+}
+
+.planet-scene-planet-1-button,
+.planet-scene-planet-2-button,
+.planet-scene-planet-3-button {
+  position: absolute;
+  height: auto;
+  width: 66%;
+  aspect-ratio: 68 / 67;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.planet-scene-planet-1-button {
+  top: 25%;
+}
+
+.planet-scene-planet-2-button {
+  top: 50%;
+}
+
+.planet-scene-planet-3-button {
+  top: 75%;
 }
 
 @keyframes unlockFrames {

@@ -27,8 +27,8 @@ export class Scenario {
     );
   }
 
-  nextBackground() {
-    this.background.nextBackground();
+  updateBackground(index: number) {
+    this.background.updateBackground(index);
   }
 
   updateCreatureAnimations(creatureTypes: number[]) {
