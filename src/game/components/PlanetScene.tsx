@@ -353,57 +353,58 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         <div className="planet-scene-canvas-container">
           <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
-        <div className="planet-scene-program-container">
-          {showConfirmCreateButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureConfirmButton
-                isDisabled={!enableConfirmButton}
-                onClick={onClickUnlock}
-              />
-            </div>
-          )}
-          {showConfirmRebootButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureConfirmButton
-                isDisabled={!enableConfirmButton}
-                onClick={onClickConfirmReboot}
-              />
-            </div>
-          )}
-          {showRebootButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureRebootButton
-                isDisabled={isLoading}
-                onClick={onClickReboot}
-              />
-            </div>
-          )}
-          <div className="planet-scene-program-new-creature-button">
-            <CreatureNewButton
-              isDisabled={isLoading}
-              onClick={onClickNewCreature}
-            />
-          </div>
-          {selectedCreaturePrograms.map((program, index) => (
-            <MainMenuProgram
-              key={index}
-              order={index}
-              program={program}
-              showContainerAnimation={isSelectingUIState}
-              showProgramAnimation={
-                !selectedCreature.isStarting &&
-                !isSelectingUIState &&
-                !isLoading &&
-                uIState.type != UIStateType.UnlockPopup &&
-                uIState.type != UIStateType.PlayUnlockAnimation &&
-                currentProgramInfo.index == index &&
-                !selectedCreature.isProgramStop
-              }
-            />
-          ))}
+        <div className="planet-scene-program-new-creature-button">
+          <CreatureNewButton
+            isDisabled={isLoading}
+            onClick={onClickNewCreature}
+          />
         </div>
+
         {!isNotSelectingCreature && (
           <>
+            <div className="planet-scene-program-container">
+              {showConfirmCreateButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureConfirmButton
+                    isDisabled={!enableConfirmButton}
+                    onClick={onClickUnlock}
+                  />
+                </div>
+              )}
+              {showConfirmRebootButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureConfirmButton
+                    isDisabled={!enableConfirmButton}
+                    onClick={onClickConfirmReboot}
+                  />
+                </div>
+              )}
+              {showRebootButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureRebootButton
+                    isDisabled={isLoading}
+                    onClick={onClickReboot}
+                  />
+                </div>
+              )}
+              {selectedCreaturePrograms.map((program, index) => (
+                <MainMenuProgram
+                  key={index}
+                  order={index}
+                  program={program}
+                  showContainerAnimation={isSelectingUIState}
+                  showProgramAnimation={
+                    !selectedCreature.isStarting &&
+                    !isSelectingUIState &&
+                    !isLoading &&
+                    uIState.type != UIStateType.UnlockPopup &&
+                    uIState.type != UIStateType.PlayUnlockAnimation &&
+                    currentProgramInfo.index == index &&
+                    !selectedCreature.isProgramStop
+                  }
+                />
+              ))}
+            </div>
             <div className="planet-scene-creature-info">
               <Creature
                 isLocked={false}
