@@ -67,5 +67,16 @@ module.exports = function override(config, env) {
           },
   });
 
+  // Enable polling for WSL compatibility
+  if (env === 'development') {
+    config.devServer = {
+      ...config.devServer,
+      watchOptions: {
+        poll: 1000,
+        aggregateTimeout: 300,
+      },
+    };
+  }
+
   return config
 }

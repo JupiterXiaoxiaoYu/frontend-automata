@@ -52,7 +52,7 @@ import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import CreatureNewButton from "./Buttons/CreatureRebootNew";
-import { Scenario } from "../script/scene/planet/scenario/Scenario";
+import { Scenario } from "../script/scene/planet/scenario/scenario";
 
 interface Props {
   localTimer: number;
