@@ -10,13 +10,11 @@ module.exports = function override(config, env) {
   Object.assign(fallback, {
       "crypto": require.resolve("crypto-browserify"),
       "stream": require.resolve("stream-browserify"),
-      "assert": require.resolve("assert"),
-      "http": require.resolve("stream-http"),
-      "https": require.resolve("https-browserify"),
-      "os": require.resolve("os-browserify"),
+      "buffer": require.resolve("buffer"),      
+      "process": require.resolve("process/browser"), 
+      "util": require.resolve("util"),
       "path": require.resolve("path-browserify"),
-      "vm": false,
-      "url": require.resolve("url")
+      "os": require.resolve("os-browserify")
   })
   config.resolve.fallback = fallback;
   config.plugins = (config.plugins || []).concat([
