@@ -258,10 +258,8 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     const left = (e.clientX - rect.left) * ratio;
     const top = (e.clientY - rect.top) * ratio;
     const index = scenarioRef.current.getFirstCreatureInRect(left, top);
-    if (index !== null) {
-      scenarioRef.current.setFocus(index);
-      dispatch(setSelectedCreature({ index }));
-    }
+    scenarioRef.current.setFocus(index);
+    dispatch(setSelectedCreature({ index: index == null ? -1 : index }));
   }
 
   useEffect(() => {

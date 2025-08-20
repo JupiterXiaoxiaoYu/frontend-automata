@@ -131,17 +131,6 @@ function createLockedCreature(creatureType: number): CreatureModel {
   };
 }
 
-const CREATURE_MAX_COUNT = 24;
-function fillCreaturesWithLocked(origin: CreatureModel[]): CreatureModel[] {
-  const start = origin.length;
-  const end = CREATURE_MAX_COUNT;
-  const addArray = Array.from(
-    { length: end - start },
-    (_, index) => start + index
-  ).map((index) => createLockedCreature(index));
-  return [...origin, ...addArray];
-}
-
 const NOT_SELECTING_CREATURE = "NotSelecting";
 interface CreaturesState {
   selectedCreatureIndex: number | typeof NOT_SELECTING_CREATURE;
@@ -176,12 +165,11 @@ export const creaturesSlice = createSlice({
           state.creatures.length) %
         state.creatures.length;
     },
-    initSelectingCreatureIndex: (state, action) => {
-      state.selectedCreatureIndex =
-        state.creatures.length == 0 ? NOT_SELECTING_CREATURE : 0;
-    },
     setSelectedCreature: (state, action) => {
-      state.selectedCreatureIndex = action.payload.index;
+      state.selectedCreatureIndex =
+        action.payload.index == -1
+          ? NOT_SELECTING_CREATURE
+          : action.payload.index;
     },
     startCreatingCreature: (state, action) => {
       state.selectedCreatureIndex = state.creatures.length;
@@ -500,7 +488,6 @@ export const selectInstalledProgramIds = (state: RootState): number[] => {
 
 export const {
   changeSelectedCreature,
-  initSelectingCreatureIndex,
   setSelectedCreature,
   startCreatingCreature,
   startRebootCreature,
