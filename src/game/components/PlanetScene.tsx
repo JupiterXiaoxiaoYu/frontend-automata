@@ -52,7 +52,10 @@ import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import CreatureNewButton from "./Buttons/CreatureRebootNew";
-import { Scenario } from "../script/scene/planet/scenario/scenario";
+import { Scenario } from "../script/scene/planet/scenario/Scenario";
+import Planet1Button from "./Buttons/Planet1Button";
+import Planet2Button from "./Buttons/Planet2Button";
+import Planet3Button from "./Buttons/Planet3Button";
 
 interface Props {
   localTimer: number;
@@ -89,6 +92,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
   const scenarioRef = useRef<Scenario | null>(null);
+  const backgroundIndexRef = useRef<number>(0);
 
   const containerRatio = 1671 / 951;
   const [containerWidth, setContainerWidth] = useState<number>(0);
@@ -192,12 +196,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     }
   }
 
-  function onClickNextBackground() {
-    if (!isLoading && scenarioRef.current) {
-      scenarioRef.current.nextBackground();
-    }
-  }
-
   const currentProgramInfo = useAppSelector(
     isSelectingUIState || isLoading
       ? selectSelectedCreatureSelectingProgram
@@ -231,6 +229,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
       scenarioRef.current.updateCreatureAnimations(currentCreatureTypes);
     }
   }, [scenarioRef.current, currentCreatureTypes]);
+
+  useEffect(() => {
+    if (scenarioRef.current) {
+      scenarioRef.current.updateBackground(backgroundIndexRef.current);
+    }
+  }, [backgroundIndexRef.current]);
 
   useEffect(() => {
     if (uIState.type == UIStateType.PlayUnlockAnimation) {
@@ -382,12 +386,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
               onClick={onClickNewCreature}
             />
           </div>
-          <div className="planet-scene-program-next-background-button">
-            <CreatureNewButton
-              isDisabled={isLoading}
-              onClick={onClickNextBackground}
-            />
-          </div>
           {selectedCreaturePrograms.map((program, index) => (
             <MainMenuProgram
               key={index}
@@ -429,6 +427,26 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
             </div>
           </>
         )}
+        <div className="planet-scene-planet-button-container">
+          <div className="planet-scene-planet-1-button">
+            <Planet1Button
+              isDisabled={backgroundIndexRef.current == 0}
+              onClick={() => (backgroundIndexRef.current = 0)}
+            />
+          </div>
+          <div className="planet-scene-planet-2-button">
+            <Planet2Button
+              isDisabled={backgroundIndexRef.current == 1}
+              onClick={() => (backgroundIndexRef.current = 1)}
+            />
+          </div>
+          <div className="planet-scene-planet-3-button">
+            <Planet3Button
+              isDisabled={backgroundIndexRef.current == 2}
+              onClick={() => (backgroundIndexRef.current = 2)}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

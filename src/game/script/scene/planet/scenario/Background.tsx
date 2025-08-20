@@ -28,9 +28,9 @@ export class Background {
     this.context = context;
   }
 
-  nextBackground(): void {
-    this.backgroundIndex = (this.backgroundIndex + 1) % backgrounds.length;
-    this.backgroundImage.src = backgrounds[this.backgroundIndex];
+  updateBackground(index: number): void {
+    this.backgroundIndex = index;
+    this.backgroundImage.src = backgrounds[index];
   }
 
   draw(): void {

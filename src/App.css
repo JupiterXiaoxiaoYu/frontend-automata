@@ -38,10 +38,11 @@
   }
 }
 
-
 div.hide {
-  display:none;
+  display: none;
 }
 
+html,
 body {
+  overflow: hidden;
 }
