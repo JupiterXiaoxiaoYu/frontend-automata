@@ -5,12 +5,8 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-
-  /* width: 44px;
-  height: 16px; */
 }
 
-/* 图标样式 - 基础样式 */
 .program-resource-display-image {
   position: absolute;
   top: 50%;
@@ -22,13 +18,11 @@
   user-select: none;
 }
 
-/* 双值显示时图标位置向左移 */
 .program-resource-display-container.dual-values
   .program-resource-display-image {
   left: 0.05%;
 }
 
-/* 文本样式 - 基础文本样式 */
 .program-resource-display-positive-text,
 .program-resource-display-zero-text,
 .program-resource-display-negative-text {
@@ -44,7 +38,6 @@
   white-space: nowrap;
 }
 
-/* 双值显示时文本位置向右移 */
 .program-resource-display-container.dual-values
   .program-resource-display-positive-text,
 .program-resource-display-container.dual-values

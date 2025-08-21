@@ -4,7 +4,7 @@ import "./ProgramResourceDisplay.css";
 interface Props {
   iconImagePath: string;
   amount: number;
-  originalAmount?: number; // 原始资源数量（可选）
+  originalAmount?: number;
 }
 
 const ProgramResourceDisplay = ({
@@ -31,11 +31,9 @@ const ProgramResourceDisplay = ({
     };
   }, [containerRef.current, containerRef.current?.offsetHeight]);
 
-  // 如果提供了原始数量且与调整后数量不同，则显示两个数量
   const showBothAmounts =
     originalAmount !== undefined && originalAmount !== amount;
 
-  // 根据是否显示两个值来设置不同的容器类名
   const containerClassName = `program-resource-display-container${
     showBothAmounts ? " dual-values" : ""
   }`;
