@@ -26,6 +26,32 @@ const NewProgramAnimation = () => {
     selectIsSelectingCreatingCreature
   );
 
+  const spinImageContainerRef = useRef<HTMLDivElement>(null);
+  const mainAnimationContainerRef = useRef<HTMLDivElement>(null);
+  const [mainAnimationScale, setMainAnimationScale] = useState<number>(0);
+  const [spinAnimationScale, setSpinAnimationScale] = useState<number>(0);
+
+  const adjustSize = () => {
+    if (mainAnimationContainerRef.current) {
+      setMainAnimationScale(mainAnimationContainerRef.current.offsetHeight);
+    }
+    if (spinImageContainerRef.current) {
+      setSpinAnimationScale(spinImageContainerRef.current.offsetHeight);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [
+    spinImageContainerRef.current,
+    spinImageContainerRef.current?.offsetHeight,
+  ]);
+
   useEffect(() => {
     if (uIState.type == UIStateType.PlayNewProgramAnimation) {
       setShowAnimation(true);
@@ -52,14 +78,32 @@ const NewProgramAnimation = () => {
       {showAnimation && (
         <div className="new-program-animation-container">
           <div onClick={onClickCancel} className="new-program-animation-mask" />
+          <div className="new-program-animation-animation-container">
+            <div
+              ref={mainAnimationContainerRef}
+              className="new-program-animation-main-animation-container"
+              style={{
+                transform: `translate(-50%, -50%) scale(${mainAnimationScale}%, ${mainAnimationScale}%)`,
+              }}
+            >
+              <div className="new-program-animation-main-animation" />
+            </div>
+          </div>
           <div className="new-program-animation-program-container">
-            <div className="new-program-animation-main-animation" />
             {animationEnd && (
               <>
-                <img
-                  src={bg_spin}
-                  className="new-program-animation-spin-image"
-                />
+                <div
+                  ref={spinImageContainerRef}
+                  className="new-program-animation-spin-image-container"
+                  style={{
+                    transform: `translate(-50%, -50%) scale(${spinAnimationScale}%, ${spinAnimationScale}%)`,
+                  }}
+                >
+                  <img
+                    src={bg_spin}
+                    className="new-program-animation-spin-image"
+                  />
+                </div>
                 <Program
                   index={-1}
                   program={program}
