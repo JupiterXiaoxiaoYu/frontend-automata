@@ -49,34 +49,20 @@ export function ConnectController({
   } = useWalletContext();
   const connectState = useAppSelector(selectConnectState);
   const [queryingLogin, setQueryingLogin] = useState(false);
-
   // RainbowKit connect modal hook
   const { openConnectModal } = useConnectModal();
-  const showedModal = useRef(false);
 
   useEffect(() => {
-    if (!isConnected && !showedModal.current) {
-      showedModal.current = true;
-      openConnectModal?.();
-    }
-  }, [isConnected, openConnectModal]);
-
-  useEffect(() => {
-    if (isConnected && !l1Account) {
+    if (isConnected) {
       connectL1();
     }
-  }, [isConnected, l1Account, connectL1]);
+  }, [isConnected]);
 
-  const prevIsConnected = useRef(isConnected);
-
-  // Show connect modal automatically on mount if wallet not connected
   useEffect(() => {
-    if (prevIsConnected.current && !isConnected) {
-      showedModal.current = false;
-      openConnectModal?.();
+    if (l1Account) {
+      connectL2();
     }
-    prevIsConnected.current = isConnected;
-  }, [l1Account, openConnectModal]);
+  }, [l1Account]);
 
   async function preloadImages(imageUrls: string[]): Promise<void> {
     let loadedCount = 0;
@@ -115,7 +101,7 @@ export function ConnectController({
   }, [l1Account]);
 
   useEffect(() => {
-    console.log("connectState", connectState);
+    console.log("ConnectState", ConnectState[connectState]);
     if (connectState == ConnectState.OnStart) {
       onStart().then(() => {
         dispatch(setConnectState(ConnectState.Preloading));
@@ -128,8 +114,14 @@ export function ConnectController({
   }, [connectState]);
 
   const onLogin = async () => {
-    if (!queryingLogin) {
-      await connectL2();
+    console.log("l1Account", l1Account);
+    console.log("l2Account", l2Account);
+    console.log(
+      "openConnectModal",
+      openConnectModal != undefined && openConnectModal != null
+    );
+    if (!queryingLogin && openConnectModal) {
+      openConnectModal();
       setQueryingLogin(true);
     }
   };
@@ -169,18 +161,18 @@ export function ConnectController({
     return <LoadingPage message={"Starting"} progress={0} />;
   } else if (connectState == ConnectState.Preloading) {
     return <LoadingPage message={"Preloading Textures"} progress={progress} />;
-  } else if (connectState == ConnectState.Idle) {
+  } else if (
+    connectState == ConnectState.Idle ||
+    connectState == ConnectState.QueryConfig ||
+    connectState == ConnectState.QueryState
+  ) {
     return (
       <WelcomePage
-        isLogin={l2Account != null}
+        isLogin={isL2Connected}
         onLogin={onLogin}
         onStartGame={onStartGame}
       />
     );
-  } else if (connectState == ConnectState.QueryConfig) {
-    return <LoadingPage message={"Querying Config"} progress={0} />;
-  } else if (connectState == ConnectState.QueryState) {
-    return <LoadingPage message={"Querying State"} progress={0} />;
   } else if (connectState == ConnectState.ConnectionError) {
     return <LoadingPage message={"Error"} progress={0} />;
   } else {
