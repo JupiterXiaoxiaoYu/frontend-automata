@@ -46,6 +46,7 @@ const NewProgram = ({ onSelect }: Props) => {
       </p>
       <div className="new-program-button">
         <OrangeButton
+          id={fontSize}
           text={""}
           onClick={onSelect}
           isDisabled={
