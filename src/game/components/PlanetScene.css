@@ -48,6 +48,19 @@
   transform: translate(-50%, -50%);
 }
 
+.planet-scene-program-selecting-frame {
+  position: absolute;
+  width: auto;
+  height: 20%;
+  aspect-ratio: 48 / 26;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  background-image: url("../image/backgrounds/program_select.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .planet-scene-creature-info {
   position: absolute;
   height: auto;

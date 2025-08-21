@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, MouseEvent } from "react";
 import circleBackground from "../image/backgrounds/circle.png";
-import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
 import CreatureConfirmButton from "./Buttons/CreatureConfirmButton";
 import "./PlanetScene.css";
@@ -404,6 +403,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
                   }
                 />
               ))}
+              {currentProgramInfo.index != null && (
+                <div
+                  className="planet-scene-program-selecting-frame"
+                  style={{ left: `${5.5 + 10.85 * currentProgramInfo.index}%` }}
+                ></div>
+              )}
             </div>
             <div className="planet-scene-creature-info">
               <Creature
