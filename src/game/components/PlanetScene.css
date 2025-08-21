@@ -96,22 +96,22 @@
 .planet-scene-planet-3-button {
   position: absolute;
   height: auto;
-  width: 66%;
+  width: 67%;
   aspect-ratio: 68 / 67;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .planet-scene-planet-1-button {
-  top: 25%;
+  top: 22%;
 }
 
 .planet-scene-planet-2-button {
-  top: 50%;
+  top: 51%;
 }
 
 .planet-scene-planet-3-button {
-  top: 75%;
+  top: 80%;
 }
 
 @keyframes unlockFrames {
