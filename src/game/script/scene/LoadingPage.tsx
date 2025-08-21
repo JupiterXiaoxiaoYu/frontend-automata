@@ -12,7 +12,7 @@ interface Props {
 
 const LoadingPage = ({ message, progress }: Props) => {
   return (
-    <div className="loading-page-connecting-container">
+    <div className="loading-page-container">
       <img src={background_back} className="loading-page-background-back" />
       <img src={sponsor_frame} className="loading-page-sponsor-frame" />
       <img src={background_front} className="loading-page-background-front" />
