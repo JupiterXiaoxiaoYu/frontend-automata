@@ -85,7 +85,7 @@ interface PropertiesState {
 const initialState: PropertiesState = {
   tutorialType: TutorialType.None,
   uIState: { type: UIStateType.WelcomePage },
-  sceneType: SceneType.Redeem,
+  sceneType: SceneType.Planet,
   globalTimer: 0,
   nonce: "0",
   hasRocket: false,

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./MainMenu.css";
 import { selectSceneType, SceneType } from "../../data/properties";
-import { initSelectingCreatureIndex } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MarketScene from "./Popups/MarketScene";
 import RedeemScene from "./RedeemScene";
@@ -15,13 +14,6 @@ const MainMenu = ({ localTimer }: Props) => {
   const dispatch = useAppDispatch();
   const sceneType = useAppSelector(selectSceneType);
   const mainContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (sceneType == SceneType.Planet) {
-      console.log("Switching to Planet Scene");
-      dispatch(initSelectingCreatureIndex({}));
-    }
-  }, [sceneType]);
 
   return (
     <div className="main" ref={mainContainerRef}>

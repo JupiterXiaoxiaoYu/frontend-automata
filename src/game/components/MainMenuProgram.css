@@ -64,7 +64,10 @@
 
 .main-bot-program-hover-container {
   position: absolute;
-  top: 200%;
+  width: auto;
+  height: 130%;
+  aspect-ratio: 150 / 80;
+  top: -25%;
   left: 50%;
   transform: translate(0%, -50%);
   user-select: none;

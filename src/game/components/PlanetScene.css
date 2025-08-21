@@ -40,12 +40,25 @@
 
 .planet-scene-program-new-creature-button {
   position: absolute;
-  height: 40%;
+  height: 5%;
   width: auto;
   aspect-ratio: 132 / 128;
-  top: -45%;
-  left: 111.7%;
+  top: 76%;
+  left: 80.2%;
   transform: translate(-50%, -50%);
+}
+
+.planet-scene-program-selecting-frame {
+  position: absolute;
+  width: auto;
+  height: 20%;
+  aspect-ratio: 48 / 26;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  background-image: url("../image/backgrounds/program_select.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .planet-scene-creature-info {
@@ -96,22 +109,22 @@
 .planet-scene-planet-3-button {
   position: absolute;
   height: auto;
-  width: 66%;
+  width: 67%;
   aspect-ratio: 68 / 67;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .planet-scene-planet-1-button {
-  top: 25%;
+  top: 22%;
 }
 
 .planet-scene-planet-2-button {
-  top: 50%;
+  top: 51%;
 }
 
 .planet-scene-planet-3-button {
-  top: 75%;
+  top: 80%;
 }
 
 @keyframes unlockFrames {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, MouseEvent } from "react";
 import circleBackground from "../image/backgrounds/circle.png";
-import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
 import CreatureConfirmButton from "./Buttons/CreatureConfirmButton";
 import "./PlanetScene.css";
@@ -258,10 +257,8 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     const left = (e.clientX - rect.left) * ratio;
     const top = (e.clientY - rect.top) * ratio;
     const index = scenarioRef.current.getFirstCreatureInRect(left, top);
-    if (index !== null) {
-      scenarioRef.current.setFocus(index);
-      dispatch(setSelectedCreature({ index }));
-    }
+    scenarioRef.current.setFocus(index);
+    dispatch(setSelectedCreature({ index: index == null ? -1 : index }));
   }
 
   useEffect(() => {
@@ -355,57 +352,64 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         <div className="planet-scene-canvas-container">
           <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
-        <div className="planet-scene-program-container">
-          {showConfirmCreateButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureConfirmButton
-                isDisabled={!enableConfirmButton}
-                onClick={onClickUnlock}
-              />
-            </div>
-          )}
-          {showConfirmRebootButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureConfirmButton
-                isDisabled={!enableConfirmButton}
-                onClick={onClickConfirmReboot}
-              />
-            </div>
-          )}
-          {showRebootButton && (
-            <div className="planet-scene-program-action-button">
-              <CreatureRebootButton
-                isDisabled={isLoading}
-                onClick={onClickReboot}
-              />
-            </div>
-          )}
-          <div className="planet-scene-program-new-creature-button">
-            <CreatureNewButton
-              isDisabled={isLoading}
-              onClick={onClickNewCreature}
-            />
-          </div>
-          {selectedCreaturePrograms.map((program, index) => (
-            <MainMenuProgram
-              key={index}
-              order={index}
-              program={program}
-              showContainerAnimation={isSelectingUIState}
-              showProgramAnimation={
-                !selectedCreature.isStarting &&
-                !isSelectingUIState &&
-                !isLoading &&
-                uIState.type != UIStateType.UnlockPopup &&
-                uIState.type != UIStateType.PlayUnlockAnimation &&
-                currentProgramInfo.index == index &&
-                !selectedCreature.isProgramStop
-              }
-            />
-          ))}
+        <div className="planet-scene-program-new-creature-button">
+          <CreatureNewButton
+            isDisabled={isLoading}
+            onClick={onClickNewCreature}
+          />
         </div>
+
         {!isNotSelectingCreature && (
           <>
+            <div className="planet-scene-program-container">
+              {showConfirmCreateButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureConfirmButton
+                    isDisabled={!enableConfirmButton}
+                    onClick={onClickUnlock}
+                  />
+                </div>
+              )}
+              {showConfirmRebootButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureConfirmButton
+                    isDisabled={!enableConfirmButton}
+                    onClick={onClickConfirmReboot}
+                  />
+                </div>
+              )}
+              {showRebootButton && (
+                <div className="planet-scene-program-action-button">
+                  <CreatureRebootButton
+                    isDisabled={isLoading}
+                    onClick={onClickReboot}
+                  />
+                </div>
+              )}
+              {selectedCreaturePrograms.map((program, index) => (
+                <MainMenuProgram
+                  key={index}
+                  order={index}
+                  program={program}
+                  showContainerAnimation={isSelectingUIState}
+                  showProgramAnimation={
+                    !selectedCreature.isStarting &&
+                    !isSelectingUIState &&
+                    !isLoading &&
+                    uIState.type != UIStateType.UnlockPopup &&
+                    uIState.type != UIStateType.PlayUnlockAnimation &&
+                    currentProgramInfo.index == index &&
+                    !selectedCreature.isProgramStop
+                  }
+                />
+              ))}
+              {currentProgramInfo.index != null && (
+                <div
+                  className="planet-scene-program-selecting-frame"
+                  style={{ left: `${5.5 + 10.85 * currentProgramInfo.index}%` }}
+                ></div>
+              )}
+            </div>
             <div className="planet-scene-creature-info">
               <Creature
                 isLocked={false}
