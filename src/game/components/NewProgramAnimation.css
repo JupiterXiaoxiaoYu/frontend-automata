@@ -16,8 +16,19 @@
 
 .new-program-animation-program-container {
   position: absolute;
-  width: 165px;
-  height: 125px;
+  width: auto;
+  height: 15%;
+  aspect-ratio: 168 / 89;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.new-program-animation-animation-container {
+  position: absolute;
+  width: auto;
+  height: 15%;
+  aspect-ratio: 165 / 125;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -30,6 +41,16 @@
   to {
     background-position: -10230px;
   }
+}
+
+.new-program-animation-main-animation-container {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 330 / 250;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .new-program-animation-main-animation {
@@ -52,6 +73,15 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+.new-program-animation-spin-image-container {
+  position: absolute;
+  width: auto;
+  height: 80%;
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .new-program-animation-spin-image {
   position: absolute;
@@ -59,7 +89,7 @@
   height: 250px;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0%, 0%);
   animation: SpinAnimation 5s linear infinite;
   user-select: none;
 }

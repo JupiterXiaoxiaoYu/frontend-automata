@@ -6,6 +6,15 @@
   transform: translate(-50%, -50%);
 }
 
+.main-bot-program-bot-background {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes programImageFrames {
   0% {
     width: 200%;

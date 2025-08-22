@@ -50,11 +50,12 @@ import Creature from "./Creature";
 import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
-import CreatureNewButton from "./Buttons/CreatureRebootNew";
+import CreatureNewButton from "./Buttons/CreatureNewButton";
 import { Scenario } from "../script/scene/planet/scenario/Scenario";
 import Planet1Button from "./Buttons/Planet1Button";
 import Planet2Button from "./Buttons/Planet2Button";
 import Planet3Button from "./Buttons/Planet3Button";
+import { newCreaturePositions } from "../script/scene/planet/scenario/Background";
 
 interface Props {
   localTimer: number;
@@ -352,7 +353,13 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         <div className="planet-scene-canvas-container">
           <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
-        <div className="planet-scene-program-new-creature-button">
+        <div
+          className="planet-scene-program-new-creature-button"
+          style={{
+            left: `${newCreaturePositions[backgroundIndexRef.current].x}%`,
+            top: `${newCreaturePositions[backgroundIndexRef.current].y}%`,
+          }}
+        >
           <CreatureNewButton
             isDisabled={isLoading}
             onClick={onClickNewCreature}
@@ -390,6 +397,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
                 <MainMenuProgram
                   key={index}
                   order={index}
+                  isSelecting={index == currentProgramInfo.index}
                   program={program}
                   showContainerAnimation={isSelectingUIState}
                   showProgramAnimation={

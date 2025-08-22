@@ -4,6 +4,11 @@ import background_2 from "../../../../image/backgrounds/planet2.png";
 
 const CREATURE_PER_BACKGROUND = 8;
 const backgrounds = [background_1, background_2, background_2];
+export const newCreaturePositions = [
+  { x: 45, y: 50 },
+  { x: 45, y: 50 },
+  { x: 45, y: 50 },
+];
 
 export class Background {
   width: number;
