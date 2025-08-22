@@ -12,9 +12,12 @@ import { selectIsLoading } from "../../data/errors";
 import { setSelectingProgramIndex } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ProgramHover from "./ProgramHover";
+import selectingFrame from "../image/backgrounds/selecting_frame.png";
+import emptyProgramFrame from "../image/backgrounds/empty_program_frame.png";
 
 interface Props {
   order: number;
+  isSelecting: boolean;
   program: ProgramModel | null;
   showContainerAnimation: boolean;
   showProgramAnimation: boolean;
@@ -22,6 +25,7 @@ interface Props {
 
 const MainMenuProgram = ({
   order,
+  isSelecting,
   program,
   showContainerAnimation,
   showProgramAnimation,
@@ -32,6 +36,7 @@ const MainMenuProgram = ({
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => setIsHovering(true);
   const handleMouseLeave = () => setIsHovering(false);
+  const emptyProgram = program == null;
 
   const yPosition = 43;
   const xPosition = 5.5 + 10.85 * order;
@@ -73,6 +78,18 @@ const MainMenuProgram = ({
           left: `${xPosition}%`,
         }}
       >
+        {isSelecting && (
+          <img
+            className="main-bot-program-bot-background"
+            src={selectingFrame}
+          />
+        )}
+        {emptyProgram && (
+          <img
+            className="main-bot-program-bot-background"
+            src={emptyProgramFrame}
+          />
+        )}
         <div
           key={program?.index}
           className={

@@ -390,6 +390,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
                 <MainMenuProgram
                   key={index}
                   order={index}
+                  isSelecting={index == currentProgramInfo.index}
                   program={program}
                   showContainerAnimation={isSelectingUIState}
                   showProgramAnimation={
