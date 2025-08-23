@@ -4,6 +4,7 @@ import {
   getCreatureTop,
   ProgramType,
 } from "../../../../../data/models";
+import creatingCreatureImage from "../../../../image/Animations/Creatures/idle_robot_select.png";
 
 const CLIP_HEIGHT = 300;
 const CLIP_WIDTH = 300;
@@ -13,6 +14,7 @@ export class CreatureAnimation {
   index: number;
   name: string;
   creatureType: number;
+  isCreating: boolean;
   src: HTMLImageElement;
   left: number;
   top: number;
@@ -21,35 +23,50 @@ export class CreatureAnimation {
   focus: boolean;
   target: Array<[number, number]>;
 
-  constructor(index: number, creatureType: number, ratio: number) {
+  constructor(
+    index: number,
+    creatureType: number,
+    isCreating: boolean,
+    ratio: number
+  ) {
     this.index = index;
     this.name = `Robot ${index + 1}`;
     this.creatureType = creatureType;
+    this.isCreating = isCreating;
 
     const spriteSheetImage = new Image();
     spriteSheetImage.setAttribute("crossOrigin", "");
-    spriteSheetImage.src = getCreatureSpriteSheetPath(creatureType, false);
+    spriteSheetImage.src = this.isCreating
+      ? creatingCreatureImage
+      : getCreatureSpriteSheetPath(this.creatureType, false);
 
     this.src = spriteSheetImage;
-    this.left = getCreatureLeft(creatureType) * ratio;
-    this.top = getCreatureTop(creatureType) * ratio;
+    this.left = getCreatureLeft(this.creatureType) * ratio;
+    this.top = getCreatureTop(this.creatureType) * ratio;
     this.currentFrame = 0;
     this.ratio = ratio;
     this.focus = false;
     this.target = [];
   }
 
-  updateCreatureType(creatureType: number) {
+  updateCreatureType(creatureType: number, isCreating: boolean) {
     this.creatureType = creatureType;
-    this.src.src = getCreatureSpriteSheetPath(creatureType, this.focus);
+    this.isCreating = isCreating;
+    console.log(
+      `CreatureAnimation: Updating creature type to ${creatureType}, isCreating: ${isCreating}`
+    );
+    this.src.src = this.isCreating
+      ? creatingCreatureImage
+      : getCreatureSpriteSheetPath(this.creatureType, this.focus);
     this.left = getCreatureLeft(creatureType) * this.ratio;
     this.top = getCreatureTop(creatureType) * this.ratio;
-    this.currentFrame = 0;
   }
 
   updateFocus(focus: boolean) {
     this.focus = focus;
-    this.src.src = getCreatureSpriteSheetPath(this.creatureType, this.focus);
+    this.src.src = this.isCreating
+      ? creatingCreatureImage
+      : getCreatureSpriteSheetPath(this.creatureType, this.focus);
   }
 
   inRect(cursorLeft: number, cursorTop: number): boolean {
@@ -86,17 +103,31 @@ export class CreatureAnimation {
       ctx.fillStyle = "black"; // Red color
     }
 
-    ctx.drawImage(
-      this.src,
-      this.currentFrame * CLIP_WIDTH,
-      0,
-      CLIP_WIDTH,
-      CLIP_HEIGHT,
-      this.left,
-      this.top,
-      CLIP_WIDTH * this.ratio,
-      CLIP_HEIGHT * this.ratio
-    );
+    if (this.isCreating) {
+      ctx.drawImage(
+        this.src,
+        0,
+        0,
+        CLIP_WIDTH,
+        CLIP_HEIGHT,
+        this.left,
+        this.top,
+        CLIP_WIDTH * this.ratio,
+        CLIP_HEIGHT * this.ratio
+      );
+    } else {
+      ctx.drawImage(
+        this.src,
+        this.currentFrame * CLIP_WIDTH,
+        0,
+        CLIP_WIDTH,
+        CLIP_HEIGHT,
+        this.left,
+        this.top,
+        CLIP_WIDTH * this.ratio,
+        CLIP_HEIGHT * this.ratio
+      );
+    }
 
     const nameWidth = this.name.length * 7 + 5;
     ctx.fillRect(

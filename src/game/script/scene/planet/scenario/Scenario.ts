@@ -31,10 +31,22 @@ export class Scenario {
     this.background.updateBackground(index);
   }
 
-  updateCreatureAnimations(creatureTypes: number[]) {
+  updateCreatureAnimations(creatureTypes: number[], isCreating: boolean) {
+    if (isCreating) {
+      creatureTypes.push(creatureTypes.length);
+    }
+
+    let popCount = this.creatureAnimations.length - creatureTypes.length;
+    while (popCount-- > 0) {
+      this.creatureAnimations.pop();
+    }
+
     for (let i = 0; i < this.creatureAnimations.length; i++) {
       if (this.creatureAnimations[i].creatureType != creatureTypes[i]) {
-        this.creatureAnimations[i].updateCreatureType(creatureTypes[i]);
+        this.creatureAnimations[i].updateCreatureType(
+          creatureTypes[i],
+          isCreating && i == creatureTypes.length - 1
+        );
       }
     }
 
@@ -46,6 +58,7 @@ export class Scenario {
       const creatureAnimation = new CreatureAnimation(
         i,
         creatureTypes[i],
+        isCreating && i == creatureTypes.length - 1,
         this.ratio
       );
       this.creatureAnimations.push(creatureAnimation);
@@ -55,10 +68,13 @@ export class Scenario {
   setFocus(index: number | null) {
     if (index != null && this.creatureAnimations.length <= index) return;
 
-    if (this.focusingIndex != null) {
+    if (
+      this.focusingIndex != null &&
+      this.focusingIndex < this.creatureAnimations.length
+    ) {
       this.creatureAnimations[this.focusingIndex].updateFocus(false);
     }
-    if (index != null) {
+    if (index != null && index < this.creatureAnimations.length) {
       this.creatureAnimations[index].updateFocus(true);
     }
     this.focusingIndex = index;
@@ -74,7 +90,7 @@ export class Scenario {
     return null;
   }
 
-  draw(state: any) {
+  draw() {
     if (this.context) {
       this.background.draw();
     }
