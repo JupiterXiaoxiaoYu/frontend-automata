@@ -50,7 +50,11 @@ import OrangeTabButton from "../../script/button/OrangeTabButton";
 
 const ELEMENT_PER_REQUEST = 30;
 
-const MarketScene = () => {
+interface Props {
+  mainContainerRef: React.RefObject<HTMLDivElement>;
+}
+
+const MarketScene = ({ mainContainerRef }: Props) => {
   const dispatch = useAppDispatch();
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
@@ -61,12 +65,12 @@ const MarketScene = () => {
     ? new LeHexBN(bnToHexLe(l2Account?.pubkey)).toU64Array()
     : ["", "", "", ""];
 
+  const gridContainerRef = useRef<HTMLParagraphElement>(null);
   const elementRatio = 297 / 205;
-  const containerRef = useRef<HTMLParagraphElement>(null);
-  const elementWidth = 165;
-  const elementHeight = 114;
+  const columnCount = 4;
   const [rowCount, setRowCount] = useState<number>(0);
-  const [columnCount, setColumnCount] = useState<number>(0);
+  const [elementWidth, setElementWidth] = useState<number>(0);
+  const [elementHeight, setElementHeight] = useState<number>(0);
 
   const tabState = useAppSelector(selectTabState);
   const [page, setPage] = useState<number>(0);
@@ -91,14 +95,29 @@ const MarketScene = () => {
   const [currentPopupProgram, setCurrentPopupProgram] =
     useState<ProgramModel>();
 
+  const containerRatio = 5 / 3.5;
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
+
   const adjustSize = () => {
-    if (containerRef.current) {
+    if (gridContainerRef.current) {
+      const programGridElementWidth =
+        gridContainerRef.current.offsetWidth / columnCount;
+      const programElementHeight = programGridElementWidth / elementRatio;
+      setElementWidth(programGridElementWidth);
+      setElementHeight(programElementHeight);
       setRowCount(
-        Math.floor(containerRef.current.offsetHeight / elementHeight)
+        Math.floor(gridContainerRef.current.offsetHeight / programElementHeight)
       );
-      setColumnCount(
-        Math.floor(containerRef.current.offsetWidth / elementWidth)
+    }
+
+    if (mainContainerRef.current) {
+      const height = Math.min(
+        mainContainerRef.current.offsetHeight,
+        mainContainerRef.current.offsetWidth / containerRatio
       );
+      setContainerHeight(height * 0.88);
+      setContainerWidth(height * 0.88 * containerRatio);
     }
   };
 
@@ -109,7 +128,7 @@ const MarketScene = () => {
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, []);
+  }, [gridContainerRef.current, gridContainerRef.current?.offsetWidth]);
 
   useEffect(() => {
     checkTabData();
@@ -453,45 +472,67 @@ const MarketScene = () => {
 
   return (
     <div className="market-scene-container">
-      <div className="market-scene-main-container">
+      <div
+        className="market-scene-main-container"
+        style={{ width: containerWidth, height: containerHeight }}
+      >
         <div className="market-scene-main-tab-container">
           <div className="market-scene-tab-button">
             <OrangeTabButton
+              id={elementWidth}
               text={"Inventory"}
               onClick={onClickInventoryTab}
               isDisabled={tabState == MarketTabState.Inventory}
-              fontSizeRatio={0.75}
+              fontSizeRatio={0.7}
             />
           </div>
           <div className="market-scene-tab-button">
             <OrangeTabButton
+              id={elementWidth}
               text={"Selling"}
               onClick={onClickSellingTab}
               isDisabled={tabState == MarketTabState.Selling}
+              fontSizeRatio={0.7}
             />
           </div>
           <div className="market-scene-tab-button">
             <OrangeTabButton
+              id={elementWidth}
               text={"Auction"}
               onClick={onClickAuctionTab}
               isDisabled={tabState == MarketTabState.Auction}
+              fontSizeRatio={0.7}
             />
           </div>
           <div className="market-scene-tab-button">
             <OrangeTabButton
+              id={elementWidth}
               text={"Lot"}
               onClick={onClickLotTab}
               isDisabled={tabState == MarketTabState.Lot}
+              fontSizeRatio={0.7}
             />
           </div>
         </div>
-        <div ref={containerRef} className="market-scene-main-grid-container">
+        <div
+          ref={gridContainerRef}
+          className="market-scene-main-grid-container"
+        >
           <Grid
             elementWidth={elementWidth}
             elementHeight={elementHeight}
             columnCount={columnCount}
             rowCount={rowCount}
             elements={elements}
+          />
+        </div>
+        <div className="market-scene-page-selector-container">
+          <PageSelector
+            currentPage={page}
+            pageCount={totalPage}
+            isHorizontal={true}
+            onClickPrevPageButton={onClickPrevPageButton}
+            onClickNextPageButton={onClickNextPageButton}
           />
         </div>
       </div>
@@ -511,15 +552,6 @@ const MarketScene = () => {
           onCancelBid={onCancelBid}
         />
       )}
-      <div className="market-scene-page-selector-container">
-        <PageSelector
-          currentPage={page}
-          pageCount={totalPage}
-          isHorizontal={true}
-          onClickPrevPageButton={onClickPrevPageButton}
-          onClickNextPageButton={onClickNextPageButton}
-        />
-      </div>
     </div>
   );
 };

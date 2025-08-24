@@ -10,38 +10,35 @@
 
 .market-scene-main-container {
   position: absolute;
-  width: 100%;
-  height: 90%;
   left: 50%;
-  top: 0;
-  transform: translate(-50%, 0);
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .market-scene-main-grid-container {
   position: absolute;
-  width: 75%;
-  height: 100%;
-  left: 19%;
-  top: 0;
+  width: 100%;
+  height: 80%;
+  left: 0;
+  top: 10%;
 }
 
 .market-scene-main-tab-container {
   position: absolute;
-  width: 19%;
-  height: 100%;
+  width: 100%;
+  height: 10%;
   left: 0;
   top: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 5px;
-  padding-top: 10px;
+  gap: 20px;
 }
 
 .market-scene-tab-button {
   position: relative;
-  width: 70%;
-  height: auto;
+  width: auto;
+  height: 50%;
   aspect-ratio: 132/45;
 }
 
@@ -49,7 +46,7 @@
   position: absolute;
   width: auto;
   height: 10%;
-  aspect-ratio: 3/1;
+  aspect-ratio: 17 / 4;
   left: 50%;
   bottom: 0;
   transform: translate(-50%, 0);

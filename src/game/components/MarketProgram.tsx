@@ -91,7 +91,7 @@ const MarketProgram = ({
             text={"List"}
             onClick={onClickList}
             isDisabled={false}
-            fontSizeRatio={1}
+            fontSizeRatio={0.8}
           />
         </div>
       )}

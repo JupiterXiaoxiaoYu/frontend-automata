@@ -26,7 +26,9 @@ const MainMenu = ({ localTimer }: Props) => {
       {mainContainerRef && sceneType == SceneType.Redeem && (
         <RedeemScene mainContainerRef={mainContainerRef} />
       )}
-      {mainContainerRef && sceneType == SceneType.Market && <MarketScene />}
+      {mainContainerRef && sceneType == SceneType.Market && (
+        <MarketScene mainContainerRef={mainContainerRef} />
+      )}
     </div>
   );
 };

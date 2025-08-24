@@ -37,7 +37,7 @@ const PageSelector = ({
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
 
   return (
     <div className="page-selector-container" ref={containerRef}>
