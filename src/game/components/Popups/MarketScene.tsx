@@ -471,69 +471,71 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   };
 
   return (
-    <div className="market-scene-container">
-      <div
-        className="market-scene-main-container"
-        style={{ width: containerWidth, height: containerHeight }}
-      >
-        <div className="market-scene-main-tab-container">
-          <div className="market-scene-tab-button">
-            <OrangeTabButton
-              id={elementWidth}
-              text={"Inventory"}
-              onClick={onClickInventoryTab}
-              isDisabled={tabState == MarketTabState.Inventory}
-              fontSizeRatio={0.7}
-            />
-          </div>
-          <div className="market-scene-tab-button">
-            <OrangeTabButton
-              id={elementWidth}
-              text={"Selling"}
-              onClick={onClickSellingTab}
-              isDisabled={tabState == MarketTabState.Selling}
-              fontSizeRatio={0.7}
-            />
-          </div>
-          <div className="market-scene-tab-button">
-            <OrangeTabButton
-              id={elementWidth}
-              text={"Auction"}
-              onClick={onClickAuctionTab}
-              isDisabled={tabState == MarketTabState.Auction}
-              fontSizeRatio={0.7}
-            />
-          </div>
-          <div className="market-scene-tab-button">
-            <OrangeTabButton
-              id={elementWidth}
-              text={"Lot"}
-              onClick={onClickLotTab}
-              isDisabled={tabState == MarketTabState.Lot}
-              fontSizeRatio={0.7}
-            />
-          </div>
-        </div>
+    <>
+      <div className="market-scene-container">
         <div
-          ref={gridContainerRef}
-          className="market-scene-main-grid-container"
+          className="market-scene-main-container"
+          style={{ width: containerWidth, height: containerHeight }}
         >
-          <Grid
-            elementWidth={elementWidth}
-            elementHeight={elementHeight}
-            columnCount={columnCount}
-            rowCount={rowCount}
-            elements={elements}
-          />
-        </div>
-        <div className="market-scene-page-selector-container">
-          <PageSelector
-            currentPage={page}
-            pageCount={totalPage}
-            isHorizontal={true}
-            onClickPrevPageButton={onClickPrevPageButton}
-            onClickNextPageButton={onClickNextPageButton}
-          />
+          <div className="market-scene-main-tab-container">
+            <div className="market-scene-tab-button">
+              <OrangeTabButton
+                id={elementWidth}
+                text={"Inventory"}
+                onClick={onClickInventoryTab}
+                isDisabled={tabState == MarketTabState.Inventory}
+                fontSizeRatio={0.7}
+              />
+            </div>
+            <div className="market-scene-tab-button">
+              <OrangeTabButton
+                id={elementWidth}
+                text={"Selling"}
+                onClick={onClickSellingTab}
+                isDisabled={tabState == MarketTabState.Selling}
+                fontSizeRatio={0.7}
+              />
+            </div>
+            <div className="market-scene-tab-button">
+              <OrangeTabButton
+                id={elementWidth}
+                text={"Auction"}
+                onClick={onClickAuctionTab}
+                isDisabled={tabState == MarketTabState.Auction}
+                fontSizeRatio={0.7}
+              />
+            </div>
+            <div className="market-scene-tab-button">
+              <OrangeTabButton
+                id={elementWidth}
+                text={"Lot"}
+                onClick={onClickLotTab}
+                isDisabled={tabState == MarketTabState.Lot}
+                fontSizeRatio={0.7}
+              />
+            </div>
+          </div>
+          <div
+            ref={gridContainerRef}
+            className="market-scene-main-grid-container"
+          >
+            <Grid
+              elementWidth={elementWidth}
+              elementHeight={elementHeight}
+              columnCount={columnCount}
+              rowCount={rowCount}
+              elements={elements}
+            />
+          </div>
+          <div className="market-scene-page-selector-container">
+            <PageSelector
+              currentPage={page}
+              pageCount={totalPage}
+              isHorizontal={true}
+              onClickPrevPageButton={onClickPrevPageButton}
+              onClickNextPageButton={onClickNextPageButton}
+            />
+          </div>
         </div>
       </div>
       {showListAmountPopup && (
@@ -552,7 +554,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
           onCancelBid={onCancelBid}
         />
       )}
-    </div>
+    </>
   );
 };
 
