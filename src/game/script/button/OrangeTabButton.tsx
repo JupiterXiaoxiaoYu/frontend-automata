@@ -67,18 +67,18 @@ const OrangeTabButton = ({
       isDisabled={isDisabled}
       leftRatio={leftRatio}
       rightRatio={rightRatio}
-      leftNormalImage={leftNormalImage}
-      midNormalImage={midNormalImage}
-      rightNormalImage={rightNormalImage}
+      leftNormalImage={leftClickImage}
+      midNormalImage={midClickImage}
+      rightNormalImage={rightClickImage}
       leftHoverImage={leftHoverImage}
       midHoverImage={midHoverImage}
       rightHoverImage={rightHoverImage}
-      leftClickImage={leftClickImage}
-      midClickImage={midClickImage}
-      rightClickImage={rightClickImage}
-      leftDisabledImage={leftClickImage}
-      midDisabledImage={midClickImage}
-      rightDisabledImage={rightClickImage}
+      leftClickImage={leftNormalImage}
+      midClickImage={midNormalImage}
+      rightClickImage={rightNormalImage}
+      leftDisabledImage={leftNormalImage}
+      midDisabledImage={midNormalImage}
+      rightDisabledImage={rightNormalImage}
       getText={getText}
     />
   );

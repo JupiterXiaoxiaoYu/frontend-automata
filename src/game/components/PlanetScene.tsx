@@ -205,9 +205,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   useEffect(() => {
     const draw = (): void => {
       if (scenarioRef.current && scenarioRef.current.status === "play") {
-        scenarioRef.current.draw({
-          l2Account,
-        });
+        scenarioRef.current.draw();
         scenarioRef.current.step();
       }
     };
@@ -226,7 +224,10 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
 
   useEffect(() => {
     if (scenarioRef.current) {
-      scenarioRef.current.updateCreatureAnimations(currentCreatureTypes);
+      scenarioRef.current.updateCreatureAnimations(
+        currentCreatureTypes,
+        uIState.type == UIStateType.Creating
+      );
     }
   }, [scenarioRef.current, currentCreatureTypes]);
 
@@ -259,7 +260,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     const top = (e.clientY - rect.top) * ratio;
     const index = scenarioRef.current.getFirstCreatureInRect(left, top);
     scenarioRef.current.setFocus(index);
-    dispatch(setSelectedCreature({ index: index == null ? -1 : index }));
+    dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+    if (index == null) {
+      dispatch(setSelectedCreature({ index: -1 }));
+    } else {
+      dispatch(setSelectedCreature({ index }));
+    }
   }
 
   useEffect(() => {

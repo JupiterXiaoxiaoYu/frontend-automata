@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./MarketProgram.css";
 import Grid from "./Grid";
 import ProgramResourceDisplay from "./ProgramResourceDisplay";
@@ -26,19 +26,57 @@ const MarketProgram = ({
   onClickSell = undefined,
   onClickList = undefined,
 }: Props) => {
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const [nameFontSize, setNameFontSize] = useState<number>(0);
+  const [timeFontSize, setTimeFontSize] = useState<number>(0);
+  const [bidFontSize, setBidFontSize] = useState<number>(0);
+  const gridContainerRef = useRef<HTMLParagraphElement>(null);
+  const [elementWidth, setElementWidth] = useState<number>(0);
+  const [elementHeight, setElementHeight] = useState<number>(0);
+  const columnCount = 2;
+  const rowCount = 4;
+
+  const adjustSize = () => {
+    if (containerRef.current) {
+      setNameFontSize(containerRef.current.offsetHeight / 12);
+      setTimeFontSize(containerRef.current.offsetHeight / 15);
+      setBidFontSize(containerRef.current.offsetHeight / 22);
+    }
+    if (gridContainerRef.current) {
+      setElementWidth(gridContainerRef.current.offsetWidth / columnCount);
+      setElementHeight(gridContainerRef.current.offsetHeight / rowCount);
+    }
+  };
+
+  useEffect(() => {
+    adjustSize();
+
+    window.addEventListener("resize", adjustSize);
+    return () => {
+      window.removeEventListener("resize", adjustSize);
+    };
+  }, [containerRef.current, containerRef.current?.offsetHeight]);
   return (
-    <div className="market-program-container">
+    <div className="market-program-container" ref={containerRef}>
       <img src={background} className="market-program-background" />
-      <p className="market-program-name-text">{program.name}</p>
-      <p className="market-program-time-text">
+      <p
+        className="market-program-name-text"
+        style={{ fontSize: nameFontSize }}
+      >
+        {program.name}
+      </p>
+      <p
+        className="market-program-time-text"
+        style={{ fontSize: timeFontSize }}
+      >
         {formatTime(program.processingTime)}
       </p>
-      <div className="market-program-resource-grid">
+      <div className="market-program-resource-grid" ref={gridContainerRef}>
         <Grid
-          elementWidth={44}
-          elementHeight={16}
-          columnCount={2}
-          rowCount={4}
+          elementWidth={elementWidth}
+          elementHeight={elementHeight}
+          columnCount={columnCount}
+          rowCount={rowCount}
           elements={program.resources.map((resource, index) => (
             <ProgramResourceDisplay
               key={index}
@@ -50,21 +88,48 @@ const MarketProgram = ({
       </div>
       {!onClickList && (
         <>
-          <p className="market-program-bid-title-text">Highest Bid :</p>
+          <p
+            className="market-program-bid-title-text"
+            style={{ fontSize: bidFontSize }}
+          >
+            Highest Bid :
+          </p>
           <img
             src={getResourceIconPath(ResourceType.Titanium)}
             className="market-program-bid-icon"
           />
-          <p className="market-program-bid-text">{program.bid?.bidPrice}</p>
-          <p className="market-program-ask-title-text">Ask Price :</p>
+          <p
+            className="market-program-bid-text"
+            style={{ fontSize: bidFontSize }}
+          >
+            {program.bid?.bidPrice}
+          </p>
+          <p
+            className="market-program-ask-title-text"
+            style={{ fontSize: bidFontSize }}
+          >
+            Ask Price :
+          </p>
           <img
             src={getResourceIconPath(ResourceType.Titanium)}
             className="market-program-ask-icon"
           />
-          <p className="market-program-ask-text">{program.askPrice}</p>
+          <p
+            className="market-program-ask-text"
+            style={{ fontSize: bidFontSize }}
+          >
+            {program.askPrice}
+          </p>
         </>
       )}
-      {isInstalled && <p className="market-program-installed-text">In use</p>}
+      {isInstalled && onClickList && (
+        <p
+          className="market-program-installed-text"
+          style={{ fontSize: nameFontSize }}
+        >
+          In use
+        </p>
+      )}
       {onClickBid && (
         <div className="market-program-button">
           <OrangeButton
@@ -91,7 +156,7 @@ const MarketProgram = ({
             text={"List"}
             onClick={onClickList}
             isDisabled={false}
-            fontSizeRatio={1}
+            fontSizeRatio={0.8}
           />
         </div>
       )}
