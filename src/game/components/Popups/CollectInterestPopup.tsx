@@ -17,7 +17,7 @@ import {
   queryState,
 } from "zkwasm-minirollup-browser";
 import { getRedeemTransactionCommandArray } from "../../rpc";
-import { setLoadingType, LoadingType } from "../../../data/errors";
+import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 
 const COLLECT_INTEREST_BOUNTY_PARAM = 7;
 
@@ -40,16 +40,19 @@ const CollectInterestPopup = () => {
           prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
-        if (
-          sendTransaction.fulfilled.match(action) ||
-          sendTransaction.rejected.match(action)
-        ) {
+        if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
               dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
               dispatch(setLoadingType(LoadingType.None));
             }
           });
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "collect interest Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
+          dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }

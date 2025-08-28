@@ -30,7 +30,7 @@ import {
 } from "zkwasm-minirollup-browser";
 
 import { selectResources } from "../../data/resources";
-import { LoadingType, setLoadingType } from "../../data/errors";
+import { LoadingType, pushError, setLoadingType } from "../../data/errors";
 
 interface Props {
   mainContainerRef: React.RefObject<HTMLDivElement>;
@@ -92,6 +92,12 @@ const RedeemScene = ({ mainContainerRef }: Props) => {
             dispatch(setLoadingType(LoadingType.None));
           }
         });
+      } else if (sendTransaction.rejected.match(action)) {
+        const message = "redeem Error: " + action.payload;
+        dispatch(pushError(message));
+        console.error(message);
+        dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+        dispatch(setLoadingType(LoadingType.None));
       }
     });
   };

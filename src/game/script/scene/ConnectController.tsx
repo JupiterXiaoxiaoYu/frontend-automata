@@ -22,6 +22,7 @@ import {
   TutorialType,
   UIStateType,
 } from "../../../data/properties";
+import { pushError } from "../../../data/errors";
 
 const CREATE_PLAYER = 1n;
 
@@ -149,6 +150,10 @@ export function ConnectController({
             dispatch(setTutorialType({ tutorialType: TutorialType.Creature }));
             dispatch(setSceneType({ sceneType: SceneType.None }));
             onStartGameplay();
+          } else if (sendTransaction.rejected.match(action)) {
+            const message = "start game Error: " + action.payload;
+            dispatch(pushError(message));
+            console.error(message);
           }
         });
       }

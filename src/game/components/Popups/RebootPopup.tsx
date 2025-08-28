@@ -25,7 +25,7 @@ import {
   selectSelectedCreature,
   selectSelectedCreatureListIndex,
 } from "../../../data/creatures";
-import { setLoadingType, LoadingType } from "../../../data/errors";
+import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 
 const RebootPopup = () => {
   const dispatch = useAppDispatch();
@@ -69,6 +69,9 @@ const RebootPopup = () => {
             }
           });
         } else if (sendTransaction.rejected.match(action)) {
+          const message = "reboot Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
           dispatch(setLoadingType(LoadingType.None));
         }
