@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { selectNonce } from "../../../data/properties";
 import {
   LoadingType,
+  pushError,
   selectIsLoading,
   setLoadingType,
 } from "../../../data/errors";
@@ -394,6 +395,11 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               dispatch(setLoadingType(LoadingType.None));
             }
           });
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "sell program Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }
@@ -414,6 +420,14 @@ const MarketScene = ({ mainContainerRef }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
+          dispatch(resetAuctionTab());
+          dispatch(resetLotTab());
+          dispatch(setMarketForceUpdate(true));
+          dispatch(setLoadingType(LoadingType.None));
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "bid program Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(resetAuctionTab());
           dispatch(resetLotTab());
           dispatch(setMarketForceUpdate(true));
@@ -456,6 +470,14 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               }
             }
           );
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "list program Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
+          dispatch(resetSellingTab());
+          dispatch(setInventoryChanged());
+          dispatch(setMarketForceUpdate(true));
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }

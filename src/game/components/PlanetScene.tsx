@@ -21,6 +21,7 @@ import {
 } from "../../data/properties";
 import {
   LoadingType,
+  pushError,
   selectIsLoading,
   setLoadingType,
 } from "../../data/errors";
@@ -169,6 +170,9 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
             }
           });
         } else if (sendTransaction.rejected.match(action)) {
+          const message = "update program Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
           dispatch(setLoadingType(LoadingType.None));
         }

@@ -33,7 +33,7 @@ import {
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/resources";
-import { setLoadingType, LoadingType } from "../../../data/errors";
+import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 
 enum UpgradeState {
   None,
@@ -111,6 +111,11 @@ const UpgradePopup = () => {
           dispatch(
             setUIState({ uIState: { type: UIStateType.PlayUpgradeAnimation } })
           );
+          dispatch(setLoadingType(LoadingType.None));
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "upgrade bot Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(setLoadingType(LoadingType.None));
         }
       });

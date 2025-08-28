@@ -26,7 +26,7 @@ import {
 import { getCollectEnergyTransactionCommandArray } from "../../rpc";
 import GainEnergy from "../GainEnergy";
 import { useEffect, useRef, useState } from "react";
-import { setLoadingType, LoadingType } from "../../../data/errors";
+import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 
 interface GainEnergyProps {
   startPosition: { x: number; y: number };
@@ -143,6 +143,10 @@ const RocketPopup = () => {
               }
             }
           );
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "claim rocket Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
         }
       });
     }

@@ -9,19 +9,25 @@ import creaturesReducer from "../data/creatures";
 import programsReducer from "../data/programs";
 import guidesReducer from "../data/guides";
 import marketReducer from "../data/market";
+import { accountSliceReducer } from "zkwasm-minirollup-browser/dist/store";
 
-export const store = createDelphinusStore({
-  state: stateReducer,
-  errors: errorsReducer,
-  endpoint: endpointReducer,
-  resources: resourcesReducer,
-  properties: propertiesReducer,
-  creatures: creaturesReducer,
-  programs: programsReducer,
-  guides: guidesReducer,
-  market: marketReducer,
-  additionalIgnoredPaths: ["endpoint.zkWasmServiceHelper"],
-});
+export const store = createDelphinusStore(
+  {
+    state: stateReducer,
+    errors: errorsReducer,
+    endpoint: endpointReducer,
+    resources: resourcesReducer,
+    properties: propertiesReducer,
+    creatures: creaturesReducer,
+    programs: programsReducer,
+    guides: guidesReducer,
+    market: marketReducer,
+  },
+  [],
+  [],
+  ["endpoint.zkWasmServiceHelper", "state.lastError.payload"],
+  []
+);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

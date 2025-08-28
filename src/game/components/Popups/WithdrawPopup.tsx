@@ -20,6 +20,7 @@ import { sendTransaction, useWalletContext } from "zkwasm-minirollup-browser";
 import { selectResource } from "../../../data/resources";
 import {
   LoadingType,
+  pushError,
   selectIsLoading,
   setLoadingType,
 } from "../../../data/errors";
@@ -64,6 +65,11 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
               },
             })
           );
+          dispatch(setLoadingType(LoadingType.None));
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "withdraw / deposit Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(setLoadingType(LoadingType.None));
         }
       });

@@ -13,7 +13,7 @@ import { getResourceIconPath, ResourceType } from "../../../data/models";
 import { selectResource } from "../../../data/resources";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
 import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
-import { setLoadingType, LoadingType } from "../../../data/errors";
+import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 import OrangeButton from "../../script/button/OrangeButton";
 
 const NewProgramPopup = () => {
@@ -46,6 +46,11 @@ const NewProgramPopup = () => {
               uIState: { type: UIStateType.PlayNewProgramAnimation },
             })
           );
+          dispatch(setLoadingType(LoadingType.None));
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "new program Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
           dispatch(setLoadingType(LoadingType.None));
         }
       });
