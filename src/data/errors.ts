@@ -21,6 +21,7 @@ const errorsSlice = createSlice({
   initialState,
   reducers: {
     pushError: (state, d: PayloadAction<string>) => {
+      console.log("Pushing error:", d.payload);
       state.messages.push(d.payload);
     },
     popError: (state) => {
