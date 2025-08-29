@@ -72,6 +72,9 @@
 
 .upgrade-popup-confirm-button {
   position: absolute;
+  width: 20%;
+  height: auto;
+  aspect-ratio: 3 / 1;
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
