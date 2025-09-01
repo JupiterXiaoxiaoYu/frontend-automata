@@ -394,6 +394,8 @@ const MarketScene = ({ mainContainerRef }: Props) => {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
               dispatch(setInventoryChanged());
+              dispatch(resetSellingTab());
+              dispatch(resetAuctionTab());
               dispatch(setLoadingType(LoadingType.None));
             }
           });
