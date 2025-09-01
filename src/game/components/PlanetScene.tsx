@@ -56,7 +56,10 @@ import { Scenario } from "../script/scene/planet/scenario/Scenario";
 import Planet1Button from "./Buttons/Planet1Button";
 import Planet2Button from "./Buttons/Planet2Button";
 import Planet3Button from "./Buttons/Planet3Button";
-import { newCreaturePositions } from "../script/scene/planet/scenario/Background";
+import {
+  CREATURE_PER_BACKGROUND,
+  newCreaturePositions,
+} from "../script/scene/planet/scenario/Background";
 
 interface Props {
   localTimer: number;
@@ -83,8 +86,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   );
   const showRebootButton =
     uIState.type == UIStateType.Idle && !isNotSelectingCreature;
-  const showNewCreatureButton =
-    uIState.type == UIStateType.Idle && isNotSelectingCreature;
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
@@ -94,6 +95,11 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
   const scenarioRef = useRef<Scenario | null>(null);
   const backgroundIndexRef = useRef<number>(0);
+  const showNewCreatureButton =
+    backgroundIndexRef.current * CREATURE_PER_BACKGROUND <=
+      currentCreatureTypes.length &&
+    (backgroundIndexRef.current + 1) * CREATURE_PER_BACKGROUND >
+      currentCreatureTypes.length;
 
   const containerRatio = 1671 / 951;
   const [containerWidth, setContainerWidth] = useState<number>(0);
@@ -265,6 +271,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     const index = scenarioRef.current.getFirstCreatureInRect(left, top);
     scenarioRef.current.setFocus(index);
     dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+    dispatch(clearRebootCreature({}));
     if (index == null) {
       dispatch(setSelectedCreature({ index: -1 }));
     } else {
@@ -363,18 +370,20 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         <div className="planet-scene-canvas-container">
           <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
-        <div
-          className="planet-scene-program-new-creature-button"
-          style={{
-            left: `${newCreaturePositions[backgroundIndexRef.current].x}%`,
-            top: `${newCreaturePositions[backgroundIndexRef.current].y}%`,
-          }}
-        >
-          <CreatureNewButton
-            isDisabled={isLoading}
-            onClick={onClickNewCreature}
-          />
-        </div>
+        {showNewCreatureButton && (
+          <div
+            className="planet-scene-program-new-creature-button"
+            style={{
+              left: `${newCreaturePositions[backgroundIndexRef.current].x}%`,
+              top: `${newCreaturePositions[backgroundIndexRef.current].y}%`,
+            }}
+          >
+            <CreatureNewButton
+              isDisabled={isLoading}
+              onClick={onClickNewCreature}
+            />
+          </div>
+        )}
 
         {!isNotSelectingCreature && (
           <>

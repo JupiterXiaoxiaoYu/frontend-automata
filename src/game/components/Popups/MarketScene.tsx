@@ -415,7 +415,11 @@ const MarketScene = ({ mainContainerRef }: Props) => {
       dispatch(setLoadingType(LoadingType.Default));
       dispatch(
         sendTransaction({
-          cmd: getBidCardTransactionCommandArray(nonce, program.index, amount),
+          cmd: getBidCardTransactionCommandArray(
+            nonce,
+            program.marketId,
+            amount
+          ),
           prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
@@ -444,7 +448,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const onClickBid = (program: ProgramModel) => {
     setCurrentPopupProgram(program);
     setMaxBidAmount(Math.min(titaniumCount, program.askPrice));
-    setMinBidAmount(program.bid?.bidPrice ?? 0);
+    setMinBidAmount(program.bid?.bidprice ?? 0);
     setShowBidAmountPopup(true);
   };
 

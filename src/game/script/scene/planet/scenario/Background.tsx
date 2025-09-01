@@ -2,7 +2,7 @@ import { CreatureAnimation } from "./CreatureAnimation";
 import background_1 from "../../../../image/backgrounds/planet.png";
 import background_2 from "../../../../image/backgrounds/planet2.png";
 
-const CREATURE_PER_BACKGROUND = 8;
+export const CREATURE_PER_BACKGROUND = 8;
 const backgrounds = [background_1, background_2, background_2];
 export const newCreaturePositions = [
   { x: 45, y: 50 },
