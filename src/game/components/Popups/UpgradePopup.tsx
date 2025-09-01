@@ -30,7 +30,11 @@ import {
   selectSelectedCreatureDiffResources,
   selectSelectedCreatureListIndex,
 } from "../../../data/creatures";
-import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
+import {
+  useWalletContext,
+  sendTransaction,
+  queryState,
+} from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/resources";
 import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
@@ -108,10 +112,18 @@ const UpgradePopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(
-            setUIState({ uIState: { type: UIStateType.PlayUpgradeAnimation } })
-          );
-          dispatch(setLoadingType(LoadingType.None));
+          dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
+            if (queryState.fulfilled.match(action)) {
+              dispatch(
+                setUIState({
+                  uIState: { type: UIStateType.PlayUpgradeAnimation },
+                })
+              );
+              dispatch(setLoadingType(LoadingType.None));
+            } else {
+              dispatch(setLoadingType(LoadingType.None));
+            }
+          });
         } else if (sendTransaction.rejected.match(action)) {
           const message = "upgrade bot Error: " + action.payload;
           dispatch(pushError(message));
