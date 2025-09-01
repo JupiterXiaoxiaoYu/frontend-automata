@@ -383,15 +383,17 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const sendSellCmd = (program: ProgramModel) => {
     if (!isLoading) {
       dispatch(setLoadingType(LoadingType.Default));
+      const index = programs.findIndex((p: any) => p.index == program.index);
       dispatch(
         sendTransaction({
-          cmd: getSellCardTransactionCommandArray(nonce, program.index),
+          cmd: getSellCardTransactionCommandArray(nonce, index),
           prikey: l2Account!.getPrivateKey(),
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
           dispatch(queryState(l2Account.getPrivateKey())).then((action) => {
             if (queryState.fulfilled.match(action)) {
+              dispatch(setInventoryChanged());
               dispatch(setLoadingType(LoadingType.None));
             }
           });
@@ -424,14 +426,22 @@ const MarketScene = ({ mainContainerRef }: Props) => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(resetAuctionTab());
-          dispatch(resetLotTab());
-          dispatch(setMarketForceUpdate(true));
-          dispatch(setLoadingType(LoadingType.None));
+          dispatch(queryState(l2Account.getPrivateKey())).then(
+            async (action) => {
+              if (queryState.fulfilled.match(action)) {
+                dispatch(setInventoryChanged());
+                dispatch(resetAuctionTab());
+                dispatch(resetLotTab());
+                dispatch(setMarketForceUpdate(true));
+                dispatch(setLoadingType(LoadingType.None));
+              }
+            }
+          );
         } else if (sendTransaction.rejected.match(action)) {
           const message = "bid program Error: " + action.payload;
           dispatch(pushError(message));
           console.error(message);
+          dispatch(setInventoryChanged());
           dispatch(resetAuctionTab());
           dispatch(resetLotTab());
           dispatch(setMarketForceUpdate(true));
