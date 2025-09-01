@@ -271,6 +271,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     const index = scenarioRef.current.getFirstCreatureInRect(left, top);
     scenarioRef.current.setFocus(index);
     dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
+    dispatch(clearRebootCreature({}));
     if (index == null) {
       dispatch(setSelectedCreature({ index: -1 }));
     } else {
