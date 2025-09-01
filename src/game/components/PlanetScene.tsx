@@ -250,8 +250,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   useEffect(() => {
     if (uIState.type == UIStateType.PlayUnlockAnimation) {
       playUnlockAnimation(() => sendUpdateProgram());
-    } else if (uIState.type == UIStateType.PlayUpgradeAnimation) {
-      playUpgradeAnimation(() => sendUpdateProgram());
     }
   }, [uIState]);
 

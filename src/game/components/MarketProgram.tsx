@@ -102,7 +102,7 @@ const MarketProgram = ({
             className="market-program-bid-text"
             style={{ fontSize: bidFontSize }}
           >
-            {program.bid?.bidprice}
+            {program.bid?.bidprice ?? 0}
           </p>
           <p
             className="market-program-ask-title-text"
