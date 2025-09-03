@@ -290,7 +290,7 @@ export function adjustResourceByProductivity(
   if (resource.amount > 0 && productivityValue > 0) {
     return {
       type: resource.type,
-      amount: Math.floor(resource.amount + Math.log2(productivityValue)),
+      amount: Math.floor(resource.amount + Math.log2(productivityValue + 1)),
     };
   }
 
