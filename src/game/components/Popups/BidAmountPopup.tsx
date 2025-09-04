@@ -41,6 +41,23 @@ const BidAmountPopup = ({
     onCancelBid();
   };
 
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (value === "") {
+      setAmountString("");
+      return;
+    }
+
+    if (/^0\d+/.test(value)) {
+      value = String(Number(value));
+    }
+
+    const num = Number(value);
+    if (Number.isInteger(num) && num >= 0 && num <= maxBidAmount) {
+      setAmountString(value);
+    }
+  };
+
   return (
     <div className="bid-amount-popup-container">
       <div onClick={onClickCancel} className="bid-amount-popup-mask" />
@@ -68,8 +85,12 @@ const BidAmountPopup = ({
             type="number"
             className="bid-amount-popup-amount-input"
             value={amountString}
-            onChange={(e) => setAmountString(e.target.value)}
-            min="0"
+            onKeyDown={(e) => {
+              if (["e", "E", "-", "+", "."].includes(e.key)) {
+                e.preventDefault();
+              }
+            }}
+            onChange={onInputChange}
           />
         </div>
         <div className="bid-amount-popup-confirm-button">
