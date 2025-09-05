@@ -52,6 +52,60 @@ def pascal_to_snake(name):
 def generate_button_component(button_name, aspect_ratio, output_folder_path):
     
     component_code = f'''import React from "react";
+import ImageButton from "../../script/common/ImageButton";
+import image from "../../image/Buttons/{button_name}Button/{pascal_to_snake(button_name)}.png";
+import hoverImage from "../../image/Buttons/{button_name}Button/{pascal_to_snake(button_name)}_hv.png";
+import clickImage from "../../image/Buttons/{button_name}Button/{pascal_to_snake(button_name)}_click.png";
+import disabledImage from "../../image/Buttons/{button_name}Button/{pascal_to_snake(button_name)}_idle.png";
+
+interface Props {{
+  isDisabled: boolean;
+  onClick: () => void;
+}}
+
+const {button_name}Button = ({{ isDisabled, onClick }}: Props) => {{
+  return (
+    <div
+      style={{{{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "auto",
+        height: "100%",
+        aspectRatio: "{aspect_ratio}",
+        transform: "translate(-50%, -50%)",
+        margin: "0px",
+      }}}}
+    >
+      <ImageButton
+        onClick={{onClick}}
+        isDisabled={{isDisabled}}
+        defaultImagePath={{image}}
+        hoverImagePath={{hoverImage}}
+        clickedImagePath={{clickImage}}
+        disabledImagePath={{disabledImage}}
+      />
+    </div>
+  );
+}};
+
+export default {button_name}Button;
+'''
+
+    # Create output directory if it doesn't exist
+    os.makedirs(output_folder_path, exist_ok=True)
+    
+    # Write the component file
+    output_file = os.path.join(output_folder_path, f"{button_name}Button.tsx")
+    with open(output_file, 'w') as f:
+        f.write(component_code)
+    
+    print(f"Generated: {output_file}")
+    return output_file
+
+def generate_text_button_component(button_name, aspect_ratio, output_folder_path):
+
+    component_code = f'''import React from "react";
 import ImageTextButton from "../../script/common/ImageTextButton";
 import {{ getTextShadowStyle }} from "../common/Utility";
 import image from "../../image/Buttons/{button_name}Button/{pascal_to_snake(button_name)}.png";
@@ -140,9 +194,9 @@ export default {button_name}Button;
     print(f"Generated: {output_file}")
     return output_file
 
-aspect_ratio = "3 / 1"
-button_name = "GuidePlay"
-template_path = "./blue_button/"
+aspect_ratio = "67 / 25"
+button_name = "NewProgram"
+template_path = "./orange_button/"
 output_root_folder_path = "../../image/Buttons/"
 script_output_folder_path = "./"
 
@@ -158,3 +212,9 @@ generate_button_component(
     aspect_ratio,
     script_output_folder_path,
 )
+
+# generate_text_button_component(
+#     button_name,
+#     aspect_ratio,
+#     script_output_folder_path,
+# )
