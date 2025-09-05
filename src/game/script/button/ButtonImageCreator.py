@@ -103,7 +103,7 @@ export default {button_name}Button;
     print(f"Generated: {output_file}")
     return output_file
 
-def generate_text_button_component(button_name, aspect_ratio, output_folder_path):
+def generate_text_button_component(button_name, aspect_ratio, output_folder_path, fontFamily, color, fontSizeRatio, text):
 
     component_code = f'''import React from "react";
 import ImageTextButton from "../../script/common/ImageTextButton";
@@ -119,11 +119,11 @@ interface Props {{
 }}
 
 const {button_name}Button = ({{ isDisabled, onClick }}: Props) => {{
-  const fontFamily = "mishmash";
+  const fontFamily = "{fontFamily}";
   const isBold = true;
-  const color = "white";
-  const fontSizeRatio = 0.8;
-  const text = "Play";
+  const color = "{color}";
+  const fontSizeRatio = {fontSizeRatio};
+  const text = "{text}";
 
   const getText = (fontBaseSize: number) => {{
     const fontSize = fontBaseSize * fontSizeRatio;
@@ -194,8 +194,8 @@ export default {button_name}Button;
     print(f"Generated: {output_file}")
     return output_file
 
-aspect_ratio = "67 / 25"
-button_name = "NewProgram"
+aspect_ratio = "203 / 56"
+button_name = "MarketConfirm"
 template_path = "./orange_button/"
 output_root_folder_path = "../../image/Buttons/"
 script_output_folder_path = "./"
@@ -207,14 +207,18 @@ create_button_images(
     output_root_folder_path
 )
 
-generate_button_component(
-    button_name,
-    aspect_ratio,
-    script_output_folder_path,
-)
-
-# generate_text_button_component(
+# generate_button_component(
 #     button_name,
 #     aspect_ratio,
 #     script_output_folder_path,
 # )
+
+generate_text_button_component(
+    button_name,
+    aspect_ratio,
+    script_output_folder_path,
+    "mishmash",
+    "white",
+    0.7,
+    "Confirm"
+)
