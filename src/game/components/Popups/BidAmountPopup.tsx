@@ -7,7 +7,7 @@ import {
   ResourceType,
 } from "../../../data/models";
 import "./BidAmountPopup.css";
-import OrangeButton from "../../script/button/OrangeButton";
+import ConfirmButton from "../../script/button/ConfirmButton";
 
 interface Props {
   minBidAmount: number;
@@ -94,12 +94,7 @@ const BidAmountPopup = ({
           />
         </div>
         <div className="bid-amount-popup-confirm-button">
-          <OrangeButton
-            text={"Confirm"}
-            onClick={onClickConfirm}
-            isDisabled={false}
-            fontSizeRatio={0.7}
-          />
+          <ConfirmButton onClick={onClickConfirm} isDisabled={false} />
         </div>
       </div>
     </div>

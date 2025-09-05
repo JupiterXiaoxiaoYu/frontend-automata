@@ -47,7 +47,7 @@ import {
   getSellCardTransactionCommandArray,
 } from "../../rpc";
 import { selectResource } from "../../../data/resources";
-import OrangeTabButton from "../../script/button/OrangeTabButton";
+import MarketTabButton from "../../script/button/MarketTabButton";
 
 const ELEMENT_PER_REQUEST = 30;
 
@@ -517,8 +517,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
         >
           <div className="market-scene-main-tab-container">
             <div className="market-scene-tab-button">
-              <OrangeTabButton
-                id={elementWidth}
+              <MarketTabButton
                 text={"Inventory"}
                 onClick={onClickInventoryTab}
                 isDisabled={tabState == MarketTabState.Inventory}
@@ -526,8 +525,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               />
             </div>
             <div className="market-scene-tab-button">
-              <OrangeTabButton
-                id={elementWidth}
+              <MarketTabButton
                 text={"Selling"}
                 onClick={onClickSellingTab}
                 isDisabled={tabState == MarketTabState.Selling}
@@ -535,8 +533,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               />
             </div>
             <div className="market-scene-tab-button">
-              <OrangeTabButton
-                id={elementWidth}
+              <MarketTabButton
                 text={"Auction"}
                 onClick={onClickAuctionTab}
                 isDisabled={tabState == MarketTabState.Auction}
@@ -544,8 +541,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               />
             </div>
             <div className="market-scene-tab-button">
-              <OrangeTabButton
-                id={elementWidth}
+              <MarketTabButton
                 text={"Lot"}
                 onClick={onClickLotTab}
                 isDisabled={tabState == MarketTabState.Lot}
