@@ -7,6 +7,7 @@ import clickImage from "../../image/Buttons/MarketTabButton/market_tab.png";
 import disabledImage from "../../image/Buttons/MarketTabButton/market_tab.png";
 
 interface Props {
+  id: number;
   text: string;
   isDisabled: boolean;
   onClick: () => void;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const MarketTabButton = ({
+  id,
   text,
   isDisabled,
   onClick,
@@ -66,6 +68,7 @@ const MarketTabButton = ({
       }}
     >
       <ImageTextButton
+        id={id}
         onClick={onClick}
         isDisabled={isDisabled}
         normalImage={image}

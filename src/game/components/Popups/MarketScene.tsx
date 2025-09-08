@@ -518,6 +518,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
           <div className="market-scene-main-tab-container">
             <div className="market-scene-tab-button">
               <MarketTabButton
+                id={0}
                 text={"Inventory"}
                 onClick={onClickInventoryTab}
                 isDisabled={tabState == MarketTabState.Inventory}
@@ -526,6 +527,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             </div>
             <div className="market-scene-tab-button">
               <MarketTabButton
+                id={1}
                 text={"Selling"}
                 onClick={onClickSellingTab}
                 isDisabled={tabState == MarketTabState.Selling}
@@ -534,6 +536,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             </div>
             <div className="market-scene-tab-button">
               <MarketTabButton
+                id={2}
                 text={"Auction"}
                 onClick={onClickAuctionTab}
                 isDisabled={tabState == MarketTabState.Auction}
@@ -542,6 +545,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             </div>
             <div className="market-scene-tab-button">
               <MarketTabButton
+                id={3}
                 text={"Lot"}
                 onClick={onClickLotTab}
                 isDisabled={tabState == MarketTabState.Lot}
