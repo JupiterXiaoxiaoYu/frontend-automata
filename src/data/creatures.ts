@@ -159,11 +159,13 @@ export const creaturesSlice = createSlice({
         return;
       }
 
-      state.selectedCreatureIndex =
-        (state.selectedCreatureIndex +
-          action.payload.diff +
-          state.creatures.length) %
-        state.creatures.length;
+      if (state.creatures.length > 0) {
+        state.selectedCreatureIndex =
+          (state.selectedCreatureIndex +
+            action.payload.diff +
+            state.creatures.length) %
+          state.creatures.length;
+      }
     },
     setSelectedCreature: (state, action) => {
       state.selectedCreatureIndex =
