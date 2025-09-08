@@ -396,6 +396,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               dispatch(setInventoryChanged());
               dispatch(resetSellingTab());
               dispatch(resetAuctionTab());
+              dispatch(setMarketForceUpdate(true));
               dispatch(setLoadingType(LoadingType.None));
             }
           });
