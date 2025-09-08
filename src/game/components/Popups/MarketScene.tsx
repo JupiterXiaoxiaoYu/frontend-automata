@@ -48,6 +48,7 @@ import {
 } from "../../rpc";
 import { selectResource } from "../../../data/resources";
 import MarketTabButton from "../../script/button/MarketTabButton";
+import MarketRefreshButton from "../../script/button/MarketRefreshButton";
 
 const ELEMENT_PER_REQUEST = 30;
 
@@ -565,6 +566,9 @@ const MarketScene = ({ mainContainerRef }: Props) => {
               rowCount={rowCount}
               elements={elements}
             />
+          </div>
+          <div className="market-scene-reload-button">
+            <MarketRefreshButton onClick={reloadTabData} isDisabled={false} />
           </div>
           <div className="market-scene-page-selector-container">
             <PageSelector

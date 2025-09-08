@@ -195,11 +195,11 @@ export default {button_name}Button;
     return output_file
 
 aspect_ratio = "132 / 45"
-button_name = "MarketTab"
+button_name = "MarketRefresh"
 fontFamily = "mishmash"
 color = "white"
 fontSize = 0.7
-text = "List"
+text = "Refresh"
 template_path = "./orange_button/"
 output_root_folder_path = "../../image/Buttons/"
 script_output_folder_path = "./"
