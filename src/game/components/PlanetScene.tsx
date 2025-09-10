@@ -60,6 +60,7 @@ import {
   CREATURE_PER_BACKGROUND,
   newCreaturePositions,
 } from "../script/scene/planet/scenario/Background";
+import { getTextShadowStyle } from "../script/common/Utility";
 
 interface Props {
   localTimer: number;
@@ -104,6 +105,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const containerRatio = 1671 / 951;
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const [containerHeight, setContainerHeight] = useState<number>(0);
+  const [hintFontSize, setHintFontSize] = useState<number>(0);
 
   const adjustSize = () => {
     if (mainContainerRef.current) {
@@ -113,6 +115,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
       );
       setContainerHeight(height);
       setContainerWidth(height * containerRatio);
+      setHintFontSize(height / 40);
     }
   };
 
@@ -389,7 +392,22 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
 
         {!isNotSelectingCreature && (
           <>
-            <div className="planet-scene-program-container">
+            <div
+              className="planet-scene-program-container"
+              style={{
+                fontSize: hintFontSize,
+                ...getTextShadowStyle(hintFontSize / 15),
+              }}
+            >
+              {uIState.type == UIStateType.Creating && (
+                <p className="planet-scene-program-hint-text">
+                  {`${
+                    selectedCreaturePrograms.filter(
+                      (program) => program !== null
+                    ).length
+                  } / 8 programs are selected`}{" "}
+                </p>
+              )}
               {showConfirmCreateButton && (
                 <div className="planet-scene-program-action-button">
                   <CreatureConfirmButton
