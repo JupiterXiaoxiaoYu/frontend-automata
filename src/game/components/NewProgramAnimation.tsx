@@ -14,6 +14,7 @@ import { selectAllPrograms } from "../../data/programs";
 
 import Program from "./Program";
 import { selectIsSelectingCreatingCreature } from "../../data/creatures";
+import NewProgramAnimationCollectButton from "../script/button/NewProgramAnimationCollectButton";
 
 const NewProgramAnimation = () => {
   const dispatch = useAppDispatch();
@@ -112,6 +113,12 @@ const NewProgramAnimation = () => {
                     /* */
                   }}
                 />
+                <div className="new-program-animation-program-collect-button">
+                  <NewProgramAnimationCollectButton
+                    isDisabled={false}
+                    onClick={onClickCancel}
+                  />
+                </div>
               </>
             )}
           </div>

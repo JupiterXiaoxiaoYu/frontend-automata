@@ -55,6 +55,13 @@ const ELEMENT_PER_REQUEST = 30;
 interface Props {
   mainContainerRef: React.RefObject<HTMLDivElement>;
 }
+function toUnsigned64(n: string) {
+  let big = BigInt(n);
+  if (big < 0n) {
+    big += 1n << 64n; // add 2^64
+  }
+  return Number(big);
+}
 
 const MarketScene = ({ mainContainerRef }: Props) => {
   const dispatch = useAppDispatch();
@@ -180,6 +187,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             <MarketProgram
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
+              isButtonDisabled={false}
               program={program}
               onClickList={() => onClickList(program)}
             />
@@ -196,6 +204,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             <MarketProgram
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
+              isButtonDisabled={false}
               program={program}
               onClickSell={() => onClickSell(program)}
             />
@@ -212,6 +221,10 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             <MarketProgram
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
+              isButtonDisabled={
+                toUnsigned64(program.owner[0].toString()) == Number(pids[1]) &&
+                toUnsigned64(program.owner[1].toString()) == Number(pids[2])
+              }
               program={program}
               onClickBid={() => onClickBid(program)}
             />
@@ -228,6 +241,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
             <MarketProgram
               key={index}
               isInstalled={installedProgramIds.includes(program.index)}
+              isButtonDisabled={false}
               program={program}
               onClickBid={() => onClickBid(program)}
             />
@@ -384,7 +398,9 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const sendSellCmd = (program: ProgramModel) => {
     if (!isLoading) {
       dispatch(setLoadingType(LoadingType.Default));
-      const index = programs.findIndex((p: any) => p.index == program.index);
+      const index = programs.findIndex(
+        (p: any) => p.marketId == program.marketId
+      );
       dispatch(
         sendTransaction({
           cmd: getSellCardTransactionCommandArray(nonce, index),
@@ -462,7 +478,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const onClickBid = (program: ProgramModel) => {
     setCurrentPopupProgram(program);
     setMaxBidAmount(Math.min(titaniumCount, program.askPrice));
-    setMinBidAmount(program.bid?.bidprice ?? 0);
+    setMinBidAmount((program.bid?.bidprice ?? 0) + 1);
     setShowBidAmountPopup(true);
   };
 
@@ -583,6 +599,8 @@ const MarketScene = ({ mainContainerRef }: Props) => {
       </div>
       {showListAmountPopup && (
         <ListAmountPopup
+          minBidAmount={1}
+          maxBidAmount={titaniumCount}
           program={currentPopupProgram!}
           onConfirmListAmount={onConfirmListAmount}
           onCancelList={onCancelList}

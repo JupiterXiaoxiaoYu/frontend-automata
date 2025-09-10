@@ -25,7 +25,12 @@ import {
 import { getCollectEnergyTransactionCommandArray } from "../../rpc";
 import GainEnergy from "../GainEnergy";
 import { useEffect, useRef, useState } from "react";
-import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
+import {
+  setLoadingType,
+  LoadingType,
+  pushError,
+  selectIsLoading,
+} from "../../../data/errors";
 import ConfirmButton from "../../script/button/ConfirmButton";
 
 interface GainEnergyProps {
@@ -103,6 +108,7 @@ const RocketPopup = () => {
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
+  const isLoading = useAppSelector(selectIsLoading);
   const redeemEnergy = useAppSelector(selectRedeemEnergy);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const [rewardAnimation, setRewardAnimation] = useState(false);
@@ -122,7 +128,7 @@ const RocketPopup = () => {
   const endPosition = getEndPosition(parentRef && parentRef.current);
 
   const onClickConfirm = () => {
-    if (titaniumCount < redeemEnergyTitaniumCost) {
+    if (isLoading || titaniumCount < redeemEnergyTitaniumCost) {
       return;
     }
     if (uIState.type == UIStateType.RocketPopup) {

@@ -6,21 +6,47 @@ import { ProgramModel } from "../../../data/models";
 import ConfirmButton from "../../script/button/ConfirmButton";
 
 interface Props {
+  minBidAmount: number;
+  maxBidAmount: number;
   program: ProgramModel;
   onConfirmListAmount: (amount: number, program: ProgramModel) => void;
   onCancelList: () => void;
 }
 
 const ListAmountPopup = ({
+  minBidAmount,
+  maxBidAmount,
   program,
   onConfirmListAmount,
   onCancelList,
 }: Props) => {
   const [amountString, setAmountString] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (value === "") {
+      setAmountString("");
+      return;
+    }
+
+    if (/^0\d+/.test(value)) {
+      value = String(Number(value));
+    }
+
+    const num = Number(value);
+    if (Number.isInteger(num) && num >= 0 && num <= maxBidAmount) {
+      setAmountString(value);
+    }
+  };
 
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    onConfirmListAmount(amount, program);
+    if (amount > maxBidAmount || amount < minBidAmount) {
+      setErrorMessage("Please enter a valid amount");
+    } else {
+      onConfirmListAmount(amount, program);
+    }
   };
 
   const onClickCancel = () => {
@@ -33,6 +59,9 @@ const ListAmountPopup = ({
       <div className="list-amount-popup-main-container">
         <img src={background} className="list-amount-popup-main-background" />
         <p className="list-amount-popup-title-text">Price</p>
+        {errorMessage != "" && (
+          <p className="list-amount-popup-amount-text">{errorMessage}</p>
+        )}
         <div className="list-amount-popup-amount-container">
           <img
             src={amountBackground}
@@ -42,8 +71,12 @@ const ListAmountPopup = ({
             type="number"
             className="list-amount-popup-amount-input"
             value={amountString}
-            onChange={(e) => setAmountString(e.target.value)}
-            min="0"
+            onKeyDown={(e) => {
+              if (["e", "E", "-", "+", "."].includes(e.key)) {
+                e.preventDefault();
+              }
+            }}
+            onChange={onInputChange}
           />
         </div>
         <div className="list-amount-popup-confirm-button">

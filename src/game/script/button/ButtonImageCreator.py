@@ -194,12 +194,12 @@ export default {button_name}Button;
     print(f"Generated: {output_file}")
     return output_file
 
-aspect_ratio = "132 / 45"
-button_name = "MarketRefresh"
+aspect_ratio = "203 / 56"
+button_name = "NewProgramAnimationCollect"
 fontFamily = "mishmash"
 color = "white"
 fontSize = 0.7
-text = "Refresh"
+text = "Collect"
 template_path = "./orange_button/"
 output_root_folder_path = "../../image/Buttons/"
 script_output_folder_path = "./"

@@ -28,6 +28,21 @@
   background-repeat: no-repeat;
 }
 
+.planet-scene-program-hint-text {
+  position: absolute;
+  margin: 0;
+  color: white;
+  text-align: left;
+  top: -25%;
+  left: 1%;
+  width: 70%;
+  height: 30%;
+  font-family: "mishmash";
+  white-space: break-spaces;
+  pointer-events: none;
+  user-select: none;
+}
+
 .planet-scene-program-action-button {
   position: absolute;
   height: 80%;

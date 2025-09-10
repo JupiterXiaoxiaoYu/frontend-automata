@@ -16,6 +16,7 @@ import MarketProgramListButton from "../script/button/MarketProgramListButton";
 interface Props {
   program: ProgramModel;
   isInstalled: boolean;
+  isButtonDisabled: boolean;
   onClickBid?: () => void;
   onClickSell?: () => void;
   onClickList?: () => void;
@@ -24,6 +25,7 @@ interface Props {
 const MarketProgram = ({
   program,
   isInstalled,
+  isButtonDisabled,
   onClickBid = undefined,
   onClickSell = undefined,
   onClickList = undefined,
@@ -134,17 +136,26 @@ const MarketProgram = ({
       )}
       {onClickBid && (
         <div className="market-program-button">
-          <MarketProgramBidButton onClick={onClickBid} isDisabled={false} />
+          <MarketProgramBidButton
+            onClick={onClickBid}
+            isDisabled={isButtonDisabled}
+          />
         </div>
       )}
       {onClickSell && (
         <div className="market-program-button">
-          <MarketProgramSellButton onClick={onClickSell} isDisabled={false} />
+          <MarketProgramSellButton
+            onClick={onClickSell}
+            isDisabled={isButtonDisabled}
+          />
         </div>
       )}
       {!isInstalled && onClickList && (
         <div className="market-program-button">
-          <MarketProgramListButton onClick={onClickList} isDisabled={false} />
+          <MarketProgramListButton
+            onClick={onClickList}
+            isDisabled={isButtonDisabled}
+          />
         </div>
       )}
     </div>
