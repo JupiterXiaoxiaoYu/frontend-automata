@@ -398,7 +398,9 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const sendSellCmd = (program: ProgramModel) => {
     if (!isLoading) {
       dispatch(setLoadingType(LoadingType.Default));
-      const index = programs.findIndex((p: any) => p.index == program.index);
+      const index = programs.findIndex(
+        (p: any) => p.marketId == program.marketId
+      );
       dispatch(
         sendTransaction({
           cmd: getSellCardTransactionCommandArray(nonce, index),
