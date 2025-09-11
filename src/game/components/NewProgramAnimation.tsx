@@ -90,37 +90,36 @@ const NewProgramAnimation = () => {
               <div className="new-program-animation-main-animation" />
             </div>
           </div>
-          <div className="new-program-animation-program-container">
-            {animationEnd && (
-              <>
-                <div
-                  ref={spinImageContainerRef}
-                  className="new-program-animation-spin-image-container"
-                  style={{
-                    transform: `translate(-50%, -50%) scale(${spinAnimationScale}%, ${spinAnimationScale}%)`,
-                  }}
-                >
-                  <img
-                    src={bg_spin}
-                    className="new-program-animation-spin-image"
-                  />
-                </div>
-                <Program
-                  index={-1}
-                  program={program}
-                  isDisabled={true}
-                  onSelect={() => {
-                    /* */
-                  }}
-                />
-                <div className="new-program-animation-program-collect-button">
-                  <NewProgramAnimationCollectButton
-                    isDisabled={false}
-                    onClick={onClickCancel}
-                  />
-                </div>
-              </>
-            )}
+          <div
+            className={
+              animationEnd
+                ? "new-program-animation-program-container active"
+                : "new-program-animation-program-container"
+            }
+          >
+            <div
+              ref={spinImageContainerRef}
+              className="new-program-animation-spin-image-container"
+              style={{
+                transform: `translate(-50%, -50%) scale(${spinAnimationScale}%, ${spinAnimationScale}%)`,
+              }}
+            >
+              <img src={bg_spin} className="new-program-animation-spin-image" />
+            </div>
+            <Program
+              index={-1}
+              program={program}
+              isDisabled={true}
+              onSelect={() => {
+                /* */
+              }}
+            />
+            <div className="new-program-animation-program-collect-button">
+              <NewProgramAnimationCollectButton
+                isDisabled={false}
+                onClick={onClickCancel}
+              />
+            </div>
           </div>
         </div>
       )}
