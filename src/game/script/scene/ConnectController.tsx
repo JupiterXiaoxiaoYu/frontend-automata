@@ -179,7 +179,7 @@ export function ConnectController({
       />
     );
   } else if (connectState == ConnectState.ConnectionError) {
-    return <LoadingPage message={"Error"} progress={0} />;
+    return <LoadingPage message={"Creating Player"} progress={0} />;
   } else {
     return <LoadingPage message={"Loading"} progress={0} />;
   }
