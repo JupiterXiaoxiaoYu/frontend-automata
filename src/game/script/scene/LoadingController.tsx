@@ -52,7 +52,7 @@ export function LoadingController() {
             dispatch(
               sendTransaction({
                 cmd: command,
-                prikey: l2Account!.getPrivateKey(),
+                prikey: l2AccountRef.current.getPrivateKey(),
               })
             );
           }
