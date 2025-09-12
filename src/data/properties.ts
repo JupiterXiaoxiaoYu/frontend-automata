@@ -80,6 +80,7 @@ interface PropertiesState {
   lastRedeemEnergy: number;
   interest: number;
   bountyPool: number;
+  scenarioRatio: number;
 }
 
 const initialState: PropertiesState = {
@@ -100,6 +101,7 @@ const initialState: PropertiesState = {
   lastRedeemEnergy: 0,
   interest: 0,
   bountyPool: 0,
+  scenarioRatio: 1,
 };
 
 export const propertiesSlice = createSlice({
@@ -117,6 +119,9 @@ export const propertiesSlice = createSlice({
     },
     setHasRocket: (state, action) => {
       state.hasRocket = action.payload.hasRocket;
+    },
+    setScenarioRatio: (state, action) => {
+      state.scenarioRatio = action.payload.scenarioRatio;
     },
   },
 
@@ -201,7 +206,14 @@ export const selectLastRedeemEnergy = (state: RootState) =>
 export const selectInterest = (state: RootState) => state.properties.interest;
 export const selectBountyPool = (state: RootState) =>
   state.properties.bountyPool;
+export const selectScenarioRatio = (state: RootState) =>
+  state.properties.scenarioRatio;
 
-export const { setUIState, setSceneType, setTutorialType, setHasRocket } =
-  propertiesSlice.actions;
+export const {
+  setUIState,
+  setSceneType,
+  setTutorialType,
+  setHasRocket,
+  setScenarioRatio,
+} = propertiesSlice.actions;
 export default propertiesSlice.reducer;

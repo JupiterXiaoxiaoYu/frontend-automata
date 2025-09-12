@@ -50,6 +50,7 @@ export function ConnectController({
   } = useWalletContext();
   const connectState = useAppSelector(selectConnectState);
   const [queryingLogin, setQueryingLogin] = useState(false);
+  const [isServerNoResponse, setIsServerNoResponse] = useState(false);
   // RainbowKit connect modal hook
   const { openConnectModal } = useConnectModal();
 
@@ -152,15 +153,21 @@ export function ConnectController({
             onStartGameplay();
           } else if (sendTransaction.rejected.match(action)) {
             const message = "start game Error: " + action.payload;
-            dispatch(pushError(message));
             console.error(message);
+            if (
+              action.payload == "SendTransactionError AxiosError: Network Error"
+            ) {
+              setIsServerNoResponse(true);
+            }
           }
         });
       }
     });
   };
 
-  if (connectState == ConnectState.Init) {
+  if (isServerNoResponse) {
+    return <LoadingPage message={"Server No Response"} progress={0} />;
+  } else if (connectState == ConnectState.Init) {
     return <LoadingPage message={"Initialising"} progress={0} />;
   } else if (connectState == ConnectState.OnStart) {
     return <LoadingPage message={"Starting"} progress={0} />;
@@ -179,7 +186,7 @@ export function ConnectController({
       />
     );
   } else if (connectState == ConnectState.ConnectionError) {
-    return <LoadingPage message={"Error"} progress={0} />;
+    return <LoadingPage message={"Creating Player"} progress={0} />;
   } else {
     return <LoadingPage message={"Loading"} progress={0} />;
   }

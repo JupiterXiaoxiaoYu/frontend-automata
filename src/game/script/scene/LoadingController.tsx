@@ -9,11 +9,15 @@ import Gameplay from "../../components/Gameplay";
 import {
   queryInitialState,
   queryState,
+  sendTransaction,
   useWalletContext,
 } from "zkwasm-minirollup-browser/";
 import { ConnectState } from "zkwasm-minirollup-browser";
 import { ConnectController } from "./ConnectController";
 import { setUIState, UIStateType } from "../../../data/properties";
+import { createCommand } from "zkwasm-minirollup-rpc";
+
+const CREATE_PLAYER = 1n;
 
 export function LoadingController() {
   const dispatch = useAppDispatch();
@@ -38,7 +42,22 @@ export function LoadingController() {
       connectStateRef.current == ConnectState.Idle &&
       l2AccountRef.current != null
     ) {
-      dispatch(queryState(l2AccountRef.current.getPrivateKey()));
+      dispatch(queryState(l2AccountRef.current.getPrivateKey())).then(
+        (action) => {
+          if (queryState.fulfilled.match(action)) {
+            console.log("initial queryState success");
+          } else {
+            console.log("initial queryState failed");
+            const command = createCommand(0n, CREATE_PLAYER, []);
+            dispatch(
+              sendTransaction({
+                cmd: command,
+                prikey: l2AccountRef.current.getPrivateKey(),
+              })
+            );
+          }
+        }
+      );
     }
     setInc(inc + 1);
   }

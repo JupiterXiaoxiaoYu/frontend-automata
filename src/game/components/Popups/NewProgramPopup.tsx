@@ -12,7 +12,11 @@ import "./NewProgramPopup.css";
 import { getResourceIconPath, ResourceType } from "../../../data/models";
 import { selectResource } from "../../../data/resources";
 import { getNewProgramTransactionCommandArray } from "../../rpc";
-import { useWalletContext, sendTransaction } from "zkwasm-minirollup-browser";
+import {
+  useWalletContext,
+  sendTransaction,
+  queryState,
+} from "zkwasm-minirollup-browser";
 import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
 import ConfirmButton from "../../script/button/ConfirmButton";
 
@@ -41,12 +45,23 @@ const NewProgramPopup = () => {
         })
       ).then((action) => {
         if (sendTransaction.fulfilled.match(action)) {
-          dispatch(
-            setUIState({
-              uIState: { type: UIStateType.PlayNewProgramAnimation },
-            })
+          dispatch(queryState(l2Account!.getPrivateKey())).then(
+            async (action) => {
+              if (queryState.fulfilled.match(action)) {
+                dispatch(
+                  setUIState({
+                    uIState: { type: UIStateType.PlayNewProgramAnimation },
+                  })
+                );
+                dispatch(setLoadingType(LoadingType.None));
+              } else if (queryState.rejected.match(action)) {
+                const message = "new program Error: " + action.payload;
+                dispatch(pushError(message));
+                console.error(message);
+                dispatch(setLoadingType(LoadingType.None));
+              }
+            }
           );
-          dispatch(setLoadingType(LoadingType.None));
         } else if (sendTransaction.rejected.match(action)) {
           const message = "new program Error: " + action.payload;
           dispatch(pushError(message));

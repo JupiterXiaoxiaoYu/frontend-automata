@@ -18,6 +18,7 @@ import {
   UIStateType,
   selectSceneType,
   SceneType,
+  setScenarioRatio,
 } from "../../data/properties";
 import {
   LoadingType,
@@ -52,7 +53,10 @@ import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
 import CreatureNewButton from "./Buttons/CreatureNewButton";
-import { Scenario } from "../script/scene/planet/scenario/Scenario";
+import {
+  Scenario,
+  SCENARIO_DEFAULT_RATIO,
+} from "../script/scene/planet/scenario/Scenario";
 import Planet1Button from "./Buttons/Planet1Button";
 import Planet2Button from "./Buttons/Planet2Button";
 import Planet3Button from "./Buttons/Planet3Button";
@@ -102,7 +106,6 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     (backgroundIndexRef.current + 1) * CREATURE_PER_BACKGROUND >
       currentCreatureTypes.length;
 
-  const containerRatio = 1671 / 951;
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const [containerHeight, setContainerHeight] = useState<number>(0);
   const [hintFontSize, setHintFontSize] = useState<number>(0);
@@ -111,10 +114,10 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     if (mainContainerRef.current) {
       const height = Math.min(
         mainContainerRef.current.offsetHeight,
-        mainContainerRef.current.offsetWidth / containerRatio
+        mainContainerRef.current.offsetWidth / SCENARIO_DEFAULT_RATIO
       );
       setContainerHeight(height);
-      setContainerWidth(height * containerRatio);
+      setContainerWidth(height * SCENARIO_DEFAULT_RATIO);
       setHintFontSize(height / 40);
     }
   };
@@ -233,6 +236,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
 
   useEffect(() => {
     scenarioRef.current = new Scenario(containerWidth, containerHeight);
+    dispatch(setScenarioRatio({ scenarioRatio: containerWidth / 1920 }));
   }, [containerWidth, containerHeight]);
 
   useEffect(() => {

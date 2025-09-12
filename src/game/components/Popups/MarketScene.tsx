@@ -478,7 +478,7 @@ const MarketScene = ({ mainContainerRef }: Props) => {
   const onClickBid = (program: ProgramModel) => {
     setCurrentPopupProgram(program);
     setMaxBidAmount(Math.min(titaniumCount, program.askPrice));
-    setMinBidAmount((program.bid?.bidprice ?? 0) + 1);
+    setMinBidAmount(Number(program.bid?.bidprice ?? 0) + 1);
     setShowBidAmountPopup(true);
   };
 

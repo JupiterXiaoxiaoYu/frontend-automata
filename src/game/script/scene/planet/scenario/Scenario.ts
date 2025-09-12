@@ -1,6 +1,11 @@
 import { CreatureAnimation } from "./CreatureAnimation";
 import { Background } from "./Background";
 
+export const SCENARIO_DEFAULT_WIDTH = 1920;
+export const SCENARIO_DEFAULT_RATIO = 1671 / 951;
+export const SCENARIO_DEFAULT_HEIGHT =
+  SCENARIO_DEFAULT_WIDTH / SCENARIO_DEFAULT_RATIO;
+
 export class Scenario {
   status: string;
   creatureAnimations: Array<CreatureAnimation>;
@@ -18,7 +23,7 @@ export class Scenario {
     canvas.height = height;
     const context = canvas.getContext("2d")!;
     this.context = context;
-    this.ratio = width / 1920;
+    this.ratio = width / SCENARIO_DEFAULT_WIDTH;
     this.background = new Background(
       width,
       height,
