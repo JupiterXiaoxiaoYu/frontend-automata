@@ -8,8 +8,13 @@ import {
   ProgramInfo,
   ResourceType,
   AttributeType,
+  getCreatureLeft,
+  getCreatureTop,
 } from "../../data/models";
-import { selectIsSelectingUIState } from "../../data/properties";
+import {
+  selectIsSelectingUIState,
+  selectScenarioRatio,
+} from "../../data/properties";
 import {
   selectSelectedCreatureIndex,
   selectSelectedCreatureCurrentProgram,
@@ -20,10 +25,16 @@ import {
 import { useAppSelector } from "../../app/hooks";
 import "./ResourceAnimations.css";
 import GainTitaniumResource from "./GainTitaniumResource";
+import {
+  SCENARIO_DEFAULT_HEIGHT,
+  SCENARIO_DEFAULT_WIDTH,
+} from "../script/scene/planet/scenario/Scenario";
 
 interface Props {
   localTimer: number;
 }
+
+const LEFT_MENU_WIDTH = 190;
 
 const ResourceAnimations = ({ localTimer }: Props) => {
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
@@ -39,6 +50,7 @@ const ResourceAnimations = ({ localTimer }: Props) => {
   );
   const [gainTitaniumAnimationDelayTime, setGainTitaniumAnimationDelayTime] =
     useState<number>(0);
+  const scenarioRatio = useAppSelector(selectScenarioRatio);
 
   interface GainAnimationProps {
     entity: ResourceAmountPair;
@@ -55,11 +67,29 @@ const ResourceAnimations = ({ localTimer }: Props) => {
     endPosition: { x: number; y: number };
   }
 
-  const getCenterPosition = (parentContainer: HTMLDivElement) => {
+  const getCreatureCenterPosition = (
+    parentContainer: HTMLDivElement,
+    index: number
+  ) => {
     return {
-      x: parentContainer.clientWidth / 2,
-      y: parentContainer.clientHeight / 2,
+      x:
+        (parentContainer.clientWidth -
+          LEFT_MENU_WIDTH -
+          SCENARIO_DEFAULT_WIDTH * scenarioRatio) /
+          2 +
+        getCreatureLeft(selectedCreatureIndex) * scenarioRatio +
+        LEFT_MENU_WIDTH +
+        150 * scenarioRatio,
+      y:
+        parentContainer.clientHeight -
+        (SCENARIO_DEFAULT_HEIGHT - getCreatureTop(selectedCreatureIndex)) *
+          scenarioRatio +
+        150 * scenarioRatio,
     };
+  };
+
+  const getCenterPosition = (parentContainer: HTMLDivElement) => {
+    return getCreatureCenterPosition(parentContainer, selectedCreatureIndex);
   };
 
   const getSplashEndPosition =
@@ -71,9 +101,13 @@ const ResourceAnimations = ({ localTimer }: Props) => {
         y: centerPosition.y - resourceDisplayerPosition.y,
       };
       const length = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+      const creatureCenterPosition = getCreatureCenterPosition(
+        parentContainer,
+        selectedCreatureIndex
+      );
       return {
-        x: parentContainer.clientWidth / 2 + (vector.x / length) * 25,
-        y: parentContainer.clientHeight / 2 + (vector.y / length) * 25,
+        x: creatureCenterPosition.x + (vector.x / length) * 25,
+        y: creatureCenterPosition.y + (vector.y / length) * 25,
       };
     };
 
