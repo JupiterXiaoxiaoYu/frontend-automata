@@ -602,7 +602,7 @@ const creatureDatas: CreatureData[] = [
     spriteSheetPath: bot1Spritesheet,
     selectSpriteSheetPath: bot1_selectSpritesheet,
     left: 210,
-    top: 500,
+    top: 530,
   },
   {
     iconPath: Bot2,
@@ -616,7 +616,7 @@ const creatureDatas: CreatureData[] = [
     spriteSheetPath: bot3Spritesheet,
     selectSpriteSheetPath: bot3_selectSpritesheet,
     left: 1320,
-    top: 360,
+    top: 390,
   },
   {
     iconPath: Bot4,
@@ -630,14 +630,14 @@ const creatureDatas: CreatureData[] = [
     spriteSheetPath: bot5Spritesheet,
     selectSpriteSheetPath: bot5_selectSpritesheet,
     left: 1160,
-    top: 100,
+    top: 140,
   },
   {
     iconPath: Bot2,
     spriteSheetPath: bot6Spritesheet,
     selectSpriteSheetPath: bot6_selectSpritesheet,
     left: 300,
-    top: 230,
+    top: 270,
   },
   {
     iconPath: Bot3,
