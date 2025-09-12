@@ -175,7 +175,9 @@ export const propertiesSlice = createSlice({
 
 export const selectIsSelectingUIState = (state: RootState) =>
   state.properties.uIState.type == UIStateType.Creating ||
-  state.properties.uIState.type == UIStateType.Reboot;
+  state.properties.uIState.type == UIStateType.UnlockPopup ||
+  state.properties.uIState.type == UIStateType.Reboot ||
+  state.properties.uIState.type == UIStateType.RebootPopup;
 export const selectUIState = (state: RootState) => state.properties.uIState;
 export const selectSceneType = (state: RootState) => state.properties.sceneType;
 export const selectTutorialType = (state: RootState) =>

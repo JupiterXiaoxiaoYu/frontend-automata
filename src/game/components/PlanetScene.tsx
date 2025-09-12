@@ -84,8 +84,13 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   );
 
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
-  const showConfirmRebootButton = uIState.type == UIStateType.Reboot;
-  const showConfirmCreateButton = uIState.type == UIStateType.Creating;
+  const isRebooting =
+    uIState.type == UIStateType.Reboot ||
+    uIState.type == UIStateType.RebootPopup;
+  const isCreating =
+    uIState.type == UIStateType.Creating ||
+    uIState.type == UIStateType.UnlockPopup ||
+    uIState.type == UIStateType.PlayUnlockAnimation;
   const enableConfirmButton = selectedCreaturePrograms.every(
     (program) => program !== null
   );
@@ -213,7 +218,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   }
 
   const currentProgramInfo = useAppSelector(
-    isSelectingUIState || isLoading
+    isSelectingUIState
       ? selectSelectedCreatureSelectingProgram
       : selectSelectedCreatureCurrentProgram(localTimer)
   );
@@ -243,7 +248,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     if (scenarioRef.current) {
       scenarioRef.current.updateCreatureAnimations(
         currentCreatureTypes,
-        uIState.type == UIStateType.Creating
+        isCreating
       );
     }
   }, [scenarioRef.current, currentCreatureTypes]);
@@ -412,7 +417,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
                   } / 8 programs are selected`}{" "}
                 </p>
               )}
-              {showConfirmCreateButton && (
+              {isCreating && (
                 <div className="planet-scene-program-action-button">
                   <CreatureConfirmButton
                     isDisabled={!enableConfirmButton}
@@ -420,7 +425,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
                   />
                 </div>
               )}
-              {showConfirmRebootButton && (
+              {isRebooting && (
                 <div className="planet-scene-program-action-button">
                   <CreatureConfirmButton
                     isDisabled={!enableConfirmButton}
