@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../image/Guides/mission.png";
+import image from "../../image/Guides/step1.png";
 import "./GuideMission.css";
 
 const GuideMission = () => {

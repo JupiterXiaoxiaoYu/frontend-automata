@@ -70,7 +70,7 @@ const BidAmountPopup = ({
             className="bid-amount-popup-titanium-resource-display-image"
           />
           <p className="bid-amount-popup-titanium-resource-display-text">
-            {minBidAmount}
+            {`${minBidAmount} ~ ${maxBidAmount}`}
           </p>
         </div>
         {errorMessage != "" && (

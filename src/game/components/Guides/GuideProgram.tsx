@@ -1,13 +1,11 @@
 import React from "react";
-import image from "../../image/Guides/program.png";
-import arrowImage from "../../image/Guides/program_arrow.png";
+import image from "../../image/Guides/step3.png";
 import "./GuideProgram.css";
 
 const GuideProgram = () => {
   return (
     <div>
       <img src={image} className="guide-popup-program-image" />
-      <img src={arrowImage} className="guide-popup-program-arrow-image" />
       <p className="guide-popup-program-content-title">3. Program List</p>
       <p className="guide-popup-program-content-text">
         You can purchase new programs using Titanium and participate in our

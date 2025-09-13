@@ -49,8 +49,12 @@ export class Scenario {
     }
 
     for (let i = 0; i < this.creatureAnimations.length; i++) {
+      const creatureType = this.creatureAnimations[i].creatureType;
+      const creatureIsCreating = this.creatureAnimations[i].isCreating;
       if (
-        this.creatureAnimations[i].creatureType != creatureTypesWithCreating[i]
+        creatureType != creatureTypesWithCreating[i] ||
+        (creatureIsCreating != isCreating &&
+          i == creatureTypesWithCreating.length - 1)
       ) {
         this.creatureAnimations[i].updateCreatureType(
           creatureTypesWithCreating[i],
