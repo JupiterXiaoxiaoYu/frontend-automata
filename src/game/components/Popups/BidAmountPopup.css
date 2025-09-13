@@ -105,7 +105,7 @@
 
 .bid-amount-popup-titanium-resource-container {
   position: absolute;
-  width: 50px;
+  width: 100px;
   height: 30px;
   left: 50%;
   top: 37%;
@@ -118,23 +118,23 @@
   top: 50%;
   left: 10%;
   transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   user-select: none;
 }
 
 .bid-amount-popup-titanium-resource-display-text {
   position: absolute;
   top: 50%;
-  left: 60%;
+  left: 65%;
   transform: translate(-50%, -50%);
-  font-size: 12px;
-  text-align: center;
+  font-size: 10px;
+  text-align: left;
   line-height: 100%;
   margin: 0px;
   color: white;
-  width: 35px;
-  height: 12px;
+  width: 80px;
+  height: 10px;
   font-family: "mishmash";
   pointer-events: none;
   user-select: none;
