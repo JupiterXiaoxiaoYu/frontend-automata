@@ -149,10 +149,13 @@ const RocketPopup = () => {
               }
             }
           );
+          dispatch(setLoadingType(LoadingType.None));
         } else if (sendTransaction.rejected.match(action)) {
           const message = "claim rocket Error: " + action.payload;
           dispatch(pushError(message));
           console.error(message);
+          setFinishQuery(true);
+          dispatch(setLoadingType(LoadingType.None));
         }
       });
     }
