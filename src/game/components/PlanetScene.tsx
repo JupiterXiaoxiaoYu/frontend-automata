@@ -41,6 +41,7 @@ import {
   selectCurrentCreatureTypes,
   setSelectedCreature,
   selectSelectedCreatureIndex,
+  selectCreatureIsStops,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -101,6 +102,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   );
   const isLoading = useAppSelector(selectIsLoading);
   const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
+  const creatureIsStops = useAppSelector(selectCreatureIsStops);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
   const [showUpgradeAnimation, setShowUpgradeAnimation] = useState(false);
   const scenarioRef = useRef<Scenario | null>(null);
@@ -248,10 +250,11 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     if (scenarioRef.current) {
       scenarioRef.current.updateCreatureAnimations(
         currentCreatureTypes,
+        creatureIsStops,
         isCreating
       );
     }
-  }, [scenarioRef.current, currentCreatureTypes]);
+  }, [scenarioRef.current, currentCreatureTypes, creatureIsStops]);
 
   useEffect(() => {
     if (scenarioRef.current) {
