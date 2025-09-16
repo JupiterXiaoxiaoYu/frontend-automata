@@ -37,7 +37,12 @@ import {
 } from "zkwasm-minirollup-browser";
 import { getUpgradeBotTransactionCommandArray } from "../../rpc";
 import { selectResource } from "../../../data/resources";
-import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
+import {
+  setLoadingType,
+  LoadingType,
+  pushError,
+  selectIsLoading,
+} from "../../../data/errors";
 
 enum UpgradeState {
   None,
@@ -69,6 +74,7 @@ const UpgradePopup = () => {
   );
   const currentCost = useAppSelector(selectCurrentCost);
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
+  const isLoading = useAppSelector(selectIsLoading);
 
   const onClickSpeed = () => {
     setUpgradeState(UpgradeState.Speed);
@@ -91,6 +97,10 @@ const UpgradePopup = () => {
   };
 
   function upgradeBot() {
+    if (isLoading) {
+      return;
+    }
+
     let attrIndex = 0n;
     if (upgradeState == UpgradeState.Speed) {
       attrIndex = 1n;

@@ -17,7 +17,12 @@ import {
   sendTransaction,
   queryState,
 } from "zkwasm-minirollup-browser";
-import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
+import {
+  setLoadingType,
+  LoadingType,
+  pushError,
+  selectIsLoading,
+} from "../../../data/errors";
 import ConfirmButton from "../../script/button/ConfirmButton";
 
 const NewProgramPopup = () => {
@@ -26,6 +31,7 @@ const NewProgramPopup = () => {
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const { l2Account } = useWalletContext();
   const nonce = useAppSelector(selectNonce);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const onClickConfirm = () => {
     newProgram();
@@ -36,6 +42,7 @@ const NewProgramPopup = () => {
   };
 
   function newProgram() {
+    if (isLoading) return;
     try {
       dispatch(setLoadingType(LoadingType.Default));
       dispatch(
