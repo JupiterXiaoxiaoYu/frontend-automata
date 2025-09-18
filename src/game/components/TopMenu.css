@@ -152,3 +152,14 @@
   right: -3px;
   z-index: 6;
 }
+
+.top-rocket-switch-button {
+  position: relative;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 130 / 79;
+  top: 3%;
+  height: 41%;
+  z-index: 7;
+  pointer-events: all;
+}

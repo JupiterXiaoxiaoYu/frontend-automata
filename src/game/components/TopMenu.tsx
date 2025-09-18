@@ -4,11 +4,13 @@ import AccountInfo from "./AccountInfo";
 import Resources from "./Resources";
 import {
   SceneType,
+  selectAutoRedeemEnergy,
   selectEnergy,
   selectExp,
   selectLevel,
   selectRedeemEnergy,
   selectSceneType,
+  setAutoRedeemEnergy,
   setSceneType,
   setUIState,
   UIState,
@@ -29,6 +31,7 @@ import RedeemSceneButton from "./Buttons/RedeemSceneButton";
 import PlayerInfoLevelDisplay from "./PlayerInfoLevelDisplay";
 import PlayerInfoDisplay from "./PlayerInfoDisplay";
 import { useEffect, useRef, useState } from "react";
+import RocketSwitchButton from "../script/button/RocketSwitchButton";
 
 const TopMenu = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +41,7 @@ const TopMenu = () => {
   const exp = useAppSelector(selectExp);
   const energy = useAppSelector(selectEnergy);
   const redeemEnergy = useAppSelector(selectRedeemEnergy);
+  const autoRedeemEnergy = useAppSelector(selectAutoRedeemEnergy);
 
   const textRef = useRef<HTMLParagraphElement>(null);
   const [titaniumFontSize, setTitaniumFontSize] = useState<number>(0);
@@ -91,6 +95,10 @@ const TopMenu = () => {
     dispatch(setSceneType({ sceneType: SceneType.Redeem }));
   }
 
+  function onToggleAutoRedeemEnergy(isOn: boolean) {
+    dispatch(setAutoRedeemEnergy({ autoRedeemEnergy: isOn }));
+  }
+
   return (
     <div className="top-menu-container" ref={textRef}>
       <div className="top-left"></div>
@@ -134,6 +142,12 @@ const TopMenu = () => {
         </div>
       </div>
       <div className="top-right-info-container">
+        <div className="top-rocket-switch-button">
+          <RocketSwitchButton
+            isInitOn={autoRedeemEnergy}
+            onToggle={onToggleAutoRedeemEnergy}
+          />
+        </div>
         <div className="top-titanium-frame">
           <TitaniumFrame
             onClickWithdraw={onClickWithdraw}

@@ -1,6 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  selectAutoRedeemEnergy,
   selectHasRocket,
+  selectNonce,
   setHasRocket,
   setUIState,
   UIState,
@@ -9,6 +11,13 @@ import {
 
 import "./Rocket.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { getCollectEnergyTransactionCommandArray } from "../rpc";
+import {
+  queryState,
+  sendTransaction,
+  useWalletContext,
+} from "zkwasm-minirollup-browser";
+import { pushError } from "../../data/errors";
 
 const getRandomStartPosition = (width: number, height: number) => {
   const x = Math.random() * 0.3;
@@ -25,15 +34,21 @@ const getRandomEndPosition = (width: number, height: number) => {
 const Rocket = () => {
   const dispatch = useAppDispatch();
   const hasRocket = useAppSelector(selectHasRocket);
+  const autoRedeemEnergy = useAppSelector(selectAutoRedeemEnergy);
+  const { l2Account } = useWalletContext();
+  const nonce = useAppSelector(selectNonce);
   const rocketRef = useRef<HTMLDivElement | null>(null);
   const spaceRef = useRef<HTMLDivElement | null>(null);
+  const [isShowingRocket, setIsShowingRocket] = useState(false);
 
   const onClickRocket = () => {
     dispatch(setHasRocket({ hasRocket: false }));
+    setIsShowingRocket(false);
     dispatch(setUIState({ uIState: { type: UIStateType.RocketPopup } }));
   };
 
   const onAnimationEnd = () => {
+    setIsShowingRocket(false);
     dispatch(setHasRocket({ hasRocket: false }));
   };
 
@@ -41,6 +56,7 @@ const Rocket = () => {
     const rocketContainer = rocketRef.current;
     const spaceContainer = spaceRef.current;
     if (rocketContainer && spaceContainer) {
+      setIsShowingRocket(true);
       const startPosition = getRandomStartPosition(
         spaceContainer.clientWidth,
         spaceContainer.clientHeight
@@ -71,23 +87,46 @@ const Rocket = () => {
     }
   };
 
+  const claimRocket = () => {
+    dispatch(
+      sendTransaction({
+        cmd: getCollectEnergyTransactionCommandArray(nonce),
+        prikey: l2Account!.getPrivateKey(),
+      })
+    ).then((action: any) => {
+      if (sendTransaction.fulfilled.match(action)) {
+        dispatch(queryState(l2Account.getPrivateKey())).then((action: any) => {
+          if (queryState.fulfilled.match(action)) {
+            dispatch(setHasRocket({ hasRocket: false }));
+          }
+        });
+      } else if (sendTransaction.rejected.match(action)) {
+        const message = "auto claim rocket Error: " + action.payload;
+        dispatch(pushError(message));
+        console.error(message);
+      }
+    });
+  };
+
   useEffect(() => {
     if (hasRocket) {
-      return InitRocket();
+      if (autoRedeemEnergy) {
+        console.log("claim");
+        claimRocket();
+      } else {
+        return InitRocket();
+      }
     }
   }, [hasRocket]);
 
   return (
-    <>
-      <></>
-      {hasRocket && (
-        <div ref={spaceRef} className="space-container">
-          <div ref={rocketRef} className="rocket-container">
-            <div className="rocket-image" onClick={onClickRocket} />
-          </div>
-        </div>
-      )}
-    </>
+    <div ref={spaceRef} className="space-container">
+      <div ref={rocketRef} className="rocket-container">
+        {isShowingRocket && (
+          <div className="rocket-image" onClick={onClickRocket} />
+        )}
+      </div>
+    </div>
   );
 };
 
