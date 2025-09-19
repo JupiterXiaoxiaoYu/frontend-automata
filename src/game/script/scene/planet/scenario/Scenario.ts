@@ -36,10 +36,16 @@ export class Scenario {
     this.background.updateBackground(index);
   }
 
-  updateCreatureAnimations(creatureTypes: number[], isCreating: boolean) {
+  updateCreatureAnimations(
+    creatureTypes: number[],
+    creatureIsStops: boolean[],
+    isCreating: boolean
+  ) {
     const creatureTypesWithCreating = [...creatureTypes];
+    const creatureIsStopsWithCreating = [...creatureIsStops];
     if (isCreating) {
       creatureTypesWithCreating.push(creatureTypesWithCreating.length);
+      creatureIsStopsWithCreating.push(false);
     }
 
     let popCount =
@@ -51,14 +57,17 @@ export class Scenario {
     for (let i = 0; i < this.creatureAnimations.length; i++) {
       const creatureType = this.creatureAnimations[i].creatureType;
       const creatureIsCreating = this.creatureAnimations[i].isCreating;
+      const creatureIsStop = this.creatureAnimations[i].isStop;
       if (
         creatureType != creatureTypesWithCreating[i] ||
         (creatureIsCreating != isCreating &&
-          i == creatureTypesWithCreating.length - 1)
+          i == creatureTypesWithCreating.length - 1) ||
+        creatureIsStop != creatureIsStopsWithCreating[i]
       ) {
         this.creatureAnimations[i].updateCreatureType(
           creatureTypesWithCreating[i],
-          isCreating && i == creatureTypesWithCreating.length - 1
+          isCreating && i == creatureTypesWithCreating.length - 1,
+          creatureIsStopsWithCreating[i]
         );
       }
     }
@@ -72,6 +81,7 @@ export class Scenario {
         i,
         creatureTypesWithCreating[i],
         isCreating && i == creatureTypesWithCreating.length - 1,
+        creatureIsStopsWithCreating[i],
         this.ratio
       );
       this.creatureAnimations.push(creatureAnimation);

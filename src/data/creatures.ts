@@ -268,6 +268,11 @@ export const selectCurrentCreatureTypes = (state: RootState) =>
     (creature: CreatureModel) => creature.creatureType
   );
 
+export const selectCreatureIsStops = (state: RootState) =>
+  state.creatures.creatures.map(
+    (creature: CreatureModel) => creature.isProgramStop
+  );
+
 /**
  * 根据生物的Productivity和Efficiency属性调整资源数量
  * Adjusts resource amount based on creature's Productivity and Efficiency attributes
