@@ -7,6 +7,7 @@ import sponsor_frame from "../../image/backgrounds/sponsor_frame.png";
 import logo from "../../image/backgrounds/sponsor logo.png";
 import WelcomeConnectWalletButton from "../button/WelcomeConnectWalletButton";
 import WelcomePlayButton from "../button/WelcomePlayButton";
+import { selectServerVersion } from "../../../data/properties";
 // import TemplateAdjustableImageTextButton from "../template/TemplateAdjustableImageTextButton";
 
 interface Props {
@@ -17,13 +18,14 @@ interface Props {
 
 const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
   const dispatch = useAppDispatch();
+  const serverVersion = useAppSelector(selectServerVersion);
   const textRef = useRef<HTMLParagraphElement>(null);
   const [fontSize, setFontSize] = useState<number>(0);
 
   const adjustSize = () => {
     if (textRef.current) {
       const parentWidth = textRef.current.offsetWidth;
-      setFontSize(parentWidth / 25);
+      setFontSize(parentWidth / 150);
     }
   };
 
@@ -45,11 +47,17 @@ const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
   };
 
   return (
-    <div className="welcome-page-container">
+    <div className="welcome-page-container" ref={textRef}>
       <img src={background_back} className="welcome-page-background-back" />
       <img src={sponsor_frame} className="welcome-page-sponsor-frame" />
       <img src={background_front} className="welcome-page-background-front" />
       <img src={logo} className="welcome-page-logo-image" />
+      <p
+        className="welcome-page-server-version-text"
+        style={{ fontSize: fontSize }}
+      >
+        {`Server Version: ${serverVersion}`}
+      </p>
       {isLogin ? (
         <div className="welcome-page-play-button">
           <WelcomePlayButton onClick={onClickPlay} isDisabled={false} />

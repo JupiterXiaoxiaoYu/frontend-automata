@@ -53,7 +53,6 @@ import Creature from "./Creature";
 import PrevPageButton from "./Buttons/PrevPageButton";
 import NextPageButton from "./Buttons/NextPageButton";
 import CreatureRebootButton from "./Buttons/CreatureRebootButton";
-import CreatureNewButton from "./Buttons/CreatureNewButton";
 import {
   Scenario,
   SCENARIO_DEFAULT_RATIO,
@@ -63,7 +62,7 @@ import Planet2Button from "./Buttons/Planet2Button";
 import Planet3Button from "./Buttons/Planet3Button";
 import {
   CREATURE_PER_BACKGROUND,
-  newCreaturePositions,
+  planetDatas,
 } from "../script/scene/planet/scenario/Background";
 import { getTextShadowStyle } from "../script/common/Utility";
 
@@ -391,14 +390,20 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
           <div
             className="planet-scene-program-new-creature-button"
             style={{
-              left: `${newCreaturePositions[backgroundIndexRef.current].x}%`,
-              top: `${newCreaturePositions[backgroundIndexRef.current].y}%`,
+              left: `${
+                planetDatas[backgroundIndexRef.current]
+                  .newCreatureButtonPosition.x
+              }%`,
+              top: `${
+                planetDatas[backgroundIndexRef.current]
+                  .newCreatureButtonPosition.y
+              }%`,
             }}
           >
-            <CreatureNewButton
-              isDisabled={isLoading}
-              onClick={onClickNewCreature}
-            />
+            {planetDatas[backgroundIndexRef.current].getComponent({
+              isDisabled: isLoading,
+              onClick: onClickNewCreature,
+            })}
           </div>
         )}
 

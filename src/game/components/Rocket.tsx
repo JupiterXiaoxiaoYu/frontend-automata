@@ -45,11 +45,23 @@ const Rocket = () => {
     dispatch(setHasRocket({ hasRocket: false }));
     setIsShowingRocket(false);
     dispatch(setUIState({ uIState: { type: UIStateType.RocketPopup } }));
+    removeAnimation();
   };
 
   const onAnimationEnd = () => {
     setIsShowingRocket(false);
     dispatch(setHasRocket({ hasRocket: false }));
+    removeAnimation();
+  };
+
+  const removeAnimation = () => {
+    const styleSheet = document.styleSheets[0] as CSSStyleSheet;
+    for (let i = 0; i < styleSheet.cssRules.length; i++) {
+      const rule = styleSheet.cssRules[i] as CSSKeyframesRule;
+      if (rule.name == "flyAcrossScreen") {
+        styleSheet.deleteRule(i);
+      }
+    }
   };
 
   const InitRocket = () => {
@@ -65,6 +77,7 @@ const Rocket = () => {
         spaceContainer.clientWidth,
         spaceContainer.clientHeight
       );
+      console.log("rocket position", startPosition, endPosition);
       const dx = endPosition.x - startPosition.x;
       const dy = endPosition.y - startPosition.y;
       const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
