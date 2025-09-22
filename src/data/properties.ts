@@ -6,7 +6,7 @@ import {
   queryState,
   SERVER_TICK_TO_SECOND,
 } from "../game/request";
-import { ConfirmPopupInfo, redeemEnergyCooldownBase } from "./models";
+import { ConfirmPopupInfo } from "./models";
 
 export enum UIStateType {
   Idle,
@@ -79,9 +79,11 @@ interface PropertiesState {
   redeemEnergy: number;
   lastRedeemEnergy: number;
   autoRedeemEnergy: boolean;
+  redeemEnergyCooldown: number;
   interest: number;
   bountyPool: number;
   scenarioRatio: number;
+  serverVersion: string;
 }
 
 const initialState: PropertiesState = {
@@ -101,9 +103,11 @@ const initialState: PropertiesState = {
   redeemEnergy: 0,
   lastRedeemEnergy: 0,
   autoRedeemEnergy: false,
+  redeemEnergyCooldown: 0,
   interest: 0,
   bountyPool: 0,
   scenarioRatio: 1,
+  serverVersion: "0.0.0",
 };
 
 export const propertiesSlice = createSlice({
@@ -135,7 +139,9 @@ export const propertiesSlice = createSlice({
       .addCase(getConfig.fulfilled, (state, action) => {
         state.redeemCostBase = action.payload.bounty_cost_base;
         state.redeemRewardBase = action.payload.bounty_reward_base;
-        console.log("query config fulfilled");
+        state.redeemEnergyCooldown = action.payload.redeem_energy_cooldown;
+        state.serverVersion = action.payload.version;
+        console.log("query config fulfilled", action.payload);
       })
       .addCase(getConfig.rejected, (state, action) => {
         console.log(`query config rejected: ${action.payload}`);
@@ -207,7 +213,7 @@ export const selectEnergy = (state: RootState) => state.properties.energy;
 export const selectRedeemEnergy = (state: RootState) =>
   state.properties.redeemEnergy;
 export const selectRedeemEnergyCooldown = (state: RootState) =>
-  redeemEnergyCooldownBase;
+  state.properties.redeemEnergyCooldown;
 export const selectLastRedeemEnergy = (state: RootState) =>
   state.properties.lastRedeemEnergy;
 export const selectAutoRedeemEnergy = (state: RootState) =>
@@ -217,6 +223,8 @@ export const selectBountyPool = (state: RootState) =>
   state.properties.bountyPool;
 export const selectScenarioRatio = (state: RootState) =>
   state.properties.scenarioRatio;
+export const selectServerVersion = (state: RootState) =>
+  state.properties.serverVersion;
 
 export const {
   setUIState,

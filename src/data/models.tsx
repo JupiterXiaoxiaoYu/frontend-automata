@@ -1033,6 +1033,5 @@ export const emptyConfirmPopupInfo: ConfirmPopupInfo = {
 };
 
 export const expToLevelUp = 100;
-export const redeemEnergyCooldownBase = 1000;
 export const redeemEnergyAmount = 10;
 export const redeemEnergyTitaniumCost = 1;
