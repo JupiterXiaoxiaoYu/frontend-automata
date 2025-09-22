@@ -1,13 +1,37 @@
 import { CreatureAnimation } from "./CreatureAnimation";
 import background_1 from "../../../../image/backgrounds/planet.png";
 import background_2 from "../../../../image/backgrounds/planet2.png";
+import CreatureNewPlanet1Button, {
+  Props as Planet1Props,
+} from "../../../../components/Buttons/CreatureNewPlanet1Button";
+import CreatureNewPlanet2Button, {
+  Props as Planet2Props,
+} from "../../../../components/Buttons/CreatureNewPlanet2Button";
 
 export const CREATURE_PER_BACKGROUND = 8;
-const backgrounds = [background_1, background_2, background_2];
-export const newCreaturePositions = [
-  { x: 45, y: 50 },
-  { x: 45, y: 50 },
-  { x: 45, y: 50 },
+
+export const planetDatas = [
+  {
+    background: background_1,
+    newCreatureButtonPosition: { x: 45, y: 50 },
+    getComponent: ({ isDisabled, onClick }: Planet1Props) => (
+      <CreatureNewPlanet1Button isDisabled={isDisabled} onClick={onClick} />
+    ),
+  },
+  {
+    background: background_2,
+    newCreatureButtonPosition: { x: 47, y: 65 },
+    getComponent: ({ isDisabled, onClick }: Planet2Props) => (
+      <CreatureNewPlanet2Button isDisabled={isDisabled} onClick={onClick} />
+    ),
+  },
+  {
+    background: background_1,
+    newCreatureButtonPosition: { x: 45, y: 50 },
+    getComponent: ({ isDisabled, onClick }: Planet2Props) => (
+      <CreatureNewPlanet2Button isDisabled={isDisabled} onClick={onClick} />
+    ),
+  },
 ];
 
 export class Background {
@@ -29,13 +53,13 @@ export class Background {
     this.creatureAnimations = creatureAnimations;
     this.backgroundIndex = 0;
     this.backgroundImage = new Image();
-    this.backgroundImage.src = backgrounds[0];
+    this.backgroundImage.src = planetDatas[0].background;
     this.context = context;
   }
 
   updateBackground(index: number): void {
     this.backgroundIndex = index;
-    this.backgroundImage.src = backgrounds[index];
+    this.backgroundImage.src = planetDatas[index].background;
   }
 
   draw(): void {

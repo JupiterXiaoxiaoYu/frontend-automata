@@ -580,77 +580,137 @@ const programDatas: Record<ProgramType, ProgramData> = {
   },
 };
 
-interface CreatureData {
+interface CreatureImageData {
   iconPath: string;
   spriteSheetPath: string;
   selectSpriteSheetPath: string;
+}
+
+const emptyCreatureImageData: CreatureImageData = {
+  iconPath: "",
+  spriteSheetPath: "",
+  selectSpriteSheetPath: "",
+};
+
+interface CreatureLocationData {
   left: number;
   top: number;
 }
 
-const emptyCreatureData: CreatureData = {
-  iconPath: "",
-  spriteSheetPath: "",
-  selectSpriteSheetPath: "",
+const emptyCreatureLocationData: CreatureLocationData = {
   left: 0,
   top: 0,
 };
 
-const creatureDatas: CreatureData[] = [
+const creatureImageDatas: CreatureImageData[] = [
   {
     iconPath: Bot1,
     spriteSheetPath: bot1Spritesheet,
     selectSpriteSheetPath: bot1_selectSpritesheet,
-    left: 210,
-    top: 530,
   },
   {
     iconPath: Bot2,
     spriteSheetPath: bot2Spritesheet,
     selectSpriteSheetPath: bot2_selectSpritesheet,
-    left: 880,
-    top: 280,
   },
   {
     iconPath: Bot3,
     spriteSheetPath: bot3Spritesheet,
     selectSpriteSheetPath: bot3_selectSpritesheet,
-    left: 1320,
-    top: 390,
   },
   {
     iconPath: Bot4,
     spriteSheetPath: bot4Spritesheet,
     selectSpriteSheetPath: bot4_selectSpritesheet,
-    left: 1100,
-    top: 480,
   },
   {
     iconPath: Bot1,
     spriteSheetPath: bot5Spritesheet,
     selectSpriteSheetPath: bot5_selectSpritesheet,
-    left: 1160,
-    top: 140,
   },
   {
     iconPath: Bot2,
     spriteSheetPath: bot6Spritesheet,
     selectSpriteSheetPath: bot6_selectSpritesheet,
-    left: 300,
-    top: 270,
   },
   {
     iconPath: Bot3,
     spriteSheetPath: bot7Spritesheet,
     selectSpriteSheetPath: bot7_selectSpritesheet,
-    left: 590,
-    top: 380,
   },
   {
     iconPath: Bot4,
     spriteSheetPath: bot8Spritesheet,
     selectSpriteSheetPath: bot8_selectSpritesheet,
+  },
+];
+
+const creatureLocationDatas: CreatureLocationData[] = [
+  // planet 1
+  {
+    left: 210,
+    top: 530,
+  },
+  {
+    left: 880,
+    top: 280,
+  },
+  {
+    left: 1320,
+    top: 390,
+  },
+  {
+    left: 1100,
+    top: 480,
+  },
+  {
+    left: 1160,
+    top: 140,
+  },
+  {
+    left: 300,
+    top: 270,
+  },
+  {
+    left: 590,
+    top: 380,
+  },
+  {
     left: 680,
+    top: 480,
+  },
+
+  // planet 2
+  {
+    left: 170,
+    top: 530,
+  },
+  {
+    left: 960,
+    top: 340,
+  },
+  {
+    left: 680,
+    top: 410,
+  },
+  {
+    left: 1260,
+    top: 570,
+  },
+  {
+    left: 1450,
+    top: 350,
+  },
+  {
+    left: 400,
+    top: 550,
+  },
+  {
+    left: 620,
+    top: 250,
+  },
+  {
+    left: 900,
     top: 480,
   },
 ];
@@ -917,12 +977,6 @@ export function getNumberAbbr(num: number): string {
   return sign + num.toString();
 }
 
-export function getCreatureIconPath(creatureType: number): string {
-  return creatureType == -1
-    ? emptyCreatureData.iconPath
-    : creatureDatas[creatureType % creatureDatas.length].iconPath;
-}
-
 export function getProgramName(type: ProgramType): string {
   return ProgramType[type];
 }
@@ -935,27 +989,35 @@ export function getProgramSpriteSheetPath(type: ProgramType): string {
   return programDatas[type].spriteSheetPath;
 }
 
+export function getCreatureIconPath(creatureType: number): string {
+  return creatureType == -1
+    ? emptyCreatureImageData.iconPath
+    : creatureImageDatas[creatureType % creatureImageDatas.length].iconPath;
+}
+
 export function getCreatureSpriteSheetPath(
   creatureType: number,
   isSelect: boolean
 ): string {
   return creatureType == -1
-    ? emptyCreatureData.spriteSheetPath
+    ? emptyCreatureImageData.spriteSheetPath
     : isSelect
-    ? creatureDatas[creatureType % creatureDatas.length].selectSpriteSheetPath
-    : creatureDatas[creatureType % creatureDatas.length].spriteSheetPath;
+    ? creatureImageDatas[creatureType % creatureImageDatas.length]
+        .selectSpriteSheetPath
+    : creatureImageDatas[creatureType % creatureImageDatas.length]
+        .spriteSheetPath;
 }
 
 export function getCreatureLeft(creatureType: number): number {
   return creatureType == -1
-    ? emptyCreatureData.left
-    : creatureDatas[creatureType % creatureDatas.length].left;
+    ? emptyCreatureLocationData.left
+    : creatureLocationDatas[creatureType % creatureLocationDatas.length].left;
 }
 
 export function getCreatureTop(creatureType: number): number {
   return creatureType == -1
-    ? emptyCreatureData.top
-    : creatureDatas[creatureType % creatureDatas.length].top;
+    ? emptyCreatureLocationData.top
+    : creatureLocationDatas[creatureType % creatureLocationDatas.length].top;
 }
 
 export interface ConfirmPopupInfo {
