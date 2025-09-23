@@ -7,7 +7,6 @@ import ConfirmButton from "../../script/button/ConfirmButton";
 
 interface Props {
   minBidAmount: number;
-  maxBidAmount: number;
   program: ProgramModel;
   onConfirmListAmount: (amount: number, program: ProgramModel) => void;
   onCancelList: () => void;
@@ -15,7 +14,6 @@ interface Props {
 
 const ListAmountPopup = ({
   minBidAmount,
-  maxBidAmount,
   program,
   onConfirmListAmount,
   onCancelList,
@@ -35,14 +33,14 @@ const ListAmountPopup = ({
     }
 
     const num = Number(value);
-    if (Number.isInteger(num) && num >= 0 && num <= maxBidAmount) {
+    if (Number.isInteger(num) && num >= 0) {
       setAmountString(value);
     }
   };
 
   const onClickConfirm = () => {
     const amount = Number(amountString);
-    if (amount > maxBidAmount || amount < minBidAmount) {
+    if (amount < minBidAmount) {
       setErrorMessage("Please enter a valid amount");
     } else {
       onConfirmListAmount(amount, program);
