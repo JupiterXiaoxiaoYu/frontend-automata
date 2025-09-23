@@ -183,25 +183,42 @@ const RocketPopup = () => {
       <div onClick={onClickCancel} className="rocket-popup-mask" />
       <div className="rocket-popup-main-container">
         <img src={background} className="rocket-popup-main-background" />
-        <p className="rocket-popup-title-text">Redeem {redeemEnergy} Energy</p>
-        <p className="rocket-popup-subtitle-text">Cost</p>
-        <div className="rocket-popup-cost-container">
-          <img
-            src={getResourceIconPath(ResourceType.Titanium)}
-            className="rocket-popup-cost-icon"
-          />
-          <p className="rocket-popup-cost-text">{redeemEnergyTitaniumCost}</p>
-          <img
-            src={amountBackground}
-            className="rocket-popup-cost-background"
-          />
-        </div>
-        <div className="rocket-popup-confirm-button">
-          <ConfirmButton
-            onClick={onClickConfirm}
-            isDisabled={titaniumCount < redeemEnergyTitaniumCost}
-          />
-        </div>
+        {redeemEnergy > 0 ? (
+          <>
+            <p className="rocket-popup-title-text">
+              Redeem {redeemEnergy} Energy
+            </p>
+            <p className="rocket-popup-subtitle-text">Cost</p>
+            <div className="rocket-popup-cost-container">
+              <img
+                src={getResourceIconPath(ResourceType.Titanium)}
+                className="rocket-popup-cost-icon"
+              />
+              <p className="rocket-popup-cost-text">
+                {redeemEnergyTitaniumCost}
+              </p>
+              <img
+                src={amountBackground}
+                className="rocket-popup-cost-background"
+              />
+            </div>
+            <div className="rocket-popup-confirm-button">
+              <ConfirmButton
+                onClick={onClickConfirm}
+                isDisabled={titaniumCount < redeemEnergyTitaniumCost}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="rocket-popup-title-text">
+              Own 10000 Titanium to start redeem energy"
+            </p>
+            <div className="rocket-popup-confirm-button">
+              <ConfirmButton onClick={onClickCancel} isDisabled={false} />
+            </div>
+          </>
+        )}
       </div>
       <div className="rocket-popup-energy-animation-container">
         {gainnergyProps.map((prop, index) => (

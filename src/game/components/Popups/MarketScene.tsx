@@ -600,7 +600,6 @@ const MarketScene = ({ mainContainerRef }: Props) => {
       {showListAmountPopup && (
         <ListAmountPopup
           minBidAmount={1}
-          maxBidAmount={titaniumCount}
           program={currentPopupProgram!}
           onConfirmListAmount={onConfirmListAmount}
           onCancelList={onCancelList}
