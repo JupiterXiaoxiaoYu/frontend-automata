@@ -6,7 +6,7 @@ import {
   queryState,
   SERVER_TICK_TO_SECOND,
 } from "../game/request";
-import { ConfirmPopupInfo } from "./models";
+import { ConfirmPopupInfo, ResourceType } from "./models";
 
 export enum UIStateType {
   Idle,
@@ -76,7 +76,6 @@ interface PropertiesState {
   level: number;
   exp: number;
   energy: number;
-  redeemEnergy: number;
   lastRedeemEnergy: number;
   autoRedeemEnergy: boolean;
   redeemEnergyCooldown: number;
@@ -100,7 +99,6 @@ const initialState: PropertiesState = {
   level: 1,
   exp: 0,
   energy: 0,
-  redeemEnergy: 0,
   lastRedeemEnergy: 0,
   autoRedeemEnergy: false,
   redeemEnergyCooldown: 0,
@@ -174,8 +172,6 @@ export const propertiesSlice = createSlice({
             (BigInt(level) * balance * delta) / (10000n * 17280n)
           );
           state.bountyPool = action.payload.player.data.bounty_pool;
-          state.redeemEnergy =
-            Math.floor(Math.log2(Number(balance / 10000n) + 1)) * level;
         }
       })
       .addCase(queryState.rejected, (state, action) => {
@@ -210,8 +206,17 @@ export const selectRedeemInfo = (state: RootState) =>
 export const selectLevel = (state: RootState) => state.properties.level;
 export const selectExp = (state: RootState) => state.properties.exp;
 export const selectEnergy = (state: RootState) => state.properties.energy;
-export const selectRedeemEnergy = (state: RootState) =>
-  state.properties.redeemEnergy;
+export const selectRedeemEnergy = (state: RootState) => {
+  const titaniumAmount =
+    state.resources.resources.find(
+      (resource: { type: ResourceType }) =>
+        resource.type == ResourceType.Titanium
+    )?.amount ?? 0;
+  return (
+    Math.floor(Math.log2(Math.floor(titaniumAmount / 10000) + 1)) *
+    state.properties.level
+  );
+};
 export const selectRedeemEnergyCooldown = (state: RootState) =>
   state.properties.redeemEnergyCooldown;
 export const selectLastRedeemEnergy = (state: RootState) =>
