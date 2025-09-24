@@ -49,8 +49,15 @@ const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
   return (
     <div className="welcome-page-container" ref={textRef}>
       <img src={background_back} className="welcome-page-background-back" />
-      <img src={sponsor_frame} className="welcome-page-sponsor-frame" />
+      {/* <img src={sponsor_frame} className="welcome-page-sponsor-frame" /> */}
       <img src={background_front} className="welcome-page-background-front" />
+      <iframe
+        className="welcome-page-youtube-iframe-container"
+        src="https://www.youtube.com/embed/M7UVw9KtcB0"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
       <img src={logo} className="welcome-page-logo-image" />
       <p
         className="welcome-page-server-version-text"

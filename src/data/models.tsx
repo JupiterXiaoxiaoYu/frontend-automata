@@ -181,6 +181,7 @@ export interface CreatureModel {
 }
 
 export enum ProgramType {
+  None,
   BioGen,
   CrysTara,
   AstroMine,
@@ -286,7 +287,7 @@ export function decodeProgram(
   bid: Bid | null = null
 ): ProgramModel {
   const { duration, attributes, marketid } = programRaw;
-  const type = index as ProgramType;
+  const type = (index + 1) as ProgramType;
   const program: ProgramModel = {
     index,
     marketId: marketid,
@@ -326,6 +327,10 @@ interface ProgramData {
 }
 
 const programDatas: Record<ProgramType, ProgramData> = {
+  [ProgramType.None]: {
+    iconPath: "",
+    spriteSheetPath: "",
+  },
   [ProgramType.IlluGen]: {
     iconPath: IlluGenIcon,
     spriteSheetPath: IlluGenSpriteSheet,

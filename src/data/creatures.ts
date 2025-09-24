@@ -263,6 +263,14 @@ export const selectSelectedAttributes =
 export const selectSelectedCreaturePrograms = (state: RootState) =>
   selectProgramsByIndexes(selectSelectedCreature(state).programIndexes)(state);
 
+export const selectCreatureProgramTypes = (state: RootState): ProgramType[] =>
+  state.creatures.creatures.map((creature: CreatureModel) => {
+    const currentProgramIndex = creature.currentProgramIndex;
+    const programIndex = creature.programIndexes[currentProgramIndex]!;
+    const program = selectProgramByIndex(programIndex)(state);
+    return program?.type ?? ProgramType.None;
+  });
+
 export const selectCurrentCreatureTypes = (state: RootState) =>
   state.creatures.creatures.map(
     (creature: CreatureModel) => creature.creatureType

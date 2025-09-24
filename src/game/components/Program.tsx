@@ -18,6 +18,7 @@ import {
 import ProgramTutorial from "./ProgramTutorial";
 import { useAppSelector } from "../../app/hooks";
 import { selectSelectedCreature } from "../../data/creatures";
+import disabledImageMask from "../image/backgrounds/listed_program_frame.png";
 
 interface Props {
   index: number;
@@ -115,6 +116,16 @@ const Program = ({ index, program, isDisabled, onSelect }: Props) => {
           })}
         />
       </div>
+      {isDisabled && (
+        <img
+          src={disabledImageMask}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      )}
     </div>
   );
 };
