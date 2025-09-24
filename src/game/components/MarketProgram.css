@@ -170,3 +170,13 @@
   aspect-ratio: 35 / 14;
   transform: translate(-50%, -50%);
 }
+
+.market-list-by-you-icon {
+  position: absolute;
+  top: 83%;
+  left: 22%;
+  width: auto;
+  height: 12%;
+  aspect-ratio: 99 / 26;
+  transform: translate(-50%, -50%);
+}

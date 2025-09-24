@@ -12,6 +12,7 @@ import background from "../image/backgrounds/market_card_frame.png";
 import MarketProgramBidButton from "../script/button/MarketProgramBidButton";
 import MarketProgramSellButton from "../script/button/MarketProgramSellButton";
 import MarketProgramListButton from "../script/button/MarketProgramListButton";
+import ListByYouIconImage from "../image/backgrounds/list_by_you_icon.png";
 
 interface Props {
   program: ProgramModel;
@@ -134,14 +135,17 @@ const MarketProgram = ({
           In use
         </p>
       )}
-      {onClickBid && (
-        <div className="market-program-button">
-          <MarketProgramBidButton
-            onClick={onClickBid}
-            isDisabled={isButtonDisabled}
-          />
-        </div>
-      )}
+      {onClickBid &&
+        (isButtonDisabled ? (
+          <img src={ListByYouIconImage} className="market-list-by-you-icon" />
+        ) : (
+          <div className="market-program-button">
+            <MarketProgramBidButton
+              onClick={onClickBid}
+              isDisabled={isButtonDisabled}
+            />
+          </div>
+        ))}
       {onClickSell && (
         <div className="market-program-button">
           <MarketProgramSellButton
