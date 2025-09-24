@@ -1,5 +1,6 @@
 import { CreatureAnimation } from "./CreatureAnimation";
 import { Background } from "./Background";
+import { ProgramType } from "../../../../../data/models";
 
 export const SCENARIO_DEFAULT_WIDTH = 1920;
 export const SCENARIO_DEFAULT_RATIO = 1671 / 951;
@@ -14,10 +15,12 @@ export class Scenario {
   background: Background;
   context: CanvasRenderingContext2D;
   ratio: number;
+  parent: HTMLElement;
 
   constructor(width: number, height: number) {
     this.status = "play";
     this.creatureAnimations = [];
+    this.parent = document.getElementById("canvas-container")!;
     const canvas = document.getElementById("canvas")! as HTMLCanvasElement;
     canvas.width = width;
     canvas.height = height;
@@ -32,18 +35,28 @@ export class Scenario {
     );
   }
 
+  destroy() {
+    while (this.creatureAnimations.length > 0) {
+      const removed = this.creatureAnimations.pop()!;
+      removed.destroy();
+    }
+  }
+
   updateBackground(index: number) {
     this.background.updateBackground(index);
   }
 
   updateCreatureAnimations(
+    programTypes: ProgramType[],
     creatureTypes: number[],
     creatureIsStops: boolean[],
     isCreating: boolean
   ) {
+    const programTypesWithCreating = [...programTypes];
     const creatureTypesWithCreating = [...creatureTypes];
     const creatureIsStopsWithCreating = [...creatureIsStops];
     if (isCreating) {
+      programTypesWithCreating.push(ProgramType.None);
       creatureTypesWithCreating.push(creatureTypesWithCreating.length);
       creatureIsStopsWithCreating.push(false);
     }
@@ -51,10 +64,12 @@ export class Scenario {
     let popCount =
       this.creatureAnimations.length - creatureTypesWithCreating.length;
     while (popCount-- > 0) {
-      this.creatureAnimations.pop();
+      const removed = this.creatureAnimations.pop()!;
+      removed.destroy();
     }
 
     for (let i = 0; i < this.creatureAnimations.length; i++) {
+      const programType = this.creatureAnimations[i].programType;
       const creatureType = this.creatureAnimations[i].creatureType;
       const creatureIsCreating = this.creatureAnimations[i].isCreating;
       const creatureIsStop = this.creatureAnimations[i].isStop;
@@ -62,9 +77,11 @@ export class Scenario {
         creatureType != creatureTypesWithCreating[i] ||
         (creatureIsCreating != isCreating &&
           i == creatureTypesWithCreating.length - 1) ||
-        creatureIsStop != creatureIsStopsWithCreating[i]
+        creatureIsStop != creatureIsStopsWithCreating[i] ||
+        programType != programTypesWithCreating[i]
       ) {
-        this.creatureAnimations[i].updateCreatureType(
+        this.creatureAnimations[i].update(
+          programTypesWithCreating[i],
           creatureTypesWithCreating[i],
           isCreating && i == creatureTypesWithCreating.length - 1,
           creatureIsStopsWithCreating[i]
@@ -79,10 +96,12 @@ export class Scenario {
     ) {
       const creatureAnimation = new CreatureAnimation(
         i,
+        programTypesWithCreating[i],
         creatureTypesWithCreating[i],
         isCreating && i == creatureTypesWithCreating.length - 1,
         creatureIsStopsWithCreating[i],
-        this.ratio
+        this.ratio,
+        this.parent
       );
       this.creatureAnimations.push(creatureAnimation);
     }

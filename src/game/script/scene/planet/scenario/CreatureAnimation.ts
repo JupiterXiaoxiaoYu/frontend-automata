@@ -7,6 +7,7 @@ import {
 import creatingCreatureImage from "../../../../image/Animations/Creatures/idle_robot_select.png";
 import stopCreatureImage from "../../../../image/Animations/Creatures/stop_robot.png";
 import stopCreatureSelectedImage from "../../../../image/Animations/Creatures/stop_robot_select.png";
+import { getTextShadowString } from "../../../common/Utility";
 
 const CLIP_HEIGHT = 300;
 const CLIP_WIDTH = 300;
@@ -15,26 +16,33 @@ const CLIP_FRAME_COUNT = 24;
 export class CreatureAnimation {
   index: number;
   name: string;
+  programType: ProgramType;
   creatureType: number;
   isCreating: boolean;
   isStop: boolean;
   src: HTMLImageElement;
+  nameTextElement: HTMLParagraphElement | undefined;
+  programTextElement: HTMLParagraphElement | undefined;
   left: number;
   top: number;
   currentFrame: number;
   ratio: number;
   focus: boolean;
   target: Array<[number, number]>;
+  parent: HTMLElement;
 
   constructor(
     index: number,
+    programType: ProgramType,
     creatureType: number,
     isCreating: boolean,
     isStop: boolean,
-    ratio: number
+    ratio: number,
+    parent: HTMLElement
   ) {
     this.index = index;
     this.name = `Robot ${index + 1}`;
+    this.programType = programType;
     this.creatureType = creatureType;
     this.isCreating = isCreating;
     this.isStop = isStop;
@@ -55,6 +63,72 @@ export class CreatureAnimation {
     this.currentFrame = 0;
     this.ratio = ratio;
     this.target = [];
+    this.parent = parent;
+
+    this.updateNameTextElement();
+    this.updateProgramTextElement();
+  }
+
+  createNameTextElement() {
+    const p = document.createElement("p");
+    p.innerText = this.name;
+    p.style.position = "absolute";
+    p.style.color = "#81FF73";
+    const fontSize = 20 * this.ratio;
+    p.style.fontSize = `${fontSize}px`;
+    p.style.fontFamily = "mishmash";
+    p.style.textAlign = "center";
+    p.style.textShadow = getTextShadowString(fontSize / 10, "#1C2B3D");
+    this.parent.appendChild(p);
+    return p;
+  }
+
+  updateNameTextElement() {
+    if (!this.nameTextElement) {
+      this.nameTextElement = this.createNameTextElement();
+    }
+    this.nameTextElement.innerText = this.name;
+    this.nameTextElement.style.left = `${
+      this.left +
+      (CLIP_WIDTH * this.ratio - this.nameTextElement.offsetWidth) / 2
+    }px`;
+    this.nameTextElement.style.top = `${this.top - 10 * this.ratio}px`;
+  }
+
+  createProgramTextElement() {
+    const p = document.createElement("p");
+    p.style.position = "absolute";
+    p.style.color = "white";
+    const fontSize = 15 * this.ratio;
+    p.style.fontSize = `${fontSize}px`;
+    p.style.fontFamily = "mishmash";
+    p.style.textAlign = "center";
+    p.style.textShadow = getTextShadowString(fontSize / 10, "#1C2B3D");
+    this.parent.appendChild(p);
+    return p;
+  }
+
+  updateProgramTextElement() {
+    if (!this.programTextElement) {
+      this.programTextElement = this.createProgramTextElement();
+    }
+    this.programTextElement.innerText =
+      ProgramType[this.programType].toString();
+    this.programTextElement.style.left = `${
+      this.left +
+      (CLIP_WIDTH * this.ratio - this.programTextElement.offsetWidth) / 2
+    }px`;
+    this.programTextElement.style.top = `${this.top + 20 * this.ratio}px`;
+  }
+
+  destroy() {
+    if (this.nameTextElement) {
+      this.parent.removeChild(this.nameTextElement);
+    }
+
+    if (this.programTextElement) {
+      this.parent.removeChild(this.programTextElement);
+    }
   }
 
   getSrc(
@@ -63,12 +137,6 @@ export class CreatureAnimation {
     isCreating: boolean,
     isStop: boolean
   ) {
-    console.log("getSrc", {
-      creatureType,
-      isSelected,
-      isCreating,
-      isStop,
-    });
     if (isCreating) {
       return creatingCreatureImage;
     }
@@ -78,11 +146,13 @@ export class CreatureAnimation {
     return getCreatureSpriteSheetPath(creatureType, isSelected);
   }
 
-  updateCreatureType(
+  update(
+    programType: ProgramType,
     creatureType: number,
     isCreating: boolean,
     isStop: boolean
   ) {
+    this.programType = programType;
     this.creatureType = creatureType;
     this.isCreating = isCreating;
     this.isStop = isStop;
@@ -94,6 +164,8 @@ export class CreatureAnimation {
     );
     this.left = getCreatureLeft(creatureType) * this.ratio;
     this.top = getCreatureTop(creatureType) * this.ratio;
+    this.updateNameTextElement();
+    this.updateProgramTextElement();
   }
 
   updateFocus(focus: boolean) {
@@ -134,12 +206,6 @@ export class CreatureAnimation {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    if (this.focus == true) {
-      ctx.fillStyle = "orange"; // Red color
-    } else {
-      ctx.fillStyle = "black"; // Red color
-    }
-
     if (this.isCreating || this.isStop) {
       ctx.drawImage(
         this.src,
@@ -165,21 +231,6 @@ export class CreatureAnimation {
         CLIP_HEIGHT * this.ratio
       );
     }
-
-    const nameWidth = this.name.length * 7 + 5;
-    ctx.fillRect(
-      this.left + (CLIP_WIDTH * this.ratio - nameWidth) / 2,
-      this.top - 13,
-      nameWidth,
-      15
-    );
-    ctx.fillStyle = "white";
-    ctx.font = "12px Arial";
-    ctx.fillText(
-      this.name,
-      this.left + (CLIP_WIDTH * this.ratio - nameWidth) / 2 + 5,
-      this.top
-    );
   }
 
   incFrame() {

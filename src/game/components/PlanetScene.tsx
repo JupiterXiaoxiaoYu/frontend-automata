@@ -42,6 +42,7 @@ import {
   setSelectedCreature,
   selectSelectedCreatureIndex,
   selectCreatureIsStops,
+  selectCreatureProgramTypes,
 } from "../../data/creatures";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import MainMenuWarning from "./MainMenuWarning";
@@ -100,6 +101,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
     selectSelectedCreatureListIndex
   );
   const isLoading = useAppSelector(selectIsLoading);
+  const creatureProgramTypes = useAppSelector(selectCreatureProgramTypes);
   const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
   const creatureIsStops = useAppSelector(selectCreatureIsStops);
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
@@ -241,6 +243,10 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   }, []);
 
   useEffect(() => {
+    if (scenarioRef.current) {
+      scenarioRef.current.destroy();
+    }
+
     scenarioRef.current = new Scenario(containerWidth, containerHeight);
     dispatch(setScenarioRatio({ scenarioRatio: containerWidth / 1920 }));
   }, [containerWidth, containerHeight]);
@@ -248,12 +254,18 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   useEffect(() => {
     if (scenarioRef.current) {
       scenarioRef.current.updateCreatureAnimations(
+        creatureProgramTypes,
         currentCreatureTypes,
         creatureIsStops,
         isCreating
       );
     }
-  }, [scenarioRef.current, currentCreatureTypes, creatureIsStops]);
+  }, [
+    scenarioRef.current,
+    creatureProgramTypes,
+    currentCreatureTypes,
+    creatureIsStops,
+  ]);
 
   useEffect(() => {
     if (scenarioRef.current) {
@@ -383,7 +395,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
         className="planet-scene-container"
         style={{ width: containerWidth, height: containerHeight }}
       >
-        <div className="planet-scene-canvas-container">
+        <div id="canvas-container" className="planet-scene-canvas-container">
           <canvas id="canvas" onClick={onClickCanvas}></canvas>
         </div>
         {showNewCreatureButton && (
