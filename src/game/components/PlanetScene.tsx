@@ -19,6 +19,7 @@ import {
   selectSceneType,
   SceneType,
   setScenarioRatio,
+  selectLevel,
 } from "../../data/properties";
 import {
   LoadingType,
@@ -100,6 +101,7 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
   const selectedCreatureIndexForRequestEncode = useAppSelector(
     selectSelectedCreatureListIndex
   );
+  const level = useAppSelector(selectLevel);
   const isLoading = useAppSelector(selectIsLoading);
   const creatureProgramTypes = useAppSelector(selectCreatureProgramTypes);
   const currentCreatureTypes = useAppSelector(selectCurrentCreatureTypes);
@@ -215,8 +217,12 @@ const PlanetScene = ({ localTimer, mainContainerRef }: Props) => {
 
   function onClickNewCreature() {
     if (!isLoading) {
-      dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
-      dispatch(startCreatingCreature({}));
+      if (currentCreatureTypes.length > Math.floor((level + 1) / 2)) {
+        dispatch(pushError("Level not enough"));
+      } else {
+        dispatch(setUIState({ uIState: { type: UIStateType.Creating } }));
+        dispatch(startCreatingCreature({}));
+      }
     }
   }
 

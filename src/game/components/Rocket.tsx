@@ -77,7 +77,6 @@ const Rocket = () => {
         spaceContainer.clientWidth,
         spaceContainer.clientHeight
       );
-      console.log("rocket position", startPosition, endPosition);
       const dx = endPosition.x - startPosition.x;
       const dy = endPosition.y - startPosition.y;
       const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
