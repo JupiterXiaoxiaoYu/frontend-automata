@@ -18,6 +18,8 @@ import {
   useWalletContext,
 } from "zkwasm-minirollup-browser";
 import { pushError } from "../../data/errors";
+import { ResourceType } from "../../data/models";
+import { selectResource } from "../../data/resources";
 
 const getRandomStartPosition = (width: number, height: number) => {
   const x = Math.random() * 0.3;
@@ -33,6 +35,7 @@ const getRandomEndPosition = (width: number, height: number) => {
 
 const Rocket = () => {
   const dispatch = useAppDispatch();
+  const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
   const hasRocket = useAppSelector(selectHasRocket);
   const autoRedeemEnergy = useAppSelector(selectAutoRedeemEnergy);
   const { l2Account } = useWalletContext();
@@ -100,30 +103,33 @@ const Rocket = () => {
   };
 
   const claimRocket = () => {
-    dispatch(
-      sendTransaction({
-        cmd: getCollectEnergyTransactionCommandArray(nonce),
-        prikey: l2Account!.getPrivateKey(),
-      })
-    ).then((action: any) => {
-      if (sendTransaction.fulfilled.match(action)) {
-        dispatch(queryState(l2Account.getPrivateKey())).then((action: any) => {
-          if (queryState.fulfilled.match(action)) {
-            dispatch(setHasRocket({ hasRocket: false }));
-          }
-        });
-      } else if (sendTransaction.rejected.match(action)) {
-        const message = "auto claim rocket Error: " + action.payload;
-        dispatch(pushError(message));
-        console.error(message);
-      }
-    });
+    if (titaniumCount >= 10000) {
+      dispatch(
+        sendTransaction({
+          cmd: getCollectEnergyTransactionCommandArray(nonce),
+          prikey: l2Account!.getPrivateKey(),
+        })
+      ).then((action: any) => {
+        if (sendTransaction.fulfilled.match(action)) {
+          dispatch(queryState(l2Account.getPrivateKey())).then(
+            (action: any) => {
+              if (queryState.fulfilled.match(action)) {
+                dispatch(setHasRocket({ hasRocket: false }));
+              }
+            }
+          );
+        } else if (sendTransaction.rejected.match(action)) {
+          const message = "auto claim rocket Error: " + action.payload;
+          dispatch(pushError(message));
+          console.error(message);
+        }
+      });
+    }
   };
 
   useEffect(() => {
     if (hasRocket) {
       if (autoRedeemEnergy) {
-        console.log("claim");
         claimRocket();
       } else {
         return InitRocket();
