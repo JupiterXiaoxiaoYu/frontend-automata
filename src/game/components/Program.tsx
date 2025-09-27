@@ -24,10 +24,11 @@ interface Props {
   index: number;
   program: ProgramModel;
   isDisabled: boolean;
+  isMasked: boolean;
   onSelect: () => void;
 }
 
-const Program = ({ index, program, isDisabled, onSelect }: Props) => {
+const Program = ({ index, program, isMasked, isDisabled, onSelect }: Props) => {
   // 获取选中生物的Productivity、Efficiency和Speed属性值
   // Get the Productivity, Efficiency and Speed attribute values of the selected creature
   const selectedCreature = useAppSelector(selectSelectedCreature);
@@ -116,7 +117,7 @@ const Program = ({ index, program, isDisabled, onSelect }: Props) => {
           })}
         />
       </div>
-      {isDisabled && (
+      {isMasked && (
         <img
           src={disabledImageMask}
           style={{

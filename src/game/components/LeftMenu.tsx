@@ -76,6 +76,7 @@ const LeftMenu = () => {
               index={index}
               program={program}
               isDisabled={program.marketId > 0}
+              isMasked={program.marketId > 0}
               onSelect={() => onSelectProgram(program.index)}
             />
           )),
@@ -86,6 +87,7 @@ const LeftMenu = () => {
             index={index}
             program={program}
             isDisabled={program.marketId > 0}
+            isMasked={program.marketId > 0}
             onSelect={() => onSelectProgram(program.index)}
           />
         ));
