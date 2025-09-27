@@ -7,6 +7,7 @@ interface Props {
   hoverElement: JSX.Element;
   clickedElement: JSX.Element;
   disabledElement: JSX.Element;
+  removeHoverWhenClicked?: boolean;
   onClick: () => void;
 }
 
@@ -16,6 +17,7 @@ const ElementButton = ({
   hoverElement,
   clickedElement,
   disabledElement,
+  removeHoverWhenClicked = false,
   onClick,
 }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -31,6 +33,9 @@ const ElementButton = ({
     if (!isDisabled) {
       setIsClicked(false);
       onClick();
+      if (removeHoverWhenClicked) {
+        setIsHovered(false);
+      }
     }
   };
 

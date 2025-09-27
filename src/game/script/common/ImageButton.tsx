@@ -8,6 +8,7 @@ interface Props {
   hoverImagePath: string;
   clickedImagePath: string;
   disabledImagePath: string;
+  removeHoverWhenClicked?: boolean;
   onClick: () => void;
 }
 
@@ -17,6 +18,7 @@ const ImageButton = ({
   hoverImagePath,
   clickedImagePath,
   disabledImagePath,
+  removeHoverWhenClicked = false,
   onClick,
 }: Props) => {
   return (
@@ -26,6 +28,7 @@ const ImageButton = ({
       hoverElement={<img className="image-button" src={hoverImagePath} />}
       clickedElement={<img className="image-button" src={clickedImagePath} />}
       disabledElement={<img className="image-button" src={disabledImagePath} />}
+      removeHoverWhenClicked={removeHoverWhenClicked}
       onClick={onClick}
     />
   );
