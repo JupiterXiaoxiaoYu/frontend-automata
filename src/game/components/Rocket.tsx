@@ -43,25 +43,26 @@ const Rocket = () => {
   const rocketRef = useRef<HTMLDivElement | null>(null);
   const spaceRef = useRef<HTMLDivElement | null>(null);
   const [isShowingRocket, setIsShowingRocket] = useState(false);
+  const animationNameRef = useRef<string>("");
 
   const onClickRocket = () => {
     dispatch(setHasRocket({ hasRocket: false }));
     setIsShowingRocket(false);
     dispatch(setUIState({ uIState: { type: UIStateType.RocketPopup } }));
-    removeAnimation();
   };
 
   const onAnimationEnd = () => {
     setIsShowingRocket(false);
     dispatch(setHasRocket({ hasRocket: false }));
-    removeAnimation();
   };
 
-  const removeAnimation = () => {
-    const styleSheet = document.styleSheets[0] as CSSStyleSheet;
+  const removeAnimation = (
+    styleSheet: CSSStyleSheet,
+    animationName: string
+  ) => {
     for (let i = 0; i < styleSheet.cssRules.length; i++) {
       const rule = styleSheet.cssRules[i] as CSSKeyframesRule;
-      if (rule.name == "flyAcrossScreen") {
+      if (rule.name == animationName) {
         styleSheet.deleteRule(i);
       }
     }
@@ -84,16 +85,17 @@ const Rocket = () => {
       const dy = endPosition.y - startPosition.y;
       const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
 
-      rocketContainer.style.transform = `translate(${startPosition.x}px, ${startPosition.y}px) rotate(${angle}deg)`;
       const styleSheet = document.styleSheets[0] as CSSStyleSheet;
+      removeAnimation(styleSheet, animationNameRef.current);
+      animationNameRef.current = `flyAcrossScreen_${Date.now()}`;
       const keyframes = `
-        @keyframes flyAcrossScreen {
+        @keyframes ${animationNameRef.current} {
           from { transform: translate(${startPosition.x}px, ${startPosition.y}px) rotate(${angle}deg); }
           to { transform: translate(${endPosition.x}px, ${endPosition.y}px) rotate(${angle}deg); }
         }
       `;
       styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
-      rocketContainer.style.animation = `flyAcrossScreen 20s linear`;
+      rocketContainer.style.animation = `${animationNameRef.current} 20s linear forwards`;
       rocketContainer.addEventListener("animationend", onAnimationEnd);
 
       return () => {
