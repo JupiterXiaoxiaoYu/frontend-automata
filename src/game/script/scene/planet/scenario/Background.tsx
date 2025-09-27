@@ -69,14 +69,15 @@ export class Background {
     this.context.clearRect(0, 0, this.width, this.height);
     this.context.drawImage(this.backgroundImage, 0, 0, this.width, this.height);
 
-    for (
-      let i = this.backgroundIndex * CREATURE_PER_BACKGROUND;
-      i < (this.backgroundIndex + 1) * CREATURE_PER_BACKGROUND;
-      i++
-    ) {
-      const obj = this.creatureAnimations[i];
-      if (obj) {
-        obj.draw(this.context);
+    for (let i = 0; i < this.creatureAnimations.length; i++) {
+      if (
+        i >= this.backgroundIndex * CREATURE_PER_BACKGROUND &&
+        i < (this.backgroundIndex + 1) * CREATURE_PER_BACKGROUND
+      ) {
+        this.creatureAnimations[i].draw(this.context);
+        this.creatureAnimations[i].showTextElements(true);
+      } else {
+        this.creatureAnimations[i].showTextElements(false);
       }
     }
   }

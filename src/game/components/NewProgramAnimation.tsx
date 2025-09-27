@@ -110,6 +110,7 @@ const NewProgramAnimation = () => {
               index={-1}
               program={program}
               isDisabled={true}
+              isMasked={false}
               onSelect={() => {
                 /* */
               }}

@@ -38,6 +38,7 @@ const RocketSwitchButton = ({ isInitOn, onToggle }: Props) => {
         hoverImagePath={isOn ? onHoverImage : offHoverImage}
         clickedImagePath={isOn ? onHoverImage : offHoverImage}
         disabledImagePath={isOn ? onImage : offImage}
+        removeHoverWhenClicked={true}
       />
     </div>
   );

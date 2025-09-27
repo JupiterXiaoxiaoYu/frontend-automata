@@ -69,6 +69,15 @@ export class CreatureAnimation {
     this.updateProgramTextElement();
   }
 
+  showTextElements(isShow: boolean) {
+    if (this.nameTextElement) {
+      this.nameTextElement.hidden = !isShow;
+    }
+    if (this.programTextElement) {
+      this.programTextElement.hidden = !isShow;
+    }
+  }
+
   createNameTextElement() {
     const p = document.createElement("p");
     p.innerText = this.name;
