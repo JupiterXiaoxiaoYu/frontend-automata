@@ -105,33 +105,29 @@ const Rocket = () => {
   };
 
   const claimRocket = () => {
-    if (titaniumCount >= 10000) {
-      dispatch(
-        sendTransaction({
-          cmd: getCollectEnergyTransactionCommandArray(nonce),
-          prikey: l2Account!.getPrivateKey(),
-        })
-      ).then((action: any) => {
-        if (sendTransaction.fulfilled.match(action)) {
-          dispatch(queryState(l2Account.getPrivateKey())).then(
-            (action: any) => {
-              if (queryState.fulfilled.match(action)) {
-                dispatch(setHasRocket({ hasRocket: false }));
-              }
-            }
-          );
-        } else if (sendTransaction.rejected.match(action)) {
-          const message = "auto claim rocket Error: " + action.payload;
-          dispatch(pushError(message));
-          console.error(message);
-        }
-      });
-    }
+    dispatch(
+      sendTransaction({
+        cmd: getCollectEnergyTransactionCommandArray(nonce),
+        prikey: l2Account!.getPrivateKey(),
+      })
+    ).then((action: any) => {
+      if (sendTransaction.fulfilled.match(action)) {
+        dispatch(queryState(l2Account.getPrivateKey())).then((action: any) => {
+          if (queryState.fulfilled.match(action)) {
+            dispatch(setHasRocket({ hasRocket: false }));
+          }
+        });
+      } else if (sendTransaction.rejected.match(action)) {
+        const message = "auto claim rocket Error: " + action.payload;
+        dispatch(pushError(message));
+        console.error(message);
+      }
+    });
   };
 
   useEffect(() => {
     if (hasRocket) {
-      if (autoRedeemEnergy) {
+      if (autoRedeemEnergy && titaniumCount >= 10000) {
         claimRocket();
       } else {
         return InitRocket();
