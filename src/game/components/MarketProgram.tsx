@@ -6,6 +6,7 @@ import {
   getResourceIconPath,
   ResourceType,
   ProgramModel,
+  getNumberAbbr,
 } from "../../data/models";
 import { formatTime } from "../../data/creatures";
 import background from "../image/backgrounds/market_card_frame.png";
@@ -107,7 +108,7 @@ const MarketProgram = ({
             className="market-program-bid-text"
             style={{ fontSize: bidFontSize }}
           >
-            {program.bid?.bidprice ?? 0}
+            {getNumberAbbr(program.bid?.bidprice ?? 0)}
           </p>
           <p
             className="market-program-ask-title-text"
@@ -123,7 +124,7 @@ const MarketProgram = ({
             className="market-program-ask-text"
             style={{ fontSize: bidFontSize }}
           >
-            {program.askPrice}
+            {getNumberAbbr(program.askPrice)}
           </p>
         </>
       )}
