@@ -126,7 +126,7 @@ const UpgradePopup = () => {
             if (queryState.fulfilled.match(action)) {
               dispatch(
                 setUIState({
-                  uIState: { type: UIStateType.PlayUpgradeAnimation },
+                  uIState: { type: UIStateType.Idle },
                 })
               );
               dispatch(setLoadingType(LoadingType.None));
