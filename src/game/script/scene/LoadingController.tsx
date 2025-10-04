@@ -95,6 +95,14 @@ export function LoadingController() {
     setStartGameplay(true);
   };
 
+  console.log(
+    "Testing Login",
+    config,
+    userState?.player,
+    userState?.player ? Object.keys(userState.player!).length : 0,
+    startGameplay
+  );
+
   if (
     config &&
     userState?.player &&

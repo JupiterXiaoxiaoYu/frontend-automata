@@ -12,11 +12,19 @@ import { selectServerVersion } from "../../../data/properties";
 
 interface Props {
   isLogin: boolean;
+  disabledLoginButton: boolean;
+  disabledPlayButton: boolean;
   onLogin: () => void;
   onStartGame: () => void;
 }
 
-const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
+const WelcomePage = ({
+  isLogin,
+  disabledLoginButton,
+  disabledPlayButton,
+  onLogin,
+  onStartGame,
+}: Props) => {
   const dispatch = useAppDispatch();
   const serverVersion = useAppSelector(selectServerVersion);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -67,13 +75,16 @@ const WelcomePage = ({ isLogin, onLogin, onStartGame }: Props) => {
       </p>
       {isLogin ? (
         <div className="welcome-page-play-button">
-          <WelcomePlayButton onClick={onClickPlay} isDisabled={false} />
+          <WelcomePlayButton
+            onClick={onClickPlay}
+            isDisabled={disabledPlayButton}
+          />
         </div>
       ) : (
         <div className="welcome-page-connect-wallet-button">
           <WelcomeConnectWalletButton
             onClick={onClickConnectWallet}
-            isDisabled={false}
+            isDisabled={disabledLoginButton}
           />
         </div>
       )}
