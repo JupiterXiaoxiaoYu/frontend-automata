@@ -7,26 +7,26 @@ import sponsor_frame from "../../image/backgrounds/sponsor_frame.png";
 import logo from "../../image/backgrounds/sponsor logo.png";
 import WelcomeConnectWalletButton from "../button/WelcomeConnectWalletButton";
 import WelcomePlayButton from "../button/WelcomePlayButton";
-import { selectServerVersion } from "../../../data/properties";
+import { selectNullableConfig } from "../../../data/state";
 // import TemplateAdjustableImageTextButton from "../template/TemplateAdjustableImageTextButton";
 
 interface Props {
   isLogin: boolean;
   disabledLoginButton: boolean;
   disabledPlayButton: boolean;
-  onLogin: () => void;
-  onStartGame: () => void;
+  onClickConnectWallet: () => void;
+  onClickPlay: () => void;
 }
 
 const WelcomePage = ({
   isLogin,
   disabledLoginButton,
   disabledPlayButton,
-  onLogin,
-  onStartGame,
+  onClickConnectWallet,
+  onClickPlay,
 }: Props) => {
   const dispatch = useAppDispatch();
-  const serverVersion = useAppSelector(selectServerVersion);
+  const serverVersion = useAppSelector(selectNullableConfig)?.version || "N/A";
   const textRef = useRef<HTMLParagraphElement>(null);
   const [fontSize, setFontSize] = useState<number>(0);
 
@@ -45,14 +45,6 @@ const WelcomePage = ({
       window.removeEventListener("resize", adjustSize);
     };
   }, []);
-
-  const onClickConnectWallet = () => {
-    onLogin();
-  };
-
-  const onClickPlay = () => {
-    onStartGame();
-  };
 
   return (
     <div className="welcome-page-container" ref={textRef}>

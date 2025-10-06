@@ -82,7 +82,6 @@ interface PropertiesState {
   interest: number;
   bountyPool: number;
   scenarioRatio: number;
-  serverVersion: string;
 }
 
 const initialState: PropertiesState = {
@@ -105,7 +104,6 @@ const initialState: PropertiesState = {
   interest: 0,
   bountyPool: 0,
   scenarioRatio: 1,
-  serverVersion: "0.0.0",
 };
 
 export const propertiesSlice = createSlice({
@@ -138,7 +136,6 @@ export const propertiesSlice = createSlice({
         state.redeemCostBase = action.payload.bounty_cost_base;
         state.redeemRewardBase = action.payload.bounty_reward_base;
         state.redeemEnergyCooldown = action.payload.redeem_energy_cooldown;
-        state.serverVersion = action.payload.version;
         console.log("query config fulfilled", action.payload);
       })
       .addCase(getConfig.rejected, (state, action) => {
@@ -228,8 +225,6 @@ export const selectBountyPool = (state: RootState) =>
   state.properties.bountyPool;
 export const selectScenarioRatio = (state: RootState) =>
   state.properties.scenarioRatio;
-export const selectServerVersion = (state: RootState) =>
-  state.properties.serverVersion;
 
 export const {
   setUIState,

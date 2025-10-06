@@ -13,7 +13,7 @@ import {
   useWalletContext,
 } from "zkwasm-minirollup-browser/";
 import { ConnectState } from "zkwasm-minirollup-browser";
-import { ConnectController } from "./ConnectController";
+import { FrontPageController } from "./FrontPageController";
 import { setUIState, UIStateType } from "../../../data/properties";
 import { createCommand } from "zkwasm-minirollup-rpc";
 import { selectError } from "../../../data/errors";
@@ -21,7 +21,7 @@ import ErrorPopup from "../../components/Popups/ErrorPopup";
 
 const CREATE_PLAYER = 1n;
 
-export function LoadingController() {
+export function InitController() {
   const dispatch = useAppDispatch();
   const userState = useAppSelector(selectNullableUserState);
   const config = useAppSelector(selectNullableConfig);
@@ -121,7 +121,7 @@ export function LoadingController() {
   } else {
     return (
       <>
-        <ConnectController
+        <FrontPageController
           imageUrls={imageUrls}
           onStart={onStart}
           onStartGameplay={onStartGameplay}
