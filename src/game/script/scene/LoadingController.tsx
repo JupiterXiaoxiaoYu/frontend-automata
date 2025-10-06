@@ -16,6 +16,8 @@ import { ConnectState } from "zkwasm-minirollup-browser";
 import { ConnectController } from "./ConnectController";
 import { setUIState, UIStateType } from "../../../data/properties";
 import { createCommand } from "zkwasm-minirollup-rpc";
+import { selectError } from "../../../data/errors";
+import ErrorPopup from "../../components/Popups/ErrorPopup";
 
 const CREATE_PLAYER = 1n;
 
@@ -30,6 +32,7 @@ export function LoadingController() {
   const [startGameplay, setStartGameplay] = useState(false);
   const { l2Account } = useWalletContext();
   const l2AccountRef = useRef(l2Account);
+  const error = useAppSelector(selectError);
 
   // update State
   function updateState() {
@@ -109,14 +112,22 @@ export function LoadingController() {
     Object.keys(userState.player!).length > 0 &&
     startGameplay
   ) {
-    return <Gameplay />;
+    return (
+      <>
+        <Gameplay />
+        {error && <ErrorPopup message={error} />}
+      </>
+    );
   } else {
     return (
-      <ConnectController
-        imageUrls={imageUrls}
-        onStart={onStart}
-        onStartGameplay={onStartGameplay}
-      />
+      <>
+        <ConnectController
+          imageUrls={imageUrls}
+          onStart={onStart}
+          onStartGameplay={onStartGameplay}
+        />
+        {error && <ErrorPopup message={error} />}
+      </>
     );
   }
 }

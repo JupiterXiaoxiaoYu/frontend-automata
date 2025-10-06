@@ -51,7 +51,6 @@ export function ConnectController({
   const connectState = useAppSelector(selectConnectState);
   const [queryingLogin, setQueryingLogin] = useState(false);
   const [isServerNoResponse, setIsServerNoResponse] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
   // RainbowKit connect modal hook
   const { openConnectModal } = useConnectModal();
@@ -94,7 +93,7 @@ export function ConnectController({
       console.log(`${imageUrls.length} images loaded`);
     } catch (error) {
       console.error("Error loading images:", error);
-      setErrorMessage("Error loading images");
+      dispatch(pushError("Error loading images:" + String(error)));
     }
   };
 
@@ -163,7 +162,7 @@ export function ConnectController({
           } else if (sendTransaction.rejected.match(action)) {
             const message = "start game Error: " + action.payload;
             console.error(message);
-            setErrorMessage(message);
+            dispatch(pushError(message));
             if (
               action.payload == "SendTransactionError AxiosError: Network Error"
             ) {
@@ -177,8 +176,6 @@ export function ConnectController({
 
   if (isServerNoResponse) {
     return <LoadingPage message={"Server No Response"} progress={0} />;
-  } else if (errorMessage != "") {
-    return <LoadingPage message={errorMessage} progress={0} />;
   } else if (connectState == ConnectState.Init) {
     return <LoadingPage message={"Initialising"} progress={0} />;
   } else if (connectState == ConnectState.OnStart) {
