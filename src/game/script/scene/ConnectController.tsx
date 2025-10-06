@@ -143,6 +143,7 @@ export function ConnectController({
         dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
         console.error("start game query success");
       } else if (queryState.rejected.match(action)) {
+        console.log("start game query failed", action.payload);
         const command = createCommand(0n, CREATE_PLAYER, []);
         dispatch(
           sendTransaction({
@@ -150,7 +151,10 @@ export function ConnectController({
             prikey: l2Account!.getPrivateKey(),
           })
         ).then(async (action) => {
-          if (sendTransaction.fulfilled.match(action)) {
+          if (
+            sendTransaction.fulfilled.match(action) ||
+            action.payload == "PlayerAlreadyExist"
+          ) {
             dispatch(queryState(l2Account.getPrivateKey()));
             dispatch(setUIState({ uIState: { type: UIStateType.GuidePopup } }));
             dispatch(setTutorialType({ tutorialType: TutorialType.Creature }));
