@@ -11,12 +11,9 @@ import ConfirmPopup from "./Popups/ConfirmPopup";
 import RocketPopup from "./Popups/RocketPopup";
 import RebootPopup from "./Popups/RebootPopup";
 import CollectInterestPopup from "./Popups/CollectInterestPopup";
-import { selectError } from "../../data/errors";
-import ErrorPopup from "./Popups/ErrorPopup";
 
 const Popups = () => {
   const uIState = useAppSelector(selectUIState);
-  const error = useAppSelector(selectError);
 
   return (
     <>
@@ -38,7 +35,6 @@ const Popups = () => {
         <CollectInterestPopup />
       )}
       {uIState.type == UIStateType.RocketPopup && <RocketPopup />}
-      {error && <ErrorPopup message={error} />}
     </>
   );
 };

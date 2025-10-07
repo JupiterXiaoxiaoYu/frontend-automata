@@ -1,8 +1,8 @@
 import "./App.css";
-import { LoadingController } from "./game/script/scene/LoadingController";
+import { InitController } from "./game/script/scene/InitController";
 
 function App() {
-  return <LoadingController />;
+  return <InitController />;
 }
 
 export default App;
