@@ -55,8 +55,6 @@ export function FrontPageController({
   // RainbowKit connect modal hook
   const { connectModalOpen, openConnectModal } = useConnectModal();
 
-  console.log("connectModalOpen", connectModalOpen);
-
   useEffect(() => {
     if (isConnected) {
       connectL1();
@@ -94,21 +92,12 @@ export function FrontPageController({
   };
 
   useEffect(() => {
-    if (l1Account) {
-      if (connectState == ConnectState.Init) {
-        dispatch(setConnectState(ConnectState.OnStart));
-      }
-    }
-  }, [l1Account]);
-
-  useEffect(() => {
     if (connectModalOpen == false) {
       setQueryingLogin(false);
     }
   }, [connectModalOpen]);
 
   useEffect(() => {
-    console.log("ConnectState", ConnectState[connectState]);
     if (connectState == ConnectState.OnStart) {
       onStart().then(() => {
         dispatch(setConnectState(ConnectState.Preloading));
@@ -121,12 +110,6 @@ export function FrontPageController({
   }, [connectState]);
 
   const onClickConnectWallet = async () => {
-    console.log("l1Account", l1Account);
-    console.log("l2Account", l2Account);
-    console.log(
-      "openConnectModal",
-      openConnectModal != undefined && openConnectModal != null
-    );
     if (!queryingLogin && openConnectModal) {
       openConnectModal();
       setQueryingLogin(true);
@@ -152,9 +135,7 @@ export function FrontPageController({
       if (queryState.fulfilled.match(action)) {
         onStartGameplay();
         dispatch(setUIState({ uIState: { type: UIStateType.Idle } }));
-        console.error("start game query success");
       } else if (queryState.rejected.match(action)) {
-        console.log("start game query failed", action.payload);
         const command = createCommand(0n, CREATE_PLAYER, []);
         dispatch(
           sendTransaction({
