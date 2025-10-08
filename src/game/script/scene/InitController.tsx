@@ -45,22 +45,7 @@ export function InitController() {
       connectStateRef.current == ConnectState.Idle &&
       l2AccountRef.current != null
     ) {
-      dispatch(queryState(l2AccountRef.current.getPrivateKey())).then(
-        (action) => {
-          if (queryState.fulfilled.match(action)) {
-            console.log("initial queryState success");
-          } else {
-            console.log("initial queryState failed");
-            const command = createCommand(0n, CREATE_PLAYER, []);
-            dispatch(
-              sendTransaction({
-                cmd: command,
-                prikey: l2AccountRef.current.getPrivateKey(),
-              })
-            );
-          }
-        }
-      );
+      dispatch(queryState(l2AccountRef.current.getPrivateKey()));
     }
     setInc(inc + 1);
   }
@@ -97,14 +82,6 @@ export function InitController() {
   const onStartGameplay = () => {
     setStartGameplay(true);
   };
-
-  console.log(
-    "Testing Login",
-    config,
-    userState?.player,
-    userState?.player ? Object.keys(userState.player!).length : 0,
-    startGameplay
-  );
 
   if (
     config &&
