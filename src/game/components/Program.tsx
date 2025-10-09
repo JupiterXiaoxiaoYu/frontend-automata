@@ -58,8 +58,8 @@ const Program = ({ index, program, isMasked, isDisabled, onSelect }: Props) => {
 
   const adjustSize = () => {
     if (containerRef.current) {
-      setNameFontSize(containerRef.current.offsetHeight / 8);
-      setTimeFontSize(containerRef.current.offsetHeight / 10);
+      setNameFontSize(containerRef.current.offsetHeight / 9);
+      setTimeFontSize(containerRef.current.offsetHeight / 11);
     }
     if (gridContainerRef.current) {
       setElementWidth(gridContainerRef.current.offsetWidth / columnCount);
