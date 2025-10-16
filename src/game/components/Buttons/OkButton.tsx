@@ -6,9 +6,10 @@ import clickImage from "../../image/Buttons/Ok/ok_click.png";
 
 interface Props {
   onClick: () => void;
+  isDisabled: boolean;
 }
 
-const OkButton = ({ onClick }: Props) => {
+const OkButton = ({ onClick, isDisabled }: Props) => {
   return (
     <div
       style={{
@@ -24,7 +25,7 @@ const OkButton = ({ onClick }: Props) => {
     >
       <ImageButton
         onClick={onClick}
-        isDisabled={false}
+        isDisabled={isDisabled}
         defaultImagePath={image}
         hoverImagePath={hoverImage}
         clickedImagePath={clickImage}

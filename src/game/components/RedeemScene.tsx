@@ -30,7 +30,12 @@ import {
 } from "zkwasm-minirollup-browser";
 
 import { selectResources } from "../../data/resources";
-import { LoadingType, pushError, setLoadingType } from "../../data/errors";
+import {
+  LoadingType,
+  pushError,
+  selectIsLoading,
+  setLoadingType,
+} from "../../data/errors";
 
 interface Props {
   mainContainerRef: React.RefObject<HTMLDivElement>;
@@ -46,6 +51,7 @@ const RedeemScene = ({ mainContainerRef }: Props) => {
   const resources = useAppSelector(selectResources);
   const interest = useAppSelector(selectInterest);
   const bountyPool = useAppSelector(selectBountyPool);
+  const isLoading = useAppSelector(selectIsLoading);
   const resourcesMap = Object.fromEntries(
     resources.map((resource: any) => [resource.type, resource.amount])
   );
@@ -78,6 +84,10 @@ const RedeemScene = ({ mainContainerRef }: Props) => {
   }, [mainContainerRef.current]);
 
   const onClickRedeem = (index: number) => {
+    if (isLoading) {
+      return;
+    }
+
     dispatch(setLoadingType(LoadingType.Default));
     dispatch(
       sendTransaction({
@@ -142,7 +152,8 @@ const RedeemScene = ({ mainContainerRef }: Props) => {
               <RedeemDisplay
                 key={index}
                 isDisabled={
-                  getRedeemCostAmount(redeemInfo[index]) > resourcesMap[type]
+                  getRedeemCostAmount(redeemInfo[index]) > resourcesMap[type] ||
+                  isLoading
                 }
                 costIconImagePath={
                   getRedeemCostAmount(redeemInfo[index]) > resourcesMap[type]

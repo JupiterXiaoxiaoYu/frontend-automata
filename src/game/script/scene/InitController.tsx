@@ -34,6 +34,7 @@ export function InitController() {
   const l2AccountRef = useRef(l2Account);
   const error = useAppSelector(selectError);
 
+  const testRef = useRef(0);
   // update State
   function updateState() {
     if (
