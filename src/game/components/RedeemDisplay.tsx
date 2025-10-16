@@ -25,9 +25,14 @@ const RedeemDisplay = ({
 
   const adjustSize = () => {
     if (containerRef.current) {
-      setFontSize(containerRef.current.offsetHeight / 70);
+      const digit = Math.max(2, rewardAmount.toString().length);
+      setFontSize(containerRef.current.offsetHeight / 70 / (digit / 2));
     }
   };
+
+  useEffect(() => {
+    adjustSize();
+  }, [rewardAmount]);
 
   useEffect(() => {
     adjustSize();
