@@ -164,9 +164,13 @@ export const propertiesSlice = createSlice({
           const serverTickBn = BigInt(action.payload.state.counter);
           const lastInterestStamp = BigInt(interestInfo) & 0xffffffffn;
           const balance = BigInt(interestInfo) >> 32n;
+          const currentBalance = action.payload.player.data.local[7];
+          const currentBalanceBn = BigInt(currentBalance);
+          const minBalance =
+            currentBalanceBn < balance ? currentBalanceBn : balance;
           const delta = serverTickBn - lastInterestStamp;
           state.interest = Number(
-            (BigInt(level) * balance * delta) / (10000n * 17280n)
+            (BigInt(level) * minBalance * delta) / (10000n * 17280n)
           );
           state.bountyPool = action.payload.player.data.bounty_pool;
         }
