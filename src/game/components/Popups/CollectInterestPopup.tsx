@@ -17,7 +17,12 @@ import {
   queryState,
 } from "zkwasm-minirollup-browser";
 import { getRedeemTransactionCommandArray } from "../../rpc";
-import { setLoadingType, LoadingType, pushError } from "../../../data/errors";
+import {
+  setLoadingType,
+  LoadingType,
+  pushError,
+  selectIsLoading,
+} from "../../../data/errors";
 
 const COLLECT_INTEREST_BOUNTY_PARAM = 7;
 
@@ -27,8 +32,13 @@ const CollectInterestPopup = () => {
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
   const interest = useAppSelector(selectInterest);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const onClickConfirm = () => {
+    if (isLoading) {
+      return;
+    }
+
     if (uIState.type == UIStateType.CollectInterestPopup) {
       dispatch(setLoadingType(LoadingType.None));
       dispatch(
@@ -78,7 +88,7 @@ const CollectInterestPopup = () => {
           (include 100 processing fee)
         </p>
         <div className="collect-interest-popup-ok-button">
-          <OkButton onClick={onClickConfirm} />
+          <OkButton onClick={onClickConfirm} isDisabled={isLoading} />
         </div>
       </div>
     </div>

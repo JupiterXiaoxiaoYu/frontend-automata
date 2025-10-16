@@ -58,7 +58,7 @@ const WelcomePage = ({
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <img src={logo} className="welcome-page-logo-image" />
+      {/* <img src={logo} className="welcome-page-logo-image" /> */}
       <p
         className="welcome-page-server-version-text"
         style={{ fontSize: fontSize }}

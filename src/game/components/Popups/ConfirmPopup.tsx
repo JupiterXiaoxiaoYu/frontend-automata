@@ -35,7 +35,7 @@ const ConfirmPopup = ({ confirmPopupInfo }: Props) => {
           {confirmPopupInfo.description}
         </p>
         <div className="confirm-popup-ok-button">
-          <OkButton onClick={onClickConfirm} />
+          <OkButton onClick={onClickConfirm} isDisabled={false} />
         </div>
       </div>
     </div>

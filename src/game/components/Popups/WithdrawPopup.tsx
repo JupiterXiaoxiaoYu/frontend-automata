@@ -40,6 +40,9 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   const titaniumCount = useAppSelector(selectResource(ResourceType.Titanium));
 
   const withdraw = (amount: number) => {
+    if (isLoading) {
+      return;
+    }
     try {
       dispatch(setLoadingType(LoadingType.Default));
       dispatch(
@@ -79,6 +82,9 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
   };
 
   const onDeposit = (amount: string) => {
+    if (isLoading) {
+      return;
+    }
     dispatch(setLoadingType(LoadingType.Default));
     deposit({
       tokenIndex: 0,
@@ -173,7 +179,7 @@ const WithdrawPopup = ({ isWithdraw }: Props) => {
           />
         </div>
         <div className="withdraw-popup-confirm-button">
-          <ConfirmButton onClick={onClickConfirm} isDisabled={false} />
+          <ConfirmButton onClick={onClickConfirm} isDisabled={isLoading} />
         </div>
       </div>
     </div>

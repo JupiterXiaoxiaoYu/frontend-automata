@@ -14,9 +14,9 @@ const LoadingPage = ({ message, progress }: Props) => {
   return (
     <div className="loading-page-container">
       <img src={background_back} className="loading-page-background-back" />
-      <img src={sponsor_frame} className="loading-page-sponsor-frame" />
+      {/* <img src={sponsor_frame} className="loading-page-sponsor-frame" /> */}
       <img src={background_front} className="loading-page-background-front" />
-      <img src={logo} className="loading-page-logo-image" />
+      {/* <img src={logo} className="loading-page-logo-image" /> */}
       {progress == 0 && (
         <>
           <div className="loading-page-background-filter"></div>
