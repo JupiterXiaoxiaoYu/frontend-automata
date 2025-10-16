@@ -4,6 +4,7 @@ import {
   selectConnectState,
   selectNullableConfig,
   selectNullableUserState,
+  setConnectState,
 } from "../../../data/state";
 import Gameplay from "../../components/Gameplay";
 import {
@@ -34,21 +35,25 @@ export function InitController() {
   const l2AccountRef = useRef(l2Account);
   const error = useAppSelector(selectError);
 
-  const testRef = useRef(0);
   // update State
   function updateState() {
-    if (
-      connectStateRef.current == ConnectState.Init &&
-      userStateRef.current == null
-    ) {
-      dispatch(queryInitialState("1"));
-    } else if (
-      connectStateRef.current == ConnectState.Idle &&
-      l2AccountRef.current != null
-    ) {
-      dispatch(queryState(l2AccountRef.current.getPrivateKey()));
+    try {
+      if (
+        connectStateRef.current === ConnectState.OnStart &&
+        userStateRef.current == null
+      ) {
+        dispatch(queryInitialState("1"));
+      } else if (
+        connectStateRef.current === ConnectState.Idle &&
+        l2AccountRef.current != null
+      ) {
+        dispatch(queryState(l2AccountRef.current.getPrivateKey()));
+      }
+    } catch (err) {
+      console.warn("query_state failed:", err);
+    } finally {
+      setInc((prev) => prev + 1);
     }
-    setInc(inc + 1);
   }
 
   useEffect(() => {
@@ -82,6 +87,8 @@ export function InitController() {
 
   const onStartGameplay = () => {
     setStartGameplay(true);
+    dispatch(setUIState({ type: UIStateType.Idle }));
+    dispatch(setConnectState(ConnectState.Idle));
   };
 
   if (
