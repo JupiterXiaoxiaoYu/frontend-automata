@@ -87,8 +87,6 @@ export function InitController() {
 
   const onStartGameplay = () => {
     setStartGameplay(true);
-    dispatch(setUIState({ type: UIStateType.Idle }));
-    dispatch(setConnectState(ConnectState.Idle));
   };
 
   if (
