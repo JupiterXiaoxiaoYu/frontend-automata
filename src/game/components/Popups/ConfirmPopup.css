@@ -77,4 +77,5 @@
   font-family: "mishmash";
   color: white;
   user-select: none;
+  word-break: break-all;
 }
