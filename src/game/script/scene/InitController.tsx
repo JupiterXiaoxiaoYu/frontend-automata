@@ -29,38 +29,41 @@ export function InitController() {
   const connectState = useAppSelector(selectConnectState);
   const connectStateRef = useRef(connectState);
   const userStateRef = useRef(userState);
-  const [inc, setInc] = useState(0);
   const [startGameplay, setStartGameplay] = useState(false);
   const { l2Account } = useWalletContext();
   const l2AccountRef = useRef(l2Account);
   const error = useAppSelector(selectError);
 
-  // update State
-  function updateState() {
-    try {
-      if (
-        connectStateRef.current === ConnectState.OnStart &&
-        userStateRef.current == null
-      ) {
-        dispatch(queryInitialState("1"));
-      } else if (
-        connectStateRef.current === ConnectState.Idle &&
-        l2AccountRef.current != null
-      ) {
-        dispatch(queryState(l2AccountRef.current.getPrivateKey()));
-      }
-    } catch (err) {
-      console.warn("query_state failed:", err);
-    } finally {
-      setInc((prev) => prev + 1);
-    }
-  }
-
   useEffect(() => {
-    setTimeout(() => {
-      updateState();
-    }, 5000);
-  }, [inc]);
+    let isCancelled = false;
+
+    async function updateState() {
+      try {
+        if (
+          connectStateRef.current === ConnectState.OnStart &&
+          userStateRef.current == null
+        ) {
+          await dispatch(queryInitialState("1"));
+        } else if (
+          connectStateRef.current === ConnectState.Idle &&
+          l2AccountRef.current != null
+        ) {
+          await dispatch(queryState(l2AccountRef.current.getPrivateKey()));
+        }
+      } catch (err) {
+        console.warn("query_state failed:", err);
+      } finally {
+        if (!isCancelled) {
+          setTimeout(updateState, 5000);
+        }
+      }
+    }
+
+    updateState();
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     connectStateRef.current = connectState;
