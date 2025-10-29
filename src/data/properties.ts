@@ -172,7 +172,7 @@ export const propertiesSlice = createSlice({
           state.interest = Number(
             (BigInt(level) * minBalance * delta) / (10000n * 17280n)
           );
-          state.bountyPool = action.payload.player.data.bounty_pool;
+          state.bountyPool = action.payload.state.bounty_pool;
         }
       })
       .addCase(queryState.rejected, (state, action) => {
